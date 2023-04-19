@@ -1,4 +1,6 @@
 from random import randint
+import csv
+import sys
 
 # THIS IS THE MOST UP TO DATE VERSION SHOULD SEE THIS ON GITHUB
 
@@ -6,20 +8,23 @@ def main():
     # Mode will only ever be a set string based off what data you collect from the user
     user_mode = "5_questions"
 
-    # The basic layout for the type list
-    user_settings = [
-    {"type": "addition", "on": True},
-    {"type": "subtraction", "on": True},
-    {"type": "multiplication", "on": False},
-    {"type": "division", "on": False},
-    {"type": "exponential", "on": False},
-    {"type": "radical", "on": False}
-]
-    # for now user will be just a number to get basic functionality going. 
-    # In the future it will be all the users levels and then based on that it will generate different difficulty problems 
-    user_acc = 2
+    # The basic layout for user_settings, more things might be added. It also might be seperated
+    # if its easier to handle things that way although now that I think about it I don't know how
+    # it would be easier seperate, you'll just have to update the rest of the system if it ever
+    # impacts it.the thing is it shouldn't impact it becuase the new settings will always be 
+    # last and they'll have to be hard coded in, things wont SHIFT around
 
-    questions = GenerateQuestions(user_mode, user_settings)
+    user_settings = [
+    {"type": "addition", "on": True, "level": 2},
+    {"type": "subtraction", "on": True, "level": 2},
+    {"type": "multiplication", "on": False, "level": 2},
+    {"type": "division", "on": False, "level": 2},
+    {"type": "exponential", "on": False, "level": 2},
+    {"type": "radical", "on": False, "level": 2}
+    ]
+
+    questions_list = GenerateQuestions(user_mode, user_settings)
+    print(questions_list)
 
 
 class GenerateQuestions:
@@ -27,23 +32,42 @@ class GenerateQuestions:
     # math_types dictates which types of math are selected
     # user is the users settings for difficulty 
 
-    def __init__(self, mode, math_types, user=1) -> list:
-        mode = self.select_mode(mode)
+    def __init__(self, user_mode, user_settings) -> list:
+        question_amount = self.select_mode(user_mode)
+        question_types = self.math_types(user_settings)
+        questions_list = self.generate_list(question_amount, question_types)
+        print(questions_list)
 
 
-    def select_mode(self, mode):
-        pass
-        return mode
+    def select_mode(self, user_mode):
+        # Get user_mode as input and checks if it exists in modes.csv
+        # If it does then return all the settings for the corresponding mode
+        with open ("modes.csv") as file:
+            modes = csv.DictReader(file)
+            for mode in modes:
+                if user_mode == mode['mode']:
+                    return int(mode['questions'])
+                
+        sys.exit("errorcode: 1 - issue with the gamemode")
         # select mode will output mode_settings
 
 
+    def math_types(self, user_settings):
+        
+        math_types_list = []
+        for setting in user_settings:
+            if setting['on'] is True:
+                math_types_list.append({"type": setting['type'], "level": setting['level']})
 
-    def math_types(self, ):
-        pass
-    
+        if 1 > len(math_types_list) > 6:
+            sys.exit("errorcode: 2 - math_types error")
+        return math_types_list
 
-    def generate_list(self, mode, math_types, ):
-        pass
+    def generate_list(self, question_amount, question_types):
+        # for i in range (question_amount):
+            # user random choice to select one of the question types and then generate a question of that type
+            # using the levels 
+        return "TODO"
 
 
     def generate_number(self, length):

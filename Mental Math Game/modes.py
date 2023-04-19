@@ -1,3 +1,10 @@
-# Testing 2
+"""
+5 Question
+10 Question
+20 Question
 
-# final test
+Speed Mode
+Sudden Death
+
+Compound
+"""
