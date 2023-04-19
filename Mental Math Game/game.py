@@ -1,11 +1,13 @@
 from random import randint
 
+# THIS IS THE MOST UP TO DATE VERSION SHOULD SEE THIS ON GITHUB
+
 def main():
     # Mode will only ever be a set string based off what data you collect from the user
-    mode = "5_questions"
+    user_mode = "5_questions"
 
     # The basic layout for the type list
-    math_types = [
+    user_settings = [
     {"type": "addition", "on": True},
     {"type": "subtraction", "on": True},
     {"type": "multiplication", "on": False},
@@ -14,9 +16,10 @@ def main():
     {"type": "radical", "on": False}
 ]
     # for now user will be just a number to get basic functionality going. 
-    user = 2
+    # In the future it will be all the users levels and then based on that it will generate different difficulty problems 
+    user_acc = 2
 
-    questions = GenerateQuestions(mode, math_types, user)
+    questions = GenerateQuestions(user_mode, user_settings)
 
 
 class GenerateQuestions:
@@ -25,10 +28,21 @@ class GenerateQuestions:
     # user is the users settings for difficulty 
 
     def __init__(self, mode, math_types, user=1) -> list:
-        
+        mode = self.select_mode(mode)
+
+
+    def select_mode(self, mode):
+        pass
+        return mode
+        # select mode will output mode_settings
+
+
+
+    def math_types(self, ):
+        pass
     
 
-    def generate_list():
+    def generate_list(self, mode, math_types, ):
         pass
 
 
