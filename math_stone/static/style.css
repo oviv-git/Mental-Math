@@ -1,0 +1,17 @@
+.entrance_logo 
+{
+    display: block;
+    margin: 10% auto 8%;
+    max-width: 80%;
+}
+
+.form-box
+{   
+    margin: auto;
+    width: 60%;
+}
+.input-field
+{
+    background-color: aliceblue;
+
+}
