@@ -1,17 +1,46 @@
-.entrance_logo 
+.entrance-logo 
+{   
+    height: 60%;
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.entrance-banner
+{   
+    object-fit: contain;
+    font-size: 3em;
+    /* font-size: clamp(1rem, 3rem, 2rem); */
+    display: flex;
+    width: 60%;
+    height: 16rem;
+    justify-content: center;
+    align-items: center;
+    margin: 6rem auto;
+    font-family: 'Varela Round', sans-serif;
+}
+
+.light-mode
 {
-    display: block;
-    margin: 10% auto 8%;
-    max-width: 80%;
+    background-color: #FFF;
+    color:#222
+}
+
+.dark-mode
+{
+    background-color: #222;
+    color: #FFF;
 }
 
 .form-box
 {   
     margin: auto;
-    width: 60%;
+    max-width: 60%;
+    width: 32rem;
 }
 .input-field
 {
-    background-color: aliceblue;
-
+    display: flex;
+    justify-content: space-around;
+    height: 6rem;
 }

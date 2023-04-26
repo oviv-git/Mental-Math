@@ -5,22 +5,31 @@
 {% endblock %}
 
 {% block main %}
-    <img class="entrance_logo" src="static/logo.png" alt="Math-Stone Text and Logo">
+    <div class="entrance-banner">
+        <p>MathStone</p>
+        <img class="entrance-logo" src="static/logo-dark.png" alt="MathStone Logo dark">
+    </div>
 
     <div class="form-box">
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s12">
-                    <input id="username" name="username" placeholder="Username" type="text"
+                    <input id="username" name="username" type="text"
                     autofocus autocomplete="off">
+                    <label for="username">Username</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                  <input id="password" type="password" class="validate">
-                  <label for="password">Password</label>
+                    <input id="password" type="password" class="validate">
+                    <label for="password">Password</label>
                 </div>
               </div>
         </form>
     </div>
 {% endblock %} 
+
+<!-- <div class="entrance-banner">
+    <h1>MathStone</h1>
+    <img>
+</div> -->
