@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Math-Stone Register
+{% endblock %} 
+
+{% block main %}
+    <div class="form-box">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                <span class="card-title">Card Title</span>
+                <p>I am a very simple card. I am good at containing small bits of information.
+                I am convenient because I require little markup to use effectively.</p>
+                </div>
+            </div>
+        </div>
+        <form action="/register" class="col s12" method="post">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="input-box" id="username" name="username" type="text"
+                    autofocus autocomplete="off">
+                    <label for="username">Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="input-box" id="password" name="password" type="password">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input class="input-box" id="confirmation" name="confirmation" type="password">
+                    <label for="password">Confirm Password</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light btn-large">Register</button>
+        </form>
+    </div>
+{% endblock %}

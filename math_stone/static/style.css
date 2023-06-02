@@ -1,4 +1,21 @@
-.entrance-logo 
+h1
+{
+    color: #4f9db7; 
+}
+
+label.active
+{
+    color: #4f9db7 !important;
+}
+
+input:focus {
+    box-shadow: 0 1px 0 0 #4f9db7 !important;
+    border-bottom: 1px solid #4f9db7 !important;
+  }
+
+
+
+.entrance-logo
 {   
     height: 60%;
     max-height: 100%;
@@ -10,37 +27,121 @@
 {   
     object-fit: contain;
     font-size: 3em;
-    /* font-size: clamp(1rem, 3rem, 2rem); */
     display: flex;
     width: 60%;
     height: 16rem;
     justify-content: center;
     align-items: center;
-    margin: 6rem auto;
+    margin: 3rem auto;
     font-family: 'Varela Round', sans-serif;
 }
 
-.light-mode
-{
-    background-color: #FFF;
-    color:#222
+
+
+.btn {
+    background-color: #4f9db7;
 }
 
-.dark-mode
+.btn:hover {
+    background-color: #6bacc2;
+}
+.btn:focus {
+    background-color: #6bacc2;
+}
+
+
+
+.error-card-container
+{   
+    object-fit: contain;
+    font-size: 3em;
+    display: flex;
+    width: 60%;
+    height: 36rem;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem auto;
+    color: #c8d0f4;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.modal 
 {
-    background-color: #222;
-    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.0);
+}
+.modal-trigger {
+    display: block
+    margin: 2rem;
 }
 
 .form-box
 {   
+    padding: 1rem;
+    display: inline-block;
+    text-align: cente;
     margin: auto;
-    max-width: 60%;
-    width: 32rem;
+    max-width: 350%;
+    width: 40rem;
 }
 .input-field
 {
     display: flex;
     justify-content: space-around;
-    height: 6rem;
+    height: 4rem;
+}
+.input-field:active 
+{
+    box-shadow: red;
+}
+
+
+.btn {
+    margin: 0 auto;
+    font-size: 140%;
+    justify-content: center;
+    width: 80%;
+    border-radius: 1rem;
+}
+
+.card {
+    margin: 3rem auto;
+}
+
+html.light
+{
+    background-color: #fff;
+    color: #222;
+}
+html.dark
+{
+    background-color: #222;
+    color: #fff; 
+}
+
+html.light .input-box
+{
+    color: #222
+}
+html.dark .input-box
+{
+    color: #fff;
+}
+
+html.light .card
+{
+    background-color: #3b7b91;
+}
+
+html.dark .card
+{
+    background: #145650;
+}
+
+html.light .modal
+{
+    background-color: #fff;
+}
+
+html.dark .modal
+{
+    background-color: #222;
 }

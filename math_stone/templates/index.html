@@ -1,35 +1,77 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Math-Stone 
+    MathStone 
 {% endblock %}
 
 {% block main %}
     <div class="entrance-banner">
-        <p>MathStone</p>
-        <img class="entrance-logo" src="static/logo-dark.png" alt="MathStone Logo dark">
+        <h1>MathStone</h1>
+        <img class="entrance-logo" src="static/logo.png" alt="MathStone Logo">
+        <div>
+            <!-- <h4>Improve your focus and train your mental math skills</h4> -->
+        </div>
     </div>
-
+    
+    
+    
+    
+    <!-- <div class="form-box">
+        <a href="/register">
+            <button class="btn waves-effect waves-light btn-large">Register</button>
+        </a>
+    </div> -->
     <div class="form-box">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="username" name="username" type="text"
-                    autofocus autocomplete="off">
-                    <label for="username">Username</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="password" type="password" class="validate">
-                    <label for="password">Password</label>
-                </div>
-              </div>
-        </form>
-    </div>
-{% endblock %} 
 
-<!-- <div class="entrance-banner">
-    <h1>MathStone</h1>
-    <img>
-</div> -->
+        <button data-target="modal1" class="btn btn-large modal-trigger">Login</button>
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <form action="/play" class="col s12" method="post">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="input-box" id="username" name="username" type="text"
+                            autofocus autocomplete="off">
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input class="input-box" id="password" type="password">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <button class="btn waves-effect waves-light btn-large">Login</button>
+                </form>
+            </div>
+        </div>
+        
+        <button data-target="modal2" class="btn btn-large modal-trigger">Register</button>
+        <div id="modal2" class="modal">
+            <div class="modal-content">
+                <form action="/register" class="col s12" method="post">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="input-box" id="reg_username" name="reg_username" type="text"
+                            autofocus autocomplete="off">
+                            <label for="username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="input-box" id="reg_password" name="reg_password" type="password">
+                            <label for="password">Password</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="input-box" id="reg_confirmation" name="reg_confirmation" type="password">
+                            <label for="password">Confirm Password</label>
+                        </div>
+                    </div>
+                    <button class="btn waves-effect waves-light btn-large">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/script.js"></script>
+    {% endblock %} 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" class="dark">
 
     <head>
 
@@ -15,19 +15,21 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
         
         <!-- Personal Stylesheet and JavaScript -->
         <link rel="stylesheet" href="static/style.css">
         <script src="static/script.js"></script>
 
     </head>
-    <body class="dark-mode">
+    <body>
         {% if session["user_id"] %}
         <!-- If logged in display the header bar -->
         {% else %}
         <!-- assume not logged in so dont -->
         {% endif %}
 
-        {% block main %}{% endblock %}
+        {% block main %}
+        {% endblock %}
     </body>
 </html>
