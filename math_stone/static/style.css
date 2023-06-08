@@ -1,55 +1,219 @@
-h1
+html
 {
-    color: #4f9db7; 
+    scroll-behavior: smooth;
 }
 
-label.active
+html.light
 {
-    color: #4f9db7 !important;
+    background-color: #fff;
+    color: #222;
+}
+html.dark
+{
+    background-color: #222;
+    color: #fff; 
 }
 
-input:focus {
-    box-shadow: 0 1px 0 0 #4f9db7 !important;
-    border-bottom: 1px solid #4f9db7 !important;
-  }
-
-
-
-.entrance-logo
-{   
-    height: 60%;
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
+html.light h3
+{
+    color: #222;
+}
+html.dark h3
+{
+    color: #fff;
+}
+html.light h5
+{
+    color: #222;
+}
+html.dark h5
+{
+    color: #fff;
 }
 
-.entrance-banner
-{   
-    object-fit: contain;
-    font-size: 3em;
+.section-container 
+{
     display: flex;
-    width: 60%;
-    height: 16rem;
-    justify-content: center;
-    align-items: center;
-    margin: 3rem auto;
-    font-family: 'Varela Round', sans-serif;
+    margin: auto;
+    text-align: center;
+}
+.section
+{   
+    padding: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100vh;
 }
 
 
+.section-small 
+{   
+    width: 40%;
+    order: 1;
+}
+.section-med
+{
+    width: 50%
+}
+.section-large
+{
+    width: 60%;
+    order: 2;
+    justify-content: center;
+}
 
-.btn {
+
+.logo-container
+{   
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.logo-container img 
+{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo
+{   
+    object-fit: scale-down;
+    margin-bottom: 1rem;
+    
+}
+form
+{   
+    padding: 1rem;
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+html.light .input-box
+{
+    color: #222;
+}
+html.dark .input-box
+{
+    color: #fff;
+}
+
+.input-field
+{
+    height: 4rem;
+}
+.btn 
+{   
+    background-color: #4f9db7;
+    font-weight: 500;
+    font-size: 140%;
+    width: 32rem;
+    max-width: 60%;
+    border-radius: 1rem;
+}
+.btn:hover 
+{
+    background-color: #6bacc2;
+}
+.btn:focus 
+{
+    background-color: #6bacc2;
+}
+
+html.light .btn-secondary
+{   
+    color: #3e6775;
+    background-color: #a3cbd9;
+}
+
+html.dark .btn-secondary
+{   
+    color: #abc8d2;
+    background-color: #22373e;
+}
+.dark-mode-toggle
+{
+    height: 4rem;
+    width: 4rem;
+    border-radius: 1rem;
+}
+html.light .dark-mode-toggle
+{
+    background-color: #bfbfbf;
+}
+html.dark .dark-mode-toggle
+{
+    background-color: #444;
+}
+
+.card 
+{
+    margin: 3rem auto;
+}
+
+html.light .card
+{
+    background-color: #3b7b91;
+}
+
+html.dark .card
+{
+    background: #145650;
+}
+.flow-text
+{   
+    margin: 2rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.slider
+{
+    margin-top: 2rem;
+}
+.slides 
+{   
+    border-radius: 4rem;
+}
+.slider .slides 
+{   
+    background-color: transparent;
+}
+.slider .slides li .caption {
+    top: 0%;
+}
+.indicators
+{   
+    position: absolute;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 2;
+    top: 90%;
+}
+
+html.light .slider .indicators .indicator-item
+{
+    background-color: #a3cbd9;
+}
+html.dark .slider .indicators .indicator-item
+{
+    background-color: #22373e;
+}
+html.light .slider .indicators .indicator-item.active 
+{
     background-color: #4f9db7;
 }
-
-.btn:hover {
-    background-color: #6bacc2;
+html.dark .slider .indicators .indicator-item.active 
+{
+    background-color: #4f9db7;
 }
-.btn:focus {
-    background-color: #6bacc2;
+html.dark .light-image 
+{
+    display: none;
 }
-
-
 
 .error-card-container
 {   
@@ -64,78 +228,76 @@ input:focus {
     color: #c8d0f4;
     font-family: 'Source Sans Pro', sans-serif;
 }
-.modal 
-{
-    background-color: rgba(0, 0, 0, 0.0);
-}
-.modal-trigger {
-    display: block
-    margin: 2rem;
-}
-
-.form-box
-{   
-    padding: 1rem;
-    display: inline-block;
-    text-align: cente;
-    margin: auto;
-    max-width: 350%;
-    width: 40rem;
-}
-.input-field
-{
+.tabs {
+    overflow: hidden;
     display: flex;
     justify-content: space-around;
     height: 4rem;
+    align-items: center;
 }
-.input-field:active 
+
+.tabs .tab a 
 {
-    box-shadow: red;
+    font-size: 120%;
+    font-weight: 500;
+    transition: 0.5s;
+    color: #4f9db7;
 }
-
-
-.btn {
-    margin: 0 auto;
-    font-size: 140%;
-    justify-content: center;
-    width: 80%;
-    border-radius: 1rem;
+.tabs .tab a.active {
+    transition: 0.5s;
+    font-size: 160%;
+    font-weight: 700;
 }
-
-.card {
-    margin: 3rem auto;
-}
-
-html.light
+html.light .tabs .tab a.active 
 {
-    background-color: #fff;
-    color: #222;
+    color: #41879f;
 }
-html.dark
+html.dark .tabs .tab a.active 
 {
-    background-color: #222;
-    color: #fff; 
+    color: #4f9db7;
 }
 
-html.light .input-box
+.tabs .tab a:hover 
 {
-    color: #222
+    color: #4f9db7;
 }
-html.dark .input-box
+.tabs .tab a.active:hover 
 {
-    color: #fff;
-}
-
-html.light .card
-{
-    background-color: #3b7b91;
+    color: #4f9db7;
 }
 
-html.dark .card
-{
-    background: #145650;
+.tabs .tab a:focus.active {
+    background-color: rgba(0, 0, 0, 0)
+}
+.tabs .indicator {
+    height: 0.2rem;
 }
 
+html.light .tabs .indicator
+{
+    background-color: #4f9db7;
+}
+html.dark .tabs .indicator
+{
+    background-color: #4f9db7;
+}
+
+input:focus 
+{
+    box-shadow: 0 1px 0 0 #4f9db7 !important;
+    border-bottom: 1px solid #4f9db7 !important;
+}
+.input-field input:focus + label
+{
+    color: #4f9db7 !important;
+}
+.modal 
+{
+    border-radius: 2rem;
+    max-width: 90%;
+    width: 60rem;
+
+}
 html.light .modal
 {
     background-color: #fff;
@@ -144,4 +306,73 @@ html.light .modal
 html.dark .modal
 {
     background-color: #222;
+}
+.modal-overlay
+{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-header
+{
+    display: block;
+    justify-content: center;
+    
+}
+.modal-content
+{
+    display: block;
+    justify-content: center;
+}
+
+html.light .tabs
+{
+    background: #fff;    
+}
+
+html.dark .tabs
+{
+    background-color: #444;
+
+}
+html.light .caption
+{
+    color: #5f5f5f;
+}
+html.dark .caption
+{
+    color: #999999;
+}
+
+
+
+
+@media (max-width: 800px) {
+    .section-container
+    {
+        flex-direction: column;
+    }
+    .section 
+    {
+        padding: 2rem;
+    }
+    .section-small 
+    {
+        width: 100%;
+        order: 2;
+    }
+    .section-large 
+    {
+        width: 100%;
+        padding: 0rem;
+        order: 1;
+    }
+    .slider 
+    {
+        margin-top: 4rem;
+    }
+    .slides 
+    {   
+        border: none;
+        border-radius: 0rem;
+    }
 }

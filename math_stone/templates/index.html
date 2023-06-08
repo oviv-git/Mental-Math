@@ -1,77 +1,138 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    MathStone 
+    MathStone
 {% endblock %}
 
 {% block main %}
-    <div class="entrance-banner">
-        <h1>MathStone</h1>
-        <img class="entrance-logo" src="static/logo.png" alt="MathStone Logo">
-        <div>
-            <!-- <h4>Improve your focus and train your mental math skills</h4> -->
-        </div>
-    </div>
-    
-    
-    
-    
-    <!-- <div class="form-box">
-        <a href="/register">
-            <button class="btn waves-effect waves-light btn-large">Register</button>
-        </a>
-    </div> -->
-    <div class="form-box">
-
-        <button data-target="modal1" class="btn btn-large modal-trigger">Login</button>
-        <div id="modal1" class="modal">
-            <div class="modal-content">
-                <form action="/play" class="col s12" method="post">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input class="input-box" id="username" name="username" type="text"
-                            autofocus autocomplete="off">
-                            <label for="username">Username</label>
+    <div class="section-container">
+        <div class="section section-small" id="section1">
+            <div class="section-group">
+                <div class="logo-container">
+                    <img class="logo" src="static/logo.png" alt="MathStone Logo">
+                </div>
+                <p class="flow-text">A quick and convinent tool for sharpening your mind, 
+                    improving your focus and stregthening your concentration
+                </p>
+                <button id="login-button" class="btn btn-large waves-effect waves-light">Play</button>
+                <div id="modal" class="modal">
+                    <div class="modal-header">
+                        <ul class="tabs tabs-fixed-width" id="indicator">
+                            <li class="tab col s3"><a id="login-tab-button" href="#login-tab">Login</a></li>
+                            <li class="tab col s3"><a id="register-tab-button" href="#register-tab">Register</a></li>
+                        </ul>
+                    </div>
+                    <div id="login-tab" class="col s12">
+                        <div class="modal-content">
+                            <form action="/play" class="col s12" method="post">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input class="input-box" id="username" name="username" type="text"
+                                        autocomplete="off">
+                                        <label for="username">Username</label>
+                                    </div>
+                                </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input class="input-box" id="password" type="password">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <button class="btn waves-effect waves-light btn-large">Login</button>
+                            </form>
                         </div>
                     </div>
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input class="input-box" id="password" type="password">
-                        <label for="password">Password</label>
+                    <div id="register-tab" class="col s12">
+                        <div class="modal-content">
+                            <form action="/register" class="col s12" method="post">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input class="input-box" id="reg_username" name="reg_username" type="text"
+                                        autocomplete="off">
+                                        <label for="username">Username</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input class="input-box" id="reg_password" name="reg_password" type="password">
+                                        <label for="password">Password</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <input class="input-box" id="reg_confirmation" name="reg_confirmation" type="password">
+                                        <label for="password">Confirm Password</label>
+                                    </div>
+                                </div>
+                                <button class="btn waves-effect waves-light btn-large">Register</button>
+                            </form>
+                            
+                        </div>
                     </div>
                 </div>
-                <button class="btn waves-effect waves-light btn-large">Login</button>
-                </form>
+            </div>
+            <div class="section-group">
+                <p class="caption">Don't have an account?</p>
+                <button id="register-button" class="btn btn-large waves-effect waves-light btn-secondary">Register</button>
+            </div>
+            <div class="section-group">
+                <button id="dark-mode-toggle" class="dark-mode-toggle btn waves-effect waves-dark" aria-label="dark mode toggle"></button>
+                <a class="caption" href="#explanation">Why do I need an account?</a>
             </div>
         </div>
-        
-        <button data-target="modal2" class="btn btn-large modal-trigger">Register</button>
-        <div id="modal2" class="modal">
-            <div class="modal-content">
-                <form action="/register" class="col s12" method="post">
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input class="input-box" id="reg_username" name="reg_username" type="text"
-                            autofocus autocomplete="off">
-                            <label for="username">Username</label>
+
+        <div class="section section-large" id="section2">
+            <div class="slider">
+                <ul class="slides">
+                    <li>
+                        <img class="slides light-image" src="static/demos/l1.png">
+                        <img class="slides dark-image" src="static/demos/d1.png">
+                        <div class="caption center-align">
+                            <h3 class="tagline">This is our big Tagline!</h3>
+                            <h5 class="slogan">Here's our small slogan.</h5>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input class="input-box" id="reg_password" name="reg_password" type="password">
-                            <label for="password">Password</label>
+                    </li>
+                    <li>
+                        <img class="slides light-image" src="static/demos/l2.png">
+                        <img class="slides dark-image" src="static/demos/d2.png">
+                        <div class="caption left-align">
+                            <h3 class="tagline">Left Aligned Caption</h3>
+                            <h5 class="slogan">Here's our small slogan.</h5>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input class="input-box" id="reg_confirmation" name="reg_confirmation" type="password">
-                            <label for="password">Confirm Password</label>
+                    </li>
+                    <li>
+                        <img class="slides light-image" src="static/demos/l3.png">
+                        <img class="slides dark-image" src="static/demos/d3.png">
+                        <div class="caption right-align">
+                            <h3 class="tagline">Right Aligned Caption</h3>
+                            <h5 class="slogan">Here's our small slogan.</h5>
                         </div>
-                    </div>
-                    <button class="btn waves-effect waves-light btn-large">Register</button>
-                </form>
+                    </li>
+                    <li>
+                        <img class="slides light-image" src="static/demos/l4.png">
+                        <img class="slides dark-image" src="static/demos/d4.png">
+                        <div class="caption center-align">
+                            <h3 class="tagline">This is our big Tagline!</h3>
+                            <h5 class="slogan">Here's our small slogan.</h5>
+                        </div>
+                    </li>
+                    <ul class="indicators">
+                        <li class="indicator-item"></li>
+                        <li class="indicator-item"></li>
+                        <li class="indicator-item"></li>
+                        <li class="indicator-item"></li>
+                    </ul>
+                </ul>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="static/script.js"></script>
-    {% endblock %} 
+    <div class="section-container">
+        <div class="section section-med" id="section3">
+            <p id="explanation" class="caption">Because I said so</p>
+        </div>
+        <div class="section section-med">
+            <p class="caption">got it chump</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="static/script.js">index();</script>
+    {% endblock %}
