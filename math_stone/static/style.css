@@ -91,6 +91,7 @@ form
     display: block;
     text-align: center;
     margin: auto;
+    font-family: 'Heebo', sans-serif;
 }
 
 html.light .input-box
@@ -101,10 +102,20 @@ html.dark .input-box
 {
     color: #fff;
 }
-
-.input-field
+.form-error
+{   
+    font-weight: 400;
+    transition: .5s;
+    height: 2rem;
+    
+}
+html.light .form-error.failure
 {
-    height: 4rem;
+    color: #d1214d
+}
+html.dark .form-error.failure
+{
+    color: #ff517c
 }
 .btn 
 {   
@@ -133,7 +144,7 @@ html.light .btn-secondary
 html.dark .btn-secondary
 {   
     color: #abc8d2;
-    background-color: #22373e;
+    background-color: #244753;
 }
 .dark-mode-toggle
 {
@@ -200,7 +211,7 @@ html.light .slider .indicators .indicator-item
 }
 html.dark .slider .indicators .indicator-item
 {
-    background-color: #22373e;
+    background-color: #244753;
 }
 html.light .slider .indicators .indicator-item.active 
 {
@@ -282,14 +293,73 @@ html.dark .tabs .indicator
     background-color: #4f9db7;
 }
 
+.input-field input:focus + label
+{
+    color: #4f9db7 !important;
+}
+
+html.light .input-field label.failure
+{
+    color: #d1214d
+}
+html.dark  .input-field label.failure
+{
+    color: #ff517c
+}
+html.light .input-field label.success
+{
+    color: #4f9db7
+}
+html.dark  .input-field label.success
+{
+    color: #4f9db7
+}
+
+html.light .input-field input:focus + label
+{
+    color: #4f9db7 !important;
+}
+html.dark .input-field input:focus + label
+{
+    color: #4f9db7 !important;
+}
+
+html.light input.success
+{
+    box-shadow: 0 1px 0 0 #4f9db7 !important;
+    border-bottom: 1px solid #4f9db7 !important;
+}
+html.dark input.success
+{
+    box-shadow: 0 1px 0 0 #4f9db7 !important;
+    border-bottom: 1px solid #4f9db7 !important;
+}
+html.light input.failure
+{
+    box-shadow: 0 1px 0 0 #d1214d !important;
+    border-bottom: 1px solid #d1214d !important;
+}
+html.dark input.failure
+{
+    box-shadow: 0 1px 0 0 #ff517c !important;
+    border-bottom: 1px solid #ff517c !important;
+}
+
 input:focus 
 {
     box-shadow: 0 1px 0 0 #4f9db7 !important;
     border-bottom: 1px solid #4f9db7 !important;
 }
-.input-field input:focus + label
+
+html.light input.failure:focus
 {
-    color: #4f9db7 !important;
+    box-shadow: 0 1px 0 0 #4f9db7 !important;
+    border-bottom: 1px solid #4f9db7 !important;
+}
+html.dark input.failure:focus
+{
+    box-shadow: 0 1px 0 0 #4f9db7 !important;
+    border-bottom: 1px solid #4f9db7 !important;
 }
 .modal 
 {
@@ -342,9 +412,36 @@ html.dark .caption
 {
     color: #999999;
 }
-
-
-
+@keyframes fadeIn 
+{
+    0% 
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+.fade-in 
+{
+    animation: fadeIn .5s ease-in forwards;
+}
+@keyframes fadeOut 
+{
+    0% 
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        opacity: 0;
+    }
+}
+.fade-out
+{
+    animation: fadeOut .5s ease-in forwards;
+}
 
 @media (max-width: 800px) {
     .section-container

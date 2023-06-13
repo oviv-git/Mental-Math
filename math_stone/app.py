@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from flask_session import Session
 import sqlite3
 
@@ -39,33 +39,37 @@ def play():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if request.method == "GET":
-        print("register app route using get")
-        return render_template("/register.html")
+    pass
+    # if request.method == "GET":
+    #     print("register app route using get")
+    #     return render_template("/register.html")
     
-    elif request.method == "POST":
-        if not request.form['reg_username']:
-            return error("Must include a username", 403)
-        username = request.form["reg_username"]
+    # elif request.method == "POST":
+    #     if not request.form['reg_username']:
+    #         return jsonify({'status': 'invalid'})
+        # username = request.form["reg_username"]
         
-        if not request.form['reg_password']:
-            return error("Must include a password", 403)
-        password = request.form["reg_password"]        
+        # if not request.form['reg_password']:
+        #     return response
+        #     return error("Must include a password", 403)
+        # password = request.form["reg_password"]        
         
-        if not request.form['reg_confirmation']:
-            return error("Must confirm password", 403)
-        confirmation = request.form["reg_confirmation"]
+        # if not request.form['reg_confirmation']:
+        #     return response
+        #     return error("Must confirm password", 403)
+        # confirmation = request.form["reg_confirmation"]
 
-        if password != confirmation:
-            return error("Password and confirmation must match", 403)
+        # if password != confirmation:
+        #     return response
+        #     return error("Password and confirmation must match", 403)
 
-        print(username, password, confirmation)
+        # print(username, password, confirmation)
 
-
-        return render_template("/play.html")
-
-
-
+        
+        # return render_template("/play.html")
+@app.route('/check_username_availability', methods=['POST'])
+def check_username_availability():
+    pass
 
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
