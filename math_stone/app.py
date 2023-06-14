@@ -1,6 +1,6 @@
+import sqlite3
 from flask import Flask, flash, redirect, render_template, request, session, jsonify
 from flask_session import Session
-import sqlite3
 
 from helpers import login_required, error
 
@@ -69,7 +69,12 @@ def register():
         # return render_template("/play.html")
 @app.route('/check_username_availability', methods=['POST'])
 def check_username_availability():
-    pass
+    if request.method == "POST":
+        username = request.form.get('username')
+        print("INSIDE OF USERNAME AVAIL: ", username)
+        response = {'available': True}
+        return jsonify(response)
+
 
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
@@ -81,4 +86,16 @@ def profile():
 @login_required
 def stats():
     pass
+
+@app.route('/error_redirect', methods=['GET', 'POST'])
+def error_redirect():
+    if request.method == 'GET':
+        return error('error_redirect', 'you shouldnt be seeing this')
+    if request.method == 'POST':
+        error_message = request.form.get('errorMessage')
+        error_code = request.form.get('errorCode')
+
+        return error(error_message, error_code)
+
+
 

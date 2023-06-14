@@ -61,23 +61,29 @@ function registerVerification() {
         var confirm = document.getElementById('reg-confirm')
 
         // Running Basic Tests
-        if (!usernameBasicErrorHandler(usernameBasicCheck(username.value), username)) {
+        if (!usernameErrorHandler(usernameBasicCheck(username.value), username)) {
             return
         }
-        if (!passwordBasicErrorHandler(passwordBasicCheck(password.value), password)) {
+        if (usernameAvailability(username.value)) {
+            usernameErrorHandler("Username is already registered", username)
             return
         }
-        if (!confirmBasicErrorHandler(confirmBasicCheck(password.value, confirm.value), confirm)) {
+        if (!passwordErrorHandler(passwordBasicCheck(password.value), password)) {
             return
         }
-        // assuming the forms pass all the basic checks they then get sent into advanced checks
-
+        if (!confirmErrorHandler(confirmBasicCheck(password.value, confirm.value), confirm)) {
+            return
+        }
+        
     })
 }
 
 function usernameBasicCheck(username) {
     // TODO: checks for a username and returns an error message if its false. 
     // No error message will be returned for a success and therefore no need to return a bool, just count the return
+    if (/\s/.test(username)) {
+        return "Username can't any contain spaces"
+    }
     if (username.length < 1 || username.length > 20) {
         return "Username must be between 1-20 characters long";
     }
@@ -87,7 +93,7 @@ function usernameBasicCheck(username) {
     return true;
 }
 
-function usernameBasicErrorHandler(errorMessage, username) {
+function usernameErrorHandler(errorMessage, username) {
     var usernameErrorBox = document.getElementById('reg-username-error');
     var usernameLabel = document.getElementById('reg-username-label');
 
@@ -99,7 +105,6 @@ function usernameBasicErrorHandler(errorMessage, username) {
 
         usernameLabel.classList.remove('success');
         username.classList.remove('success');
-
         usernameLabel.classList.add('failure');
         username.classList.add('failure');
         return false
@@ -124,15 +129,13 @@ function passwordBasicCheck(password) {
     if (/\s/.test(password)) {
         return "Password can't any contain spaces"
     }
-
     if (/^[a-zA-Z]+$/.test(password)) {
-        // && /[A-z]/.test(password) != true
         return "Password must contain atleast one letter and number"
     }
     return true
 }
 
-function passwordBasicErrorHandler(errorMessage, password) {
+function passwordErrorHandler(errorMessage, password) {
     var passwordLabel = document.getElementById('reg-password-label')
     var passwordErrorBox = document.getElementById('reg-password-error')
 
@@ -166,9 +169,9 @@ function confirmBasicCheck(password, confirm) {
     return true
 }
 
-function confirmBasicErrorHandler(errorMessage, confirm) {
+function confirmErrorHandler(errorMessage, confirm) {
     var confirmErrorBox = document.getElementById('reg-confirm-error')
-    var confirmLabel = document.getElementById('reg-username-label')
+    var confirmLabel = document.getElementById('reg-confirm-label')
 
     if (errorMessage != true) {
         confirmErrorBox.innerHTML = errorMessage;
@@ -197,17 +200,19 @@ function usernameAvailability(username) {
     $.ajax({
         url: 'check_username_availability',
         method: 'POST',
-        data: {'username': username},
         dataType: 'json',
+        data: {'username': username},
         success: function(response) {
             if (response.availabile) {
-                // available: send to /register
+                return true
             } else {
-                // registered: error
+                return false
             }
         },
         error: function(xhr, status, error) {
+            console.log(status, error)
             // handle ajax error
+            // redirect to error page with the error code
         }
     })
 }
@@ -228,6 +233,15 @@ function darkModeToggle() {
     });
 }
 
+
+function errorRedirect(errorMessage, errorCode) {
+    $.ajax({
+        url: '/error_redirect',
+        method: 'POST',
+        dataType: 'json',
+        data: {'errorMessage': errorMessage, 'errorCode': errorCode}
+    })
+}
 
 
 
