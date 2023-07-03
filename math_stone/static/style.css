@@ -109,13 +109,26 @@ html.dark .input-box
     height: 2rem;
     
 }
-html.light .form-error.failure
+html.light .form-error
 {
-    color: #d1214d
+    color: #d1214d;
 }
-html.dark .form-error.failure
+html.dark .form-error
 {
-    color: #ff517c
+    color: #ff517c;
+}
+.error
+{
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+html.light .error
+{
+    color: #ff517c;
+}
+html.dark .error
+{
+    color: #ff517c;
 }
 .btn 
 {   

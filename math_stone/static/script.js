@@ -2,10 +2,43 @@ function main() {
     if (window.location.pathname == '/') {
         initSlider();
         initForm();
-        darkModeToggle();
-        registerVerification();
+        displaySessionInformation();
+        storedColorScheme();
+        colorSchemeToggle();
+        registerFormSubmit();
+        loginFormSubmit();
+    } else {
+        storedColorScheme();
+        colorSchemeToggle();
     }
-} 
+}
+
+function storedColorScheme() {
+    var html = document.querySelector('html')
+    var storedMode = sessionStorage.getItem('prefferedMode')
+
+    if (storedMode == 'dark') {
+        html.classList.remove('light');
+        html.classList.add('dark');
+    }
+}
+
+function colorSchemeToggle() {
+    var toggle = document.querySelector('.dark-mode-toggle')
+    var html = document.querySelector('html')
+
+    toggle.addEventListener('click', function() {
+        if (html.classList.contains('light') == true) {
+            html.classList.remove('light');
+            html.classList.add('dark');
+            sessionStorage.setItem('prefferedMode', 'dark')
+        } else if (html.classList.contains('dark') == true) {
+            html.classList.remove('dark')
+            html.classList.add('light')
+            sessionStorage.setItem('prefferedMode', 'light')
+        }
+    });
+}
 
 function initSlider() {
     document.addEventListener('DOMContentLoaded', function() {
@@ -18,7 +51,6 @@ function initSlider() {
 }
 
 function initForm() {
-
     // Initialize modal
     var modal = document.querySelector('.modal')
     var modalInstance = M.Modal.init(modal);
@@ -46,46 +78,181 @@ function initForm() {
     });
 }
 
-function loginVerification() {
-    // TODO
+function clearForm() {
+    let forms = document.querySelectorAll('form')
+
+    var modal = document.querySelector('.modal')
+    var modalInstance = M.Modal.init(modal);
+
+    for (let i = 0; i < forms.length; i++) {
+        let form = forms[i]
+        let inputs = form.querySelectorAll('.input-box')
+        let inputErrorBoxes = form.querySelectorAll('.form-error')
+        let inputLabels = form.querySelectorAll('label')
+        for (let j = 0; j < inputs.length; j++ ) {
+            let input = inputs[j];
+            let inputErrorBox = inputErrorBoxes[j];
+            let inputLabel = inputLabels[j];
+            
+            input.classList.remove('success', 'failure');
+            inputErrorBox.classList.remove('success', 'failure', 'fade-in', 'fade-out')
+            inputLabel.classList.remove('success', 'failure');
+
+            inputErrorBox.innerHTML = '';
+            input.value = '';
+        }
+    }
+    modalInstance.close();
 }
 
-function registerVerification() {
+// Finds the session-information class and set the innerHTML to session.storage
+function displaySessionInformation() {
+    informationContainer = document.getElementById('session-information');
+
+    informationContainer.innerHTML = sessionStorage.getItem('message');
+    informationContainer.className = '';
+    informationContainer.classList.add(sessionStorage.getItem('messageType'))
+}
+
+function loginFormSubmit() {
+    var loginForm = document.getElementById('login-form')
+
+    loginForm.addEventListener('submit', async function(e)  {
+        e.preventDefault();
+        var isValid = await loginFormCheck()
+        if (isValid == true) {
+            loginForm.submit();
+        }
+    })
+}
+
+async function loginFormCheck() {
+
+    var username = document.getElementById('username');
+    var usernameErrorBox = document.getElementById('username-error');
+    var usernameLabel = document.getElementById('username-label');
+    
+    var password = document.getElementById('password');
+    var passwordErrorBox = document.getElementById('password-error');
+    var passwordLabel = document.getElementById('password-label');
+
+    var unsuccessfulAttemptsLeft = password.dataset.attempts;
+
+    if (!errorHandler(usernameBasicCheck(username.value), username, usernameErrorBox, usernameLabel)) {
+        return false;
+    }
+
+    isUsernameAvailable = await checkUsernameAvailability(username.value)
+        .then(function(available) {
+            if (!available) {
+                return true;
+            } else {
+                return ("That username isn't registered");
+            }
+        })
+        .catch(function(error) {
+            // Should redirect to the error page using javascript if it cant connect to app.py
+            console.log("error", error);
+        })
+
+    if (!errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)) {
+        return false;
+    }
+
+    if (!errorHandler(passwordBasicCheck(password.value), password, passwordErrorBox, passwordLabel)) {
+        return false;
+    }
+    isLoginSuccessful = await checkSuccessfulLogin(username.value, password.value)
+        .then(function(successful) {
+            if (successful) {
+                return true;
+            } else {
+                return ("Incorrect password")
+            }
+        })
+        .catch(function(error) {
+            // Should redirect to the error page using javascript if it cant connect to app.py
+        })
+        
+    if (!errorHandler(isLoginSuccessful, password, passwordErrorBox, passwordLabel)) {
+        unsuccessfulAttemptsLeft--;
+        password.dataset.attempts = unsuccessfulAttemptsLeft;
+        if (password.dataset.attempts == 0) {
+            sessionStorage.setItem('message', 'Too many unsuccessful login attempts',)
+            sessionStorage.setItem('messageType', 'error',)
+            password.dataset.attempts = 3;
+            clearForm();
+        }
+        return false;
+    }
+    return true;
+}
+
+function registerFormSubmit() {
     var registerForm = document.getElementById('reg-form')
 
-    registerForm.addEventListener('submit', function(e) {
+    registerForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-
-        var username = document.getElementById('reg-username')
-        var password = document.getElementById('reg-password')
-        var confirm = document.getElementById('reg-confirm')
-
-        // Running Basic Tests
-        if (!usernameErrorHandler(usernameBasicCheck(username.value), username)) {
-            return
+        var isValid = await registerFormCheck()
+        if (isValid == true) {
+            registerForm.submit();
         }
-        if (usernameAvailability(username.value)) {
-            usernameErrorHandler("Username is already registered", username)
-            return
-        }
-        if (!passwordErrorHandler(passwordBasicCheck(password.value), password)) {
-            return
-        }
-        if (!confirmErrorHandler(confirmBasicCheck(password.value, confirm.value), confirm)) {
-            return
-        }
-        
     })
+}
+
+async function registerFormCheck() {
+    var username = document.getElementById('reg-username');
+    var usernameErrorBox = document.getElementById('reg-username-error');
+    var usernameLabel = document.getElementById('reg-username-label');
+    
+    var password = document.getElementById('reg-password');
+    var passwordErrorBox = document.getElementById('reg-password-error')
+    var passwordLabel = document.getElementById('reg-password-label')
+    
+    var confirm = document.getElementById('reg-confirm');
+    var confirmErrorBox = document.getElementById('reg-confirm-error')
+    var confirmLabel = document.getElementById('reg-confirm-label')
+
+    if (!errorHandler(usernameBasicCheck(username.value), username, usernameErrorBox, usernameLabel)) {   
+        return false;
+    }
+    isUsernameAvailable = await checkUsernameAvailability(username.value)
+        .then(function(available) {
+            if (available) {
+                return true;
+            } else {
+                return ('Username is not available');
+            }
+        })
+        .catch(function(error) {
+            console.log("error", error);
+        })
+    if (!errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)) {
+        return false;
+    }
+
+    if (!errorHandler(passwordBasicCheck(password.value), password, passwordErrorBox, passwordLabel)) {
+        return false;
+    }
+
+    if (!errorHandler(confirmBasicCheck(password.value, confirm.value), confirm, confirmErrorBox, confirmLabel)) {
+        return false;
+    }
+    return true;
 }
 
 function usernameBasicCheck(username) {
     // TODO: checks for a username and returns an error message if its false. 
     // No error message will be returned for a success and therefore no need to return a bool, just count the return
+    if (username.length == 0) {
+        return "Must enter a username"
+    }
     if (/\s/.test(username)) {
         return "Username can't any contain spaces"
     }
-    if (username.length < 1 || username.length > 20) {
-        return "Username must be between 1-20 characters long";
+
+    if (username.length < 1 || username.length > 32) {
+        return "Username must be between 1-32 characters long";
     }
     if (/^[A-z]/.test(username) == false) {
         return "Username must start with a letter";
@@ -93,73 +260,24 @@ function usernameBasicCheck(username) {
     return true;
 }
 
-function usernameErrorHandler(errorMessage, username) {
-    var usernameErrorBox = document.getElementById('reg-username-error');
-    var usernameLabel = document.getElementById('reg-username-label');
-
-    if (errorMessage != true) {
-        usernameErrorBox.innerHTML = errorMessage;
-
-        usernameErrorBox.classList.remove('fade-out')
-        usernameErrorBox.classList.add('fade-in');
-
-        usernameLabel.classList.remove('success');
-        username.classList.remove('success');
-        usernameLabel.classList.add('failure');
-        username.classList.add('failure');
-        return false
-    }
-    else {
-        usernameErrorBox.classList.remove('fade-in');
-        usernameErrorBox.classList.add('fade-out');
-
-        usernameLabel.classList.add('success');
-        username.classList.add('success');
-        usernameLabel.classList.remove('failure');
-        username.classList.remove('failure');
-        return true
-    }
-}
-
 function passwordBasicCheck(password) {
+    if (password.length == 0 ) {
+        return "Must enter a password"
+    }
+    
     if (password.length < 8) {
         return "Password must be atleast 8 characters long"
     }
-
+    
     if (/\s/.test(password)) {
         return "Password can't any contain spaces"
     }
+
     if (/^[a-zA-Z]+$/.test(password)) {
         return "Password must contain atleast one letter and number"
     }
+    
     return true
-}
-
-function passwordErrorHandler(errorMessage, password) {
-    var passwordLabel = document.getElementById('reg-password-label')
-    var passwordErrorBox = document.getElementById('reg-password-error')
-
-    if (errorMessage != true) {
-        passwordErrorBox.innerHTML = errorMessage;
-
-        passwordErrorBox.classList.remove('fade-out');
-        passwordErrorBox.classList.add('fade-in');
-
-        passwordLabel.classList.remove('success');
-        password.classList.remove('success');
-        passwordLabel.classList.add('failure');
-        password.classList.add('failure');
-        return false
-    } else {
-        passwordErrorBox.classList.remove('fade-in')
-        passwordErrorBox.classList.add('fade-out')
-
-        passwordLabel.classList.add('success')
-        password.classList.add('success')
-        passwordLabel.classList.remove('failure')
-        password.classList.remove('failure')
-        return true
-    }
 }
 
 function confirmBasicCheck(password, confirm) {
@@ -169,78 +287,85 @@ function confirmBasicCheck(password, confirm) {
     return true
 }
 
-function confirmErrorHandler(errorMessage, confirm) {
-    var confirmErrorBox = document.getElementById('reg-confirm-error')
-    var confirmLabel = document.getElementById('reg-confirm-label')
-
+// Input the different input elements so the error handler 
+function errorHandler(errorMessage, input, inputErrorBox, inputLabel) {
     if (errorMessage != true) {
-        confirmErrorBox.innerHTML = errorMessage;
+        inputErrorBox.innerHTML = errorMessage;
 
-        confirmErrorBox.classList.remove('fade-out');
-        confirmErrorBox.classList.add('fade-in');
+        inputErrorBox.classList.remove('fade-out')
+        inputErrorBox.classList.add('fade-in');
 
-        confirmLabel.classList.remove('success');
-        confirm.classList.remove('success');
-        confirmLabel.classList.add('failure');
-        confirm.classList.add('failure');
+        inputLabel.classList.remove('success');
+        inputLabel.classList.add('failure');
+        input.classList.add('failure');
         return false
-    } else {
-        confirmErrorBox.classList.remove('fade-in')
-        confirmErrorBox.classList.add('fade-out')
+    }
+    else {
+        inputErrorBox.classList.remove('fade-in');
+        inputErrorBox.classList.add('fade-out');
 
-        confirmLabel.classList.add('success')
-        confirm.classList.add('success')
-        confirmLabel.classList.remove('failure')
-        confirm.classList.remove('failure')
+        inputLabel.classList.add('success');
+        input.classList.add('success');
+        inputLabel.classList.remove('failure');
+        input.classList.remove('failure');
         return true
     }
 }
+
 // Sends AJAX request to check the availability of a username in app.py
-function usernameAvailability(username) {
-    $.ajax({
-        url: 'check_username_availability',
-        method: 'POST',
-        dataType: 'json',
-        data: {'username': username},
-        success: function(response) {
-            if (response.availabile) {
-                return true
-            } else {
-                return false
+function checkUsernameAvailability(username) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'check_username_availability',
+            method: 'POST',
+            dataType: 'json',
+            data: {'username': username},
+            success: function(response) {
+                resolve(response['available']);
+            },
+            error: function(xhr, status, error) {
+                reject(error);
             }
-        },
-        error: function(xhr, status, error) {
-            console.log(status, error)
-            // handle ajax error
-            // redirect to error page with the error code
-        }
-    })
-}
-
-function darkModeToggle() {
-
-    var toggle = document.querySelector('.dark-mode-toggle')
-    var html = document.querySelector('html')
-
-    toggle.addEventListener('click', function() {
-        if (html.classList.contains('light') == true) {
-            html.classList.remove('light');
-            html.classList.add('dark');
-        } else if (html.classList.contains('dark') == true) {
-            html.classList.remove('dark')
-            html.classList.add('light')
-        }
+        });
     });
 }
 
+// Sends AJAX request to check if the login is successful 
+function checkSuccessfulLogin(username, password) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: '/check_successful_login',
+            method: 'POST',
+            dataType: 'json',
+            data: {'username': username, 'password': password},
+            success: function(response) {
+                resolve(response['successful']);
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr, status, error)
+                reject(error);
+            }
+        });
+    });
+}
 
 function errorRedirect(errorMessage, errorCode) {
     $.ajax({
         url: '/error_redirect',
         method: 'POST',
         dataType: 'json',
-        data: {'errorMessage': errorMessage, 'errorCode': errorCode}
+        data: {'errorMessage': errorMessage, 'errorCode': errorCode},
+        success: function(response) {
+            console.log('errorRedirect Success.');
+        },
+        error: function(xhr, status, error) {
+            console.log('errorRedirect Failure.', xhr, status, error);
+        }
     })
+}
+
+function pathnameRedirect(pathname) {
+    window.location.pathname = pathname;
 }
 
 

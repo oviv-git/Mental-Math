@@ -1,8 +1,9 @@
-import sqlite3
-from flask import Flask, flash, redirect, render_template, request, session, jsonify
+from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-
 from helpers import login_required, error
+from database import Database
+from werkzeug.security import check_password_hash, generate_password_hash
+
 
 app = Flask(__name__)
 
@@ -11,71 +12,99 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 Session(app)
 
-con = sqlite3.connect("math-stone.db")
-db = con.cursor()
-
 # remember res.fetchone() https://docs.python.org/3/library/sqlite3.html
+
 
 @app.route("/", )
 def index():
     return render_template("/index.html")
 
 
-
-@app.route('/play', methods=["POST"])
+@app.route('/play', methods=['POST', 'GET'])
 # @login_required
 def play():
     """Sign in to be able to play"""
     # Post is for the login form
     # Get is for when you're in another page once you're logged in
-    if request.method == "GET":
-        print("play app route hit get")
-        return render_template("/play.html")
-    
-    elif request.method == "POST":
-        print("play app route hit post")
-        return render_template("/play.html")
-    
+    return render_template('play.html')
+        
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    password = request.form.get('password')
 
-@app.route('/register', methods=['GET', 'POST'])
+    if not username:
+        return error('Must enter username', 422)
+    
+    if not password:
+        return error('Must enter password', 422)
+    
+    return redirect(url_for('play'))
+
+
+@app.route('/logout', methods=['GET'])
+def logout():
+    session.clear()
+    return redirect('/')
+
+@app.route('/register', methods=['POST'])
 def register():
-    pass
-    # if request.method == "GET":
-    #     print("register app route using get")
-    #     return render_template("/register.html")
+    username = request.form.get('reg-username')
+    password = request.form.get('reg-password')
+    confirm = request.form.get('reg-confirm')
     
-    # elif request.method == "POST":
-    #     if not request.form['reg_username']:
-    #         return jsonify({'status': 'invalid'})
-        # username = request.form["reg_username"]
-        
-        # if not request.form['reg_password']:
-        #     return response
-        #     return error("Must include a password", 403)
-        # password = request.form["reg_password"]        
-        
-        # if not request.form['reg_confirmation']:
-        #     return response
-        #     return error("Must confirm password", 403)
-        # confirmation = request.form["reg_confirmation"]
+    if not username:
+        return error('Must enter username', 422)
+    
+    if not password:
+        return error('Must enter password', 422)
+    
+    if not confirm:
+        return error('Must enter confirmation', 422)
+    
+    if password != confirm:
+        return error('Password must match confirmation', 422)
+    password_hash = generate_password_hash(password)
 
-        # if password != confirmation:
-        #     return response
-        #     return error("Password and confirmation must match", 403)
+    with Database() as db:
+        query = "INSERT INTO users (username, hash) VALUES (?, ?)"
+        paramaters = (username, password_hash,)
+        db.execute(query, paramaters)
 
-        # print(username, password, confirmation)
-
+    return redirect(url_for('play')) 
         
-        # return render_template("/play.html")
+
 @app.route('/check_username_availability', methods=['POST'])
 def check_username_availability():
-    if request.method == "POST":
-        username = request.form.get('username')
-        print("INSIDE OF USERNAME AVAIL: ", username)
-        response = {'available': True}
-        return jsonify(response)
+    username = request.form.get('username')
+
+    with Database() as db:
+        query = 'SELECT DISTINCT username FROM users WHERE LOWER(username) = LOWER(?)'
+        parameters = (username,)
+        result = db.fetchone(query, parameters)
+    
+    if result is None:
+        return jsonify({'available': True})
+    return jsonify({'available': False})
 
 
+@app.route('/check_successful_login', methods=['POST'])
+def check_successful_login():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
+    with Database() as db:
+        query = "SELECT DISTINCT hash FROM users WHERE LOWER(username) = LOWER(?)"
+        paramaters = (username, )
+        user_hash = db.fetchone(query, paramaters)
+
+        is_login_successful =  check_password_hash(user_hash[0], password)
+
+    if is_login_successful == True:
+        return jsonify({'successful': True})
+    return jsonify({'successful': False})
+    
+        
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
