@@ -43,10 +43,9 @@ html.dark h5
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     height: 100vh;
 }
-
-
 .section-small 
 {   
     width: 40%;
@@ -62,8 +61,6 @@ html.dark h5
     order: 2;
     justify-content: center;
 }
-
-
 .logo-container
 {   
     width: 100%;
@@ -71,19 +68,16 @@ html.dark h5
     justify-content: center;
     overflow: hidden;
 }
-
 .logo-container img 
 {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
-
 .logo
 {   
     object-fit: scale-down;
     margin-bottom: 1rem;
-    
 }
 form
 {   
@@ -117,18 +111,18 @@ html.dark .form-error
 {
     color: #ff517c;
 }
-.error
+.session-information
 {
     font-weight: 600;
     font-size: 1.2rem;
 }
-html.light .error
+.error
 {
     color: #ff517c;
 }
-html.dark .error
+.success
 {
-    color: #ff517c;
+    color: #2ad366;
 }
 .btn 
 {   
@@ -151,7 +145,7 @@ html.dark .error
 html.light .btn-secondary
 {   
     color: #3e6775;
-    background-color: #a3cbd9;
+    background-color: #cbecf7;
 }
 
 html.dark .btn-secondary
@@ -220,7 +214,7 @@ html.dark .card
 
 html.light .slider .indicators .indicator-item
 {
-    background-color: #a3cbd9;
+    background-color: #cbecf7;
 }
 html.dark .slider .indicators .indicator-item
 {
@@ -364,12 +358,12 @@ input:focus
     border-bottom: 1px solid #4f9db7 !important;
 }
 
-html.light input.failure:focus
+html.light input.success:focus
 {
     box-shadow: 0 1px 0 0 #4f9db7 !important;
     border-bottom: 1px solid #4f9db7 !important;
 }
-html.dark input.failure:focus
+html.dark input.success:focus
 {
     box-shadow: 0 1px 0 0 #4f9db7 !important;
     border-bottom: 1px solid #4f9db7 !important;
@@ -425,6 +419,64 @@ html.dark .caption
 {
     color: #999999;
 }
+.navbar
+{
+    display: flex;
+    justify-content: space-around;
+    position: sticky;
+    width: 100%;
+    height: 4rem;
+}
+.navbar-btn
+{
+    border: none;
+    width: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 180%;
+}
+
+html.light .navbar-btn
+{      
+    color: #222;
+    background-color: #d7d7d7;
+}
+html.dark .navbar-btn
+{
+    color: #fff;
+    background-color: #3d3d3d;
+}
+html.light .navbar-btn.active
+{
+    background-color: #4f9db7
+}
+html.dark .navbar-btn.active
+{
+    background-color: #4f9db7;
+}
+.play-container
+{   
+    overflow: hidden;
+    border-radius: 3rem;
+    height: 80%;
+    width: 80%;
+}
+.play-container-top
+{
+    height: 40%;
+}
+.play-container-bottom
+{
+    height: 60%;
+}
+html.light .play-container
+{
+    background-color: #d7d7d7;
+}
+html.dark .play-container
+{
+    background-color: #3d3d3d;
+}
+
 @keyframes fadeIn 
 {
     0% 
@@ -484,5 +536,9 @@ html.dark .caption
     {   
         border: none;
         border-radius: 0rem;
+    }
+    .navbar-btn
+    {
+        font-size: 120%;
     }
 }

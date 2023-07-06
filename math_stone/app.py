@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error
+from helpers import login_required, error, validate_login, get_session_id
 from database import Database
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -20,13 +20,13 @@ def index():
     return render_template("/index.html")
 
 
-@app.route('/play', methods=['POST', 'GET'])
-# @login_required
-def play():
+@app.route('/home', methods=['POST', 'GET'])
+@login_required
+def home():
     """Sign in to be able to play"""
     # Post is for the login form
     # Get is for when you're in another page once you're logged in
-    return render_template('play.html')
+    return render_template('home.html')
         
 @app.route('/login', methods=['POST'])
 def login():
@@ -39,8 +39,11 @@ def login():
     if not password:
         return error('Must enter password', 422)
     
-    return redirect(url_for('play'))
+    if validate_login(username, password) == True:
+        session['user_id'] = get_session_id(username)
+        return redirect(url_for('home'))
 
+    return error("Invalid session id", 400)
 
 @app.route('/logout', methods=['GET'])
 def logout():
@@ -71,7 +74,7 @@ def register():
         paramaters = (username, password_hash,)
         db.execute(query, paramaters)
 
-    return redirect(url_for('play')) 
+    return redirect(url_for('home')) 
         
 
 @app.route('/check_username_availability', methods=['POST'])
@@ -88,21 +91,16 @@ def check_username_availability():
     return jsonify({'available': False})
 
 
-@app.route('/check_successful_login', methods=['POST'])
-def check_successful_login():
+@app.route('/check_valid_login', methods=['POST'])
+def check_valid_login():
     username = request.form.get('username')
     password = request.form.get('password')
     
-    with Database() as db:
-        query = "SELECT DISTINCT hash FROM users WHERE LOWER(username) = LOWER(?)"
-        paramaters = (username, )
-        user_hash = db.fetchone(query, paramaters)
+    is_login_valid = validate_login(username, password)
 
-        is_login_successful =  check_password_hash(user_hash[0], password)
-
-    if is_login_successful == True:
-        return jsonify({'successful': True})
-    return jsonify({'successful': False})
+    if is_login_valid == True:
+        return jsonify({'valid': True})
+    return jsonify({'valid': False})
     
         
 @app.route('/profile', methods=['GET', 'POST'])

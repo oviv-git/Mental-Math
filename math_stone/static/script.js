@@ -1,21 +1,23 @@
 function main() {
-    if (window.location.pathname == '/') {
-        initSlider();
-        initForm();
-        displaySessionInformation();
-        storedColorScheme();
-        colorSchemeToggle();
-        registerFormSubmit();
-        loginFormSubmit();
-    } else {
-        storedColorScheme();
-        colorSchemeToggle();
+    storedColorScheme();
+    colorSchemeToggle();
+    displaySessionInformation();
+    wavesEffectToggle();
+    switch (window.location.pathname) {
+        case '/':
+            initSlider();
+            initForm();
+            registerFormSubmit();
+            loginFormSubmit();
+            break;
+        case '/play':
+            
     }
 }
 
 function storedColorScheme() {
-    var html = document.querySelector('html')
-    var storedMode = sessionStorage.getItem('prefferedMode')
+    let html = document.querySelector('html')
+    let storedMode = sessionStorage.getItem('prefferedMode')
 
     if (storedMode == 'dark') {
         html.classList.remove('light');
@@ -32,12 +34,31 @@ function colorSchemeToggle() {
             html.classList.remove('light');
             html.classList.add('dark');
             sessionStorage.setItem('prefferedMode', 'dark')
-        } else if (html.classList.contains('dark') == true) {
+        } 
+        else if (html.classList.contains('dark') == true) {
             html.classList.remove('dark')
             html.classList.add('light')
             sessionStorage.setItem('prefferedMode', 'light')
         }
+        wavesEffectToggle();
     });
+}
+
+function wavesEffectToggle() {
+    let waveElements = document.querySelectorAll('.waves-effect')
+    let html = document.querySelector('html')
+    
+    for (let i = 0; i < waveElements.length; i++) {
+        let waveElement = waveElements[i]
+        if (html.classList.contains('light')) {
+            waveElement.classList.add('waves-dark')
+            waveElement.classList.remove('waves-light')
+        } 
+        else if (html.classList.contains('dark')) {
+            waveElement.classList.add('waves-light')
+            waveElement.classList.remove('waves-dark')
+        }
+    }
 }
 
 function initSlider() {
@@ -79,10 +100,8 @@ function initForm() {
 }
 
 function clearForm() {
+    let modalOverlay = document.querySelector('.modal-overlay')
     let forms = document.querySelectorAll('form')
-
-    var modal = document.querySelector('.modal')
-    var modalInstance = M.Modal.init(modal);
 
     for (let i = 0; i < forms.length; i++) {
         let form = forms[i]
@@ -102,16 +121,29 @@ function clearForm() {
             input.value = '';
         }
     }
-    modalInstance.close();
+    modalOverlay.click();
 }
 
 // Finds the session-information class and set the innerHTML to session.storage
 function displaySessionInformation() {
-    informationContainer = document.getElementById('session-information');
+    let informationContainer = document.getElementById('session-information');
 
     informationContainer.innerHTML = sessionStorage.getItem('message');
     informationContainer.className = '';
     informationContainer.classList.add(sessionStorage.getItem('messageType'))
+}
+
+function clearSessionInformation() {
+    let informationContainer = document.getElementById('session-information');
+
+    informationContainer.innerHTML = '';
+}
+
+// messageType is success or failure
+function updateSesssionMessage(message, messageType) {
+    sessionStorage.setItem('message', message);
+    sessionStorage.setItem('messageType', messageType);
+    displaySessionInformation();
 }
 
 function loginFormSubmit() {
@@ -121,6 +153,7 @@ function loginFormSubmit() {
         e.preventDefault();
         var isValid = await loginFormCheck()
         if (isValid == true) {
+            updateSesssionMessage('Login successful', 'success');
             loginForm.submit();
         }
     })
@@ -159,10 +192,7 @@ async function loginFormCheck() {
         return false;
     }
 
-    if (!errorHandler(passwordBasicCheck(password.value), password, passwordErrorBox, passwordLabel)) {
-        return false;
-    }
-    isLoginSuccessful = await checkSuccessfulLogin(username.value, password.value)
+    isLoginSuccessful = await checkValidLogin(username.value, password.value)
         .then(function(successful) {
             if (successful) {
                 return true;
@@ -178,9 +208,8 @@ async function loginFormCheck() {
         unsuccessfulAttemptsLeft--;
         password.dataset.attempts = unsuccessfulAttemptsLeft;
         if (password.dataset.attempts == 0) {
-            sessionStorage.setItem('message', 'Too many unsuccessful login attempts',)
-            sessionStorage.setItem('messageType', 'error',)
             password.dataset.attempts = 3;
+            updateSesssionMessage('Too many unsuccessful login attempts', 'error')
             clearForm();
         }
         return false;
@@ -247,6 +276,7 @@ function usernameBasicCheck(username) {
     if (username.length == 0) {
         return "Must enter a username"
     }
+
     if (/\s/.test(username)) {
         return "Username can't any contain spaces"
     }
@@ -254,9 +284,11 @@ function usernameBasicCheck(username) {
     if (username.length < 1 || username.length > 32) {
         return "Username must be between 1-32 characters long";
     }
+
     if (/^[A-z]/.test(username) == false) {
         return "Username must start with a letter";
     }
+
     return true;
 }
 
@@ -331,15 +363,15 @@ function checkUsernameAvailability(username) {
 }
 
 // Sends AJAX request to check if the login is successful 
-function checkSuccessfulLogin(username, password) {
+function checkValidLogin(username, password) {
     return new Promise(function(resolve, reject) {
         $.ajax({
-            url: '/check_successful_login',
+            url: '/check_valid_login',
             method: 'POST',
             dataType: 'json',
             data: {'username': username, 'password': password},
             success: function(response) {
-                resolve(response['successful']);
+                resolve(response['valid']);
             },
             error: function(xhr, status, error) {
                 console.log(xhr, status, error)
@@ -349,6 +381,7 @@ function checkSuccessfulLogin(username, password) {
     });
 }
 
+// Sends AJAX request 
 function errorRedirect(errorMessage, errorCode) {
     $.ajax({
         url: '/error_redirect',
