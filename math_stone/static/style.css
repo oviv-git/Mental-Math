@@ -1,3 +1,7 @@
+:root 
+{
+    --border-radius-size: 1rem;
+}
 html
 {
     scroll-behavior: smooth;
@@ -39,7 +43,9 @@ html.dark h5
 }
 .section
 {   
-    padding: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    padding: 4rem;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -49,7 +55,6 @@ html.dark h5
 .section-small 
 {   
     width: 40%;
-    order: 1;
 }
 .section-med
 {
@@ -57,8 +62,7 @@ html.dark h5
 }
 .section-large
 {
-    width: 60%;
-    order: 2;
+    width: 55%;
     justify-content: center;
 }
 .logo-container
@@ -113,6 +117,7 @@ html.dark .form-error
 }
 .session-information
 {
+    display: flex;
     font-weight: 600;
     font-size: 1.2rem;
 }
@@ -123,6 +128,20 @@ html.dark .form-error
 .success
 {
     color: #2ad366;
+}
+.toast
+{
+    color: #fff;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.2rem;
+}
+.toast.success
+{   
+    background-color: rgb(70, 170, 121);
+}
+.toast.error
+{
+    background-color: rgb(194, 76, 76);
 }
 .btn 
 {   
@@ -155,9 +174,7 @@ html.dark .btn-secondary
 }
 .dark-mode-toggle
 {
-    height: 4rem;
-    width: 4rem;
-    border-radius: 1rem;
+    width: 20%;
 }
 html.light .dark-mode-toggle
 {
@@ -184,7 +201,7 @@ html.dark .card
 }
 .flow-text
 {   
-    margin: 2rem;
+    font-size: 2.5rem;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
@@ -419,22 +436,34 @@ html.dark .caption
 {
     color: #999999;
 }
+/* Most of these are only used on home */
+.full-page
+{   
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
 .navbar
 {
+    height: 4.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
     display: flex;
     justify-content: space-around;
-    position: sticky;
     width: 100%;
-    height: 4rem;
 }
 .navbar-btn
 {
     border: none;
     width: 100%;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 180%;
+    font-size: 3rem;
 }
-
 html.light .navbar-btn
 {      
     color: #222;
@@ -445,28 +474,41 @@ html.dark .navbar-btn
     color: #fff;
     background-color: #3d3d3d;
 }
+html.light .navbar-btn:hover
+{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+html.dark .navbar-btn:hover
+{
+    background-color: rgba(255, 255, 255, 0.2);
+}
 html.light .navbar-btn.active
 {
-    background-color: #4f9db7
+    color: #fff;
+    background-color: #4f9db7;
 }
 html.dark .navbar-btn.active
 {
+    color: #fff;
     background-color: #4f9db7;
+}
+html.light .navbar-btn.active:hover
+{
+    background-color: #418ea8;
+}
+html.dark .navbar-btn.active:hover
+{
+    background-color: #66b7d2;
 }
 .play-container
 {   
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    border-radius: 3rem;
     height: 80%;
     width: 80%;
-}
-.play-container-top
-{
-    height: 40%;
-}
-.play-container-bottom
-{
-    height: 60%;
+    border-radius: 2rem;
+    padding: 1rem;
 }
 html.light .play-container
 {
@@ -475,6 +517,191 @@ html.light .play-container
 html.dark .play-container
 {
     background-color: #3d3d3d;
+}
+.play-container-top
+{
+    display: flex;
+    height: 55%;
+    padding-bottom: .5rem;
+}
+.play-container-bottom
+{
+    display: flex;
+    flex: 10 10 45%;
+    justify-content: center;
+    padding-top: .5rem;
+    height: 45%;
+}
+.play-container-btn
+{   
+    background: #244753;
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+}
+/* Parent element to all the switches */
+.switchboard
+{   
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 0rem .5rem 1.5rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    margin-right: .5rem;
+    width: 100%;
+}
+/* pointer events:none on everything except set to :auto on the physical button div (switch-button) */
+.switchboard *
+{
+    transition: all .3s ease, color .1s linear, text-shadow .1s linear;
+    pointer-events: none;
+}
+html.light .switchboard
+{
+    background-color: #ababab;
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+
+}
+html.dark .switchboard
+{
+    background-color: #2b2b2b;
+    box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
+}
+.switch-column
+{   
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.switch
+{   
+    pointer-events: auto;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0rem 1rem 1rem;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+.switch-button
+{
+    font-family: 'Heebo', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    vertical-align: middle;
+    width: 100%;
+    height: 90%;
+}
+html.light .switch-button
+{
+    background-color: #dadada;
+    color: #8b8b8b;
+    box-shadow: #8e8e8e 0rem 1.4rem 0rem;
+}
+html.dark .switch-button
+{
+    background-color: #4b4b4b;
+    color: #2e2e2e;
+    box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+}
+.switch.active .switch-button
+{
+    transform: translateY(1rem);
+    position: relative;
+}
+html.light .switch.active .switch-button
+{
+    box-shadow: #4f9db7 0rem 0.4rem 0rem, #6bbad4 0rem 0.4rem 1.2rem;
+    background-color: #6cbfda;
+    color: #def7ff;
+    text-shadow: #def7ff 0rem 0rem 1.5rem;
+}
+html.dark .switch.active .switch-button
+{
+    box-shadow: #346f83 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
+    background-color: #4f9db7;
+    color: #c0efff;
+    text-shadow: #c0efff 0rem 0rem 1.5rem;
+}
+
+switch.large .switch-button 
+{   
+    height: 85%;
+    box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+}
+.switch.large.active .switch-button
+{
+    box-shadow: #346f83 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
+    transform: translateY(1rem);
+    position: relative;
+    background-color: #4f9db7;
+}
+.switch-text
+{
+    height: auto;
+    width: auto;
+    position: absolute;
+    font-size: 10rem;
+}
+.mode-select-container
+{   
+    margin-left: .5rem;
+    border-radius: 1rem;
+    width: 40%;
+    height: 100%;
+}
+.test
+{
+    height: 4rem;
+    width: 4rem;
+    background-color: #244753;
+}
+.carousel
+{
+    height: 100%;
+    width: 100%;
+}
+/* Extra Decorator Classes */
+.rounded-left
+{   
+    border-top-left-radius: var(--border-radius-size);
+    border-bottom-left-radius: var(--border-radius-size);
+    overflow: hidden;
+}
+.rounded-right
+{
+    border-top-right-radius: var(--border-radius-size);
+    border-bottom-right-radius: var(--border-radius-size);
+    overflow: hidden;
+}
+.rounded-top-left 
+{
+    border-top-left-radius: var(--border-radius-size);
+    overflow: hidden;
+}
+
+.rounded-bottom-left 
+{
+    border-bottom-left-radius: var(--border-radius-size);
+    overflow: hidden;
+
+}
+.rounded-top-right 
+{
+    border-top-right-radius: var(--border-radius-size);
+    overflow: hidden;
+}
+
+.rounded-bottom-right 
+{
+    border-bottom-right-radius: var(--border-radius-size);
+    overflow: hidden;
 }
 
 @keyframes fadeIn 
@@ -528,6 +755,10 @@ html.dark .play-container
         padding: 0rem;
         order: 1;
     }
+    .full-page
+    {
+        justify-content: start;
+    }
     .slider 
     {
         margin-top: 4rem;
@@ -537,8 +768,53 @@ html.dark .play-container
         border: none;
         border-radius: 0rem;
     }
+    .navbar
+    {   
+        position: inherit;
+        margin-bottom: 0;
+        height: 6rem;
+    }
     .navbar-btn
     {
-        font-size: 120%;
+        font-size: 4vw;
     }
+    .play-container
+    {   
+        padding: 0;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .play-container-top
+    {   
+        border-radius: 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 80%;
+    }
+    
+    .play-container-btn
+    {
+        border-radius: 0
+    }
+    .switchboard
+    {
+        padding: .5rem .5rem 1.5rem;
+        border-radius: 0;
+        height: 100%;
+    }
+    .mode-select-container
+    {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .switch-text
+    {
+        font-size: 8rem;
+    }
+
+
 }

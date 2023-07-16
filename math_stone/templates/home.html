@@ -1,34 +1,63 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    MathStone Play
+    MathStone Home
 {% endblock %} 
 
 {% block main %}
-    <div class="navbar">
-        <button class="navbar-btn waves-effect active">Home</button>
-        <button class="navbar-btn waves-effect">Profile</button>
-        <button class="navbar-btn waves-effect">Leaderboard</button>
-        <button class="navbar-btn waves-effect">Logout</button>
-    </div>
-    <div class="section">
+    <div class="full-page">
+        <div class="navbar" styl="justify-content: start">
+            <button class="navbar-btn waves-effect active">Home</button>
+            <button class="navbar-btn waves-effect">Profile</button>
+            <button class="navbar-btn waves-effect">Leaderboard</button>
+            <button id="dropdown-button" class="navbar-btn waves-effect dropdown dark-mode-toggle">DROPDOWN</button>
+        </div>
         <div class="play-container">
             <div class="play-container-top">
-                <div class="section-large">
-                    
+                <div class="switchboard" id="switchboard">
+                    <div class="switch-column">
+                        <div class="switch" id="addition">
+                            <span class="switch-button">
+                                <p class=switch-text>+</p>
+                            </span>
+                        </div>
+                        <div class="switch" id="subtraction">
+                            <span class="switch-button">
+                                <p class="switch-text">−</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="switch-column">
+                        <div class="switch" id="multiplication">
+                            <span class="switch-button">
+                                <p class="switch-text">×</p>
+                            </span>
+                        </div>
+                        <div class="switch" id="division">
+                            <span class="switch-button">
+                                <p class="switch-text">÷</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="switch-column">
+                        <div class="switch large" id="special">
+                            <span class="switch-button">
+                                <p class="switch-text">★</p>
+                            </span>
+                        </div>
+                    </div>
                 </div>
-                <div class="section-small">
-                    
+                <div class="mode-select-container" id="mode-select">
+                    <div class="carousel">
+                        <div class="test carousel-item"></div>
+                        <div class="test carousel-item"></div>
+                        <div class="test carousel-item"></div>
+                        <div class="test carousel-item"></div>
+                    </div>
                 </div>
             </div>
             <div class="play-container-bottom">
-                
-            </div>
-        </div>
-        <div>
-            <button id="dark-mode-toggle" class="dark-mode-toggle btn waves-effect waves-dark" aria-label="dark mode toggle"></button>
-            <div class="session-information">
-                <p id="session-information"></p>
+                <button class="play-container-btn">PLAY</button>
             </div>
         </div>
     </div>

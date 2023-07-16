@@ -1,17 +1,19 @@
 function main() {
     storedColorScheme();
-    colorSchemeToggle();
-    displaySessionInformation();
     wavesEffectToggle();
+    displaySessionInformation();
     switch (window.location.pathname) {
         case '/':
+            colorSchemeToggle();
             initSlider();
             initForm();
             registerFormSubmit();
             loginFormSubmit();
             break;
-        case '/play':
-            
+        case '/home':
+            colorSchemeToggle();
+            switchboard();
+            initCarousel();
     }
 }
 
@@ -124,19 +126,21 @@ function clearForm() {
     modalOverlay.click();
 }
 
-// Finds the session-information class and set the innerHTML to session.storage
-function displaySessionInformation() {
-    let informationContainer = document.getElementById('session-information');
-
-    informationContainer.innerHTML = sessionStorage.getItem('message');
-    informationContainer.className = '';
-    informationContainer.classList.add(sessionStorage.getItem('messageType'))
+function initCarousel() {
+    document.addEventListener('DOMContentLoaded', function() {
+        var elems = document.querySelectorAll('.carousel');
+        var instances = M.Carousel.init(elems);
+      });
 }
 
-function clearSessionInformation() {
-    let informationContainer = document.getElementById('session-information');
-
-    informationContainer.innerHTML = '';
+// Finds the session-information class and set the innerHTML to session.storage
+function displaySessionInformation() {
+    let message = sessionStorage.getItem('message');
+    let messageType = sessionStorage.getItem('messageType')
+    
+    if (message != null || messageType != null) {
+        M.toast({html: message, classes: messageType})
+    }
 }
 
 // messageType is success or failure
@@ -153,7 +157,7 @@ function loginFormSubmit() {
         e.preventDefault();
         var isValid = await loginFormCheck()
         if (isValid == true) {
-            updateSesssionMessage('Login successful', 'success');
+            updateSesssionMessage('Login Successful', 'success');
             loginForm.submit();
         }
     })
@@ -224,6 +228,7 @@ function registerFormSubmit() {
         e.preventDefault();
         var isValid = await registerFormCheck()
         if (isValid == true) {
+            updateSesssionMessage('Registration Successful', 'success')
             registerForm.submit();
         }
     })
@@ -399,6 +404,31 @@ function errorRedirect(errorMessage, errorCode) {
 
 function pathnameRedirect(pathname) {
     window.location.pathname = pathname;
+}
+
+// Functions for Home.html
+function switchboard() {
+    var switchboard = document.getElementById('switchboard');
+
+    switchboard.addEventListener('click', function(event) {
+        if (event.target.classList.contains('switch')) {
+            let clickedButton = event.target
+
+            if (clickedButton.classList.contains('active')) {
+                clickedButton.classList.remove('active');
+            } else {
+                clickedButton.classList.add('active');
+            }
+        }
+    })
+}
+
+function initModeSelect() {
+
+}
+// AJAX request asking for the 
+function getModes() {
+
 }
 
 
