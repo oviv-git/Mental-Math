@@ -1,0 +1,797 @@
+$border-radius-size: 1rem;
+$main-cyan: #4f9db7;
+$default-light: #fff;
+$default-dark: #222;
+
+html
+{
+    scroll-behavior: smooth;
+}
+
+html.light {
+    background-color: $default-light;
+    color: $default-dark;
+
+    h3 {
+        color: $default-dark;
+    }
+    h5 {
+        color: $default-dark;
+    }
+    .input-box {
+        color: $default-dark;
+    }
+    .form-error {
+        color: #d1214d;
+    }
+    .btn-secondary {
+        color: #3e6775;
+        background-color: #cbecf7;
+    }
+    .dark-mode-toggle {
+        background-color: #bfbfbf;
+    }
+    .caption {
+        color: #5f5f5f;
+    }
+    .card {
+        background-color: #3b7b91;
+    }
+    .slider {
+        .indicators {
+            .indicator-item {
+                background-color: #cbecf7;
+                
+                &.active {
+                    background-color: $main-cyan;
+                }
+            }
+        }
+    }
+    .tabs {
+        background-color: $default-light;
+
+        .tab {
+            a {
+                &.active {
+                    color: #41879f;
+                }
+                &:hover {
+                    color: darken($main-cyan, 5%);
+                }
+            }
+        }
+        .indicator {
+            background-color: $main-cyan;
+        }
+    }
+    .input-field {
+        label {
+            &.success {
+                color: $main-cyan;
+            }
+            &.failure {
+                color: #d1214d;
+
+            }
+        }
+    }
+    input {
+        &.success {
+            box-shadow: 0 1px 0 0 $main-cyan !important;
+            border-bottom: 1px solid $main-cyan !important;
+
+            &:focus {
+                box-shadow: 0 1px 0 0 $main-cyan !important;
+                border-bottom: 1px solid $main-cyan !important;
+            }
+        }
+        &.failure {
+            box-shadow: 0 1px 0 0 #d1214d !important;
+            border-bottom: 1px solid #d1214d !important;
+        }
+    }
+    .modal {
+        background-color: $default-light;
+    } 
+    .navbar-btn {
+        color: $default-dark;
+        background-color: #d7d7d7;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+
+        }
+        &.active {
+            color: $default-light;
+            background-color: $main-cyan;
+
+            &:hover {
+                background-color: #418ea8;
+            }
+        }
+    }
+    .play-container {
+        background-color: #d7d7d7;
+    }
+    .switchboard {
+        background-color: #bfbfbf;
+        box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem,
+                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, 
+                    inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+    }
+    .switch {
+        .switch-button {
+            background-color: #dadada;
+            color: #8b8b8b;
+            box-shadow: #8e8e8e 0rem 1.4rem 0rem;
+        }
+        &.active {
+            .switch-button {
+
+            }
+        }
+        &.large {
+            &.active {
+                .switch-button {
+
+                }
+            }
+        }
+    }
+    .mode-select-container {
+
+    }
+    .swiper-slide {
+
+    }
+}
+
+html.dark
+{   
+    background-color: $default-dark;
+    color: $default-light;
+
+    .light-image {
+        display: none;
+    }
+    h3 {
+        color: $default-light;
+    }
+    h5 {
+        color: $default-light;
+    }
+    .input-box {
+        color: $default-light;
+    }
+    .form-error{
+        color: #ff517c;
+    }
+    .btn-secondary {
+        color: #abc8d2;
+        background-color: #244753;
+    }
+    .dark-mode-toggle
+    {
+        background-color: #444;
+    }
+    .caption {
+        color: #999999;
+    }
+    .card {
+        background-color: #145650;
+    }
+    .slider {
+        .indicators {
+            .indicator-item {
+                background-color: #244753;
+                
+                &.active {
+                    background-color: $main-cyan;
+                }
+            }
+        }
+    }
+    .tabs {
+        background-color: #444;
+
+        .tab {
+            a {
+                &.active {
+                    color: $main-cyan;
+                }
+                &:hover {
+                    color: darken($main-cyan, 5%);
+                }
+            }
+        }
+        .indicator {
+            background-color: $main-cyan;
+        }
+    }
+    .input-field {
+        label {
+            &.failure {
+                color: #ff517c;
+            }
+            &.success {
+                color: $main-cyan;
+            }
+        }
+    }
+    input {
+        &.success {
+            box-shadow: 0 1px 0 0 $main-cyan !important;
+            border-bottom: 1px solid $main-cyan !important;
+
+            &:focus {
+                box-shadow: 0 1px 0 0 $main-cyan !important;
+                border-bottom: 1px solid $main-cyan !important;
+            }
+        }
+        &.failure {
+            box-shadow: 0 1px 0 0 #ff517c !important;
+            border-bottom: 1px solid #ff517c !important;
+        }
+    }
+    .modal {
+        background-color: $default-dark;
+    } 
+    .navbar-btn {
+        color: $default-light;
+        background-color: #3d3d3d;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+
+        }
+        &.active {
+            color: $default-light;
+            background-color: $main-cyan;
+
+            &:hover {
+                background-color: #66b7d2;
+
+            }
+        }
+    }
+    .play-container {
+        background-color: #3d3d3d;
+
+    }
+    .switchboard {
+        background-color: #2b2b2b;
+        box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem,
+                    inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem,
+                    inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
+    }
+    .switch {
+        .switch-button {
+            background-color: #4b4b4b;
+            color: #2e2e2e;
+            box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+        }
+        &.active {
+            .switch-button {
+                
+            }
+        }
+        &.large {
+            &.active {
+                .switch-button {
+                    
+                }
+            }
+        }
+    }
+    .mode-select-container {
+
+    }
+}
+.section-container
+{
+    display: flex;
+    margin: auto;
+    text-align: center;
+}
+.section
+{
+    position: relative;
+    overflow: hidden;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+}
+.section-small
+{
+    width: 35%;
+}
+.section-med
+{
+    width: 50%
+}
+.section-large
+{
+    width: 65%;
+    justify-content: center;
+}
+.logo-container {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+.logo
+{
+    object-fit: scale-down;
+    margin-bottom: 1rem;
+}
+form {
+    padding: 1rem;
+    display: block;
+    text-align: center;
+    margin: auto;
+    font-family: 'Heebo', sans-serif;
+}
+
+.form-error {
+    font-weight: 400;
+    transition: .5s;
+    height: 2rem;
+
+}
+.session-information {
+    display: flex;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+.error {
+    color: #ff517c;
+}
+.success {
+    color: #2ad366;
+}
+.toast {
+    color: $default-light;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.2rem;
+    &.success {
+        background-color: rgb(70, 170, 121);
+    }
+    &.error {
+        background-color: rgb(194, 76, 76);
+    }
+}
+
+.btn {
+    background-color: $main-cyan;
+    font-weight: 500;
+    font-size: 140%;
+    width: 40rem;
+    max-width: 60%;
+    border-radius: 1rem;
+    &:hover {
+        background-color: #6bacc2;
+    }
+    &:focus {
+        background-color: #6bacc2;
+
+    }
+}
+
+.dark-mode-toggle {
+    width: 20%;
+}
+
+.card {
+    margin: 3rem auto;
+}
+.flow-text {
+    font-size: 2rem;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+.slider {
+    margin-top: 2rem;
+
+    .slides {
+        border-radius: 4rem;
+        background-color: transparent;
+    }
+    .slides li {
+        .caption {
+            top: 0%;
+        }
+    }
+}
+.indicators
+{
+    position: absolute;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 2;
+    top: 90%;
+}
+.error-card-container
+{
+    object-fit: contain;
+    font-size: 3em;
+    display: flex;
+    width: 60%;
+    height: 36rem;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem auto;
+    color: #c8d0f4;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.tabs {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-around;
+    height: 4rem;
+    align-items: center;
+    
+    .tab {
+
+        a {
+            font-size: 120%;
+            font-weight: 500;
+            transition: 0.5s;
+            color: $main-cyan;
+            &.active {
+                transition: 0.5s;
+                font-size: 160%;
+                font-weight: 700;
+            }
+        }
+        &.tab a:focus.active {
+            background-color: rgba(0, 0, 0, 0)
+
+        }
+    }
+    .indicator {
+ 
+        height: 0.2rem;
+    } 
+}
+
+// Not even sure what this is. Pretty sure its outdated now
+.input-field input:focus + label
+{
+    color: $main-cyan !important;
+}
+
+input:focus
+{
+    box-shadow: 0 1px 0 0 $main-cyan !important;
+    border-bottom: 1px solid $main-cyan !important;
+}
+.modal
+{
+    border-radius: 2rem;
+    width: 60rem;
+    max-width: 90%;
+}
+
+.modal-overlay
+{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-header {
+    display: block;
+    justify-content: center;
+}
+
+.modal-content {
+    display: block;
+    justify-content: center;
+}
+
+/* Most of these are only used on home */
+.full-page {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.navbar {
+    height: 4.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.navbar-btn
+{
+    border: none;
+    width: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 3rem;
+}
+
+.play-container
+{
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 80%;
+    width: 80%;
+    border-radius: 2rem;
+    padding: 1rem;
+}
+
+.play-container-top
+{
+    display: flex;
+    height: 55%;
+    padding-bottom: .5rem;
+}
+.play-container-bottom
+{
+    display: flex;
+    flex: 10 10 45%;
+    justify-content: center;
+    padding-top: .5rem;
+    height: 45%;
+}
+.play-container-btn
+{
+    background: #244753;
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+}
+/* Parent element to all the switches */
+.switchboard
+{
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    padding: 0rem .5rem 1.5rem;
+    overflow: hidden;
+    border-radius: 1rem;
+    margin-right: .5rem;
+    flex: 2;
+}
+/* pointer events:none on everything except set to :auto on the physical button div (switch-button) */
+.switchboard *
+{
+    // transition: all .3s ease, color .1s linear, text-shadow .1s linear;
+    transition: 0;
+    pointer-events: none;
+}
+
+// html.light .switchboard
+// {
+//     background-color: #bfbfbf;
+//     box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+
+// }
+// html.dark .switchboard
+// {
+//     background-color: #2b2b2b;
+//     box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
+// }
+.switch-column
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.switch
+{
+
+    pointer-events: auto;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0rem 1rem 1rem;
+    border: none;
+    height: 100%;
+    width: 100%;
+}
+.switch-button
+{
+    font-family: 'Heebo', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1rem;
+    vertical-align: middle;
+    width: 100%;
+    height: 90%;
+}
+.switch.active .switch-button
+{
+    transform: translateY(1rem);
+    
+    position: relative;
+}
+html.light .switch.active .switch-button
+{
+    box-shadow: $main-cyan 0rem 0.4rem 0rem, #6bbad4 0rem 0.4rem 1.2rem;
+    background-color: #6cbfda;
+    color: lighten($main-cyan, 45%);
+    text-shadow: lighten($main-cyan, 55%) 0rem 0rem 1rem;
+}
+html.dark .switch.active .switch-button
+{
+    box-shadow: #346f83 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
+    background-color: $main-cyan;
+    color: #c0efff;
+    text-shadow: #c0efff 0rem 0rem 1.5rem;
+}
+
+switch.large .switch-button
+{
+    height: 85%;
+    box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+}
+.switch.large.active .switch-button
+{
+    box-shadow: #346f83 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
+    transform: translateY(1rem);
+    position: relative;
+    background-color: $main-cyan;
+}
+.switch-text
+{
+    height: auto;
+    width: auto;
+    position: absolute;
+    font-size: 10rem;
+}
+.mode-select-container
+{
+    overflow: hidden;
+    padding: 1.5rem;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    margin-left: .5rem;
+    border-radius: 1rem;
+    width: 30%;
+    height: 100%;
+}
+html.light .mode-select-container
+{
+    background-color: #bfbfbf;
+    box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+}
+html.dark .mode-select-container
+{
+    background-color: #2b2b2b;
+    box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
+}
+.swiper {
+    width: 100%;
+    height: 100%;
+}
+html.light .swiper-slide.swiper-slide {
+    color: $default-light;
+    background-color: $default-dark;
+  }
+
+@keyframes fadeIn
+{
+    0%
+    {
+        opacity: 0;
+    }
+    100%
+    {
+        opacity: 1;
+    }
+}
+.fade-in
+{
+    animation: fadeIn .5s ease-in forwards;
+}
+@keyframes fadeOut
+{
+    0%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        opacity: 0;
+    }
+}
+.fade-out
+{
+    animation: fadeOut .5s ease-in forwards;
+}
+
+@media (max-width: 800px) {
+    .section-container {
+        flex-direction: column;
+    }
+    .section {
+        padding: 2rem;
+    }
+    .section-small {
+        width: 100%;
+        order: 2;
+    }
+    .section-large {
+        width: 100%;
+        padding: 0rem;
+        order: 1;
+    }
+    .full-page {
+        justify-content: start;
+    }
+    .slider {
+        margin-top: 4rem;
+    }
+    .slides {
+        border: none;
+        border-radius: 0rem;
+    }
+    .navbar {
+        position: inherit;
+        margin-bottom: 0;
+        height: 4rem;
+    }
+    .navbar-btn {
+        font-size: 4vw;
+    }
+    .play-container {
+        margin-top: 0;
+        padding: 0;
+        border-radius: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .play-container-top {
+        border-radius: 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 80%;
+    }
+
+    .play-container-btn {
+        border-radius: 0
+    }
+    .switchboard {
+        padding: .5rem .5rem 1.5rem;
+        border-radius: 0;
+        height: 100%;
+    }
+    .mode-select-container {
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+    .switch-text {
+        font-size: 8rem;
+    }
+}
+// Keep this at the very end to ensure site loads before css
+#loadOverlay
+{
+    display: none;
+}

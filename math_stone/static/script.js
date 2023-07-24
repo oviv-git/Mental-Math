@@ -1,19 +1,22 @@
 function main() {
+
     storedColorScheme();
     wavesEffectToggle();
     displaySessionInformation();
     switch (window.location.pathname) {
         case '/':
-            colorSchemeToggle();
+            toggleColorScheme();
             initSlider();
             initForm();
             registerFormSubmit();
             loginFormSubmit();
             break;
         case '/home':
-            colorSchemeToggle();
-            switchboard();
+            loadSwitchboard();
+            toggleColorScheme();
+            toggleSwitchboard();
             initCarousel();
+            
     }
 }
 
@@ -27,7 +30,7 @@ function storedColorScheme() {
     }
 }
 
-function colorSchemeToggle() {
+function toggleColorScheme() {
     var toggle = document.querySelector('.dark-mode-toggle')
     var html = document.querySelector('html')
 
@@ -127,10 +130,20 @@ function clearForm() {
 }
 
 function initCarousel() {
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.carousel');
-        var instances = M.Carousel.init(elems);
-      });
+    const swiper = new Swiper('.swiper', {
+        // Optional parameters
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+    },
+    navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+    },
+    });
 }
 
 // Finds the session-information class and set the innerHTML to session.storage
@@ -407,7 +420,8 @@ function pathnameRedirect(pathname) {
 }
 
 // Functions for Home.html
-function switchboard() {
+// Main function for when the switchboard is toggled, all other switchboard functions will be called here
+function toggleSwitchboard() {
     var switchboard = document.getElementById('switchboard');
 
     switchboard.addEventListener('click', function(event) {
@@ -419,7 +433,65 @@ function switchboard() {
             } else {
                 clickedButton.classList.add('active');
             }
+            saveSwitchboard();
         }
+    })
+}
+
+// Updates sessionStorage every time a switch is toggled on the switchboard.
+function saveSwitchboard() {
+    let additionSwitchActive = document.getElementById('addition').classList.contains('active');
+    let subtractionSwitchActive = document.getElementById('subtraction').classList.contains('active');
+    let multiplicationSwitchActive = document.getElementById('multiplication').classList.contains('active');
+    let divisionSwitchActive = document.getElementById('division').classList.contains('active');
+    let specialSwitchActive = document.getElementById('special').classList.contains('active');
+
+    const activeSwitches = {
+        addition: additionSwitchActive,
+        subtraction: subtractionSwitchActive,
+        multiplication: multiplicationSwitchActive,
+        division: divisionSwitchActive,
+        special: specialSwitchActive
+    };
+
+    let isSwitchActive = JSON.stringify(activeSwitches);
+    sessionStorage.setItem('switchState', isSwitchActive);
+
+    }
+
+// Checks sessionStorage for the state of the switches when home.html loads
+function loadSwitchboard() {
+    if (!sessionStorage.getItem('switchState')) {
+        const defaultSwitches = {
+            addition: true,
+            subtraction: true,
+            multiplication: false,
+            division: false,
+            special: false
+        };
+        const defaultSwitchesString = JSON.stringify(defaultSwitches);
+        sessionStorage.setItem('switchState', defaultSwitchesString)
+    }
+
+    let switchboardStateString = sessionStorage.getItem('switchState');
+    let switchboardState = JSON.parse(switchboardStateString);
+
+    for (const switchName in switchboardState) {
+        let switchState = switchboardState[switchName]
+
+        if (switchState ) {
+            let switchElement = document.getElementById(switchName);
+            switchElement.classList.add('active');
+        }
+    }
+    setTimeout(initSwitchboardAnimation, 100)
+}
+
+// Adds animation to the switchboard after applying the active classes to avoid 
+function initSwitchboardAnimation() {
+    const switchboard = document.querySelectorAll('#switchboard *')
+    switchboard.forEach(function(element) {
+        element.style.transition = 'all .3s ease, color .1s linear, text-shadow .1s linear';
     })
 }
 
