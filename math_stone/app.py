@@ -123,6 +123,3 @@ def error_redirect():
         error_code = request.form.get('errorCode')
 
         return error(error_message, error_code)
-
-
-

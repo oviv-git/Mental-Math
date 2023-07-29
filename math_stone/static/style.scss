@@ -2,6 +2,8 @@ $border-radius-size: 1rem;
 $main-cyan: #4f9db7;
 $default-light: #fff;
 $default-dark: #222;
+$default-success: rgb(70, 170, 121);
+$default-error: rgb(194, 76, 76);
 
 html
 {
@@ -91,59 +93,67 @@ html.light {
             border-bottom: 1px solid #d1214d !important;
         }
     }
+    .full-page {
+        background-color: darken($default-light, 5%);
+    }
     .modal {
         background-color: $default-light;
     } 
     .navbar-btn {
         color: $default-dark;
-        background-color: #d7d7d7;
+        background-color: darken($default-light, 15%);
 
         &:hover {
-            background-color: rgba(0, 0, 0, 0.2);
+            background-color: darken($default-light, 20%);
 
         }
         &.active {
+            background-color: lighten(saturate($main-cyan, 20%), 15%);
             color: $default-light;
-            background-color: $main-cyan;
-
             &:hover {
-                background-color: #418ea8;
+                background-color: lighten(saturate($main-cyan, 15%), 10%);
             }
         }
     }
     .play-container {
-        background-color: #d7d7d7;
+        border: 1rem solid darken($default-light, 20%);;
+        background-color: darken($default-light, 25%);
+        box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem,
+                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, 
+                    inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
     }
-    .switchboard {
-        background-color: #bfbfbf;
-        box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem,
-                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, 
-                    inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+    .play-container-left {
+        border-radius: 1rem 0rem 0rem 1rem;
     }
     .switch {
         .switch-button {
-            background-color: #dadada;
+            background-color: darken($default-light, 10%);
             color: #8b8b8b;
-            box-shadow: #8e8e8e 0rem 1.4rem 0rem;
+            box-shadow: darken($default-light, 35%) 0rem 1.4rem 0rem;
         }
         &.active {
             .switch-button {
-
+                box-shadow: darken($main-cyan, 10%) 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1.2rem;
+                background-color: lighten(saturate($main-cyan, 20%), 15%);
+                color: lighten($main-cyan, 45%);
+                text-shadow: lighten($main-cyan, 55%) 0rem 0rem 1rem;
             }
         }
-        &.large {
-            &.active {
-                .switch-button {
-
-                }
-            }
-        }
-    }
-    .mode-select-container {
-
     }
     .swiper-slide {
-
+        // background-color: darken($default-light, 30%);
+        background: transparent;
+        .game-mode {
+            &.vanilla {
+                border: 1rem #346f83 solid;
+            }
+            &.timed {
+                border: 1rem #145650 solid;
+            }
+            &.sudden {
+                border: 1rem orange solid;  
+            }
+        }
     }
 }
 
@@ -234,6 +244,9 @@ html.dark
             border-bottom: 1px solid #ff517c !important;
         }
     }
+    .full-page {
+        background-color: lighten($default-dark, 5%);
+    }
     .modal {
         background-color: $default-dark;
     } 
@@ -246,56 +259,64 @@ html.dark
 
         }
         &.active {
-            color: $default-light;
             background-color: $main-cyan;
+            color: lighten($main-cyan, 40%);
+            text-shadow: #c0efff 0rem 0rem 1.5rem;
 
             &:hover {
                 background-color: #66b7d2;
-
             }
         }
     }
     .play-container {
-        background-color: #3d3d3d;
-
+        border: 1rem solid lighten($default-dark, 20%);
+        background-color: lighten($default-dark, 10%);
+        box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem,
+                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, 
+                    inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
     }
-    .switchboard {
-        background-color: #2b2b2b;
-        box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem,
-                    inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem,
-                    inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
-    }
+    
     .switch {
         .switch-button {
-            background-color: #4b4b4b;
-            color: #2e2e2e;
-            box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+            background-color: lighten($default-dark, 30%);
+            color: lighten($default-dark, 15%);
+            text-shadow: lighten($default-dark, 10%);
+            box-shadow: lighten($default-dark, 20%) 0rem 1.4rem 0rem;
         }
         &.active {
             .switch-button {
-                
-            }
-        }
-        &.large {
-            &.active {
-                .switch-button {
-                    
-                }
+                box-shadow: #346f83 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
+                background-color: $main-cyan;
+                color: lighten($main-cyan, 40%);
+                text-shadow: #c0efff 0rem 0rem 1.5rem;
             }
         }
     }
-    .mode-select-container {
+    .swiper-slide {
+        color: $default-light;
+        background-color: $default-dark;
 
+        &.vanilla {
+    
+        }
+        &.timed {
+            
+        }
+        &.sudden {
+        
+        }
     }
+    .submit-button-cover {
+        background-color: lighten($default-dark, 10%)
+    }
+    
 }
-.section-container
-{
+.section-container {
     display: flex;
     margin: auto;
     text-align: center;
 }
-.section
-{
+.section {
     position: relative;
     overflow: hidden;
     padding: 4rem;
@@ -305,16 +326,13 @@ html.dark
     align-items: center;
     height: 100vh;
 }
-.section-small
-{
+.section-small {
     width: 35%;
 }
-.section-med
-{
+.section-med {
     width: 50%
 }
-.section-large
-{
+.section-large {
     width: 65%;
     justify-content: center;
 }
@@ -330,8 +348,7 @@ html.dark
         object-fit: contain;
     }
 }
-.logo
-{
+.logo {
     object-fit: scale-down;
     margin-bottom: 1rem;
 }
@@ -354,12 +371,6 @@ form {
     font-weight: 600;
     font-size: 1.2rem;
 }
-.error {
-    color: #ff517c;
-}
-.success {
-    color: #2ad366;
-}
 .toast {
     color: $default-light;
     font-family: 'Source Sans Pro', sans-serif;
@@ -371,7 +382,6 @@ form {
         background-color: rgb(194, 76, 76);
     }
 }
-
 .btn {
     background-color: $main-cyan;
     font-weight: 500;
@@ -384,7 +394,6 @@ form {
     }
     &:focus {
         background-color: #6bacc2;
-
     }
 }
 
@@ -413,16 +422,14 @@ form {
         }
     }
 }
-.indicators
-{
+.indicators {
     position: absolute;
     vertical-align: middle;
     text-align: center;
     z-index: 2;
     top: 90%;
 }
-.error-card-container
-{
+.error-card-container {
     object-fit: contain;
     font-size: 3em;
     display: flex;
@@ -456,7 +463,6 @@ form {
         }
         &.tab a:focus.active {
             background-color: rgba(0, 0, 0, 0)
-
         }
     }
     .indicator {
@@ -466,38 +472,30 @@ form {
 }
 
 // Not even sure what this is. Pretty sure its outdated now
-.input-field input:focus + label
-{
+.input-field input:focus + label {
     color: $main-cyan !important;
 }
 
-input:focus
-{
+input:focus {
     box-shadow: 0 1px 0 0 $main-cyan !important;
     border-bottom: 1px solid $main-cyan !important;
 }
-.modal
-{
+.modal {
     border-radius: 2rem;
     width: 60rem;
     max-width: 90%;
 }
-
-.modal-overlay
-{
+.modal-overlay {
     background-color: rgba(0, 0, 0, 0.7);
 }
-
 .modal-header {
     display: block;
     justify-content: center;
 }
-
 .modal-content {
     display: block;
     justify-content: center;
 }
-
 /* Most of these are only used on home */
 .full-page {
     overflow: hidden;
@@ -507,99 +505,79 @@ input:focus
     align-items: center;
     height: 100vh;
 }
-
 .navbar {
-    height: 4.5rem;
     position: absolute;
     top: 0;
     left: 0;
+    height: 4.5rem;
     display: flex;
     justify-content: space-around;
     width: 100%;
 }
-.navbar-btn
-{
+.navbar-btn {
     border: none;
     width: 100%;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 3rem;
 }
-
-.play-container
-{
-    margin-top: 4rem;
+.play-container {
+    margin-top: 4.5rem;
     display: flex;
+    overflow: hidden;
     flex-direction: column;
-    overflow: hidden;
-    height: 80%;
-    width: 80%;
+    height: 85%;
+    width: 85%;
     border-radius: 2rem;
-    padding: 1rem;
+}
+// Outdated
+// .play-container-left {
+//     display: flex;
+//     flex-direction: column;
+//     width: 50%;
+//     flex: 1;
+// }
+// .play-container-right {
+//     display: flex;
+//     width: 50%;
+//     flex: 1
+// }
+.play-container-top {
+    height: 100%;
+    vertical-align: middle;
+    display: flex;
+    padding: 1rem 1rem 0rem 1rem;
+    flex: 1;
+}
+.play-container-bottom {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    padding: 0rem 1rem 1rem 1rem;
 }
 
-.play-container-top
-{
-    display: flex;
-    height: 55%;
-    padding-bottom: .5rem;
-}
-.play-container-bottom
-{
-    display: flex;
-    flex: 10 10 45%;
-    justify-content: center;
-    padding-top: .5rem;
-    height: 45%;
-}
-.play-container-btn
-{
-    background: #244753;
-    border-radius: 1rem;
-    width: 100%;
-    height: 100%;
-}
 /* Parent element to all the switches */
-.switchboard
-{
+.switchboard-container {
+    background-color: transparent;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     text-align: center;
-    padding: 0rem .5rem 1.5rem;
-    overflow: hidden;
     border-radius: 1rem;
     margin-right: .5rem;
-    flex: 2;
+    flex: 3;
 }
-/* pointer events:none on everything except set to :auto on the physical button div (switch-button) */
-.switchboard *
-{
-    // transition: all .3s ease, color .1s linear, text-shadow .1s linear;
-    transition: 0;
+/* pointer events:none on everything except set to :auto on the physical button div () */
+.switchboard-container * {
     pointer-events: none;
 }
-
-// html.light .switchboard
-// {
-//     background-color: #bfbfbf;
-//     box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
-
-// }
-// html.dark .switchboard
-// {
-//     background-color: #2b2b2b;
-//     box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
-// }
-.switch-column
-{
+.switch-column {   
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.switch
-{
-
-    pointer-events: auto;
+.switch {
     background-color: transparent;
     display: flex;
     flex-direction: column;
@@ -608,9 +586,39 @@ input:focus
     border: none;
     height: 100%;
     width: 100%;
+    pointer-events: auto;
+
+    .switch-button {
+        font-family: 'Heebo', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 1rem;
+        vertical-align: middle;
+        width: 100%;
+        height: 90%;
+    }
+
+    &.active {
+        .switch-button {
+            transform: translateY(1rem);
+            position: relative;
+        }
+    }
+    &.large {
+        .switch-button {
+            height: 90%;
+            box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+        }
+        &.active .switch-button {
+            box-shadow: 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
+            transform: translateY(1rem);
+            position: relative;
+            background-color: $main-cyan;
+        }
+    }
 }
-.switch-button
-{
+.switch-button {
     font-family: 'Heebo', sans-serif;
     display: flex;
     align-items: center;
@@ -620,111 +628,161 @@ input:focus
     width: 100%;
     height: 90%;
 }
-.switch.active .switch-button
-{
-    transform: translateY(1rem);
-    
-    position: relative;
-}
-html.light .switch.active .switch-button
-{
-    box-shadow: $main-cyan 0rem 0.4rem 0rem, #6bbad4 0rem 0.4rem 1.2rem;
-    background-color: #6cbfda;
-    color: lighten($main-cyan, 45%);
-    text-shadow: lighten($main-cyan, 55%) 0rem 0rem 1rem;
-}
-html.dark .switch.active .switch-button
-{
-    box-shadow: #346f83 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
-    background-color: $main-cyan;
-    color: #c0efff;
-    text-shadow: #c0efff 0rem 0rem 1.5rem;
-}
-
-switch.large .switch-button
-{
-    height: 85%;
-    box-shadow: #3b3b3b 0rem 1.4rem 0rem;
-}
-.switch.large.active .switch-button
-{
-    box-shadow: #346f83 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
-    transform: translateY(1rem);
-    position: relative;
-    background-color: $main-cyan;
-}
-.switch-text
-{
+.switch-text {
     height: auto;
     width: auto;
     position: absolute;
     font-size: 10rem;
 }
-.mode-select-container
-{
-    overflow: hidden;
-    padding: 1.5rem;
-    flex: 1;
+.results-container {
     overflow: hidden;
     display: flex;
+    margin: 1rem;
+    flex: 4;
     justify-content: center;
     vertical-align: middle;
-    margin-left: .5rem;
+    border-radius: 2rem;
+    box-shadow: inset 0px 0px 0px 10px white;
+
+}
+.mode-select-container {
+    overflow: hidden;
+    background-color: transparent;
+    display: flex;
+    flex: 4;
+    justify-content: center;
+    vertical-align: middle;
     border-radius: 1rem;
-    width: 30%;
+}
+.submit-container {
+    flex: 4;
+    padding: 2rem;
     height: 100%;
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
 }
-html.light .mode-select-container
-{
-    background-color: #bfbfbf;
-    box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
-}
-html.dark .mode-select-container
-{
-    background-color: #2b2b2b;
-    box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
-}
-.swiper {
+.submit-button {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 800% 800%;
+    animation: gradient 15s ease infinite;
+    background-clip: border-box;
+    border-radius: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #244753;
     width: 100%;
     height: 100%;
+    overflow: hidden;
+
 }
-html.light .swiper-slide.swiper-slide {
-    color: $default-light;
-    background-color: $default-dark;
-  }
+.submit-button-cover {
+    border-radius: 3rem;
+    height: 87%;
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: clip;
+
+}
+.submit-button-text {
+
+    position: relative;
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 800% 800%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient 15s ease infinite;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 4rem;
+    transform: scale(2);
+    
+}
+
+.swiper {
+    width: 100%;
+    height: 80%;
+    &.mySwiper {
+        height: 100%;
+        width: 100%;
+    }
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    .game-mode {
+        height: 70%;
+        width: 90%;
+        border-radius: 2rem;
+        &.vanilla {
+
+        }
+        &.timed {
+            
+        }
+        &.sudden {
+        }
+    }
+
+}
 
 @keyframes fadeIn
 {
-    0%
-    {
+    0% {
         opacity: 0;
     }
-    100%
-    {
+    100% {
         opacity: 1;
     }
 }
-.fade-in
-{
+.fade-in {
     animation: fadeIn .5s ease-in forwards;
 }
-@keyframes fadeOut
-{
-    0%
-    {
+@keyframes fadeOut {
+    0% {
         opacity: 1;
     }
-    100%
-    {
+    100% {
         opacity: 0;
     }
 }
-.fade-out
-{
+.fade-out {
     animation: fadeOut .5s ease-in forwards;
 }
 
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 @media (max-width: 800px) {
+    html.light {
+        .play-container {
+            border: 0;
+        }
+    }
+    html.dark {
+        .play-container {
+            border: 0;
+        }
+    }
     .section-container {
         flex-direction: column;
     }
@@ -758,12 +816,16 @@ html.light .swiper-slide.swiper-slide {
     .navbar-btn {
         font-size: 4vw;
     }
+    .results-container {
+        order: 1
+    }
     .play-container {
         margin-top: 0;
         padding: 0;
         border-radius: 0;
         width: 100%;
         height: 100%;
+        border: 0;
     }
     .play-container-top {
         border-radius: 0;
@@ -772,12 +834,13 @@ html.light .swiper-slide.swiper-slide {
         flex-direction: column;
         height: 80%;
     }
-
-    .play-container-btn {
-        border-radius: 0
+    .play-container-bottom {
+        display: flex;
+        flex-direction: column;
     }
     .switchboard {
-        padding: .5rem .5rem 1.5rem;
+        padding: 1rem;
+        order: 2;
         border-radius: 0;
         height: 100%;
     }
@@ -786,12 +849,14 @@ html.light .swiper-slide.swiper-slide {
         height: 100%;
         width: 100%;
     }
+    .submit-container {
+        padding: 2rem;
+    }
     .switch-text {
-        font-size: 8rem;
+        font-size: 6rem;
     }
 }
 // Keep this at the very end to ensure site loads before css
-#loadOverlay
-{
+#loadOverlay {
     display: none;
 }

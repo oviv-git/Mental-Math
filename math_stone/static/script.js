@@ -136,12 +136,11 @@ function initCarousel() {
     spaceBetween: 30,
     loop: true,
     pagination: {
-    el: ".swiper-pagination",
     clickable: true,
     },
     navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
     },
     });
 }
@@ -426,6 +425,7 @@ function toggleSwitchboard() {
 
     switchboard.addEventListener('click', function(event) {
         if (event.target.classList.contains('switch')) {
+            console.log(event.target)
             let clickedButton = event.target
 
             if (clickedButton.classList.contains('active')) {

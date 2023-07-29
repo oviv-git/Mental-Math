@@ -67,35 +67,58 @@ html.light input.failure {
   box-shadow: 0 1px 0 0 #d1214d !important;
   border-bottom: 1px solid #d1214d !important;
 }
+html.light .full-page {
+  background-color: #f2f2f2;
+}
 html.light .modal {
   background-color: #fff;
 }
 html.light .navbar-btn {
   color: #222;
-  background-color: #d7d7d7;
+  background-color: #d9d9d9;
 }
 html.light .navbar-btn:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #cccccc;
 }
 html.light .navbar-btn.active {
+  background-color: #74c4de;
   color: #fff;
-  background-color: #4f9db7;
 }
 html.light .navbar-btn.active:hover {
-  background-color: #418ea8;
+  background-color: #64b9d5;
 }
 html.light .play-container {
-  background-color: #d7d7d7;
-}
-html.light .switchboard {
+  border: 1rem solid #cccccc;
   background-color: #bfbfbf;
-  box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
+}
+html.light .play-container-left {
+  border-radius: 1rem 0rem 0rem 1rem;
 }
 html.light .switch .switch-button {
-  background-color: #dadada;
+  background-color: #e6e6e6;
   color: #8b8b8b;
-  box-shadow: #8e8e8e 0rem 1.4rem 0rem;
+  box-shadow: #a6a6a6 0rem 1.4rem 0rem;
 }
+html.light .switch.active .switch-button {
+  box-shadow: #3d8096 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1.2rem;
+  background-color: #74c4de;
+  color: #f2f8fa;
+  text-shadow: white 0rem 0rem 1rem;
+}
+html.light .swiper-slide {
+  background: transparent;
+}
+html.light .swiper-slide .game-mode.vanilla {
+  border: 1rem #346f83 solid;
+}
+html.light .swiper-slide .game-mode.timed {
+  border: 1rem #145650 solid;
+}
+html.light .swiper-slide .game-mode.sudden {
+  border: 1rem orange solid;
+}
+
 html.dark {
   background-color: #222;
   color: #fff;
@@ -164,6 +187,9 @@ html.dark input.failure {
   box-shadow: 0 1px 0 0 #ff517c !important;
   border-bottom: 1px solid #ff517c !important;
 }
+html.dark .full-page {
+  background-color: #2f2f2f;
+}
 html.dark .modal {
   background-color: #222;
 }
@@ -175,24 +201,38 @@ html.dark .navbar-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 html.dark .navbar-btn.active {
-  color: #fff;
   background-color: #4f9db7;
+  color: #e0eef2;
+  text-shadow: #c0efff 0rem 0rem 1.5rem;
 }
 html.dark .navbar-btn.active:hover {
   background-color: #66b7d2;
 }
 html.dark .play-container {
-  background-color: #3d3d3d;
-}
-html.dark .switchboard {
-  background-color: #2b2b2b;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
+  border: 1rem solid #555555;
+  background-color: #3c3c3c;
+  box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
 }
 html.dark .switch .switch-button {
-  background-color: #4b4b4b;
-  color: #2e2e2e;
-  box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+  background-color: #6f6f6f;
+  color: #484848;
+  text-shadow: #3c3c3c;
+  box-shadow: #555555 0rem 1.4rem 0rem;
 }
+html.dark .switch.active .switch-button {
+  box-shadow: #346f83 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
+  background-color: #4f9db7;
+  color: #e0eef2;
+  text-shadow: #c0efff 0rem 0rem 1.5rem;
+}
+html.dark .swiper-slide {
+  color: #fff;
+  background-color: #222;
+}
+html.dark .submit-button-cover {
+  background-color: #3c3c3c;
+}
+
 .section-container {
   display: flex;
   margin: auto;
@@ -260,14 +300,6 @@ form {
   display: flex;
   font-weight: 600;
   font-size: 1.2rem;
-}
-
-.error {
-  color: #ff517c;
-}
-
-.success {
-  color: #2ad366;
 }
 
 .toast {
@@ -409,10 +441,10 @@ input:focus {
 }
 
 .navbar {
-  height: 4.5rem;
   position: absolute;
   top: 0;
   left: 0;
+  height: 4.5rem;
   display: flex;
   justify-content: space-around;
   width: 100%;
@@ -426,56 +458,49 @@ input:focus {
 }
 
 .play-container {
-  margin-top: 4rem;
+  margin-top: 4.5rem;
   display: flex;
-  flex-direction: column;
   overflow: hidden;
-  height: 80%;
-  width: 80%;
+  flex-direction: column;
+  height: 85%;
+  width: 85%;
   border-radius: 2rem;
-  padding: 1rem;
 }
 
 .play-container-top {
+  height: 100%;
+  vertical-align: middle;
   display: flex;
-  height: 55%;
-  padding-bottom: 0.5rem;
+  padding: 1rem 1rem 0rem 1rem;
+  flex: 1;
 }
 
 .play-container-bottom {
-  display: flex;
-  flex: 10 10 45%;
-  justify-content: center;
-  padding-top: 0.5rem;
-  height: 45%;
-}
-
-.play-container-btn {
-  background: #244753;
-  border-radius: 1rem;
-  width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  padding: 0rem 1rem 1rem 1rem;
 }
 
 /* Parent element to all the switches */
-.switchboard {
+.switchboard-container {
+  background-color: transparent;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   text-align: center;
-  padding: 0rem 0.5rem 1.5rem;
-  overflow: hidden;
   border-radius: 1rem;
   margin-right: 0.5rem;
-  flex: 2;
+  flex: 3;
 }
 
-/* pointer events:none on everything except set to :auto on the physical button div (switch-button) */
-.switchboard * {
-  transition: 0;
+/* pointer events:none on everything except set to :auto on the physical button div () */
+.switchboard-container * {
   pointer-events: none;
 }
 
 .switch-column {
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -483,7 +508,6 @@ input:focus {
 }
 
 .switch {
-  pointer-events: auto;
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -492,6 +516,31 @@ input:focus {
   border: none;
   height: 100%;
   width: 100%;
+  pointer-events: auto;
+}
+.switch .switch-button {
+  font-family: "Heebo", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  vertical-align: middle;
+  width: 100%;
+  height: 90%;
+}
+.switch.active .switch-button {
+  transform: translateY(1rem);
+  position: relative;
+}
+.switch.large .switch-button {
+  height: 90%;
+  box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+}
+.switch.large.active .switch-button {
+  box-shadow: 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
+  transform: translateY(1rem);
+  position: relative;
+  background-color: #4f9db7;
 }
 
 .switch-button {
@@ -505,37 +554,6 @@ input:focus {
   height: 90%;
 }
 
-.switch.active .switch-button {
-  transform: translateY(1rem);
-  position: relative;
-}
-
-html.light .switch.active .switch-button {
-  box-shadow: #4f9db7 0rem 0.4rem 0rem, #6bbad4 0rem 0.4rem 1.2rem;
-  background-color: #6cbfda;
-  color: #f2f8fa;
-  text-shadow: white 0rem 0rem 1rem;
-}
-
-html.dark .switch.active .switch-button {
-  box-shadow: #346f83 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
-  background-color: #4f9db7;
-  color: #c0efff;
-  text-shadow: #c0efff 0rem 0rem 1.5rem;
-}
-
-switch.large .switch-button {
-  height: 85%;
-  box-shadow: #3b3b3b 0rem 1.4rem 0rem;
-}
-
-.switch.large.active .switch-button {
-  box-shadow: #346f83 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
-  transform: translateY(1rem);
-  position: relative;
-  background-color: #4f9db7;
-}
-
 .switch-text {
   height: auto;
   width: auto;
@@ -543,40 +561,97 @@ switch.large .switch-button {
   font-size: 10rem;
 }
 
-.mode-select-container {
-  overflow: hidden;
-  padding: 1.5rem;
-  flex: 1;
+.results-container {
   overflow: hidden;
   display: flex;
+  margin: 1rem;
+  flex: 4;
   justify-content: center;
   vertical-align: middle;
-  margin-left: 0.5rem;
+  border-radius: 2rem;
+  box-shadow: inset 0px 0px 0px 10px white;
+}
+
+.mode-select-container {
+  overflow: hidden;
+  background-color: transparent;
+  display: flex;
+  flex: 4;
+  justify-content: center;
+  vertical-align: middle;
   border-radius: 1rem;
-  width: 30%;
+}
+
+.submit-container {
+  flex: 4;
+  padding: 2rem;
   height: 100%;
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
 }
 
-html.light .mode-select-container {
-  background-color: #bfbfbf;
-  box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 2rem;
+.submit-button {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 800% 800%;
+  animation: gradient 15s ease infinite;
+  background-clip: border-box;
+  border-radius: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #244753;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
-html.dark .mode-select-container {
-  background-color: #2b2b2b;
-  box-shadow: inset rgba(0, 0, 0, 0.2) 0rem 1rem 2rem, inset rgba(0, 0, 0, 0.2) 1rem 0rem 2rem, inset rgba(0, 0, 0, 0.2) -1rem 0rem 2rem;
+.submit-button-cover {
+  border-radius: 3rem;
+  height: 87%;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: clip;
+}
+
+.submit-button-text {
+  position: relative;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 800% 800%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradient 15s ease infinite;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  transform: scale(2);
 }
 
 .swiper {
   width: 100%;
+  height: 80%;
+}
+.swiper.mySwiper {
   height: 100%;
+  width: 100%;
 }
 
-html.light .swiper-slide.swiper-slide {
-  color: #fff;
-  background-color: #222;
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
-
+.swiper-slide .game-mode {
+  height: 70%;
+  width: 90%;
+  border-radius: 2rem;
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -601,7 +676,24 @@ html.light .swiper-slide.swiper-slide {
   animation: fadeOut 0.5s ease-in forwards;
 }
 
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 @media (max-width: 800px) {
+  html.light .play-container {
+    border: 0;
+  }
+  html.dark .play-container {
+    border: 0;
+  }
   .section-container {
     flex-direction: column;
   }
@@ -635,12 +727,16 @@ html.light .swiper-slide.swiper-slide {
   .navbar-btn {
     font-size: 4vw;
   }
+  .results-container {
+    order: 1;
+  }
   .play-container {
     margin-top: 0;
     padding: 0;
     border-radius: 0;
     width: 100%;
     height: 100%;
+    border: 0;
   }
   .play-container-top {
     border-radius: 0;
@@ -649,11 +745,13 @@ html.light .swiper-slide.swiper-slide {
     flex-direction: column;
     height: 80%;
   }
-  .play-container-btn {
-    border-radius: 0;
+  .play-container-bottom {
+    display: flex;
+    flex-direction: column;
   }
   .switchboard {
-    padding: 0.5rem 0.5rem 1.5rem;
+    padding: 1rem;
+    order: 2;
     border-radius: 0;
     height: 100%;
   }
@@ -662,8 +760,11 @@ html.light .swiper-slide.swiper-slide {
     height: 100%;
     width: 100%;
   }
+  .submit-container {
+    padding: 2rem;
+  }
   .switch-text {
-    font-size: 8rem;
+    font-size: 6rem;
   }
 }
 #loadOverlay {

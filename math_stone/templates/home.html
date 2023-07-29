@@ -6,7 +6,7 @@
 
 {% block main %}
     <div class="full-page">
-        <div class="navbar" styl="justify-content: start">
+        <div class="navbar">
             <button class="navbar-btn waves-effect active">Home</button>
             <button class="navbar-btn waves-effect">Profile</button>
             <button class="navbar-btn waves-effect">Leaderboard</button>
@@ -14,7 +14,38 @@
         </div>
         <div class="play-container">
             <div class="play-container-top">
-                <div class="switchboard" id="switchboard">
+                <div class="mode-select-container" id="mode-select">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="game-mode vanilla">
+                                    
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="game-mode timed">
+
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="game-mode sudden">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+               
+                <div class="results-container" id="results">
+                    
+                </div>
+                
+            </div>
+            <div class="play-container-bottom">
+                <div class="switchboard-container" id="switchboard">
                     <div class="switch-column">
                         <div class="switch" id="addition">
                             <span class="switch-button">
@@ -47,24 +78,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="mode-select-container" id="mode-select">
-                    <div class="swiper mySwiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">Slide 1
-                                
-                            </div>
-                            <div class="swiper-slide">Slide 9
-
-                            </div>
-                        </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
+                <div class="submit-container">
+                    <div class="submit-button">
+                        <span class="submit-button-cover">
+                            <p class="submit-button-text">PLAY</p>
+                        </span>
                     </div>
                 </div>
-            </div>
-            <div class="play-container-bottom">
-                <button class="play-container-btn">PLAY</button>
+
             </div>
         </div>
     </div>
