@@ -1,9 +1,38 @@
+"""
+    Collection of functions and wrappers that are used by app.py for ease of access
+
+    Functions
+        login_required: Function wrapper requring that the user is loggen in on certain pages
+        get_user_id: Database query to get user_id based on a username
+        validate_login: Database query to validate the users username and password
+        get_user_experience: Database query to get the users experience
+        generate_reward_experience: Algorithm to generate experience for each question
+        generate_speed_multiplier: Generates a multiplier for the experience based on answer time
+        error: Render error.html with a specific code and message
+"""
+
+from json import loads
 from functools import wraps
 from flask import session, render_template, redirect
 from database import Database
 from werkzeug.security import check_password_hash
+from math import exp
+
 
 def login_required(f):
+    """ 
+    Boilerplate function wrapper code referenced from CS50 PSET 9 Finance
+
+    Function Wrapper that verifies that the session has a user_id on certain webpages
+    meaning that they got there through login() or register() and not any other means
+
+    Argument:
+        f (function): Restricts access to whatever function it wraps behind the user_id check
+
+    Return:
+        f (function): If the user_id is found then return the original function
+    """
+
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
@@ -12,7 +41,16 @@ def login_required(f):
     return decorated_function
 
 
-def get_session_id(username):
+def get_user_id(username):
+    """
+    Using the users username and a database query find the user_id associated with that username
+
+    Argument:
+        username (string): The users chosen username taken from either login or register
+    Return: 
+        user_id (int): The cooresponding user_id linked to username
+    """
+
     with Database() as db:
         query = "SELECT DISTINCT id FROM users WHERE LOWER(username) = LOWER(?)"
         parameters = (username, )
@@ -20,20 +58,125 @@ def get_session_id(username):
 
         return user_id[0]
 
+
 def validate_login(username, password):
+    """
+    Checks to see if hashed password provided by the user matches the one in the database
+
+    Arugments:
+        username (string): Username provided by the user in a login form
+        password (string): Password provided by the user in a login form
+    Return: 
+        (bool): Returns true if the login is valid
+    """
+
     with Database() as db:
         query = "SELECT DISTINCT hash FROM users WHERE LOWER(username) = LOWER(?)"
         paramaters = (username, )
         user_hash = db.fetchone(query, paramaters)
 
         is_login_valid = check_password_hash(user_hash[0], password)
-        
+
         if is_login_valid == True:
             return True
         return False
 
-def error(message, code=400):
-    """Render message as an apology to user."""
-    
-    return render_template("error.html", code=code, message=message)
 
+def get_user_experience(user_id):
+    """
+    Database query gets a list of the users experience for each question type
+    
+    Argument:
+        user_id (int): The user_id that can be linked to that users levels in the database
+    Return:
+        user_experience (list): A list containing 5 numbers, each number represents the users xp
+    """
+    
+    with Database() as db:
+        query = "SELECT addition, subtraction, multiplication, division, exponential FROM levels WHERE user_id = (?)"
+        parameters = (user_id, )
+        return db.fetchone(query, parameters)
+
+
+def generate_reward_experience(results):
+    """
+    The algorithm that generates experience for each question answered, returns all the reward xp in a list
+    
+    Argument:
+        results (JSON object): Sent as an AJAX request from home.html and contains information about each question
+        Example: 'correct': true, 'operator': '+', 'timeElapsed': 1.22, 'difficulty': 2, 'level': 14
+    Return:
+        reward_experience (list): A list containing 5 numbers
+    """
+    
+    reward_experience = [0, 0, 0, 0, 0]
+    results = loads(results)
+
+    for question in results:
+
+        # If the question is wrong move onto the next one; 0 xp gained
+        if question['correct'] != True:
+            continue
+        
+        # Parts of the question object
+        level = question['level']
+        difficulty = question['difficulty']
+        time_elapsed = question['timeElapsed']
+
+        # Different Multipliers to modify the experience scaling per level
+        level_multiplier = round(level * 0.50, 3) + 1
+        difficulty_multiplier = round(difficulty * level_multiplier, 3)
+        speed_multiplier = generate_speed_multiplier(time_elapsed, difficulty)
+
+        experience_gained = round(difficulty_multiplier * speed_multiplier)
+
+        print(f'{question}\n    Experience: {experience_gained}     Speed: {speed_multiplier}       Level: {level_multiplier}       Difficulty: {difficulty_multiplier} ')
+
+        OPERATOR_MAP = {'+': 0, '-': 1, 'x': 2, '/': 3, '^': 4}
+        operator = question['operator']
+
+        if operator in OPERATOR_MAP:
+            reward_experience[OPERATOR_MAP[operator]] += experience_gained
+
+    return reward_experience
+
+
+def generate_speed_multiplier(time, difficulty):
+    """
+    Based on how long it takes the user to answer, generate a multiplier for the generated xp
+
+    Arguments:
+        time (float): Time is received from an AJAX request and is a fixed point decimal
+        difficulty (int): For more difficult questions, more time is given for the multiplier
+
+    Return:
+        (float): The return value gets lower the longer you take per question, 5 seconds * difficulty
+        is how you find out how long the user must take to get a 1 as a return (no bonus)
+    """
+    try:
+        time = float(time)
+        difficulty = int(difficulty)
+    except ValueError:
+        return 1
+    
+    MAX_MULTIPLIER = 5
+    MULTIPLIER_DECAY_RATE = round(0.5 / difficulty, 2)
+
+    multiplier = max(MAX_MULTIPLIER * exp(-MULTIPLIER_DECAY_RATE * abs(time)), 1)
+    print(multiplier)
+
+    return multiplier
+
+
+def error(message, code=400):
+    """
+    Redirects to error.html with an error code and a message detaling the nature of the error to the user
+    
+    Arguments:
+        message (string): Error message that displays on the page detailing the error
+        code (int): The cooresponding error code that gives more information about the error
+    Return:
+        render_template (webpage): Redirects to error.html with the included code and message
+    """
+
+    return render_template("error.html", code=code, message=message)

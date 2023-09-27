@@ -12,14 +12,19 @@ function main() {
             loginFormSubmit();
             break;
         case '/home':
+            switchHomeTabs();
             loadSwitchboard();
             toggleColorScheme();
             toggleSwitchboard();
-            initCarousel();
-            
+            initModeSelect();
+            updateSliderValues();
+            modeSelectMultipleChoice();
+            submitButtonActivation();
+            startGame();
     }
 }
 
+// Loads the page with the preffered color scheme stored in session.storage
 function storedColorScheme() {
     let html = document.querySelector('html')
     let storedMode = sessionStorage.getItem('prefferedMode')
@@ -30,6 +35,7 @@ function storedColorScheme() {
     }
 }
 
+// switches the class the html element between light/dark with with a button toggle
 function toggleColorScheme() {
     var toggle = document.querySelector('.dark-mode-toggle')
     var html = document.querySelector('html')
@@ -49,6 +55,7 @@ function toggleColorScheme() {
     });
 }
 
+// Called in toggleColorScheme() to also toggle the color of the waves-effect from the Materialize library
 function wavesEffectToggle() {
     let waveElements = document.querySelectorAll('.waves-effect')
     let html = document.querySelector('html')
@@ -66,6 +73,7 @@ function wavesEffectToggle() {
     }
 }
 
+// Image slider on index
 function initSlider() {
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize slider
@@ -76,6 +84,7 @@ function initSlider() {
     });
 }
 
+// Initializes modals and tabs and links the correct modal tab with its cooresponding button
 function initForm() {
     // Initialize modal
     var modal = document.querySelector('.modal')
@@ -104,6 +113,7 @@ function initForm() {
     });
 }
 
+// Resets login and registration froms back to their default values
 function clearForm() {
     let modalOverlay = document.querySelector('.modal-overlay')
     let forms = document.querySelectorAll('form')
@@ -129,22 +139,6 @@ function clearForm() {
     modalOverlay.click();
 }
 
-function initCarousel() {
-    const swiper = new Swiper('.swiper', {
-        // Optional parameters
-    slidesPerView: 1,
-    spaceBetween: 30,
-    loop: true,
-    pagination: {
-    clickable: true,
-    },
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
-    });
-}
-
 // Finds the session-information class and set the innerHTML to session.storage
 function displaySessionInformation() {
     let message = sessionStorage.getItem('message');
@@ -162,6 +156,8 @@ function updateSesssionMessage(message, messageType) {
     displaySessionInformation();
 }
 
+// When the submit button is pressed check if the form is valid with loginFormCheck()
+// if loginFormCheck() returns true then submit the form to app.py
 function loginFormSubmit() {
     var loginForm = document.getElementById('login-form')
 
@@ -172,7 +168,7 @@ function loginFormSubmit() {
             updateSesssionMessage('Login Successful', 'success');
             loginForm.submit();
         }
-    })
+    });
 }
 
 async function loginFormCheck() {
@@ -191,7 +187,7 @@ async function loginFormCheck() {
         return false;
     }
 
-    isUsernameAvailable = await checkUsernameAvailability(username.value)
+    let isUsernameAvailable = await checkUsernameAvailability(username.value)
         .then(function(available) {
             if (!available) {
                 return true;
@@ -238,8 +234,10 @@ function registerFormSubmit() {
 
     registerForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        var isValid = await registerFormCheck()
+        let isValid = await registerFormCheck()
+        console.log(isValid)
         if (isValid == true) {
+            console.log('Why tho?')
             updateSesssionMessage('Registration Successful', 'success')
             registerForm.submit();
         }
@@ -398,7 +396,7 @@ function checkValidLogin(username, password) {
     });
 }
 
-// Sends AJAX request 
+// Sends AJAX request to redirect to error.html with errorMessage and errorCode
 function errorRedirect(errorMessage, errorCode) {
     $.ajax({
         url: '/error_redirect',
@@ -406,7 +404,7 @@ function errorRedirect(errorMessage, errorCode) {
         dataType: 'json',
         data: {'errorMessage': errorMessage, 'errorCode': errorCode},
         success: function(response) {
-            console.log('errorRedirect Success.');
+            console.log('errorRedirect Success.', response);
         },
         error: function(xhr, status, error) {
             console.log('errorRedirect Failure.', xhr, status, error);
@@ -419,13 +417,66 @@ function pathnameRedirect(pathname) {
 }
 
 // Functions for Home.html
+
+// Meant to switch between the home-tab and the game-tab
+function switchHomeTabs(tab) {
+    const tabs = document.querySelectorAll('.full-page');
+    // Current tabs: 'home-tab', 'game-tab'
+
+    if (tab != null) {
+        tabs.forEach((element) => {
+            element.classList.remove('active');
+            if (element.id == tab) {
+                element.classList.add('active');
+            }
+        });
+    }
+}
+
+/**
+ * While on the play tab the key 'enter' doubles as a submit answer key.
+ * @returns Only returns true when the enter key or submit button is pressed.
+*/
+function gameInput() {
+    return new Promise((resolve) => {
+        
+        const gameTabInput = document.getElementById('input-result');
+
+        var currentTab = document.querySelector('.full-page.active');
+        const submitButton = document.getElementById('question-submit-button');
+
+        // Functionally adds autofocus for valid input[type='number'] keypresses
+
+        if (currentTab.id === 'game-tab') {
+            
+            document.addEventListener('keydown', (event) => {
+                let name = event.key;
+                
+                if (currentTab.id === 'game-tab') {
+                    gameTabInput.focus();
+                };
+
+                // If the key pressed is enter the question gets submitted 
+                if (name === 'Enter') {
+                    resolve(true);
+                };
+            });
+    
+            submitButton.addEventListener('click', (event) => {
+                resolve(true)
+            })
+        } else {
+            document.removeEventListener('keydown');
+        }
+    })
+}
+
 // Main function for when the switchboard is toggled, all other switchboard functions will be called here
 function toggleSwitchboard() {
     var switchboard = document.getElementById('switchboard');
 
     switchboard.addEventListener('click', function(event) {
         if (event.target.classList.contains('switch')) {
-            console.log(event.target)
             let clickedButton = event.target
 
             if (clickedButton.classList.contains('active')) {
@@ -433,6 +484,8 @@ function toggleSwitchboard() {
             } else {
                 clickedButton.classList.add('active');
             }
+
+            submitButtonActivation();
             saveSwitchboard();
         }
     })
@@ -444,20 +497,19 @@ function saveSwitchboard() {
     let subtractionSwitchActive = document.getElementById('subtraction').classList.contains('active');
     let multiplicationSwitchActive = document.getElementById('multiplication').classList.contains('active');
     let divisionSwitchActive = document.getElementById('division').classList.contains('active');
-    let specialSwitchActive = document.getElementById('special').classList.contains('active');
+    let exponentialSwitchActive = document.getElementById('exponential').classList.contains('active');
 
     const activeSwitches = {
         addition: additionSwitchActive,
         subtraction: subtractionSwitchActive,
         multiplication: multiplicationSwitchActive,
         division: divisionSwitchActive,
-        special: specialSwitchActive
+        exponential: exponentialSwitchActive
     };
 
     let isSwitchActive = JSON.stringify(activeSwitches);
     sessionStorage.setItem('switchState', isSwitchActive);
-
-    }
+}
 
 // Checks sessionStorage for the state of the switches when home.html loads
 function loadSwitchboard() {
@@ -467,14 +519,13 @@ function loadSwitchboard() {
             subtraction: true,
             multiplication: false,
             division: false,
-            special: false
+            exponential: false
         };
         const defaultSwitchesString = JSON.stringify(defaultSwitches);
         sessionStorage.setItem('switchState', defaultSwitchesString)
     }
 
-    let switchboardStateString = sessionStorage.getItem('switchState');
-    let switchboardState = JSON.parse(switchboardStateString);
+    let switchboardState = getSwitchboardState();
 
     for (const switchName in switchboardState) {
         let switchState = switchboardState[switchName]
@@ -484,25 +535,328 @@ function loadSwitchboard() {
             switchElement.classList.add('active');
         }
     }
-    setTimeout(initSwitchboardAnimation, 100)
+    setTimeout(initButtonsAnimation, 100)
+}
+
+// Returns the curent active switchboard state for use in question generation
+function getSwitchboardState() {
+    let switchboardStateString = sessionStorage.getItem('switchState');
+    let switchboardState = JSON.parse(switchboardStateString);
+
+    return switchboardState
 }
 
 // Adds animation to the switchboard after applying the active classes to avoid 
-function initSwitchboardAnimation() {
+function initButtonsAnimation() {
     const switchboard = document.querySelectorAll('#switchboard *')
+
     switchboard.forEach(function(element) {
-        element.style.transition = 'all .3s ease, color .1s linear, text-shadow .1s linear';
+        element.style.transition = 'all .5s ease, color .1s linear';
     })
 }
 
+// Initializes the mode select cards
 function initModeSelect() {
+    const swiper = new Swiper('.swiper', {
+        grabCursor: true,
+        effect: "creative",
+        loop: true,
+        creativeEffect: {
+            prev: {
+            shadow: false,
+            translate: ["-120%", 0, -500],
+            },
+            next: {
+            shadow: false,
+            translate: ["120%", 0, -500],
+            },
+        },
+    });
+
+    swiper.on('transitionEnd', async function () {
+        submitButtonActivation();
+        changeButtonColors();
+    });
+}
+
+// Updates the span value container for whatever settings-container is being modified
+function updateSliderValues() {
+    const settingsContainers = document.querySelectorAll('.game-mode');
+
+    settingsContainers.forEach((element) => {
+        element.addEventListener('change', (event) => {
+            let displayedValue = element.querySelector('span');
+
+            if (event.target.value != undefined) {
+                displayedValue.innerHTML = event.target.value;
+            }
+        });
+    });
+}
+
+// Makes sure only one toggle button can be active at a time.
+function modeSelectMultipleChoice() {
+    const settingsContainers = document.querySelectorAll('.settings-container.toggle');
+
+    settingsContainers.forEach((container) => {
+        let buttons = container.querySelectorAll('.toggle-button');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', function() {
+                for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].classList.remove('active');
+                }
+                button.classList.add('active');
+            })
+        });
+    });
+}
+
+// Gets called when a switch-button is pressed and when a swiper container changes
+function submitButtonActivation() {
+    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
+    const submitContainer = document.querySelector('.submit-container');
+    let shouldActivate = submitButtonActivationCheck(activeSlide);
+
+
+    if (shouldActivate == true) {
+        submitContainer.classList.add('active');
+    } else {
+        submitContainer.classList.remove('active');
+    }
 
 }
-// AJAX request asking for the 
-function getModes() {
+
+// Only gets called by submitButtonActivation(activeSlide);
+function submitButtonActivationCheck(activeSlide) {
+    const submitContainer = document.querySelector('.submit-container');
+    const switchboardButtons = document.querySelectorAll('.switch');
+  
+    // will not activate if all the switches are off
+    let activeSwitchesCount = 0;
+    for (let i = 0; i < switchboardButtons.length; i++) {
+        
+        let switchboardButton = switchboardButtons[i];
+
+        if (switchboardButton.classList.contains('active')) {
+            activeSwitchesCount++
+        }
+    }
+    if (activeSwitchesCount == 0) {
+        return false
+    }
+    return true
+}
+
+function changeButtonColors() {
+    const switchboard = document.getElementById('switchboard');
+    const submitButton = document.getElementById('submit-button');
+
+    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
+    let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
+
+    switchboard.className = 'switchboard-container ' + currentMode;
+    submitButton.className = 'submit-button ' + currentMode;
+}
+
+function startGame() {
+    const submitButton = document.getElementById('submit-button');
+
+    submitButton.addEventListener('click', function() {
+
+        let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
+        let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
+        
+        // level means what level the user is in that specific area of math
+        // var questions = generateQuestions(types, amount);
+        // let questions = activeSlide.querySelector('input').value
+        
+        switch (currentMode) {
+            case 'vanilla':
+                vanillaMode(activeSlide);
+                break;
+            case 'timed':
+                timedMode(activeSlide);
+                break;
+            case 'choice':
+                choiceMode(activeSlide);
+                break;
+            case 'sudden':
+                suddenMode(activeSlide);
+                break;
+            default:
+                console.log('invalid mode')
+                break;
+        }
+    });
+}
+
+async function vanillaMode(activeSlide) {
+    let switchboardState = JSON.stringify(getSwitchboardState());
+    let questionAmount = activeSlide.querySelector('input').value;
+    
+    let generatedQuestions = await generateQuestions(switchboardState, questionAmount)
+    
+    switchHomeTabs('game-tab');
+
+    // All of the operand containers
+    const operand1 = document.getElementById('operand-1');
+    const operand2 = document.getElementById('operand-2');
+    const operator = document.getElementById('operator');
+    const result = document.getElementById('input-result')
+    const submitButton = document.getElementById('question-submit-button')
+
+    // Array which stores the game results to send back to app.py
+    let gameResults = []
+    // let gameStartTime = new Date();
+
+    var correct_answers = 0;
+    for (let i = 0; i < generatedQuestions.length; i++) {
+        let question = generatedQuestions[i];
+        console.log(question)
+
+        let questionStartTime = new Date();
+
+        operand1.innerHTML = question['operand_1'];
+        operand2.innerHTML = question['operand_2']; 
+        operator.innerHTML = question['operator']
+
+        let userSubmission = await gameInput();
+
+        // Question can not be accidently submitted while the input field is empty 
+        while (result.value.length == 0) {
+            let userSubmission = await gameInput();
+             
+            if (result.value.length != 0) {
+                continue;
+            }
+        }
+
+        // userSubmission becomes true gameInput gets a response above
+        if (userSubmission === true) {
+            triggerAnimation(submitButton, 'active', 100);
+
+            let questionEndTime = new Date();
+            let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
+
+            if (result.value == question['result']) {
+                correct_answers++;
+                gameResults.push({'correct': true, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed,
+                                  'difficulty': question['difficulty'], 'level': question['level']})
+            } else {
+                gameResults.push({'correct': false, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed})
+            }
+            
+            result.value = '';
+            continue;
+        }
+        console.log(gameResults)
+    }
+    // AJAX request to send results and return stats while also storing results from a completed game
+    // potentially a seperate function just for successfully ending a game
+    
+    switchHomeTabs('home-tab');
+    // console.log(generatedQuestions, gameResults)
+    let experienceGained = await recordResults(JSON.stringify(gameResults));
+    console.log(experienceGained)
+
+    // let gameEndTime = new Date();
+    // let gameTimeElapsed = (gameEndTime - gameStartTime) / 1000;
+    // console.log(gameTimeElapsed);
+}
+
+
+
+
+async function timedMode() {
+    console.log('case works2');
 
 }
 
+async function choiceMode() {
+    console.log('case works3');
+
+}
+
+async function suddenMode() {
+    console.log('case works4');
+
+}
+
+/**
+ * AJAX request to get a jsonify string with all the questions and answers.
+ * @param {JSON} types - JSON object containing the selected math types
+ * @param {number} amount - number of questioned selected by the user.
+ */
+async function generateQuestions(types, amount) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: '/generate_questions',
+            method: 'POST',
+            dataType: 'json',
+            data: {'types': types, 'amount': amount},
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(xhr, status, error) {
+                console.log('GENERATE QUESTIONS - ERROR', xhr, status, error);
+                reject(error)
+            }
+        })
+    })
+    .then(function(response) {
+        return response
+    })
+    .catch(function(error) {
+        throw error
+    });
+}
+
+/**
+ * AJAX request to record the results of a successfully completed game
+ * @param {JSON} results - JSON object containing the results of the game
+ */
+async function recordResults(results) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'record_results',
+            method: 'POST',
+            dataType: 'JSON',
+            data: {'results': results},
+            success: function(response) {
+                resolve(response)
+            },
+            error: function(xhr, status, error) {
+                console.log('RECORD RESULTS - ERROR -', xhr, status, error);
+                reject(error)
+            }
+        })
+    })
+    .then(function(response) {
+        return response
+    })
+    .catch(function(error) {
+        throw error
+    })
+}
+
+/** 
+ * Triggers animations when the user submits their answer
+ * @param {object} element - The element that will receieve the class
+ * @param {string} animation - The class that will be added to trigger the animation
+ * @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset
+*/
+function triggerAnimation(element, animation, timeDelay) {
+
+    // console.log(element, animation, timeDelay)
+    // console.log(typeof(element), typeof(animation), typeof(timeDelay))
+    const removeAnimation = function () {
+        element.classList.remove(animation);
+    };
+    
+    element.classList.add(animation)
+    setTimeout(removeAnimation, timeDelay)
+}
 
 
 main();

@@ -5,7 +5,8 @@ import sqlite3
 
 class Database:
     def __init__(self):
-        self._conn = sqlite3.connect("math-stone.db")
+        # self._conn = sqlite3.connect("math-stone.db")
+        self._conn = sqlite3.connect("mathstone.db")
         self._cursor = self._conn.cursor()
 
     def __enter__(self):
@@ -42,5 +43,9 @@ class Database:
 
     def query(self, sql, params=None):
         self.cursor.execute(sql, params or ())
+        return self.fetchall()
+    
+    def last_insert_rowid(self):
+        self.cursor.execute("SELECT last_insert_rowid();")
         return self.fetchall()
 

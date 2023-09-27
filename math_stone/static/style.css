@@ -1,9 +1,13 @@
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 900, "GRAD" 0, "opsz" 200;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 html.light {
-  background-color: #fff;
+  background: default-light;
   color: #222;
 }
 html.light h3 {
@@ -20,25 +24,25 @@ html.light .form-error {
 }
 html.light .btn-secondary {
   color: #3e6775;
-  background-color: #cbecf7;
+  background: #cbecf7;
 }
 html.light .dark-mode-toggle {
-  background-color: #bfbfbf;
+  background: #bfbfbf;
 }
 html.light .caption {
   color: #5f5f5f;
 }
 html.light .card {
-  background-color: #3b7b91;
+  background: #3b7b91;
 }
 html.light .slider .indicators .indicator-item {
-  background-color: #cbecf7;
+  background: #cbecf7;
 }
 html.light .slider .indicators .indicator-item.active {
-  background-color: #4f9db7;
+  background: #4f9db7;
 }
 html.light .tabs {
-  background-color: #fff;
+  background: #fff;
 }
 html.light .tabs .tab a.active {
   color: #41879f;
@@ -47,7 +51,7 @@ html.light .tabs .tab a:hover {
   color: #458fa8;
 }
 html.light .tabs .indicator {
-  background-color: #4f9db7;
+  background: #4f9db7;
 }
 html.light .input-field label.success {
   color: #4f9db7;
@@ -68,59 +72,250 @@ html.light input.failure {
   border-bottom: 1px solid #d1214d !important;
 }
 html.light .full-page {
-  background-color: #f2f2f2;
+  background: #f2f2f2;
 }
 html.light .modal {
-  background-color: #fff;
+  background: #fff;
 }
 html.light .navbar-btn {
   color: #222;
-  background-color: #d9d9d9;
+  background: #d9d9d9;
 }
 html.light .navbar-btn:hover {
-  background-color: #cccccc;
+  background: #cccccc;
 }
 html.light .navbar-btn.active {
-  background-color: #74c4de;
+  background: #70bdd6;
   color: #fff;
 }
 html.light .navbar-btn.active:hover {
-  background-color: #64b9d5;
+  background: #48abcb;
 }
 html.light .play-container {
-  border: 1rem solid #cccccc;
-  background-color: #bfbfbf;
-  box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
+  border: 1rem solid #d9d9d9;
+  background: #f2f2f2;
+  box-shadow: inset rgba(155, 155, 155, 0.1) 0rem 1rem 4rem, inset rgba(155, 155, 155, 0.1) 1rem 0rem 4rem, inset rgba(155, 155, 155, 0.1) -1rem 0rem 4rem;
 }
-html.light .play-container-left {
-  border-radius: 1rem 0rem 0rem 1rem;
-}
-html.light .switch .switch-button {
-  background-color: #e6e6e6;
+html.light .switchboard-container .switch .switch-button {
+  background: #d9d9d9;
+  box-shadow: #bfbfbf 0rem 1.4rem 0rem;
   color: #8b8b8b;
-  box-shadow: #a6a6a6 0rem 1.4rem 0rem;
 }
-html.light .switch.active .switch-button {
-  box-shadow: #3d8096 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1.2rem;
-  background-color: #74c4de;
-  color: #f2f8fa;
-  text-shadow: white 0rem 0rem 1rem;
+html.light .switchboard-container.vanilla .switch.active .switch-button {
+  color: #ddebf7;
+  background: #71a0ca;
+  box-shadow: #477aa8 0rem 0.4rem 0rem;
+}
+html.light .switchboard-container.timed .switch.active .switch-button {
+  color: #d6d4ef;
+  background: #9a95c8;
+  box-shadow: #6f69a8 0rem 0.4rem 0rem;
+}
+html.light .switchboard-container.choice .switch.active .switch-button {
+  color: #d3f7ef;
+  background: #4dcaaf;
+  box-shadow: #339781 0rem 0.4rem 0rem;
+}
+html.light .switchboard-container.sudden .switch.active .switch-button {
+  color: #f5d4d9;
+  background: #c76976;
+  box-shadow: #a04450 0rem 0.4rem 0rem;
 }
 html.light .swiper-slide {
   background: transparent;
 }
+html.light .swiper-slide .game-mode {
+  box-shadow: 0rem 0.6em 0.4rem #555555;
+}
 html.light .swiper-slide .game-mode.vanilla {
-  border: 1rem #346f83 solid;
+  background: #cfdeeb;
+  color: #5287b6;
+}
+html.light .swiper-slide .game-mode.vanilla .settings {
+  color: #477aa8;
+}
+html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #acc5dc;
+}
+html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-track {
+  background: #acc5dc;
+}
+html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #83acd1;
+  border: 0.5rem solid #83acd1;
+  box-shadow: -415px 0 0 400px #83acd1;
+}
+html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #83acd1;
+  border: 0.5rem solid #83acd1;
+  box-shadow: -415px 0 0 400px #83acd1;
+}
+html.light .swiper-slide .game-mode.vanilla .settings-footer {
+  background: #71a0ca;
+  border-top: 0.6rem solid #dfebf5;
+  border-bottom: 0.5rem solid #477aa8;
+  color: #ddebf7;
 }
 html.light .swiper-slide .game-mode.timed {
-  border: 1rem #145650 solid;
+  background: #dbdae9;
+  color: #8e89ba;
+}
+html.light .swiper-slide .game-mode.timed .settings {
+  color: #6f69a8;
+}
+html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #cccae0;
+}
+html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
+  background: #cccae0;
+}
+html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #aaa6d0;
+  border: 0.5rem solid #aaa6d0;
+  box-shadow: -415px 0 0 400px #aaa6d0;
+}
+html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #aaa6d0;
+  border: 0.5rem solid #aaa6d0;
+  box-shadow: -415px 0 0 400px #aaa6d0;
+}
+html.light .swiper-slide .game-mode.timed .settings-footer {
+  background: #9a95c8;
+  border-top: 0.6rem solid #e9e8f4;
+  border-bottom: 0.5rem solid #6f69a8;
+  color: #e8e6f6;
+}
+html.light .swiper-slide .game-mode.choice {
+  background: #c5ebe3;
+  color: #3aaa92;
+}
+html.light .swiper-slide .game-mode.choice .settings {
+  color: #339781;
+}
+html.light .swiper-slide .game-mode.choice .settings .toggle-button {
+  background: #9fded0;
+  box-shadow: 0rem 0.6rem 0rem #79d1be;
+}
+html.light .swiper-slide .game-mode.choice .settings .toggle-button.active {
+  background: #4dcaaf;
+  color: #bdf3e7;
+}
+html.light .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #9fded0;
+}
+html.light .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-moz-range-track {
+  background: #9fded0;
+}
+html.light .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #61d0b8;
+  border: 0.5rem solid #61d0b8;
+  box-shadow: -415px 0 0 400px #61d0b8;
+}
+html.light .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #61d0b8;
+  border: 0.5rem solid #61d0b8;
+  box-shadow: -415px 0 0 400px #61d0b8;
+}
+html.light .swiper-slide .game-mode.choice .settings-footer {
+  background: #4dcaaf;
+  border-top: 0.6rem solid #d7f3ed;
+  border-bottom: 0.5rem solid #339781;
+  color: #d3f7ef;
 }
 html.light .swiper-slide .game-mode.sudden {
-  border: 1rem orange solid;
+  background: #e8c8cc;
+  color: #b24b59;
+}
+html.light .swiper-slide .game-mode.sudden .settings {
+  color: #b24b59;
+}
+html.light .swiper-slide .game-mode.sudden .settings .toggle-button {
+  background: #d1929a;
+  box-shadow: 0rem 0.6rem 0rem #c9808a;
+}
+html.light .swiper-slide .game-mode.sudden .settings .toggle-button.active {
+  background: #c76976;
+  color: #f5d4d9;
+}
+html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #e0b6bc;
+}
+html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-track {
+  background: #e0b6bc;
+}
+html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #d27783;
+  border: 0.5rem solid #d27783;
+  box-shadow: -415px 0 0 400px #d27783;
+}
+html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #d27783;
+  border: 0.5rem solid #d27783;
+  box-shadow: -415px 0 0 400px #d27783;
+}
+html.light .swiper-slide .game-mode.sudden .settings-footer {
+  background: #c76976;
+  border-top: 0.6rem solid #f2d7db;
+  border-bottom: 0.5rem solid #a04450;
+  color: #f5d4d9;
+}
+html.light .submit-container .submit-button {
+  background: #d9d9d9;
+  box-shadow: 0rem 3rem 0rem #bfbfbf;
+}
+html.light .submit-container .submit-button .submit-button-text {
+  color: #8b8b8b;
+}
+html.light .submit-container.active .submit-button.vanilla {
+  color: #ddebf7;
+  box-shadow: 0rem 3rem 0rem #5287b6;
+  background: #71a0ca;
+}
+html.light .submit-container.active .submit-button.vanilla .submit-button-text {
+  color: #ddebf7;
+}
+html.light .submit-container.active .submit-button.timed {
+  color: #f9f9fd;
+  box-shadow: 0rem 3rem 0rem #7e79b1;
+  background: #9a95c8;
+}
+html.light .submit-container.active .submit-button.timed .submit-button-text {
+  color: #e8e6f6;
+}
+html.light .submit-container.active .submit-button.choice {
+  color: #bdf3e7;
+  box-shadow: 0rem 3rem 0rem #3aaa92;
+  background: #4dcaaf;
+}
+html.light .submit-container.active .submit-button.choice .submit-button-text {
+  color: #bdf3e7;
+}
+html.light .submit-container.active .submit-button.sudden {
+  color: #f5d4d9;
+  box-shadow: 0rem 3rem 0rem #b24b59;
+  background: #c76976;
+}
+html.light .submit-container.active .submit-button.sudden .submit-button-text {
+  color: #f5d4d9;
+}
+html.light .question-container {
+  border: 0.15rem solid #cccccc;
+  color: #222;
+}
+html.light .question-container .question-row.result input[type=number] {
+  color: #222;
+  border-top: 0.15rem solid #cccccc;
+}
+html.light .question-container button {
+  background: #70bdd6;
+  color: #222;
+}
+html.light .question-container button.active {
+  background: #abd8e7;
 }
 
 html.dark {
-  background-color: #222;
+  background: #222;
   color: #fff;
 }
 html.dark .light-image {
@@ -140,25 +335,25 @@ html.dark .form-error {
 }
 html.dark .btn-secondary {
   color: #abc8d2;
-  background-color: #244753;
+  background: #244753;
 }
 html.dark .dark-mode-toggle {
-  background-color: #444;
+  background: #444;
 }
 html.dark .caption {
   color: #999999;
 }
 html.dark .card {
-  background-color: #145650;
+  background: #145650;
 }
 html.dark .slider .indicators .indicator-item {
-  background-color: #244753;
+  background: #244753;
 }
 html.dark .slider .indicators .indicator-item.active {
-  background-color: #4f9db7;
+  background: #4f9db7;
 }
 html.dark .tabs {
-  background-color: #444;
+  background: #444;
 }
 html.dark .tabs .tab a.active {
   color: #4f9db7;
@@ -167,7 +362,7 @@ html.dark .tabs .tab a:hover {
   color: #458fa8;
 }
 html.dark .tabs .indicator {
-  background-color: #4f9db7;
+  background: #4f9db7;
 }
 html.dark .input-field label.failure {
   color: #ff517c;
@@ -188,49 +383,230 @@ html.dark input.failure {
   border-bottom: 1px solid #ff517c !important;
 }
 html.dark .full-page {
-  background-color: #2f2f2f;
+  background: #2f2f2f;
 }
 html.dark .modal {
-  background-color: #222;
+  background: #222;
 }
 html.dark .navbar-btn {
   color: #fff;
-  background-color: #3d3d3d;
+  background: #3d3d3d;
 }
 html.dark .navbar-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 html.dark .navbar-btn.active {
-  background-color: #4f9db7;
-  color: #e0eef2;
-  text-shadow: #c0efff 0rem 0rem 1.5rem;
+  background: #4f9db7;
+  color: #fff;
 }
 html.dark .navbar-btn.active:hover {
-  background-color: #66b7d2;
+  background: #66b7d2;
 }
 html.dark .play-container {
   border: 1rem solid #555555;
-  background-color: #3c3c3c;
+  background: #3c3c3c;
   box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem, inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
 }
-html.dark .switch .switch-button {
-  background-color: #6f6f6f;
-  color: #484848;
-  text-shadow: #3c3c3c;
+html.dark .switchboard-container .switch .switch-button {
+  background: #6f6f6f;
   box-shadow: #555555 0rem 1.4rem 0rem;
+  color: #bfbfbf;
 }
-html.dark .switch.active .switch-button {
-  box-shadow: #346f83 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
-  background-color: #4f9db7;
-  color: #e0eef2;
-  text-shadow: #c0efff 0rem 0rem 1.5rem;
+html.dark .switchboard-container.vanilla .switch.active .switch-button {
+  background: #3f6d96;
+  color: #8fb9df;
+  box-shadow: #305372 0rem 0.4rem 0rem;
+}
+html.dark .switchboard-container.timed .switch.active .switch-button {
+  background: #615b9c;
+  color: #b5b1df;
+  box-shadow: #4d487c 0rem 0.4rem 0rem;
+}
+html.dark .switchboard-container.choice .switch.active .switch-button {
+  background: #2d8471;
+  color: #6bdfc6;
+  box-shadow: #205e50 0rem 0.4rem 0rem;
+}
+html.dark .switchboard-container.sudden .switch.active .switch-button {
+  background: #8e3c47;
+  color: #e8aeb6;
+  box-shadow: #6a2d35 0rem 0.4rem 0rem;
 }
 html.dark .swiper-slide {
-  color: #fff;
-  background-color: #222;
+  background: transparent;
 }
-html.dark .submit-button-cover {
-  background-color: #3c3c3c;
+html.dark .swiper-slide .game-mode {
+  background: #666666;
+}
+html.dark .swiper-slide .game-mode.vanilla {
+  background: #38526a;
+  color: #a0c6e8;
+}
+html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #477aa8;
+}
+html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-track {
+  background: #5287b6;
+}
+html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #7fadd5;
+  border: 0.5rem solid #7fadd5;
+  box-shadow: -415px 0 0 400px #7fadd5;
+}
+html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #7fadd5;
+  border: 0.5rem solid #7fadd5;
+  box-shadow: -415px 0 0 400px #7fadd5;
+}
+html.dark .swiper-slide .game-mode.vanilla .settings-footer {
+  background: #3f6d96;
+  border-top: 0.6rem solid #6493be;
+  border-bottom: 0.5rem solid #305372;
+}
+html.dark .swiper-slide .game-mode.timed {
+  background: #514d77;
+  color: #b5b1df;
+}
+html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #6f69a8;
+}
+html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
+  background: #7e79b1;
+}
+html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #a7a3d4;
+  border: 0.5rem solid #a7a3d4;
+  box-shadow: -415px 0 0 400px #a7a3d4;
+}
+html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #a7a3d4;
+  border: 0.5rem solid #a7a3d4;
+  box-shadow: -415px 0 0 400px #a7a3d4;
+}
+html.dark .swiper-slide .game-mode.timed .settings-footer {
+  background: #615b9c;
+  border-top: 0.6rem solid #8e89ba;
+  border-bottom: 0.5rem solid #4d487c;
+}
+html.dark .swiper-slide .game-mode.choice {
+  background: #366258;
+  color: #84dfcb;
+}
+html.dark .swiper-slide .game-mode.choice .settings {
+  color: #70dac3;
+}
+html.dark .swiper-slide .game-mode.choice .settings .toggle-button {
+  background: #339781;
+  box-shadow: 0rem 0.6rem 0rem #2d8471;
+}
+html.dark .swiper-slide .game-mode.choice .settings .toggle-button.active {
+  background: #47d0b2;
+  color: #2d8471;
+}
+html.dark .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #339781;
+}
+html.dark .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-moz-range-track {
+  background: #3aaa92;
+}
+html.dark .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #47d0b2;
+  border: 0.5rem solid #47d0b2;
+  box-shadow: -415px 0 0 400px #47d0b2;
+}
+html.dark .swiper-slide .game-mode.choice .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #47d0b2;
+  border: 0.5rem solid #47d0b2;
+  box-shadow: -415px 0 0 400px #47d0b2;
+}
+html.dark .swiper-slide .game-mode.choice .settings-footer {
+  background: #2d8471;
+  border-top: 0.6rem solid #40bda2;
+  border-bottom: 0.5rem solid #205e50;
+}
+html.dark .swiper-slide .game-mode.sudden {
+  background: #63343b;
+  color: #e29aa4;
+}
+html.dark .swiper-slide .game-mode.sudden .settings {
+  color: #d98a95;
+}
+html.dark .swiper-slide .game-mode.sudden .settings .toggle-button {
+  background: #a04450;
+  box-shadow: 0rem 0.6rem 0rem #8e3c47;
+}
+html.dark .swiper-slide .game-mode.sudden .settings .toggle-button.active {
+  background: #c26e79;
+}
+html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  background: #a04450;
+}
+html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-track {
+  background: #b24b59;
+}
+html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  background: #d27783;
+  border: 0.5rem solid #d27783;
+  box-shadow: -415px 0 0 400px #d27783;
+}
+html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-thumb {
+  background: #d27783;
+  border: 0.5rem solid #d27783;
+  box-shadow: -415px 0 0 400px #d27783;
+}
+html.dark .swiper-slide .game-mode.sudden .settings-footer {
+  background: #8e3c47;
+  border-top: 0.6rem solid #ba5c69;
+  border-bottom: 0.5rem solid #6a2d35;
+}
+html.dark .mode-select-container {
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  margin: 1rem;
+  flex: 4;
+  justify-content: center;
+  vertical-align: middle;
+  border-radius: 1rem;
+  height: 90%;
+}
+html.dark .submit-container .submit-button {
+  background: #6f6f6f;
+  box-shadow: 0rem 3rem 0rem #555555;
+}
+html.dark .submit-container .submit-button .submit-button-text {
+  color: #bfbfbf;
+}
+html.dark .submit-container.active .submit-button.vanilla {
+  box-shadow: 0rem 3rem 0rem #305372;
+  background: #3f6d96;
+}
+html.dark .submit-container.active .submit-button.vanilla .submit-button-text {
+  color: #8fb9df;
+}
+html.dark .submit-container.active .submit-button.timed {
+  box-shadow: 0rem 3rem 0rem #4d487c;
+  background: #615b9c;
+}
+html.dark .submit-container.active .submit-button.timed .submit-button-text {
+  color: #b5b1df;
+}
+html.dark .submit-container.active .submit-button.choice {
+  box-shadow: 0rem 3rem 0rem #205e50;
+  background: #2d8471;
+}
+html.dark .submit-container.active .submit-button.choice .submit-button-text {
+  color: #6bdfc6;
+}
+html.dark .submit-container.active .submit-button.sudden {
+  box-shadow: 0rem 3rem 0rem #6a2d35;
+  background: #8e3c47;
+}
+html.dark .submit-container.active .submit-button.sudden .submit-button-text {
+  color: #e8aeb6;
+}
+html.dark .question-container button {
+  background: #4f9db7;
 }
 
 .section-container {
@@ -308,14 +684,14 @@ form {
   font-size: 1.2rem;
 }
 .toast.success {
-  background-color: rgb(70, 170, 121);
+  background: rgb(70, 170, 121);
 }
 .toast.error {
-  background-color: rgb(194, 76, 76);
+  background: rgb(194, 76, 76);
 }
 
 .btn {
-  background-color: #4f9db7;
+  background: #4f9db7;
   font-weight: 500;
   font-size: 140%;
   width: 40rem;
@@ -323,10 +699,10 @@ form {
   border-radius: 1rem;
 }
 .btn:hover {
-  background-color: #6bacc2;
+  background: #6bacc2;
 }
 .btn:focus {
-  background-color: #6bacc2;
+  background: #6bacc2;
 }
 
 .dark-mode-toggle {
@@ -348,7 +724,7 @@ form {
 }
 .slider .slides {
   border-radius: 4rem;
-  background-color: transparent;
+  background: transparent;
 }
 .slider .slides li .caption {
   top: 0%;
@@ -395,7 +771,7 @@ form {
   font-weight: 700;
 }
 .tabs .tab.tab a:focus.active {
-  background-color: rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0);
 }
 .tabs .indicator {
   height: 0.2rem;
@@ -405,19 +781,18 @@ form {
   color: #4f9db7 !important;
 }
 
-input:focus {
-  box-shadow: 0 1px 0 0 #4f9db7 !important;
-  border-bottom: 1px solid #4f9db7 !important;
-}
-
 .modal {
   border-radius: 2rem;
   width: 60rem;
   max-width: 90%;
 }
+.modal input:focus {
+  box-shadow: 0 1px 0 0 #4f9db7 !important;
+  border-bottom: 1px solid #4f9db7 !important;
+}
 
 .modal-overlay {
-  background-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .modal-header {
@@ -432,6 +807,9 @@ input:focus {
 
 /* Most of these are only used on home */
 .full-page {
+  display: none;
+}
+.full-page.active {
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -454,7 +832,7 @@ input:focus {
   border: none;
   width: 100%;
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .play-container {
@@ -469,29 +847,29 @@ input:focus {
 
 .play-container-top {
   height: 100%;
-  vertical-align: middle;
   display: flex;
   padding: 1rem 1rem 0rem 1rem;
-  flex: 1;
+  flex: 4;
 }
 
 .play-container-bottom {
   height: 100%;
   display: flex;
   justify-content: center;
-  flex: 1;
+  flex: 3;
   padding: 0rem 1rem 1rem 1rem;
 }
 
 /* Parent element to all the switches */
 .switchboard-container {
-  background-color: transparent;
+  background: transparent;
   display: flex;
   justify-content: center;
   text-align: center;
   border-radius: 1rem;
-  margin-right: 0.5rem;
+  padding: 0rem 0rem 1.5rem 0rem;
   flex: 3;
+  margin-left: 3rem;
 }
 
 /* pointer events:none on everything except set to :auto on the physical button div () */
@@ -508,7 +886,7 @@ input:focus {
 }
 
 .switch {
-  background-color: transparent;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -517,6 +895,7 @@ input:focus {
   height: 100%;
   width: 100%;
   pointer-events: auto;
+  cursor: grab;
 }
 .switch .switch-button {
   font-family: "Heebo", sans-serif;
@@ -540,18 +919,7 @@ input:focus {
   box-shadow: 0rem 0.4rem 0rem, #4f9db7 0rem 0.4rem 1rem;
   transform: translateY(1rem);
   position: relative;
-  background-color: #4f9db7;
-}
-
-.switch-button {
-  font-family: "Heebo", sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
-  vertical-align: middle;
-  width: 100%;
-  height: 90%;
+  background: #4f9db7;
 }
 
 .switch-text {
@@ -564,6 +932,7 @@ input:focus {
 .results-container {
   overflow: hidden;
   display: flex;
+  height: 90%;
   margin: 1rem;
   flex: 4;
   justify-content: center;
@@ -574,40 +943,51 @@ input:focus {
 
 .mode-select-container {
   overflow: hidden;
-  background-color: transparent;
+  background: transparent;
   display: flex;
+  margin: 1rem;
   flex: 4;
   justify-content: center;
   vertical-align: middle;
   border-radius: 1rem;
+  height: 90%;
 }
 
 .submit-container {
   flex: 4;
-  padding: 2rem;
   height: 100%;
-  padding: 3rem;
-  display: flex;
-  justify-content: center;
-}
-
-.submit-button {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 800% 800%;
-  animation: gradient 15s ease infinite;
-  background-clip: border-box;
-  border-radius: 4rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #244753;
-  width: 100%;
-  height: 100%;
+}
+.submit-container .submit-button {
+  transition: all 0.5s;
+  cursor: pointer;
+  background: grey;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: 40%;
   overflow: hidden;
+}
+.submit-container .submit-button .submit-button-cover {
+  height: 85%;
+  border-radius: 1.5rem;
+}
+.submit-container .submit-button .submit-button-text {
+  transition: color 1s;
+}
+.submit-container.active .submit-button {
+  transition: background 0.5s, box-shadow 0.5s;
+}
+.submit-container.active .submit-button .submit-button-text {
+  transition: color 0.5s;
 }
 
 .submit-button-cover {
-  border-radius: 3rem;
+  border-radius: 4rem;
   height: 87%;
   width: 95%;
   display: flex;
@@ -618,7 +998,7 @@ input:focus {
 
 .submit-button-text {
   position: relative;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background: linear-gradient(-45deg, #72ade2, #9f98de, #4ce4c3, #e06a79);
   background-size: 800% 800%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -633,7 +1013,7 @@ input:focus {
 
 .swiper {
   width: 100%;
-  height: 80%;
+  height: 100%;
 }
 .swiper.mySwiper {
   height: 100%;
@@ -645,13 +1025,256 @@ input:focus {
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
+  width: 60%;
 }
 .swiper-slide .game-mode {
-  height: 70%;
+  height: 90%;
   width: 90%;
   border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0rem 0.6em 0.4rem #222;
+  cursor: auto;
 }
+.swiper-slide .game-mode .settings-header {
+  border-radius: 2rem 2rem 0rem 0rem;
+  flex: 25;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  align-items: center;
+  text-align: center;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.swiper-slide .game-mode .settings-header .title-toggle {
+  transform: scale(1.8);
+  flex: 2;
+}
+.swiper-slide .game-mode .settings-header .title-scroller {
+  transform: scale(1.8);
+  flex: 1;
+  padding: 0rem 2rem;
+}
+.swiper-slide .game-mode .settings {
+  flex: 50;
+  display: flex;
+  justify-content: center;
+}
+.swiper-slide .game-mode .settings .settings-container {
+  flex: 10;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.swiper-slide .game-mode .settings .settings-container.scroller {
+  max-width: 50%;
+  flex: 1;
+  justify-content: space-around;
+  flex-direction: column;
+  padding: 0rem 2rem;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle {
+  flex-direction: column;
+  flex: 2;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle p {
+  font-size: 1rem;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle .buttons-container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 80%;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle .buttons-container :first-child {
+  border-radius: 1.5rem 0rem 0rem 1.5rem;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle .buttons-container :last-child {
+  border-radius: 0rem 1.5rem 1.5rem 0rem;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle .buttons-container .toggle-button {
+  font-family: "Heebo", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 100%;
+  height: 80%;
+  transition: 0.2s;
+}
+.swiper-slide .game-mode .settings .settings-container.toggle .buttons-container .toggle-button.active {
+  box-shadow: none;
+  transform: translateY(0.6rem);
+  transition: 0.3s;
+  color: rgba(255, 255, 255, 0.6);
+}
+.swiper-slide .game-mode .settings .settings-container.toggle .buttons-container .toggle-button p {
+  font-size: 1rem;
+  transform: scale(2.2);
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  border: none;
+  border-radius: 16px;
+  height: 2rem;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]:focus {
+  outline: none;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  height: 2rem;
+  background: #29ff4c;
+  border-radius: 16px;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-moz-range-track {
+  height: 2rem;
+  background: #16fa25;
+  border-radius: 16px;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  border: 0.5rem solid #f50;
+  box-shadow: -415px 0 0 400px #f50;
+  margin-top: 0.02rem;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-moz-range-thumb {
+  outline: none;
+  height: 15px;
+  background: #f50;
+  width: 15px;
+  border-radius: 50%;
+  border: 0.5rem solid #f50;
+  box-shadow: -407px 0 0 400px #f50;
+}
+.swiper-slide .game-mode .settings .settings-container label {
+  font-size: 1rem;
+  font-family: "Source Sans Pro", sans-serif;
+}
+.swiper-slide .game-mode .settings .material-symbols-outlined {
+  margin-left: 1rem;
+  font-size: 4rem;
+  position: absolute;
+  top: 10%;
+  left: 83%;
+}
+.swiper-slide .game-mode .settings-footer {
+  cursor: grab;
+  pointer-events: auto;
+  display: flex;
+  justify-content: center;
+  flex: 30;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border-top: 0.6rem solid transparent;
+  box-shadow: 0rem -0.2rem 2rem rgba(0, 0, 0, 0.1);
+  align-items: center;
+  padding-top: 0.3rem;
+  border-radius: 0rem 0rem 2rem 2rem;
+  border-bottom: 0.5rem solid transparent;
+}
+.swiper-slide .game-mode .settings-footer p {
+  font-size: 4rem;
+  font-family: "Heebo", sans-serif;
+  font-weight: 900;
+}
+
+.question-container {
+  border-radius: 0.4rem;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  font-family: "Open Sans", sans-serif;
+  transform: scale(4);
+  font-size: 1.2rem;
+  top: 35%;
+  height: 16%;
+  width: 6%;
+  overflow: hidden;
+}
+.question-container input::-webkit-outer-spin-button,
+.question-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.question-container .question-row {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.question-container .question-row.operand {
+  justify-content: right;
+  padding: 0rem 0.6rem;
+}
+.question-container .question-row.operator {
+  justify-content: space-between;
+  padding: 0rem 0.6rem;
+}
+.question-container .question-row .question-text {
+  margin: 0;
+  color: #222;
+  justify-content: right;
+}
+.question-container .question-row .question-text#operator {
+  transform: scale(1.2);
+}
+.question-container .question-row.result {
+  margin: 0rem;
+}
+.question-container .question-row.result input[type=number] {
+  padding: 0rem 0.5rem;
+  font-size: 1.2rem;
+  height: 100%;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  caret-color: transparent;
+  -webkit-appearance: textfield;
+          appearance: textfield;
+  -moz-appearance: textfield;
+  text-align: right;
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+.question-container .question-row.result input[type=number]:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+}
+.question-container .question-row.submit {
+  margin: 0rem;
+  margin: 0;
+  justify-content: center;
+}
+.question-container .question-row.submit button {
+  height: 100%;
+  width: 100%;
+  border: none;
+  transition: all 0.01s;
+}
+.question-container .question-row.submit button.active {
+  transition: all 0.01s;
+}
+.question-container .question-seperator {
+  border-radius: 1rem;
+  background: #222;
+  height: 0.15rem;
+  width: 40%;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -727,9 +1350,6 @@ input:focus {
   .navbar-btn {
     font-size: 4vw;
   }
-  .results-container {
-    order: 1;
-  }
   .play-container {
     margin-top: 0;
     padding: 0;
@@ -744,16 +1364,29 @@ input:focus {
     justify-content: center;
     flex-direction: column;
     height: 80%;
+    padding: 0rem;
+  }
+  .results-container {
+    order: 1;
+  }
+  .mode-select-container {
+    order: 2;
   }
   .play-container-bottom {
     display: flex;
     flex-direction: column;
+    padding: 0rem;
   }
-  .switchboard {
-    padding: 1rem;
-    order: 2;
+  .switchboard-container {
+    display: flex;
+    order: 1;
     border-radius: 0;
     height: 100%;
+    margin: 0rem;
+  }
+  .submit-button-text {
+    font-size: 2rem;
+    transform: scale(3);
   }
   .mode-select-container {
     margin: 0;
@@ -761,7 +1394,8 @@ input:focus {
     width: 100%;
   }
   .submit-container {
-    padding: 2rem;
+    flex: 1;
+    order: 2;
   }
   .switch-text {
     font-size: 6rem;

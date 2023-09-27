@@ -5,12 +5,12 @@
 {% endblock %} 
 
 {% block main %}
-    <div class="full-page">
+    <div class="full-page active" id="home-tab">
         <div class="navbar">
             <button class="navbar-btn waves-effect active">Home</button>
             <button class="navbar-btn waves-effect">Profile</button>
             <button class="navbar-btn waves-effect">Leaderboard</button>
-            <button id="dropdown-button" class="navbar-btn waves-effect dropdown dark-mode-toggle">DROPDOWN</button>
+            <button id="dropdown-button" class="navbar-btn waves-effect dropdown dark-mode-toggle">dropdown</button>
         </div>
         <div class="play-container">
             <div class="play-container-top">
@@ -19,23 +19,95 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="game-mode vanilla">
-                                    
+                                    <div class="settings-header">
+                                        <div class="title-toggle">
+                                            Questions: <span class="range-results">5</span>
+                                        </div>
+                                    </div>
+                                    <div class="settings">
+                                        <!-- <a class="btn tooltipped" data-position="right" data-tooltip="I am a tooltip">Hover me!</a> -->
+                                        <div class="settings-container scroller">
+                                            <input type="range" min="5" max="30" step="5" value="5" id="vanilla-questions" name="vanilla-questions">
+                                        </div>
+                                    </div>
+                                    <div class="settings-footer">
+                                        <p>Vanilla</p>
+                                        <span class="material-symbols-outlined tooltipped" data-position="right" data-tooltip="I am a tooltip">icecream</span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="game-mode timed">
+                                    <div class="settings-header">
+                                        <div class="title-toggle">
+                                            Time: <span class="range-results">20</span> s
+                                        </div>
+                                    </div>
+                                    <div class="settings">
+                                        <div class="settings-container scroller">
+                                            <input type="range" min="20" max="120" step="20" value="20" id="timed-timer" name="timed-timer">
+                                        </div>
+                                    </div>
+                                    <div class="settings-footer">
+                                        <p>Timed</p>
+                                        <span class="material-symbols-outlined">timer</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="game-mode choice">
+                                    <div class="settings-header">
+                                        <div class="title-scroller">
+                                            Questions: <span class="range-results">5</span>
+                                        </div>
+                                        <div class="title-toggle">
+                                            <p>Choices</p>
+                                        </div>
+                                    </div>
+                                    <div class="settings">
+                                        <div class="settings-container scroller">
+                                            <input type="range" min="5" max="30" step=5 value="5" id="choice-questions" name="choice-questions">
+                                        </div>
+                                        <div class="settings-container toggle">
+                                            <div class="buttons-container">
+                                                <div class="toggle-button">
+                                                    <p>2</p>
+                                                </div>
+                                                <div class="toggle-button">
+                                                    <p>3</p>
+                                                </div>
+                                                <div class="toggle-button active">
+                                                    <p>4</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="settings-footer">
+                                        <p>Multiple Choice</p>
+                                        <span class="material-symbols-outlined">grid_view</span>
 
+                                    </div>
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="game-mode sudden">
-
+                                    <div class="settings-header">
+                                        <div class="title-scroller">
+                                            Time: <span class="range-results">20</span> s
+                                        </div>
+                                    </div>
+                                    <div class="settings">
+                                        <div class="settings-container scroller">
+                                            <input type="range" min="20" max="120" step="20" value="20" id="timed-timer" name="timed-timer">
+                                        </div>
+                                    </div>
+                                    <div class="settings-footer">
+                                        <p>Sudden Death</p>
+                                        <span class="material-symbols-outlined">Skull</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
                     </div>
                 </div>
                
@@ -45,7 +117,7 @@
                 
             </div>
             <div class="play-container-bottom">
-                <div class="switchboard-container" id="switchboard">
+                <div class="switchboard-container vanilla" id="switchboard">
                     <div class="switch-column">
                         <div class="switch" id="addition">
                             <span class="switch-button">
@@ -71,22 +143,41 @@
                         </div>
                     </div>
                     <div class="switch-column">
-                        <div class="switch large" id="special">
+                        <div class="switch large" id="exponential">
                             <span class="switch-button">
-                                <p class="switch-text">★</p>
+                                <p class="switch-text">x²</p>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="submit-container">
-                    <div class="submit-button">
+                    <div class="submit-button vanilla" id="submit-button">
                         <span class="submit-button-cover">
                             <p class="submit-button-text">PLAY</p>
                         </span>
                     </div>
                 </div>
-
             </div>
+        </div>
+    </div>
+    <div class="full-page" id="game-tab">
+        <!-- Js will insert an extra class depending on the question type -->
+        <div class="question-container">
+            <div class="question-row operand">
+                <p class="question-text" id="operand-1"></p>
+            </div>
+            <div class="question-row operator">
+                <p class="question-text" id="operator"></p>
+                <p class="question-text" id="operand-2"></p>
+            </div>
+            <!-- <span class="question-seperator"></span> -->
+            <div class="question-row result">
+                <input type="number" class="question-result" id="input-result" autofocus>
+            </div>
+            <div class="question-row submit">
+                <button class="question-submit-btn" id="question-submit-button">SUBMIT</button>
+            </div>
+            
         </div>
     </div>
 {% endblock %}

@@ -1,17 +1,42 @@
 $border-radius-size: 1rem;
 $main-cyan: #4f9db7;
+$main-cyan-light: #70bdd6;
 $default-light: #fff;
 $default-dark: #222;
 $default-success: rgb(70, 170, 121);
 $default-error: rgb(194, 76, 76);
+$top-shadow: 0rem -0.2rem 2rem;
+$blur-shadow: 0rem .6em .4rem;
+// $vanilla-mode: #29784f;
+// $vanilla-mode: #367a31;
+// $vanilla-mode: #494887;
+$vanilla-mode: #3f6d96;
+$timed-mode: #615b9c;
+$choice-mode: #2d8471;
+$sudden-mode: #8e3c47;
 
+
+// $vanilla-mode: #355d80;
+// $timed-mode: #544e89;
+// $choice-mode: #236a66;
+// $sudden-mode: #8e3c47;
+
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 900,
+  'GRAD' 0,
+  'opsz' 200
+}
 html
 {
     scroll-behavior: smooth;
 }
 
 html.light {
-    background-color: $default-light;
+    background: default-light;
     color: $default-dark;
 
     h3 {
@@ -28,30 +53,30 @@ html.light {
     }
     .btn-secondary {
         color: #3e6775;
-        background-color: #cbecf7;
+        background: #cbecf7;
     }
     .dark-mode-toggle {
-        background-color: #bfbfbf;
+        background: #bfbfbf;
     }
     .caption {
         color: #5f5f5f;
     }
     .card {
-        background-color: #3b7b91;
+        background: #3b7b91;
     }
     .slider {
         .indicators {
             .indicator-item {
-                background-color: #cbecf7;
-                
+                background: #cbecf7;
+
                 &.active {
-                    background-color: $main-cyan;
+                    background: $main-cyan;
                 }
             }
         }
     }
     .tabs {
-        background-color: $default-light;
+        background: $default-light;
 
         .tab {
             a {
@@ -64,7 +89,7 @@ html.light {
             }
         }
         .indicator {
-            background-color: $main-cyan;
+            background: $main-cyan;
         }
     }
     .input-field {
@@ -94,72 +119,346 @@ html.light {
         }
     }
     .full-page {
-        background-color: darken($default-light, 5%);
+        background: darken($default-light, 5%);
     }
     .modal {
-        background-color: $default-light;
-    } 
+        background: $default-light;
+    }
     .navbar-btn {
         color: $default-dark;
-        background-color: darken($default-light, 15%);
+        background: darken($default-light, 15%);
 
         &:hover {
-            background-color: darken($default-light, 20%);
-
+            background: darken($default-light, 20%);
         }
         &.active {
-            background-color: lighten(saturate($main-cyan, 20%), 15%);
+            background: $main-cyan-light;
             color: $default-light;
+
             &:hover {
-                background-color: lighten(saturate($main-cyan, 15%), 10%);
+                background: darken($main-cyan-light, 10%);
             }
         }
     }
     .play-container {
-        border: 1rem solid darken($default-light, 20%);;
-        background-color: darken($default-light, 25%);
-        box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem,
-                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, 
-                    inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
+        border: 1rem solid darken($default-light, 15%);
+        background: darken($default-light, 5%);
+        box-shadow: inset rgba(155, 155, 155, 0.1) 0rem 1rem 4rem,
+                    inset rgba(155, 155, 155, 0.1) 1rem 0rem 4rem,
+                    inset rgba(155, 155, 155, 0.1) -1rem 0rem 4rem;
     }
-    .play-container-left {
-        border-radius: 1rem 0rem 0rem 1rem;
-    }
-    .switch {
-        .switch-button {
-            background-color: darken($default-light, 10%);
-            color: #8b8b8b;
-            box-shadow: darken($default-light, 35%) 0rem 1.4rem 0rem;
-        }
-        &.active {
+    .switchboard-container {
+        .switch {
             .switch-button {
-                box-shadow: darken($main-cyan, 10%) 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1.2rem;
-                background-color: lighten(saturate($main-cyan, 20%), 15%);
-                color: lighten($main-cyan, 45%);
-                text-shadow: lighten($main-cyan, 55%) 0rem 0rem 1rem;
+                background: darken($default-light, 15%);
+                box-shadow: darken($default-light, 25%) 0rem 1.4rem 0rem;
+                color: #8b8b8b;
+            }
+        }
+        &.vanilla {
+            .switch {
+                &.active {
+                    .switch-button {
+                        color: lighten(saturate($vanilla-mode, 20%), 50%);
+                        background: lighten(saturate($vanilla-mode, 5%), 20%);
+                        box-shadow: lighten($vanilla-mode, 5%) 0rem 0.4rem 0rem;
+
+                    }
+                }
+            }
+        }
+        &.timed {
+            .switch {
+                &.active {
+                    .switch-button {
+                        color: lighten(saturate($timed-mode, 20%), 40%);
+                        background: lighten(saturate($timed-mode, 5%), 20%);
+                        box-shadow: lighten($timed-mode, 5%) 0rem 0.4rem 0rem;
+                    }
+                }
+            }
+        }
+        &.choice {
+            .switch {
+                &.active {
+                    .switch-button {
+                        color: lighten(saturate($choice-mode, 20%), 55%);
+                        background: lighten(saturate($choice-mode, 5%), 20%);
+                        box-shadow: lighten($choice-mode, 5%) 0rem 0.4rem 0rem;
+                    }
+                }
+            }
+        }
+        &.sudden {
+            .switch {
+                &.active {
+                    .switch-button {
+                        color: lighten(saturate($sudden-mode, 20%), 50%);
+                        background: lighten(saturate($sudden-mode, 5%), 20%);
+                        box-shadow: lighten($sudden-mode, 5%) 0rem 0.4rem 0rem;
+                    }
+                }
             }
         }
     }
+    // cp1 - light
     .swiper-slide {
-        // background-color: darken($default-light, 30%);
         background: transparent;
+
         .game-mode {
-            &.vanilla {
-                border: 1rem #346f83 solid;
+            box-shadow: $blur-shadow lighten($default-dark, 20%);
+
+             &.vanilla {
+                background: lighten($vanilla-mode, 45%);
+                color: lighten($vanilla-mode, 10%);
+
+                .settings {
+                    color: lighten($vanilla-mode, 5%);
+
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($vanilla-mode, 35%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($vanilla-mode, 35%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($vanilla-mode, 5%), 25%);
+                                border: .5rem solid lighten(saturate($vanilla-mode, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode, 5%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($vanilla-mode, 5%), 25%);
+                                border: .5rem solid lighten(saturate($vanilla-mode, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode, 5%), 25%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    // border-color: #F3E5AB;
+                    // color: #F3E5AB;
+                    background: lighten(saturate($vanilla-mode, 5%), 20%);
+                    border-top: .6rem solid lighten(saturate($vanilla-mode, 10%), 50%);
+                    border-bottom: .5rem solid lighten($vanilla-mode, 5%);
+                    color: lighten(saturate($vanilla-mode, 20%), 50%);
+
+                }
             }
             &.timed {
-                border: 1rem #145650 solid;
+                background: lighten($timed-mode, 40%);
+                color: lighten($timed-mode, 15%);
+
+                .settings {
+                    color: lighten($timed-mode, 5%);
+
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($timed-mode, 35%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($timed-mode, 35%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($timed-mode, 5%), 25%);
+                                border: .5rem solid lighten(saturate($timed-mode, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($timed-mode, 5%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($timed-mode, 5%), 25%);
+                                border: .5rem solid lighten(saturate($timed-mode, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($timed-mode, 5%), 25%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    background: lighten(saturate($timed-mode, 5%), 20%);
+                    border-top: .6rem solid lighten(saturate($timed-mode, 10%), 45%);
+                    border-bottom: .5rem solid lighten($timed-mode, 5%);
+                    color: lighten(saturate($timed-mode, 20%), 45%);
+
+                }
+            }
+            &.choice {
+                background: lighten($choice-mode, 50%);
+                color: lighten($choice-mode, 10%);
+
+                .settings {
+                    color: lighten($choice-mode, 5%);
+
+                    .toggle-button {
+                        background: lighten($choice-mode, 40%);
+                        box-shadow: 0rem .6rem 0rem lighten($choice-mode, 30%);
+
+                        &.active {
+                            background: lighten(saturate($choice-mode, 5%), 20%);
+                            color: lighten(saturate($choice-mode, 20%), 50%);
+                        }
+                    }
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($choice-mode, 40%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($choice-mode, 40%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($choice-mode, 5%), 25%);
+                                border: .5rem solid lighten(saturate($choice-mode, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($choice-mode, 5%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($choice-mode, 5%), 25%);
+                                border: .5rem solid lighten(saturate($choice-mode, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($choice-mode, 5%), 25%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    background: lighten(saturate($choice-mode, 5%), 20%);
+                    border-top: .6rem solid lighten(saturate($choice-mode, 5%), 55%);
+                    border-bottom: .5rem solid lighten($choice-mode, 5%);
+                    color: lighten(saturate($choice-mode, 20%), 55%);
+                }
             }
             &.sudden {
-                border: 1rem orange solid;  
+                background: lighten($sudden-mode, 45%);
+                color: lighten($sudden-mode, 10%);
+
+                .settings {
+                    color: lighten($sudden-mode, 10%);
+
+                    .toggle-button {
+                        background: lighten($sudden-mode, 30%);
+                        box-shadow: 0rem .6rem 0rem lighten($sudden-mode, 25%);
+
+                        &.active {
+                            background: lighten(saturate($sudden-mode, 5%), 20%);
+                            color: lighten(saturate($sudden-mode, 20%), 50%);
+                        }
+                    }
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($sudden-mode, 40%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($sudden-mode, 40%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($sudden-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($sudden-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($sudden-mode, 10%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($sudden-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($sudden-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($sudden-mode, 10%), 25%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    background: lighten(saturate($sudden-mode, 5%), 20%);
+                    border-top: .6rem solid lighten(saturate($sudden-mode, 10%), 50%);
+                    border-bottom: .5rem solid lighten($sudden-mode, 5%);
+                    color: lighten(saturate($sudden-mode, 20%), 50%);
+                }
+            }
+        }
+    }
+    .submit-container {
+        .submit-button {
+            background: darken($default-light, 15%);
+            box-shadow: 0rem 3rem 0rem darken($default-light, 25%);
+
+            .submit-button-text {
+                color: #8b8b8b;
+            }
+        }
+        &.active {
+            .submit-button {
+                &.vanilla {
+                    color: lighten(saturate($vanilla-mode, 20%), 50%);
+                    box-shadow: 0rem 3rem 0rem lighten($vanilla-mode, 10%);
+                    background: lighten(saturate($vanilla-mode, 5%), 20%);
+
+                    .submit-button-text {
+                        color: lighten(saturate($vanilla-mode, 20%), 50%);
+                    }
+                }
+                &.timed {
+                    color: lighten(saturate($timed-mode, 20%), 50%);
+                    box-shadow: 0rem 3rem 0rem lighten($timed-mode, 10%);
+                    background: lighten(saturate($timed-mode, 5%), 20%);
+
+                    .submit-button-text {
+                        color: lighten(saturate($timed-mode, 20%), 45%);
+                    }
+                }
+                &.choice {
+                    color: lighten(saturate($choice-mode, 20%), 50%);
+                    box-shadow: 0rem 3rem 0rem lighten($choice-mode, 10%);
+                    background: lighten(saturate($choice-mode, 5%), 20%);
+
+                    .submit-button-text {
+                        color: lighten(saturate($choice-mode, 20%), 50%);
+                    }
+                }
+                &.sudden {
+                    color: lighten(saturate($sudden-mode, 20%), 50%);
+                    box-shadow: 0rem 3rem 0rem lighten($sudden-mode, 10%);
+                    background: lighten(saturate($sudden-mode, 5%), 20%);
+
+                    .submit-button-text {
+                        color: lighten(saturate($sudden-mode, 20%), 50%);
+                    }
+                }
+            }
+        }
+    }
+    .question-container {
+        border: .15rem solid darken($default-light, 20%);
+        color: $default-dark;
+
+        .question-row {
+            &.result {
+                input[type="number"] {
+                    color: $default-dark;
+                    border-top: .15rem solid darken($default-light, 20%);
+                }
+            }
+        }
+        button {
+            background: $main-cyan-light;
+            color: $default-dark;
+
+            &.active {
+                background: lighten($main-cyan-light, 15%);
             }
         }
     }
 }
 
-html.dark
-{   
-    background-color: $default-dark;
+html.dark {
+    background: $default-dark;
     color: $default-light;
 
     .light-image {
@@ -174,36 +473,35 @@ html.dark
     .input-box {
         color: $default-light;
     }
-    .form-error{
+    .form-error {
         color: #ff517c;
     }
     .btn-secondary {
         color: #abc8d2;
-        background-color: #244753;
+        background: #244753;
     }
-    .dark-mode-toggle
-    {
-        background-color: #444;
+    .dark-mode-toggle {
+        background: #444;
     }
     .caption {
         color: #999999;
     }
     .card {
-        background-color: #145650;
+        background: #145650;
     }
     .slider {
         .indicators {
             .indicator-item {
-                background-color: #244753;
-                
+                background: #244753;
+
                 &.active {
-                    background-color: $main-cyan;
+                    background: $main-cyan;
                 }
             }
         }
     }
     .tabs {
-        background-color: #444;
+        background: #444;
 
         .tab {
             a {
@@ -216,7 +514,7 @@ html.dark
             }
         }
         .indicator {
-            background-color: $main-cyan;
+            background: $main-cyan;
         }
     }
     .input-field {
@@ -245,72 +543,326 @@ html.dark
         }
     }
     .full-page {
-        background-color: lighten($default-dark, 5%);
+        background: lighten($default-dark, 5%);
     }
     .modal {
-        background-color: $default-dark;
-    } 
+        background: $default-dark;
+    }
     .navbar-btn {
         color: $default-light;
-        background-color: #3d3d3d;
+        background: #3d3d3d;
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-
+            background: rgba(255, 255, 255, 0.2);
         }
         &.active {
-            background-color: $main-cyan;
-            color: lighten($main-cyan, 40%);
-            text-shadow: #c0efff 0rem 0rem 1.5rem;
+            background: $main-cyan;
+            color: $default-light;
 
             &:hover {
-                background-color: #66b7d2;
+                background: #66b7d2;
             }
         }
     }
     .play-container {
         border: 1rem solid lighten($default-dark, 20%);
-        background-color: lighten($default-dark, 10%);
+        background: lighten($default-dark, 10%);
         box-shadow: inset rgba(0, 0, 0, 0.1) 0rem 1rem 4rem,
-                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem, 
+                    inset rgba(0, 0, 0, 0.1) 1rem 0rem 4rem,
                     inset rgba(0, 0, 0, 0.1) -1rem 0rem 4rem;
     }
-    
-    .switch {
-        .switch-button {
-            background-color: lighten($default-dark, 30%);
-            color: lighten($default-dark, 15%);
-            text-shadow: lighten($default-dark, 10%);
-            box-shadow: lighten($default-dark, 20%) 0rem 1.4rem 0rem;
-        }
-        &.active {
+    .switchboard-container {
+        .switch {
             .switch-button {
-                box-shadow: #346f83 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
-                background-color: $main-cyan;
-                color: lighten($main-cyan, 40%);
-                text-shadow: #c0efff 0rem 0rem 1.5rem;
+                background: lighten($default-dark, 30%);
+                box-shadow: lighten($default-dark, 20%) 0rem 1.4rem 0rem;
+                color: darken($default-light, 25%);
+            }
+        }
+        &.vanilla {
+            .switch {
+                &.active {
+                    .switch-button {
+                        background: $vanilla-mode;
+                        color: lighten(saturate($vanilla-mode, 15%), 30%);
+                        box-shadow: darken($vanilla-mode, 10%) 0rem 0.4rem 0rem;
+                    }
+                }
+            }
+        }
+        &.timed {
+            .switch {
+                &.active {
+                    .switch-button {
+                        background:  $timed-mode;
+                        color: lighten(saturate($timed-mode, 15%), 30%);
+                        box-shadow: darken($timed-mode, 10%) 0rem 0.4rem 0rem;
+                    }
+                }
+            }
+        }
+        &.choice {
+            .switch {
+                &.active {
+                    .switch-button {
+                        background:  $choice-mode;
+                        color: lighten(saturate($choice-mode, 15%), 30%);
+                        box-shadow: darken($choice-mode, 10%) 0rem 0.4rem 0rem;
+                    }
+                }
+            }
+        }
+        &.sudden {
+            .switch {
+                &.active {
+                    .switch-button {
+                        background:  $sudden-mode;
+                        color: lighten(saturate($sudden-mode, 15%), 40%);
+                        box-shadow: darken($sudden-mode, 10%) 0rem 0.4rem 0rem;
+                    }
+                }
             }
         }
     }
+    // cp1 - dark
     .swiper-slide {
-        color: $default-light;
-        background-color: $default-dark;
+        background: transparent;
 
-        &.vanilla {
-    
-        }
-        &.timed {
-            
-        }
-        &.sudden {
-        
+        .game-mode {
+            background: darken($default-light, 60%);
+
+            &.vanilla {
+                background: desaturate(darken($vanilla-mode, 10%), 10%);
+                color: lighten(saturate($vanilla-mode, 20%), 35%);
+
+                .settings {
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($vanilla-mode, 5%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($vanilla-mode, 10%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($vanilla-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($vanilla-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode, 10%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($vanilla-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($vanilla-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode, 10%), 25%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    background:  $vanilla-mode;
+                    // border-color: #F3E5AB;
+                    // color: #F3E5AB;
+                    border-top: .6rem solid lighten($vanilla-mode, 15%);
+                    border-bottom: .5rem solid darken($vanilla-mode, 10%);
+                }
+            }
+            &.timed {
+                background: desaturate(darken($timed-mode, 10%), 5%);
+                color: lighten(saturate($timed-mode, 15%), 30%);
+
+                .settings {
+
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($timed-mode, 5%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($timed-mode, 10%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($timed-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($timed-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($timed-mode, 10%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($timed-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($timed-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($timed-mode, 10%), 25%);
+                            }
+                        }
+                    }
+
+                }
+                .settings-footer {
+                    background:  $timed-mode;
+                    border-top: .6rem solid lighten($timed-mode, 15%);
+                    border-bottom: .5rem solid darken($timed-mode, 10%);
+                }
+            }
+            &.choice {
+                background: desaturate(darken($choice-mode, 5%), 20%);
+                color: lighten(saturate($choice-mode, 10%), 35%);
+
+                .settings {
+                    color: lighten(saturate($choice-mode, 10%), 30%);
+
+                    .toggle-button {
+                        background: lighten($choice-mode, 5%);
+                        box-shadow: 0rem .6rem 0rem $choice-mode;
+
+                        &.active {
+                            background: lighten(saturate($choice-mode, 10%), 20%);
+                            color: $choice-mode;
+                        }
+                    }
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($choice-mode, 5%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($choice-mode, 10%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($choice-mode, 10%), 20%);
+                                border: .5rem solid lighten(saturate($choice-mode, 10%), 20%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($choice-mode, 10%), 20%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($choice-mode, 10%), 20%);
+                                border: .5rem solid lighten(saturate($choice-mode, 10%), 20%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($choice-mode, 10%), 20%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    background: $choice-mode;
+                    border-top: .6rem solid lighten($choice-mode, 15%);
+                    border-bottom: .5rem solid darken($choice-mode, 10%);
+                }
+            }
+            &.sudden {
+                background: desaturate(darken($sudden-mode, 10%), 10%);
+                color: lighten(saturate($sudden-mode, 15%), 35%);
+
+                .settings {
+                    color: lighten(saturate($sudden-mode, 10%), 30%);
+
+                    .toggle-button {
+                        background: lighten($sudden-mode, 5%);
+                        box-shadow: 0rem .6rem 0rem $sudden-mode;
+
+                        &.active {
+                            background: lighten($sudden-mode, 20%);
+                            // color: darken($sudden-mode, 5%);
+                        }
+                    }
+                    .settings-container {
+                        input[type=range] {
+                            &::-webkit-slider-runnable-track {
+                                background: lighten($sudden-mode, 5%);
+                            }
+
+                            &::-moz-range-track {
+                                background: lighten($sudden-mode, 10%);
+                            }
+
+                            &::-webkit-slider-thumb {
+                                background: lighten(saturate($sudden-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($sudden-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($sudden-mode, 10%), 25%);
+                            }
+
+                            &::-moz-range-thumb {
+                                background: lighten(saturate($sudden-mode, 10%), 25%);
+                                border: .5rem solid lighten(saturate($sudden-mode, 10%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($sudden-mode, 10%), 25%);
+                            }
+                        }
+                    }
+                }
+                .settings-footer {
+                    background:  $sudden-mode;
+                    border-top: .6rem solid lighten($sudden-mode, 15%);
+                    border-bottom: .5rem solid darken($sudden-mode, 10%);
+                }
+            }
         }
     }
-    .submit-button-cover {
-        background-color: lighten($default-dark, 10%)
+    .mode-select-container {
+        overflow: hidden;
+        background: transparent;
+        display: flex;
+        margin: 1rem;
+        flex: 4;
+        justify-content: center;
+        vertical-align: middle;
+        border-radius: 1rem;
+        height: 90%;
     }
-    
+    .submit-container {
+        .submit-button {
+            background: lighten($default-dark, 30%);
+            box-shadow: 0rem 3rem 0rem lighten($default-dark, 20%);
+
+            .submit-button-text {
+                color: darken($default-light, 25%);
+            }
+        }
+        &.active {
+            .submit-button {
+                &.vanilla {
+                    box-shadow: 0rem 3rem 0rem darken($vanilla-mode, 10%);
+                    background: $vanilla-mode;
+
+                    .submit-button-text {
+                        color: lighten(saturate($vanilla-mode, 15%), 30%);
+                    }
+                }
+                &.timed {
+                    box-shadow: 0rem 3rem 0rem darken($timed-mode, 10%);
+                    background:  $timed-mode;
+
+                    .submit-button-text {
+                        color: lighten(saturate($timed-mode, 15%), 30%);
+                    }
+                }
+                &.choice {
+                    box-shadow: 0rem 3rem 0rem darken($choice-mode, 10%);
+                    background:  $choice-mode;
+
+                    .submit-button-text {
+                        color: lighten(saturate($choice-mode, 15%), 30%);
+                    }
+                }
+                &.sudden {
+                    box-shadow: 0rem 3rem 0rem darken($sudden-mode, 10%);
+                    background:  $sudden-mode;
+
+                    .submit-button-text {
+                        color: lighten(saturate($sudden-mode, 15%), 40%);
+                    }
+                }
+            }
+        }
+    }
+    .question-container {
+        button {
+            background: $main-cyan;
+        }
+    }
 }
+
 .section-container {
     display: flex;
     margin: auto;
@@ -376,24 +928,24 @@ form {
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.2rem;
     &.success {
-        background-color: rgb(70, 170, 121);
+        background: rgb(70, 170, 121);
     }
     &.error {
-        background-color: rgb(194, 76, 76);
+        background: rgb(194, 76, 76);
     }
 }
 .btn {
-    background-color: $main-cyan;
+    background: $main-cyan;
     font-weight: 500;
     font-size: 140%;
     width: 40rem;
     max-width: 60%;
     border-radius: 1rem;
     &:hover {
-        background-color: #6bacc2;
+        background: #6bacc2;
     }
     &:focus {
-        background-color: #6bacc2;
+        background: #6bacc2;
     }
 }
 
@@ -414,7 +966,7 @@ form {
 
     .slides {
         border-radius: 4rem;
-        background-color: transparent;
+        background: transparent;
     }
     .slides li {
         .caption {
@@ -447,9 +999,8 @@ form {
     justify-content: space-around;
     height: 4rem;
     align-items: center;
-    
-    .tab {
 
+    .tab {
         a {
             font-size: 120%;
             font-weight: 500;
@@ -462,13 +1013,13 @@ form {
             }
         }
         &.tab a:focus.active {
-            background-color: rgba(0, 0, 0, 0)
+            background: rgba(0, 0, 0, 0)
         }
     }
     .indicator {
- 
+
         height: 0.2rem;
-    } 
+    }
 }
 
 // Not even sure what this is. Pretty sure its outdated now
@@ -476,17 +1027,19 @@ form {
     color: $main-cyan !important;
 }
 
-input:focus {
-    box-shadow: 0 1px 0 0 $main-cyan !important;
-    border-bottom: 1px solid $main-cyan !important;
-}
+
 .modal {
     border-radius: 2rem;
     width: 60rem;
     max-width: 90%;
+
+    input:focus {
+        box-shadow: 0 1px 0 0 $main-cyan !important;
+        border-bottom: 1px solid $main-cyan !important;
+    }
 }
 .modal-overlay {
-    background-color: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.7);
 }
 .modal-header {
     display: block;
@@ -498,12 +1051,16 @@ input:focus {
 }
 /* Most of these are only used on home */
 .full-page {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+    display: none;
+
+    &.active {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+    }
 }
 .navbar {
     position: absolute;
@@ -518,7 +1075,7 @@ input:focus {
     border: none;
     width: 100%;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 .play-container {
     margin-top: 4.5rem;
@@ -543,34 +1100,35 @@ input:focus {
 // }
 .play-container-top {
     height: 100%;
-    vertical-align: middle;
     display: flex;
     padding: 1rem 1rem 0rem 1rem;
-    flex: 1;
+    flex: 4;
 }
 .play-container-bottom {
     height: 100%;
     display: flex;
     justify-content: center;
-    flex: 1;
+    flex: 3;
     padding: 0rem 1rem 1rem 1rem;
 }
 
 /* Parent element to all the switches */
 .switchboard-container {
-    background-color: transparent;
+    background: transparent;
     display: flex;
     justify-content: center;
     text-align: center;
     border-radius: 1rem;
-    margin-right: .5rem;
+    padding: 0rem 0rem 1.5rem 0rem;
     flex: 3;
+    margin-left: 3rem;
 }
 /* pointer events:none on everything except set to :auto on the physical button div () */
 .switchboard-container * {
     pointer-events: none;
+    // transition: all .5s ease;
 }
-.switch-column {   
+.switch-column {
     height: 100%;
     width: 100%;
     display: flex;
@@ -578,7 +1136,7 @@ input:focus {
     justify-content: center;
 }
 .switch {
-    background-color: transparent;
+    background: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -587,6 +1145,8 @@ input:focus {
     height: 100%;
     width: 100%;
     pointer-events: auto;
+    cursor: grab;
+
 
     .switch-button {
         font-family: 'Heebo', sans-serif;
@@ -603,6 +1163,9 @@ input:focus {
         .switch-button {
             transform: translateY(1rem);
             position: relative;
+
+            // color: $default-light;
+            // text-shadow: $default-light 0rem 0rem 1rem;
         }
     }
     &.large {
@@ -614,19 +1177,9 @@ input:focus {
             box-shadow: 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
             transform: translateY(1rem);
             position: relative;
-            background-color: $main-cyan;
+            background: $main-cyan;
         }
     }
-}
-.switch-button {
-    font-family: 'Heebo', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    vertical-align: middle;
-    width: 100%;
-    height: 90%;
 }
 .switch-text {
     height: auto;
@@ -634,52 +1187,79 @@ input:focus {
     position: absolute;
     font-size: 10rem;
 }
+
 .results-container {
     overflow: hidden;
     display: flex;
+    height: 90%;
     margin: 1rem;
     flex: 4;
     justify-content: center;
     vertical-align: middle;
     border-radius: 2rem;
     box-shadow: inset 0px 0px 0px 10px white;
-
 }
+
 .mode-select-container {
     overflow: hidden;
-    background-color: transparent;
+    background: transparent;
     display: flex;
+    margin: 1rem;
     flex: 4;
     justify-content: center;
     vertical-align: middle;
     border-radius: 1rem;
+    height: 90%;
 }
 .submit-container {
     flex: 4;
-    padding: 2rem;
     height: 100%;
-    padding: 3rem;
-    display: flex;
-    justify-content: center;
-}
-.submit-button {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 800% 800%;
-    animation: gradient 15s ease infinite;
-    background-clip: border-box;
-    border-radius: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background-color: #244753;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    .submit-button {
+        transition: all .5s;
+        cursor: pointer;
+        background: grey;
+        border-radius: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 40%;
+        overflow: hidden;
+        // transform: translateY(4rem);
+        .submit-button-cover {
+            height: 85%;
+            border-radius: 1.5rem;
+        }
+        .submit-button-text {
+            transition: color 1s;
+        }
+    }
 
+    &.active {
+        .submit-button {
+            transition: background .5s, box-shadow .5s;
+            // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            // background-size: 800% 800%;
+            // animation: gradient 15s ease infinite;
+            // background-clip: border-box;
+            // box-shadow: 0rem 3rem 0rem black;
+
+            .submit-button-text {
+                transition: color .5s;
+                // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                // background-size: 800% 800%;
+                // background-clip: text;
+            }
+        }
+    }
 }
+
 .submit-button-cover {
-    border-radius: 3rem;
+    border-radius: 4rem;
     height: 87%;
     width: 95%;
     display: flex;
@@ -689,9 +1269,12 @@ input:focus {
 
 }
 .submit-button-text {
-
     position: relative;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background: linear-gradient(-45deg,
+        lighten(saturate($vanilla-mode, 25%), 25%),
+        lighten(saturate($timed-mode, 25%), 25%),
+        lighten(saturate($choice-mode, 25%), 25%),
+        lighten(saturate($sudden-mode, 25%), 25%));
     background-size: 800% 800%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -702,39 +1285,330 @@ input:focus {
     font-weight: 900;
     font-size: 4rem;
     transform: scale(2);
-    
 }
-
 .swiper {
     width: 100%;
-    height: 80%;
+    height: 100%;
     &.mySwiper {
         height: 100%;
         width: 100%;
     }
 }
+// cp1
+
+// checkpoint3
+
 .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 100%;
+    width: 60%;
 
     .game-mode {
-        height: 70%;
+        height: 90%;
         width: 90%;
         border-radius: 2rem;
-        &.vanilla {
+        display: flex;
+        flex-direction: column;
+        box-shadow: $blur-shadow $default-dark;
+        cursor: auto;
 
+        .settings-header {
+            border-radius: 2rem 2rem 0rem 0rem;
+            flex: 25;
+            display: flex;
+            justify-content: center;
+            font-size: 1rem;
+            align-items: center;
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
+
+            .title-toggle{
+                transform: scale(1.8);
+                flex: 2;
+            }
+
+            .title-scroller {
+                transform: scale(1.8);
+                flex: 1;
+                padding: 0rem 2rem;
+
+            }
         }
-        &.timed {
-            
+        .settings {
+            flex: 50;
+            display: flex;
+            justify-content: center;
+
+
+            .settings-container {
+                flex: 10;
+                display: flex;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+
+                &.scroller {
+                    max-width: 50%;
+                    flex: 1;
+                    justify-content: space-around;
+                    flex-direction: column;
+                    padding: 0rem 2rem;
+
+                }
+                &.toggle {
+                    flex-direction: column;
+                    flex: 2;
+
+                    p {
+                        font-size: 1rem;
+                        font-family: 'Source Sans Pro', sans-serif;
+                    }
+
+                    .buttons-container {
+                        display: flex;
+                        justify-content: center;
+                        height: 100%;
+                        width: 80%;
+
+                        :first-child {
+                            border-radius: 1.5rem 0rem 0rem 1.5rem;
+                        }
+                        :last-child {
+                            border-radius: 0rem 1.5rem 1.5rem 0rem;
+                        }
+
+                        .toggle-button {
+                            font-family: 'Heebo', sans-serif;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            vertical-align: middle;
+                            width: 100%;
+                            height: 80%;
+                            // border-radius: 1rem;
+                            // margin: 0rem 1rem;
+                            transition: 0.2s;
+
+                            &.active {
+                                box-shadow: none;
+                                transform: translateY(.6rem);
+                                transition: 0.3s;
+                                color: rgba(255, 255, 255, 0.6);
+                            }
+
+                            p {
+                                font-size: 1rem;
+                                transform: scale(2.2);
+                            }
+                        }
+                    }
+                }
+
+                input[type=range] {
+                    // height: 38px;
+                    // -webkit-appearance: none;
+                    // margin: 10px 0;
+                    // width: 100%;
+                    // border: none;
+                    // appearance: slider;
+                    -webkit-appearance: none;
+                    appearance: none;
+                    width: 100%;
+                    cursor: pointer;
+                    outline: none;
+                    overflow: hidden;
+                    border: none;
+                    border-radius: 16px;
+                    height: 2rem;
+
+                    &:focus {
+                        outline: none;
+
+                        // Changes the color of the track after its been interacted with.
+                        // &::-webkit-slider-runnable-track {
+                        //     background: #93c1e9;
+                        // }
+                        // &::-ms-fill-lower {
+                        //     background: #44a930;
+                        // }
+                        // &::-ms-fill-upper {
+                        //     background: #a93073;
+                        // }
+                    }
+                    &::-webkit-slider-runnable-track {
+                        height: 2rem;
+                        background: #29ff4c;
+                        border-radius: 16px;
+                    }
+
+                    &::-moz-range-track {
+                        height: 2rem;
+                        background: #16fa25;
+                        border-radius: 16px;
+                    }
+
+                    &::-webkit-slider-thumb {
+                        -webkit-appearance: none;
+                        appearance: none;
+                        height: 2rem;
+                        width: 2rem;
+                        border-radius: 50%;
+                        border: .5rem solid #f50;
+                        box-shadow: -415px 0 0 400px #f50;
+                        margin-top: .02rem;
+                    }
+
+                    &::-moz-range-thumb {
+                        outline: none;
+                        height: 15px;
+                        background: #f50;
+                        width: 15px;
+                        border-radius: 50%;
+                        border: .5rem solid #f50;
+                        box-shadow: -407px 0 0 400px #f50;
+                    }
+                }
+                // Controls the label of the slider
+                label {
+                    font-size: 1rem;
+                    font-family: 'Source Sans Pro', sans-serif;
+
+                }
+            }
+            .material-symbols-outlined {
+                margin-left: 1rem;
+                font-size: 4rem;
+                position: absolute;
+                top: 10%;
+                left: 83%;
+            }
         }
-        &.sudden {
+        .settings-footer {
+            cursor: grab;
+            pointer-events: auto;
+            display: flex;
+            justify-content: center;
+            flex: 30;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            border-top: .6rem solid transparent;
+            box-shadow: $top-shadow rgba(0, 0, 0, 0.1);
+            align-items: center;
+            padding-top: 0.3rem;
+            border-radius: 0rem 0rem 2rem 2rem;
+            border-bottom: .5rem solid transparent;
+
+            p {
+                font-size: 4rem;
+                font-family: 'Heebo', sans-serif;
+                font-weight: 900;
+            }
         }
     }
-
 }
+
+.question-container {
+    border-radius: .4rem;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    font-family: 'Open Sans', sans-serif;
+    transform: scale(4);
+    font-size: 1.2rem;
+    top: 35%;
+    height: 16%;
+    width: 6%;
+    overflow: hidden;
+    
+    // Removes the arrows that come default with input[type='number']
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .question-row {
+        flex: 1;
+        display: flex;
+        align-items: center;
+
+        &.operand {
+            justify-content: right;
+            padding: 0rem 0.6rem;
+        }
+        &.operator {
+            justify-content: space-between;
+            padding: 0rem 0.6rem;
+        }
+        .question-text {
+            margin: 0;
+            color: $default-dark;
+            justify-content: right;
+
+            &#operator {
+                // right: 78%;
+                transform: scale(1.2);
+            }
+        }
+        &.result {
+            margin: 0rem;
+            // padding: 0rem 1rem;
+            // background: rgba(0, 0, 0 ,0.2);
+            // border: 0.2rem solid rgba(0, 0, 0, 0.4);
+
+            // border-radius: .5rem .5rem 0rem 0rem;
+
+            input[type="number"] {
+                padding: 0rem .5rem;
+                font-size: 1.2rem;
+                height: 100%;
+                margin: 0;
+                font-family: 'Open Sans', sans-serif;
+                // font-size: 1rem;
+                caret-color: transparent;
+                appearance: textfield;
+                -moz-appearance: textfield;
+                text-align: right;
+                border: none;
+                box-shadow: none;
+                outline: none;
+    
+                &:focus {
+                    border: none;
+                    box-shadow: none;
+                    outline: none;
+                }
+            }
+        }
+        &.submit {
+            margin: 0rem;
+            margin: 0;
+            justify-content: center;
+
+            button {
+                height: 100%;
+                width: 100%;
+                border: none;
+                transition: all .01s;
+
+                &.active {
+                    transition: all .01s;
+
+                }
+            }
+        }
+    }
+    .question-seperator {
+        border-radius: 1rem;
+        background: $default-dark;
+        height: .15rem;
+        width: 40%;
+    }
+}
+
 
 @keyframes fadeIn
 {
@@ -816,9 +1690,6 @@ input:focus {
     .navbar-btn {
         font-size: 4vw;
     }
-    .results-container {
-        order: 1
-    }
     .play-container {
         margin-top: 0;
         padding: 0;
@@ -833,16 +1704,29 @@ input:focus {
         justify-content: center;
         flex-direction: column;
         height: 80%;
+        padding: 0rem;
+    }
+    .results-container {
+        order: 1
+    }
+    .mode-select-container {
+        order: 2
     }
     .play-container-bottom {
         display: flex;
         flex-direction: column;
+        padding: 0rem;
     }
-    .switchboard {
-        padding: 1rem;
-        order: 2;
+    .switchboard-container {
+        display: flex;
+        order: 1;
         border-radius: 0;
         height: 100%;
+        margin: 0rem;
+    }
+    .submit-button-text {
+        font-size: 2rem;
+        transform: scale(3);
     }
     .mode-select-container {
         margin: 0;
@@ -850,7 +1734,8 @@ input:focus {
         width: 100%;
     }
     .submit-container {
-        padding: 2rem;
+        flex: 1;
+        order: 2
     }
     .switch-text {
         font-size: 6rem;
