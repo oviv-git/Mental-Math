@@ -665,36 +665,37 @@ function startGame() {
     submitButton.addEventListener('click', function() {
 
         let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
-        let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
         
         // level means what level the user is in that specific area of math
         // var questions = generateQuestions(types, amount);
         // let questions = activeSlide.querySelector('input').value
         
-        switch (currentMode) {
-            case 'vanilla':
-                vanillaMode(activeSlide);
-                break;
-            case 'timed':
-                timedMode(activeSlide);
-                break;
-            case 'choice':
-                choiceMode(activeSlide);
-                break;
-            case 'sudden':
-                suddenMode(activeSlide);
-                break;
-            default:
-                console.log('invalid mode')
-                break;
-        }
+        gameLogic(activeSlide);
     });
 }
 
-async function vanillaMode(activeSlide) {
+async function gameLogic(activeSlide) {
+
+    let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
     let switchboardState = JSON.stringify(getSwitchboardState());
-    let questionAmount = activeSlide.querySelector('input').value;
+
+    let gameResults = []
     
+    let questionAmount = activeSlide.querySelector('input').value;
+    let timer = 0;
+    let shouldEndQuestions = false;
+
+    
+
+    console.log(questionAmount, timer)
+    // switch (currentMode) {
+    //     case 'vanilla':
+    //         let questionAmount = activeSlide.querySelector('input').value;
+    //     case 'timed':
+    //         let timer = activeSlide.querySelector('input').value;
+    // }
+    
+    // Array which stores the game results to send back to app.py
     let generatedQuestions = await generateQuestions(switchboardState, questionAmount)
     
     switchHomeTabs('game-tab');
@@ -706,54 +707,66 @@ async function vanillaMode(activeSlide) {
     const result = document.getElementById('input-result')
     const submitButton = document.getElementById('question-submit-button')
 
-    // Array which stores the game results to send back to app.py
-    let gameResults = []
-    // let gameStartTime = new Date();
-
+    // If the current game mode is timed or sudden death
+    if (activeSlide.querySelector('input').classList.contains('timer')) {
+        timer = questionAmount * 1000;
+        setTimeout(function() {
+            shouldEndQuestions = true;
+            result.value = 0;
+            submitButton.click();
+        }, timer);
+    }
+    
     var correct_answers = 0;
     for (let i = 0; i < generatedQuestions.length; i++) {
-        let question = generatedQuestions[i];
-        console.log(question)
+        while (shouldEndQuestions == false) {
 
-        let questionStartTime = new Date();
+            console.log(shouldEndQuestions)
 
-        operand1.innerHTML = question['operand_1'];
-        operand2.innerHTML = question['operand_2']; 
-        operator.innerHTML = question['operator']
+            let question = generatedQuestions[i];
 
-        let userSubmission = await gameInput();
+            let questionStartTime = new Date();
 
-        // Question can not be accidently submitted while the input field is empty 
-        while (result.value.length == 0) {
+            operand1.innerHTML = question['operand_1'];
+            operand2.innerHTML = question['operand_2']; 
+            operator.innerHTML = question['operator']
+
             let userSubmission = await gameInput();
-             
-            if (result.value.length != 0) {
+
+            // Question can not be accidently submitted while the input field is empty 
+            while (result.value.length == 0) {
+                let userSubmission = await gameInput();
+                
+                if (result.value.length != 0) {
+                    continue;
+                }
+            }
+
+            // userSubmission becomes true gameInput gets a response above
+            if (userSubmission === true) {
+                triggerAnimation(submitButton, 'active', 100);
+
+                let questionEndTime = new Date();
+                let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
+
+                if (result.value == question['result']) {
+                    correct_answers++;
+                    gameResults.push({'correct': true, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed,
+                                    'difficulty': question['difficulty'], 'level': question['level']})
+                } else {
+                    gameResults.push({'correct': false, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed})
+                }
+                
+                result.value = '';
                 continue;
             }
+            console.log(gameResults)
         }
-
-        // userSubmission becomes true gameInput gets a response above
-        if (userSubmission === true) {
-            triggerAnimation(submitButton, 'active', 100);
-
-            let questionEndTime = new Date();
-            let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
-
-            if (result.value == question['result']) {
-                correct_answers++;
-                gameResults.push({'correct': true, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed,
-                                  'difficulty': question['difficulty'], 'level': question['level']})
-            } else {
-                gameResults.push({'correct': false, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed})
-            }
-            
-            result.value = '';
-            continue;
-        }
-        console.log(gameResults)
     }
     // AJAX request to send results and return stats while also storing results from a completed game
     // potentially a seperate function just for successfully ending a game
+
+    
     
     switchHomeTabs('home-tab');
     // console.log(generatedQuestions, gameResults)
@@ -838,6 +851,10 @@ async function recordResults(results) {
     .catch(function(error) {
         throw error
     })
+}
+
+function successfullyFinishGame(gameResults, gameMode) {
+    console.log(gameResults, gameMode)
 }
 
 /** 

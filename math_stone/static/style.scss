@@ -1103,6 +1103,7 @@ form {
     display: flex;
     padding: 1rem 1rem 0rem 1rem;
     flex: 4;
+    align-items: center;
 }
 .play-container-bottom {
     height: 100%;
@@ -1191,13 +1192,33 @@ form {
 .results-container {
     overflow: hidden;
     display: flex;
-    height: 90%;
+    height: 80%;
     margin: 1rem;
     flex: 4;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     vertical-align: middle;
     border-radius: 2rem;
     box-shadow: inset 0px 0px 0px 10px white;
+
+    .last-game-results {
+        flex: 2;
+        width: 100%;
+        background: #73a576;
+    }
+
+    .levels-container {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        flex: 4;
+        
+        .math-type {
+            background: #16531a;
+            height: 100%;
+            width: 100%;;
+        }
+    }
 }
 
 .mode-select-container {
@@ -1518,7 +1539,7 @@ form {
     align-items: right;
     font-family: 'Open Sans', sans-serif;
     transform: scale(4);
-    font-size: 1.2rem;
+    font-size: 1rem;
     top: 35%;
     height: 16%;
     width: 6%;
