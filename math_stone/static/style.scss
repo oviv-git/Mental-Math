@@ -6,10 +6,8 @@ $default-dark: #222;
 $default-success: rgb(70, 170, 121);
 $default-error: rgb(194, 76, 76);
 $top-shadow: 0rem -0.2rem 2rem;
-$blur-shadow: 0rem .6em .4rem;
-// $vanilla-mode: #29784f;
-// $vanilla-mode: #367a31;
-// $vanilla-mode: #494887;
+$blur-shadow: 0rem 1.2em .8rem;
+
 $vanilla-mode: #3f6d96;
 $timed-mode: #615b9c;
 $choice-mode: #2d8471;
@@ -21,15 +19,6 @@ $sudden-mode: #8e3c47;
 // $choice-mode: #236a66;
 // $sudden-mode: #8e3c47;
 
-
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 900,
-  'GRAD' 0,
-  'opsz' 200
-}
 html
 {
     scroll-behavior: smooth;
@@ -161,7 +150,7 @@ html.light {
                     .switch-button {
                         color: lighten(saturate($vanilla-mode, 20%), 50%);
                         background: lighten(saturate($vanilla-mode, 5%), 20%);
-                        box-shadow: lighten($vanilla-mode, 5%) 0rem 0.4rem 0rem;
+                        box-shadow: lighten($vanilla-mode, 10%) 0rem 0.4rem 0rem;
 
                     }
                 }
@@ -173,7 +162,7 @@ html.light {
                     .switch-button {
                         color: lighten(saturate($timed-mode, 20%), 40%);
                         background: lighten(saturate($timed-mode, 5%), 20%);
-                        box-shadow: lighten($timed-mode, 5%) 0rem 0.4rem 0rem;
+                        box-shadow: lighten($timed-mode, 10%) 0rem 0.4rem 0rem;
                     }
                 }
             }
@@ -183,8 +172,8 @@ html.light {
                 &.active {
                     .switch-button {
                         color: lighten(saturate($choice-mode, 20%), 55%);
-                        background: lighten(saturate($choice-mode, 5%), 20%);
-                        box-shadow: lighten($choice-mode, 5%) 0rem 0.4rem 0rem;
+                        background: lighten($choice-mode, 10%);
+                        box-shadow: $choice-mode 0rem 0.4rem 0rem;
                     }
                 }
             }
@@ -195,18 +184,17 @@ html.light {
                     .switch-button {
                         color: lighten(saturate($sudden-mode, 20%), 50%);
                         background: lighten(saturate($sudden-mode, 5%), 20%);
-                        box-shadow: lighten($sudden-mode, 5%) 0rem 0.4rem 0rem;
+                        box-shadow: lighten($sudden-mode, 10%) 0rem 0.4rem 0rem;
                     }
                 }
             }
         }
     }
-    // cp1 - light
     .swiper-slide {
         background: transparent;
 
         .game-mode {
-            box-shadow: $blur-shadow lighten($default-dark, 20%);
+            box-shadow: $blur-shadow lighten($default-dark, 35%);
 
              &.vanilla {
                 background: lighten($vanilla-mode, 45%);
@@ -290,17 +278,17 @@ html.light {
             }
             &.choice {
                 background: lighten($choice-mode, 50%);
-                color: lighten($choice-mode, 10%);
+                color: $choice-mode;
 
                 .settings {
                     color: lighten($choice-mode, 5%);
 
                     .toggle-button {
-                        background: lighten($choice-mode, 40%);
-                        box-shadow: 0rem .6rem 0rem lighten($choice-mode, 30%);
+                        background: lighten($choice-mode, 30%);
+                        box-shadow: 0rem .6rem 0rem lighten($choice-mode, 20%);
 
                         &.active {
-                            background: lighten(saturate($choice-mode, 5%), 20%);
+                            background: lighten($choice-mode, 10%);
                             color: lighten(saturate($choice-mode, 20%), 50%);
                         }
                     }
@@ -329,9 +317,9 @@ html.light {
                     }
                 }
                 .settings-footer {
-                    background: lighten(saturate($choice-mode, 5%), 20%);
+                    background: lighten($choice-mode, 10%);
                     border-top: .6rem solid lighten(saturate($choice-mode, 5%), 55%);
-                    border-bottom: .5rem solid lighten($choice-mode, 5%);
+                    border-bottom: .5rem solid $choice-mode;
                     color: lighten(saturate($choice-mode, 20%), 55%);
                 }
             }
@@ -384,10 +372,63 @@ html.light {
             }
         }
     }
+    .results-container {
+        border-bottom: .5rem solid transparent;
+        box-shadow: $blur-shadow $default-dark;
+    
+        .last-game-results {
+            flex: 8;
+            width: 100%;
+            background: #b9b9b9;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+    
+            .results-row {
+                padding: 0rem 1rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                flex: 1;
+            }
+            
+            :nth-child(even) {
+                background: #efefef;
+            }
+        }
+    
+        .levels-container {
+            .level-info-container {
+                background: #2d8471;
+
+    
+                .level-info-top {
+                    background: #2d8471;
+                }
+                .level-info-bottom {
+                    .level-number {
+                        border: .3rem solid #222;
+                        color: #222;
+                        background: #e1e1e1;
+
+                    }
+                    .level-bar {
+                
+                        .filled-xp {
+                        }
+                    }
+                }
+            }
+        }
+    }
     .submit-container {
         .submit-button {
             background: darken($default-light, 15%);
-            box-shadow: 0rem 3rem 0rem darken($default-light, 25%);
+            box-shadow: 0rem 1.5rem 0rem darken($default-light, 25%);
+
+            &.active {
+                box-shadow: 0rem 0rem 0rem darken($default-light, 25%);
+            }
 
             .submit-button-text {
                 color: #8b8b8b;
@@ -397,8 +438,12 @@ html.light {
             .submit-button {
                 &.vanilla {
                     color: lighten(saturate($vanilla-mode, 20%), 50%);
-                    box-shadow: 0rem 3rem 0rem lighten($vanilla-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem lighten($vanilla-mode, 10%);
                     background: lighten(saturate($vanilla-mode, 5%), 20%);
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem lighten($vanilla-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($vanilla-mode, 20%), 50%);
@@ -406,8 +451,12 @@ html.light {
                 }
                 &.timed {
                     color: lighten(saturate($timed-mode, 20%), 50%);
-                    box-shadow: 0rem 3rem 0rem lighten($timed-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem lighten($timed-mode, 10%);
                     background: lighten(saturate($timed-mode, 5%), 20%);
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem lighten($timed-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($timed-mode, 20%), 45%);
@@ -415,8 +464,12 @@ html.light {
                 }
                 &.choice {
                     color: lighten(saturate($choice-mode, 20%), 50%);
-                    box-shadow: 0rem 3rem 0rem lighten($choice-mode, 10%);
-                    background: lighten(saturate($choice-mode, 5%), 20%);
+                    box-shadow: 0rem 1.5rem 0rem $choice-mode;
+                    background: lighten($choice-mode, 10%);
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem $choice-mode;
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($choice-mode, 20%), 50%);
@@ -424,8 +477,12 @@ html.light {
                 }
                 &.sudden {
                     color: lighten(saturate($sudden-mode, 20%), 50%);
-                    box-shadow: 0rem 3rem 0rem lighten($sudden-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem lighten($sudden-mode, 10%);
                     background: lighten(saturate($sudden-mode, 5%), 20%);
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem lighten($sudden-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($sudden-mode, 20%), 50%);
@@ -435,18 +492,18 @@ html.light {
         }
     }
     .question-container {
-        border: .15rem solid darken($default-light, 20%);
+        border: .3rem solid darken($default-light, 20%);
         color: $default-dark;
 
         .question-row {
             &.result {
                 input[type="number"] {
                     color: $default-dark;
-                    border-top: .15rem solid darken($default-light, 20%);
+                    border-top: .3rem solid darken($default-light, 20%);
                 }
             }
         }
-        button {
+        .question-submit-btn {
             background: $main-cyan-light;
             color: $default-dark;
 
@@ -595,7 +652,7 @@ html.dark {
                 &.active {
                     .switch-button {
                         background:  $timed-mode;
-                        color: lighten(saturate($timed-mode, 15%), 30%);
+                        color: lighten(saturate($timed-mode, 15%), 40%);
                         box-shadow: darken($timed-mode, 10%) 0rem 0.4rem 0rem;
                     }
                 }
@@ -624,7 +681,6 @@ html.dark {
             }
         }
     }
-    // cp1 - dark
     .swiper-slide {
         background: transparent;
 
@@ -662,14 +718,12 @@ html.dark {
                 }
                 .settings-footer {
                     background:  $vanilla-mode;
-                    // border-color: #F3E5AB;
-                    // color: #F3E5AB;
                     border-top: .6rem solid lighten($vanilla-mode, 15%);
                     border-bottom: .5rem solid darken($vanilla-mode, 10%);
                 }
             }
             &.timed {
-                background: desaturate(darken($timed-mode, 10%), 5%);
+                background: desaturate(darken($timed-mode, 15%), 5%);
                 color: lighten(saturate($timed-mode, 15%), 30%);
 
                 .settings {
@@ -728,7 +782,7 @@ html.dark {
                             }
 
                             &::-moz-range-track {
-                                background: lighten($choice-mode, 10%);
+                                background: $choice-mode;
                             }
 
                             &::-webkit-slider-thumb {
@@ -799,21 +853,14 @@ html.dark {
             }
         }
     }
-    .mode-select-container {
-        overflow: hidden;
-        background: transparent;
-        display: flex;
-        margin: 1rem;
-        flex: 4;
-        justify-content: center;
-        vertical-align: middle;
-        border-radius: 1rem;
-        height: 90%;
-    }
     .submit-container {
         .submit-button {
             background: lighten($default-dark, 30%);
-            box-shadow: 0rem 3rem 0rem lighten($default-dark, 20%);
+            box-shadow: 0rem 1.5rem 0rem lighten($default-dark, 20%);
+
+            &.active {
+                box-shadow: 0rem 0rem 0rem lighten($default-dark, 20%);
+            }
 
             .submit-button-text {
                 color: darken($default-light, 25%);
@@ -822,32 +869,48 @@ html.dark {
         &.active {
             .submit-button {
                 &.vanilla {
-                    box-shadow: 0rem 3rem 0rem darken($vanilla-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($vanilla-mode, 10%);
                     background: $vanilla-mode;
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($vanilla-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($vanilla-mode, 15%), 30%);
                     }
                 }
                 &.timed {
-                    box-shadow: 0rem 3rem 0rem darken($timed-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($timed-mode, 10%);
                     background:  $timed-mode;
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($timed-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($timed-mode, 15%), 30%);
                     }
                 }
                 &.choice {
-                    box-shadow: 0rem 3rem 0rem darken($choice-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($choice-mode, 10%);
                     background:  $choice-mode;
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($choice-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($choice-mode, 15%), 30%);
                     }
                 }
                 &.sudden {
-                    box-shadow: 0rem 3rem 0rem darken($sudden-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($sudden-mode, 10%);
                     background:  $sudden-mode;
+
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($sudden-mode, 10%);
+                    }
 
                     .submit-button-text {
                         color: lighten(saturate($sudden-mode, 15%), 40%);
@@ -1027,7 +1090,6 @@ form {
     color: $main-cyan !important;
 }
 
-
 .modal {
     border-radius: 2rem;
     width: 60rem;
@@ -1060,6 +1122,10 @@ form {
         flex-direction: column;
         align-items: center;
         height: 100vh;
+
+        &#game-tab {
+            justify-content: start;
+        }
     }
 }
 .navbar {
@@ -1081,49 +1147,76 @@ form {
     margin-top: 4.5rem;
     display: flex;
     overflow: hidden;
-    flex-direction: column;
-    height: 85%;
-    width: 85%;
+    // flex-direction: column;
+    height: 80%;
+    width: 80%;
     border-radius: 2rem;
 }
 // Outdated
-// .play-container-left {
+// .play-container-top {
+    //     height: 100%;
+    //     display: flex;
+    //     padding: 1rem 1rem 0rem 1rem;
+    //     flex: 4;
+    //     align-items: center;
+    // }
+    // .play-container-bottom {
+        //     height: 100%;
 //     display: flex;
-//     flex-direction: column;
-//     width: 50%;
-//     flex: 1;
+//     justify-content: center;
+//     flex: 3;
+//     padding: 0rem 1rem 1rem 1rem;
 // }
-// .play-container-right {
-//     display: flex;
-//     width: 50%;
-//     flex: 1
-// }
-.play-container-top {
-    height: 100%;
-    display: flex;
-    padding: 1rem 1rem 0rem 1rem;
-    flex: 4;
-    align-items: center;
-}
-.play-container-bottom {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    flex: 3;
-    padding: 0rem 1rem 1rem 1rem;
-}
 
-/* Parent element to all the switches */
-.switchboard-container {
-    background: transparent;
+.play-container-left {
     display: flex;
-    justify-content: center;
-    text-align: center;
-    border-radius: 1rem;
-    padding: 0rem 0rem 1.5rem 0rem;
-    flex: 3;
-    margin-left: 3rem;
+    flex-direction: column;
+    width: 50%;
+    flex: 1;
+
+    .mode-select-container {
+        flex: 5;
+    }
+
+    .switchboard-container {
+        background: transparent;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        border-radius: 1rem;
+        padding: 0rem 2rem 1.5rem 2rem;
+        flex: 4;
+    }
 }
+.play-container-right {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    flex: 1;
+    margin: 1rem 1rem 1rem 0rem;
+
+    .results-container {
+        overflow: hidden;
+        display: flex;
+        margin: 1rem 1rem 2rem 1rem;
+        flex: 5;
+        flex-direction: column;
+        justify-content: space-between;
+        vertical-align: middle;
+        border-radius: 2rem;
+    }
+
+    .submit-container {
+        margin: 0rem 1rem 1rem 1rem;
+        flex: 1;
+        padding: 0rem 0rem 2rem 0rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/* Parent element to all the switches */
+
 /* pointer events:none on everything except set to :auto on the physical button div () */
 .switchboard-container * {
     pointer-events: none;
@@ -1135,178 +1228,212 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-.switch {
-    background: transparent;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0rem 1rem 1rem;
-    border: none;
-    height: 100%;
-    width: 100%;
-    pointer-events: auto;
-    cursor: grab;
 
-
-    .switch-button {
-        font-family: 'Heebo', sans-serif;
+    .switch {
+        background: transparent;
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        border-radius: 1rem;
-        vertical-align: middle;
+        padding: 0rem 1rem 1rem;
+        border: none;
+        height: 100%;
         width: 100%;
-        height: 90%;
-    }
-
-    &.active {
+        pointer-events: auto;
+        cursor: grab;
+    
         .switch-button {
-            transform: translateY(1rem);
-            position: relative;
-
-            // color: $default-light;
-            // text-shadow: $default-light 0rem 0rem 1rem;
-        }
-    }
-    &.large {
-        .switch-button {
+            font-family: 'Heebo', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            vertical-align: middle;
+            width: 100%;
             height: 90%;
-            box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+            overflow: hidden;
+    
+            .switch-text {
+                height: auto;
+                width: auto;
+                position: absolute;
+                font-size: 4rem;
+                transform: scale(2);
+            }
         }
-        &.active .switch-button {
-            box-shadow: 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
-            transform: translateY(1rem);
-            position: relative;
-            background: $main-cyan;
+    
+        &.active {
+            .switch-button {
+                transform: translateY(1rem);
+                position: relative;
+            }
+        }
+        &.large {
+            .switch-button {
+                height: 90%;
+                box-shadow: #3b3b3b 0rem 1.4rem 0rem;
+            }
+            &.active .switch-button {
+                box-shadow: 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
+                transform: translateY(1rem);
+                position: relative;
+                background: $main-cyan;
+            }
         }
     }
 }
-.switch-text {
-    height: auto;
-    width: auto;
-    position: absolute;
-    font-size: 10rem;
-}
+
+
 
 .results-container {
-    overflow: hidden;
-    display: flex;
-    height: 80%;
-    margin: 1rem;
-    flex: 4;
-    flex-direction: column;
-    justify-content: space-between;
-    vertical-align: middle;
-    border-radius: 2rem;
-    box-shadow: inset 0px 0px 0px 10px white;
+    border-bottom: .5rem solid transparent;
+    box-shadow: $blur-shadow $default-dark;
 
     .last-game-results {
-        flex: 2;
+        flex: 8;
         width: 100%;
         background: #73a576;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        .results-row {
+            padding: 0rem 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+        
+        :nth-child(even) {
+            background: #caf6cb;
+        }
     }
 
     .levels-container {
         display: flex;
         justify-content: space-evenly;
         width: 100%;
-        flex: 4;
+        flex: 5;
         
-        .math-type {
-            background: #16531a;
+        .level-info-container {
+            display: flex;
+            flex-direction: column;
+            background: #2d8471;
             height: 100%;
-            width: 100%;;
+            width: 100%;
+
+            .level-info-top {
+                display: flex;
+                justify-content: center;
+                background: #2d8471;
+                flex: 5;
+                align-items: center;
+
+                .level-text {
+                    transform: scale(4);
+                    font-size: 2rem;
+                    font-family: 'Heebo', sans-serif;
+                }
+                
+            }
+            .level-info-bottom {
+                position: relative;
+                flex: 1.4;
+                display: flex;
+                align-items: center;
+                overflow: hidden;
+                margin: 0rem .5rem .5rem .5rem;
+                border-radius: 2rem;
+                // border: .3rem solid #222;
+                // outline: .3rem solid #222;
+
+                .level-number {
+                    border: .3rem solid #222;
+                    z-index: 2;
+                    position: absolute;
+                    color: #222;
+                    height: 100%;
+                    width: 30%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: #e1e1e1;
+                    border-radius: 100%;
+                    z-index: 2;
+                    
+                    p {
+                        font-size: 1.5rem;
+                        font-weight: 500;
+                    }
+                }
+                .level-bar {
+                    border: .3rem solid #222 ;
+
+                    flex: 1;
+                    height: 100%;
+                    width: 100%;
+                    // padding: .3rem .4rem .3rem 0rem;
+                    background: $default-dark;
+                    display: flex;
+                    justify-content: flex-start;
+                    border-radius: 1rem 1rem 1rem 1rem;
+                    overflow: hidden;
+
+                    
+                    .filled-xp {
+                        position: relative;
+                        background: greenyellow;
+                        border-radius: 0rem 1rem 1rem 0rem;
+                        width: 0%;
+                        transition: all 3s;
+                    }
+                }
+            }
         }
     }
 }
 
-.mode-select-container {
-    overflow: hidden;
-    background: transparent;
-    display: flex;
-    margin: 1rem;
-    flex: 4;
-    justify-content: center;
-    vertical-align: middle;
-    border-radius: 1rem;
-    height: 90%;
-}
-.submit-container {
-    flex: 4;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
+.submit-container {
     .submit-button {
-        transition: all .5s;
+        transition: all .5s !important;
         cursor: pointer;
         background: grey;
         border-radius: 2rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 80%;
-        height: 40%;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
-        // transform: translateY(4rem);
-        .submit-button-cover {
-            height: 85%;
-            border-radius: 1.5rem;
+
+        &.active {
+            transition: all .3s !important;
+            transform: translateY(1.5rem);
         }
+
         .submit-button-text {
             transition: color 1s;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            transform: scale(3);
         }
     }
 
     &.active {
         .submit-button {
             transition: background .5s, box-shadow .5s;
-            // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            // background-size: 800% 800%;
-            // animation: gradient 15s ease infinite;
-            // background-clip: border-box;
-            // box-shadow: 0rem 3rem 0rem black;
 
             .submit-button-text {
                 transition: color .5s;
-                // background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-                // background-size: 800% 800%;
-                // background-clip: text;
+
             }
         }
     }
 }
 
-.submit-button-cover {
-    border-radius: 4rem;
-    height: 87%;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    overflow: clip;
-
-}
-.submit-button-text {
-    position: relative;
-    background: linear-gradient(-45deg,
-        lighten(saturate($vanilla-mode, 25%), 25%),
-        lighten(saturate($timed-mode, 25%), 25%),
-        lighten(saturate($choice-mode, 25%), 25%),
-        lighten(saturate($sudden-mode, 25%), 25%));
-    background-size: 800% 800%;
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    animation: gradient 15s ease infinite;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
-    font-size: 4rem;
-    transform: scale(2);
-}
 .swiper {
     width: 100%;
     height: 100%;
@@ -1315,9 +1442,6 @@ form {
         width: 100%;
     }
 }
-// cp1
-
-// checkpoint3
 
 .swiper-slide {
     display: flex;
@@ -1327,7 +1451,7 @@ form {
     width: 60%;
 
     .game-mode {
-        height: 90%;
+        height: 85%;
         width: 90%;
         border-radius: 2rem;
         display: flex;
@@ -1392,6 +1516,7 @@ form {
                         justify-content: center;
                         height: 100%;
                         width: 80%;
+                        overflow: hidden;
 
                         :first-child {
                             border-radius: 1.5rem 0rem 0rem 1.5rem;
@@ -1441,8 +1566,8 @@ form {
                     outline: none;
                     overflow: hidden;
                     border: none;
-                    border-radius: 16px;
-                    height: 2rem;
+                    border-radius: 32px;
+                    height: 2.9rem;
 
                     &:focus {
                         outline: none;
@@ -1459,13 +1584,13 @@ form {
                         // }
                     }
                     &::-webkit-slider-runnable-track {
-                        height: 2rem;
+                        height: 3rem;
                         background: #29ff4c;
                         border-radius: 16px;
                     }
 
                     &::-moz-range-track {
-                        height: 2rem;
+                        height: 3rem;
                         background: #16fa25;
                         border-radius: 16px;
                     }
@@ -1473,8 +1598,8 @@ form {
                     &::-webkit-slider-thumb {
                         -webkit-appearance: none;
                         appearance: none;
-                        height: 2rem;
-                        width: 2rem;
+                        height: 3rem;
+                        width: 3rem;
                         border-radius: 50%;
                         border: .5rem solid #f50;
                         box-shadow: -415px 0 0 400px #f50;
@@ -1498,13 +1623,6 @@ form {
 
                 }
             }
-            .material-symbols-outlined {
-                margin-left: 1rem;
-                font-size: 4rem;
-                position: absolute;
-                top: 10%;
-                left: 83%;
-            }
         }
         .settings-footer {
             cursor: grab;
@@ -1523,26 +1641,94 @@ form {
             border-bottom: .5rem solid transparent;
 
             p {
-                font-size: 4rem;
+                font-size: 5rem;
                 font-family: 'Heebo', sans-serif;
                 font-weight: 900;
+            }
+            .material-symbols-outlined {
+                position: absolute;
+                left: 8%;
+                font-variation-settings:
+                    'FILL' 1,
+                    'wght' 900,
+                    'GRAD' 0,
+                    'opsz' 600;
+                font-size: 4rem;
+
+                &.results {
+                    font-size: 3rem;
+                }
+
+                .tooltip {
+                    overflow: visible;
+                    position: fixed;
+                    top: 2rem;
+                    margin: 0rem 2rem 2rem 2rem;
+                    display: none;
+                    font-family: 'Heebo', sans-serif;
+                    width: 40rem;
+                    height: 18rem;
+                    background: #3b7b91;
+                    font-size: 1rem;
+                }
+
+                &:hover {
+                    .tooltip {
+                        display: block;
+                    }
+                }
             }
         }
     }
 }
 
+.game-timer-container {
+    border: solid .4rem black;
+    margin: 2rem 0rem 0rem 0rem;
+    height: 8%;
+    width: 36%;
+    border-radius: 3rem;
+    overflow: hidden;
+    display: block;
+    
+    .game-timer {
+        transition: all 20s;
+        height: 100%;
+        width: 0%;
+        background: red;
+
+        &.active {
+            transition: width 20s;
+            width: 80%;
+        }
+    }
+}
+
+.question-timer-container {
+    border: solid .4rem black;
+    margin: 1.5rem 0rem 1rem 0rem;
+    height: 6%;
+    width: 26%;
+    border-radius: 3rem;
+    overflow: hidden;
+    display: block;
+    
+    .question-timer {
+        height: 100%;
+        width: 100%;
+        background: red;
+    }
+}
+
+
 .question-container {
-    border-radius: .4rem;
-    position: absolute;
+    border-radius: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: right;
     font-family: 'Open Sans', sans-serif;
-    transform: scale(4);
-    font-size: 1rem;
-    top: 35%;
-    height: 16%;
-    width: 6%;
+    font-size: 4rem;
+    height: 60%;
+    width: 24%;
     overflow: hidden;
     
     // Removes the arrows that come default with input[type='number']
@@ -1558,11 +1744,11 @@ form {
 
         &.operand {
             justify-content: right;
-            padding: 0rem 0.6rem;
+            padding: 0rem 1.5rem;
         }
         &.operator {
             justify-content: space-between;
-            padding: 0rem 0.6rem;
+            padding: 0rem 1.5rem;
         }
         .question-text {
             margin: 0;
@@ -1576,6 +1762,7 @@ form {
         }
         &.result {
             margin: 0rem;
+            padding: 0rem;
             // padding: 0rem 1rem;
             // background: rgba(0, 0, 0 ,0.2);
             // border: 0.2rem solid rgba(0, 0, 0, 0.4);
@@ -1583,10 +1770,10 @@ form {
             // border-radius: .5rem .5rem 0rem 0rem;
 
             input[type="number"] {
-                padding: 0rem .5rem;
-                font-size: 1.2rem;
+                font-size: 4rem;
                 height: 100%;
                 margin: 0;
+                padding: 0rem 1.5rem;
                 font-family: 'Open Sans', sans-serif;
                 // font-size: 1rem;
                 caret-color: transparent;
@@ -1604,20 +1791,27 @@ form {
                 }
             }
         }
+
+        &.number-input {
+            display: none;
+        }
         &.submit {
             margin: 0rem;
             margin: 0;
             justify-content: center;
 
-            button {
+            .question-submit-btn {
                 height: 100%;
                 width: 100%;
                 border: none;
-                transition: all .01s;
+                transition: all .1s;
 
-                &.active {
-                    transition: all .01s;
-
+                &.correct {
+                    transition: all .1s;
+                    background: rgb(126, 218, 128);
+                }
+                &.incorrect {
+                    background: rgb(210, 96, 96);
                 }
             }
         }
@@ -1678,6 +1872,7 @@ form {
             border: 0;
         }
     }
+
     .section-container {
         flex-direction: column;
     }
@@ -1712,47 +1907,149 @@ form {
         font-size: 4vw;
     }
     .play-container {
+        flex-direction: column;
         margin-top: 0;
         padding: 0;
         border-radius: 0;
         width: 100%;
         height: 100%;
         border: 0;
+
+        .play-container-left {
+            flex: 2;
+            width: 100%;
+            margin: 0;
+
+            .switchboard-container {
+                height: 50%;
+                margin: 0rem;
+                padding: 0rem;
+
+                .switch {
+
+                    &.large {
+                        width: 50%;
+                    }
+                }
+            }
+        }
+        .play-container-right {
+            flex: 4;
+            width: 100%;
+            margin: 0;
+        }
     }
-    .play-container-top {
-        border-radius: 0;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        height: 80%;
-        padding: 0rem;
-    }
-    .results-container {
-        order: 1
-    }
+
     .mode-select-container {
-        order: 2
+        height: 30% !important;
+        order: 1;
+        flex: 1;
     }
-    .play-container-bottom {
-        display: flex;
-        flex-direction: column;
-        padding: 0rem;
-    }
+    
     .switchboard-container {
         display: flex;
+        flex: 1;
         order: 1;
         border-radius: 0;
         height: 100%;
-        margin: 0rem;
+
+        .switch-column {
+            flex-direction: row;
+        }
     }
-    .submit-button-text {
-        font-size: 2rem;
-        transform: scale(3);
-    }
-    .mode-select-container {
-        margin: 0;
-        height: 100%;
+
+    .swiper {
         width: 100%;
+        height: 100%;
+        &.mySwiper {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    
+    .swiper-slide {
+        align-items: start;
+
+        width: 100%;
+        height: 100%;
+
+        .game-mode {
+            border-radius: 0rem;
+            height: 100%;
+            width: 100%;
+
+            .settings-header {
+                font-size: .8rem;
+
+                
+                border-radius: 0rem;
+                .title-toggle {
+                    flex: 2
+                }
+    
+                .title-scroller {
+                    flex: 2
+                }
+            }
+            .settings {
+                .settings-container {
+
+
+                    &.scroller {
+                        flex: 2
+                    }
+    
+                    &.toggle {
+                        p {
+                        }
+    
+                        .buttons-container {
+                            :first-child {
+                            }
+    
+                            :last-child {
+                            }
+    
+                            .toggle-button {
+                                p {
+                                }
+                            }
+                        }
+                    }
+    
+                    input[type=range] {
+                        &::-webkit-slider-runnable-track {
+                        }
+    
+                        &::-moz-range-track {
+                        }
+    
+                        &::-webkit-slider-thumb {
+                        }
+    
+                        &::-moz-range-thumb {
+                        }
+                    }
+    
+                    label {
+                    }
+                }
+            }
+            .settings-footer {
+                border-radius: 0rem;
+
+                p {
+                }
+    
+                .material-symbols-outlined {
+                    &.results {
+                    }
+    
+                    .tooltip {
+                    }
+                }
+            }
+        }
     }
     .submit-container {
         flex: 1;
@@ -1760,6 +2057,74 @@ form {
     }
     .switch-text {
         font-size: 6rem;
+    }
+
+    .full-page.active#game-tab {
+        justify-content: start;
+    }
+    .question-container {
+        position: relative;
+        height: 80%;
+        width: 100%;
+        top: 0%;
+        border-radius: 0rem;
+        
+        .question-row {            
+            font-size: 4rem;
+            padding: 0rem 3rem; 
+
+
+            &.operand {
+                justify-content: right;
+                padding: 0rem 2rem;
+            }
+            &.operator {
+                justify-content: space-between;
+                padding: 0rem 2rem;
+            }
+            &.result {
+                input[type="number"] {
+                    padding: 0rem 2rem; 
+                    font-size: 4rem;
+                }
+            }
+            &.submit {
+                margin: 0rem;
+                padding: 0rem;
+            }
+
+            &.number-input {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                margin: 0;
+                padding: 0;
+
+               .number-row {
+                    flex: 1;
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                    text-align: center;
+                    margin: 0;
+                    padding: 0;
+
+                    .number {
+                        font-family: 'Open Sans', sans-serif;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex: 1;
+                        overflow: hidden;
+                        margin: 0;
+                        padding: 0;
+                         
+                    }
+                }
+            }
+            .question-text {
+            }
+        }
     }
 }
 // Keep this at the very end to ensure site loads before css

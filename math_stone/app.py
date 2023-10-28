@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience
+from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info
 from werkzeug.security import check_password_hash, generate_password_hash
 from database import Database
 from game import Game
@@ -132,6 +132,16 @@ def error_redirect():
         error_code = request.form.get('errorCode')
 
         return error(error_message, error_code)
+    
+
+@app.route('/get_user_levels', methods=['POST'])
+def get_user_levels():
+    user_id = session['user_id']
+    experience = get_user_experience(user_id)
+
+    level_info_list = generate_user_level_info(experience)
+
+    return jsonify(level_info_list)
 
 
 @app.route('/generate_questions', methods=['POST'])

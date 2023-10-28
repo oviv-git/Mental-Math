@@ -13,7 +13,7 @@
             <button id="dropdown-button" class="navbar-btn waves-effect dropdown dark-mode-toggle">dropdown</button>
         </div>
         <div class="play-container">
-            <div class="play-container-top">
+            <div class="play-container-left">
                 <div class="mode-select-container" id="mode-select">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
@@ -25,14 +25,17 @@
                                         </div>
                                     </div>
                                     <div class="settings">
-                                        <!-- <a class="btn tooltipped" data-position="right" data-tooltip="I am a tooltip">Hover me!</a> -->
                                         <div class="settings-container scroller">
                                             <input type="range" min="5" max="30" step="5" value="5" id="vanilla-questions" name="vanilla-questions">
                                         </div>
                                     </div>
                                     <div class="settings-footer">
+                                        <span class="material-symbols-outlined">icecream
+                                            <div class="tooltip">
+                                                TODO
+                                            </div>
+                                        </span>
                                         <p>Vanilla</p>
-                                        <span class="material-symbols-outlined tooltipped" data-position="right" data-tooltip="I am a tooltip">icecream</span>
                                     </div>
                                 </div>
                             </div>
@@ -49,8 +52,12 @@
                                         </div>
                                     </div>
                                     <div class="settings-footer">
+                                        <span class="material-symbols-outlined">timer
+                                            <div class="tooltip">
+                                                TODO
+                                            </div>
+                                        </span>
                                         <p>Timed</p>
-                                        <span class="material-symbols-outlined">timer</span>
                                     </div>
                                 </div>
                             </div>
@@ -83,9 +90,12 @@
                                         </div>
                                     </div>
                                     <div class="settings-footer">
+                                        <span class="material-symbols-outlined">grid_view
+                                            <div class="tooltip">
+                                                TODO
+                                            </div>
+                                        </span>
                                         <p>Multiple Choice</p>
-                                        <span class="material-symbols-outlined">grid_view</span>
-
                                     </div>
                                 </div>
                             </div>
@@ -102,40 +112,18 @@
                                         </div>
                                     </div>
                                     <div class="settings-footer">
+                                        <span class="material-symbols-outlined">Skull
+                                            <div class="tooltip">
+                                                TODO
+                                            </div>
+                                        </span>
                                         <p>Sudden Death</p>
-                                        <span class="material-symbols-outlined">Skull</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-               
-                <div class="results-container" id="results">
-                    <div class="last-game-results">
-                        
-                    </div>
-                    <div class="levels-container">
-                        <div class="math-type" id="addition-results">
-                            
-                        </div>
-                        <div class="math-type">
-
-                        </div>
-                        <div class="math-type">
-
-                        </div>
-                        <div class="math-type">
-
-                        </div>
-                        <div class="math-type">
-
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="play-container-bottom">
                 <div class="switchboard-container vanilla" id="switchboard">
                     <div class="switch-column">
                         <div class="switch" id="addition">
@@ -169,11 +157,91 @@
                         </div>
                     </div>
                 </div>
+                
+            </div>
+            <div class="play-container-right">
+                <div class="results-container" id="results">
+                    <div class="last-game-results">
+                        <div class="results-row">
+                            <span class="material-symbols-outlined results">icecream</span>
+                        </div>
+                        <div class="results-row"></div>
+                        <div class="results-row"></div>
+                        <div class="results-row"></div>
+                        <div class="results-row"></div>
+                    </div>
+                    <div class="levels-container">
+                        <div class="level-info-container" id="addition-container">
+                            <div class="level-info-top">
+                                <p class=level-text>+</p>
+                            </div>
+                            <div class="level-info-bottom">
+                                <div class="level-number">
+                                    <p></p>
+                                </div>
+                                <div class="level-bar">
+                                    <span class="filled-xp"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-info-container" id="subtraction-container">
+                            <div class="level-info-top">
+                                <p class=level-text>−</p>
+                            </div>
+                            <div class="level-info-bottom">
+                                <div class="level-number">
+                                    <p></p>
+                                </div>
+                                <div class="level-bar">
+                                    <span class="filled-xp"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="level-info-container" id="multiplication-container">
+                            <div class="level-info-top">
+                                <p class=level-text>×</p>
+                            </div>
+                            <div class="level-info-bottom">
+                                <div class="level-number">
+                                    <p></p>
+                                </div>
+                                <div class="level-bar">
+                                    <span class="filled-xp"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-info-container" id="division-container">
+                            <div class="level-info-top">
+                                <p class=level-text>÷</p>
+                            </div>
+                            <div class="level-info-bottom">
+                                <div class="level-number">
+                                    <p></p>
+                                </div>
+                                <div class="level-bar">
+                                    <span class="filled-xp"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="level-info-container" id="exponential-container">
+                            <div class="level-info-top">
+                                <p class=level-text>x²</p>
+                            </div>
+                            <div class="level-info-bottom">
+                                <div class="level-number">
+                                    <p></p>
+                                </div>
+                                <div class="level-bar">
+                                    <span class="filled-xp"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="submit-container">
                     <div class="submit-button vanilla" id="submit-button">
-                        <span class="submit-button-cover">
-                            <p class="submit-button-text">PLAY</p>
-                        </span>
+                        <p class="submit-button-text">PLAY</p>
                     </div>
                 </div>
             </div>
@@ -181,6 +249,12 @@
     </div>
     <div class="full-page" id="game-tab">
         <!-- Js will insert an extra class depending on the question type -->
+        <div class="game-timer-container">
+            <div class="game-timer"></div>
+        </div>
+        <div class="question-timer-container">
+            <div class="question-timer"></div>
+        </div>
         <div class="question-container">
             <div class="question-row operand">
                 <p class="question-text" id="operand-1"></p>
@@ -189,9 +263,29 @@
                 <p class="question-text" id="operator"></p>
                 <p class="question-text" id="operand-2"></p>
             </div>
-            <!-- <span class="question-seperator"></span> -->
             <div class="question-row result">
                 <input type="number" class="question-result" id="input-result" autofocus>
+            </div>
+            <div class="question-row number-input">
+                <div class="number-row">
+                    <button class="number">1</button>
+                    <button class="number">2</button>
+                    <button class="number">3</button>
+                </div>
+                <div class="number-row">
+                    <button class="number">4</button>
+                    <button class="number">5</button>
+                    <button class="number">6</button>
+                </div>
+                <div class="number-row">
+                    <button class="number">7</button>
+                    <button class="number">8</button>
+                    <button class="number">9</button>
+                </div>
+                <div class="number-row">
+                    <button class="number" style="flex: 1">0</button>
+                    <button class="number" style="flex: 2.015">0</button>
+                </div>
             </div>
             <div class="question-row submit">
                 <button class="question-submit-btn" id="question-submit-button">SUBMIT</button>

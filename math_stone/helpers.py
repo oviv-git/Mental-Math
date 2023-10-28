@@ -16,6 +16,7 @@ from functools import wraps
 from flask import session, render_template, redirect
 from database import Database
 from werkzeug.security import check_password_hash
+import csv
 from math import exp
 
 
@@ -166,6 +167,55 @@ def generate_speed_multiplier(time, difficulty):
     print(multiplier)
 
     return multiplier
+
+def generate_user_level_info(experience_list):
+    """
+    Generates a list containing the users level and % to next level for each math type
+    so the experience bars in the results container can be updarted
+    
+    Arguements:
+        experience (list of ints): each index represents the users experience in a specific math type
+    
+    Return:
+    """
+
+    user_level_info = []    
+    with open('levels.csv', 'r+', encoding='utf-8') as csvfile:
+        levels_list = csv.reader(csvfile, delimiter=',')
+
+        for user_experience in experience_list:
+
+            last_level_experience = 0
+            last_level = 1
+
+            for level in levels_list:
+                if user_experience > int(level[1]):
+                    last_level = level[0]
+                    last_level_experience = int(level[1])
+                    continue
+
+                if user_experience <= int(level[1]):
+                    type_level = int(last_level)
+                    break
+            
+            percentage = round((user_experience - last_level_experience) /
+                               (int(level[1]) - last_level_experience) * 100)
+
+            # Since its impossible to devide by 0, manually set the % to 0 if the user is lvl 1 with 1 xp
+            # The xp bar on homepage should be empty(0%) even though the user technically has 1/1 (100%) xp
+            if type_level == 1 and percentage == 100:
+                percentage = 0
+
+            # Convert percentage into string to easily insert into an elements width in script.js
+            percentage = f'{percentage}%'
+            
+            user_level_info.append({'level': type_level, 'percentage': percentage})
+
+            csvfile.seek(0)
+
+    return user_level_info
+
+    
 
 
 def error(message, code=400):

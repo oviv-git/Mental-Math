@@ -1,6 +1,7 @@
 from random import randint, choice
 from csv import DictReader
 import sys
+import csv
 import json
 
 class Game:
@@ -25,31 +26,19 @@ class Game:
 
 
     # Converts the users experience into a level
-    def convert_experience(self, experience):
+    def convert_experience(self, user_experience):
         """
-        Converts the users experience into a level between 1-50 based on the algorithm below 
-        
-        Keyword arguments:
-            experience (int): Used to find what level the user is in that specific math type
-            
-        Return:
-            (int): The users current level in that specific math type
+        TODO
         """
-        
-        BASE_XP = 10
-        EXPONENT = 2.4
-        
-        for level in range(50):
-            last_xp = BASE_XP
-            
-            # So the level scaling doesn't go too high
-            if EXPONENT >= 1.15:
-                EXPONENT = round(EXPONENT - 0.1, 2)
-            
-            if experience < BASE_XP:
-                break
-            BASE_XP = round(BASE_XP * EXPONENT)
-        return level + 1
+        with open('levels.csv', 'r+', encoding="utf-8") as csvfile:
+            levels_list = csv.reader(csvfile, delimiter=',')
+
+            for level in levels_list:
+                # print(type(level[1]), type(user_experience))
+                if user_experience < int(level[1]):
+                    return int(level[0])
+                    
+        return 1
     
     
 
@@ -65,9 +54,13 @@ class Game:
         """
         MODIFIERS = [-20, -15, -10, -8, -6, -5, -4, -3, -2, -1, 0, 0, 0, 0, 0, 1, 2, 4]
 
+        # level = int(level)
+
         selected_modifier = choice(MODIFIERS)
         level += selected_modifier
         
+        # TODO : Clean up this code
+
         if level <= 5:
             return 1
         if level <= 15:
@@ -120,7 +113,6 @@ class Game:
 
         return {"operator": "-", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
                 "difficulty": difficulty, "level": level}
-
 
     # TODO
     def multiplication(self):

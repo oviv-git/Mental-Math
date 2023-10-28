@@ -12,6 +12,7 @@ function main() {
             loginFormSubmit();
             break;
         case '/home':
+            updateUserLevels();
             switchHomeTabs();
             loadSwitchboard();
             toggleColorScheme();
@@ -557,22 +558,41 @@ function initButtonsAnimation() {
 
 // Initializes the mode select cards
 function initModeSelect() {
-    const swiper = new Swiper('.swiper', {
-        grabCursor: true,
-        effect: "creative",
-        loop: true,
-        creativeEffect: {
-            prev: {
-            shadow: false,
-            translate: ["-120%", 0, -500],
-            },
-            next: {
-            shadow: false,
-            translate: ["120%", 0, -500],
-            },
-        },
-    });
+    let deviceMaxWidth = screen.width
+    var swiper = new Swiper();
 
+    if (deviceMaxWidth > 800) {
+        swiper = new Swiper('.swiper', {
+            grabCursor: true,
+            effect: "creative",
+            loop: true,
+            creativeEffect: {
+                prev: {
+                    shadow: false,
+                    translate: ["-120%", 0, -500],
+                },
+                next: {
+                    shadow: false,
+                    translate: ["120%", 0, -500],
+                },
+            },
+        });
+        
+    } else {
+        swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            loop: true,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+        });
+        
+    }
     swiper.on('transitionEnd', async function () {
         submitButtonActivation();
         changeButtonColors();
@@ -584,9 +604,9 @@ function updateSliderValues() {
     const settingsContainers = document.querySelectorAll('.game-mode');
 
     settingsContainers.forEach((element) => {
-        element.addEventListener('change', (event) => {
+        element.addEventListener('input', (event) => {
             let displayedValue = element.querySelector('span');
-
+            
             if (event.target.value != undefined) {
                 displayedValue.innerHTML = event.target.value;
             }
@@ -614,7 +634,7 @@ function modeSelectMultipleChoice() {
 
 // Gets called when a switch-button is pressed and when a swiper container changes
 function submitButtonActivation() {
-    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
+    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-active');
     const submitContainer = document.querySelector('.submit-container');
     let shouldActivate = submitButtonActivationCheck(activeSlide);
 
@@ -652,7 +672,7 @@ function changeButtonColors() {
     const switchboard = document.getElementById('switchboard');
     const submitButton = document.getElementById('submit-button');
 
-    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
+    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-active');
     let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
 
     switchboard.className = 'switchboard-container ' + currentMode;
@@ -661,19 +681,22 @@ function changeButtonColors() {
 
 function startGame() {
     const submitButton = document.getElementById('submit-button');
+    const submitContainer = document.querySelector('.submit-container')
 
     submitButton.addEventListener('click', function() {
 
-        let activeSlide = document.querySelector('.swiper-slide.swiper-slide-visible');
+        let activeSlide = document.querySelector('.swiper-slide.swiper-slide-active');
         
-        // level means what level the user is in that specific area of math
-        // var questions = generateQuestions(types, amount);
-        // let questions = activeSlide.querySelector('input').value
-        
-        gameLogic(activeSlide);
+        triggerAnimation(submitButton, 'active', 1200);
+
+        if (submitContainer.classList.contains('active')) {
+            gameLogic(activeSlide);
+        }
     });
 }
 
+
+// The activeSlide parameter denotes what game mode the user selected
 async function gameLogic(activeSlide) {
 
     let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
@@ -684,28 +707,21 @@ async function gameLogic(activeSlide) {
     let questionAmount = activeSlide.querySelector('input').value;
     let timer = 0;
     let shouldEndQuestions = false;
-
-    
-
-    console.log(questionAmount, timer)
-    // switch (currentMode) {
-    //     case 'vanilla':
-    //         let questionAmount = activeSlide.querySelector('input').value;
-    //     case 'timed':
-    //         let timer = activeSlide.querySelector('input').value;
-    // }
     
     // Array which stores the game results to send back to app.py
     let generatedQuestions = await generateQuestions(switchboardState, questionAmount)
+    console.log(generatedQuestions)
     
+
     switchHomeTabs('game-tab');
+    activateGameTimer(20, 'test');
 
     // All of the operand containers
     const operand1 = document.getElementById('operand-1');
     const operand2 = document.getElementById('operand-2');
     const operator = document.getElementById('operator');
-    const result = document.getElementById('input-result')
-    const submitButton = document.getElementById('question-submit-button')
+    const result = document.getElementById('input-result');
+    const submitButton = document.getElementById('question-submit-button');
 
     // If the current game mode is timed or sudden death
     if (activeSlide.querySelector('input').classList.contains('timer')) {
@@ -719,82 +735,67 @@ async function gameLogic(activeSlide) {
     
     var correct_answers = 0;
     for (let i = 0; i < generatedQuestions.length; i++) {
-        while (shouldEndQuestions == false) {
+                
+        let question = generatedQuestions[i];
+        
+        let questionStartTime = new Date();
+        
+        operand1.innerHTML = question['operand_1'];
+        operand2.innerHTML = question['operand_2']; 
+        operator.innerHTML = question['operator']
+        
+        let userSubmission = await gameInput();
 
-            console.log(shouldEndQuestions)
-
-            let question = generatedQuestions[i];
-
-            let questionStartTime = new Date();
-
-            operand1.innerHTML = question['operand_1'];
-            operand2.innerHTML = question['operand_2']; 
-            operator.innerHTML = question['operator']
-
+        // Question can not be accidently submitted while the input field is empty 
+        while (result.value.length == 0) {
             let userSubmission = await gameInput();
-
-            // Question can not be accidently submitted while the input field is empty 
-            while (result.value.length == 0) {
-                let userSubmission = await gameInput();
-                
-                if (result.value.length != 0) {
-                    continue;
-                }
-            }
-
-            // userSubmission becomes true gameInput gets a response above
-            if (userSubmission === true) {
-                triggerAnimation(submitButton, 'active', 100);
-
-                let questionEndTime = new Date();
-                let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
-
-                if (result.value == question['result']) {
-                    correct_answers++;
-                    gameResults.push({'correct': true, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed,
-                                    'difficulty': question['difficulty'], 'level': question['level']})
-                } else {
-                    gameResults.push({'correct': false, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed})
-                }
-                
-                result.value = '';
+            
+            if (result.value.length != 0) {
+                shouldEndQuestions = true
                 continue;
             }
-            console.log(gameResults)
         }
+
+        // userSubmission becomes true gameInput gets a response above
+        if (userSubmission === true) {
+
+            if (shouldEndQuestions == true) {
+                gameResults.pop()
+                break
+                // remove the last entry of gameResult and send it to app.py 
+            }
+
+            let questionEndTime = new Date();
+            let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
+
+            if (result.value == question['result']) {
+                triggerAnimation(submitButton, 'correct', 200);
+                correct_answers++;
+                gameResults.push({'correct': true, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed,
+                                'difficulty': question['difficulty'], 'level': question['level']})
+            } else {
+                triggerAnimation(submitButton, 'incorrect', 200);
+                gameResults.push({'correct': false, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed})
+            }
+            
+            result.value = '';
+            continue;
+        }
+    
     }
     // AJAX request to send results and return stats while also storing results from a completed game
     // potentially a seperate function just for successfully ending a game
-
     
-    
-    switchHomeTabs('home-tab');
     // console.log(generatedQuestions, gameResults)
     let experienceGained = await recordResults(JSON.stringify(gameResults));
     console.log(experienceGained)
+    successfullyFinishGame(gameResults, currentMode)
 
     // let gameEndTime = new Date();
     // let gameTimeElapsed = (gameEndTime - gameStartTime) / 1000;
     // console.log(gameTimeElapsed);
 }
 
-
-
-
-async function timedMode() {
-    console.log('case works2');
-
-}
-
-async function choiceMode() {
-    console.log('case works3');
-
-}
-
-async function suddenMode() {
-    console.log('case works4');
-
-}
 
 /**
  * AJAX request to get a jsonify string with all the questions and answers.
@@ -837,7 +838,7 @@ async function recordResults(results) {
             dataType: 'JSON',
             data: {'results': results},
             success: function(response) {
-                resolve(response)
+                resolve(response);
             },
             error: function(xhr, status, error) {
                 console.log('RECORD RESULTS - ERROR -', xhr, status, error);
@@ -854,16 +855,88 @@ async function recordResults(results) {
 }
 
 function successfullyFinishGame(gameResults, gameMode) {
+    switchHomeTabs('home-tab');
+    updateUserLevels();
     console.log(gameResults, gameMode)
 }
 
+/* 
+Starts the game timer on the game-tab when a game is started
+    @ para
+*/
+function activateGameTimer(length, direction) {
+/** 
+    Starts the game timer on the game-tab when a game is started
+    @param {number} length - The element that will receieve the class
+    @param {string} direction - The class that will be added to trigger the animation
+*/
+    const gameTimer = document.querySelector('.game-timer');
+
+    // The animation of the timer bar doesn't work if its outside of a setTimeout
+    setTimeout(function() {
+        gameTimer.classList.add('active');
+      }, 10);
+    
+    // gameTimer.style.background = 'blue';
+
+    console.log(length, direction, gameTimer)
+}
+
+
+async function updateUserLevels() {
+    let userLevels = await getUserLevels();
+    let levelInfoContainers = document.querySelectorAll('.level-info-container');
+    
+    for (let i = 0; i < levelInfoContainers.length; i++) {
+        let levelInfoContainer = levelInfoContainers[i];
+        let userLevel = userLevels[i]; 
+        
+        let levelNumber = levelInfoContainer.querySelector('.level-number p');
+        let xpBar = levelInfoContainer.querySelector('.filled-xp');
+
+        levelNumber.innerHTML = userLevel.level;
+        levelNumber.classList.add('fade-in');
+
+        xpBar.style.width = userLevel.percentage
+    }
+}
+
+
+async function getUserLevels() {
+/**
+ * AJAX request to get the users levels and % to next level when homepage loads
+ * and then to update the xp bars in the results container
+*/
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: 'get_user_levels',
+            method: 'POST', 
+            dataType: 'JSON',
+            success: function(response) {
+                resolve(response)
+            },
+            error: function(xhr, status, error) {
+                console.log('UPDATE USER LEVELS - ERROR -', xhr, status, error);
+                reject(error)
+            }
+        })
+    })
+    .then(function(response) {
+        return response
+    })
+    .catch(function(error) {
+        throw error
+    })
+}
+
+
+function triggerAnimation(element, animation, timeDelay) {
 /** 
  * Triggers animations when the user submits their answer
  * @param {object} element - The element that will receieve the class
  * @param {string} animation - The class that will be added to trigger the animation
  * @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset
 */
-function triggerAnimation(element, animation, timeDelay) {
 
     // console.log(element, animation, timeDelay)
     // console.log(typeof(element), typeof(animation), typeof(timeDelay))
