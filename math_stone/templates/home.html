@@ -9,8 +9,15 @@
         <div class="navbar">
             <button class="navbar-btn waves-effect active">Home</button>
             <button class="navbar-btn waves-effect">Profile</button>
-            <button class="navbar-btn waves-effect">Leaderboard</button>
-            <button id="dropdown-button" class="navbar-btn waves-effect dropdown dark-mode-toggle">dropdown</button>
+            <button id="dropdown-button" class="navbar-btn waves-effect">Menu</button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <button class="dropdown-menu-button"><p>Leaderboard</p></button>
+            <button class="dropdown-menu-button dark-mode-toggle"><p>Darkmode</p></button>
+            <button class="dropdown-menu-button"><p>Settings</p></button>
+            <form action="/logout" method="POST" id="logout-form" class="dropdown-menu-button">
+                <button id="logout-button"><p>Logout</p></button>
+            </form>
         </div>
         <div class="play-container">
             <div class="play-container-left">
@@ -157,23 +164,93 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
             <div class="play-container-right">
                 <div class="results-container" id="results">
                     <div class="last-game-results">
                         <div class="results-row">
-                            <span class="material-symbols-outlined results">icecream</span>
+                            <div><span class="material-symbols-outlined">menu</span></div>
+                            <div class="results"><p class="questions">#</p></div>
+                            <div class="results"><p class="percentage">%</p></div>
+                            <div class="results modes">
+                                <div class="modes-fornow"><p class="addition">+</p></div>
+                                <div class="modes-fornow"><p class="subtraction">−</p></div>
+                                <div class="modes-fornow"><p class="multiplication">×</p></div>
+                                <div class="modes-fornow"><p class="division">÷</p></div>
+                                <div class="modes-fornow"><p class="exponential">x²</p></div>
+                            </div>
+                            <div class="results"><p class="timer">Timer</p></div>
                         </div>
-                        <div class="results-row"></div>
-                        <div class="results-row"></div>
-                        <div class="results-row"></div>
-                        <div class="results-row"></div>
+                        <div class="results-row empty">
+                            <div><span class="material-symbols-outlined"></span></div>
+                            <div class="results"><p class="questions"></p></div>
+                            <div class="results"><p class="percentage"></p></div>
+                            <div class="results modes">
+                                <div class="modes-fornow"><p class="addition"></p></div>
+                                <div class="modes-fornow"><p class="subtraction"></p></div>
+                                <div class="modes-fornow"><p class="multiplication"></p></div>
+                                <div class="modes-fornow"><p class="division"></p></div>
+                                <div class="modes-fornow"><p class="exponential"></p></div>
+                            </div>
+                            <div class="results"><p class="timer"></p></div>
+                        </div>
+                        <div class="results-row empty">
+                            <div><span class="material-symbols-outlined"></span></div>
+                            <div class="results"><p class="questions"></p></div>
+                            <div class="results"><p class="percentage"></p></div>
+                            <div class="results modes">
+                                <div class="modes-fornow"><p class="addition"></p></div>
+                                <div class="modes-fornow"><p class="subtraction"></p></div>
+                                <div class="modes-fornow"><p class="multiplication"></p></div>
+                                <div class="modes-fornow"><p class="division"></p></div>
+                                <div class="modes-fornow"><p class="exponential"></p></div>
+                            </div>
+                            <div class="results"><p class="timer"></p></div>
+                        </div>
+                        <div class="results-row empty">
+                            <div><span class="material-symbols-outlined"></span></div>
+                            <div class="results"><p class="questions"></p></div>
+                            <div class="results"><p class="percentage"></p></div>
+                            <div class="results modes">
+                                <div class="modes-fornow"><p class="addition"></p></div>
+                                <div class="modes-fornow"><p class="subtraction"></p></div>
+                                <div class="modes-fornow"><p class="multiplication"></p></div>
+                                <div class="modes-fornow"><p class="division"></p></div>
+                                <div class="modes-fornow"><p class="exponential"></p></div>
+                            </div>
+                            <div class="results"><p class="timer"></p></div>
+                        </div>
+                        <div class="results-row empty">
+                            <div><span class="material-symbols-outlined"></span></div>
+                            <div class="results"><p class="questions"></p></div>
+                            <div class="results"><p class="percentage"></p></div>
+                            <div class="results modes">
+                                <div class="modes-fornow"><p class="addition"></p></div>
+                                <div class="modes-fornow"><p class="subtraction"></p></div>
+                                <div class="modes-fornow"><p class="multiplication"></p></div>
+                                <div class="modes-fornow"><p class="division"></p></div>
+                                <div class="modes-fornow"><p class="exponential"></p></div>
+                            </div>
+                            <div class="results"><p class="timer"></p></div>
+                        </div>
+                        <div class="results-row empty">
+                            <div><span class="material-symbols-outlined"></span></div>
+                            <div class="results"><p class="questions"></p></div>
+                            <div class="results"><p class="percentage"></p></div>
+                            <div class="results modes">
+                                <div class="modes-fornow"><p class="addition"></p></div>
+                                <div class="modes-fornow"><p class="subtraction"></p></div>
+                                <div class="modes-fornow"><p class="multiplication"></p></div>
+                                <div class="modes-fornow"><p class="division"></p></div>
+                                <div class="modes-fornow"><p class="exponential"></p></div>
+                            </div>
+                            <div class="results"><p class="timer"></p></div>
+                        </div>
                     </div>
                     <div class="levels-container">
                         <div class="level-info-container" id="addition-container">
                             <div class="level-info-top">
-                                <p class=level-text>+</p>
+                                <p class="level-text">+</p>
                             </div>
                             <div class="level-info-bottom">
                                 <div class="level-number">
@@ -186,7 +263,7 @@
                         </div>
                         <div class="level-info-container" id="subtraction-container">
                             <div class="level-info-top">
-                                <p class=level-text>−</p>
+                                <p class="level-text">−</p>
                             </div>
                             <div class="level-info-bottom">
                                 <div class="level-number">
@@ -200,7 +277,7 @@
                         </div>
                         <div class="level-info-container" id="multiplication-container">
                             <div class="level-info-top">
-                                <p class=level-text>×</p>
+                                <p class="level-text">×</p>
                             </div>
                             <div class="level-info-bottom">
                                 <div class="level-number">
@@ -213,7 +290,7 @@
                         </div>
                         <div class="level-info-container" id="division-container">
                             <div class="level-info-top">
-                                <p class=level-text>÷</p>
+                                <p class="level-text">÷</p>
                             </div>
                             <div class="level-info-bottom">
                                 <div class="level-number">
@@ -226,7 +303,7 @@
                         </div>
                         <div class="level-info-container" id="exponential-container">
                             <div class="level-info-top">
-                                <p class=level-text>x²</p>
+                                <p class="level-text exponential">x²</p>
                             </div>
                             <div class="level-info-bottom">
                                 <div class="level-number">
@@ -249,12 +326,8 @@
     </div>
     <div class="full-page" id="game-tab">
         <!-- Js will insert an extra class depending on the question type -->
-        <div class="game-timer-container">
-            <div class="game-timer"></div>
-        </div>
-        <div class="question-timer-container">
-            <div class="question-timer"></div>
-        </div>
+        <div class="game-progress-container"></div>
+        <div class="question-progress-container"></div>
         <div class="question-container">
             <div class="question-row operand">
                 <p class="question-text" id="operand-1"></p>

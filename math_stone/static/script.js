@@ -13,9 +13,11 @@ function main() {
             break;
         case '/home':
             updateUserLevels();
+            displayLastGamesPlayed();
             switchHomeTabs();
             loadSwitchboard();
             toggleColorScheme();
+            initDropdownMenu();
             toggleSwitchboard();
             initModeSelect();
             updateSliderValues();
@@ -142,6 +144,8 @@ function clearForm() {
 
 // Finds the session-information class and set the innerHTML to session.storage
 function displaySessionInformation() {
+    // TODO
+
     let message = sessionStorage.getItem('message');
     let messageType = sessionStorage.getItem('messageType')
     
@@ -150,8 +154,9 @@ function displaySessionInformation() {
     }
 }
 
-// messageType is success or failure
-function updateSesssionMessage(message, messageType) {
+// messageType is success or error
+function updateSessionMessage(message, messageType) {
+    // TODO BOTH HAVE TO BE STRINGS
     sessionStorage.setItem('message', message);
     sessionStorage.setItem('messageType', messageType);
     displaySessionInformation();
@@ -166,14 +171,13 @@ function loginFormSubmit() {
         e.preventDefault();
         var isValid = await loginFormCheck()
         if (isValid == true) {
-            updateSesssionMessage('Login Successful', 'success');
+            updateSessionMessage('Login Successful', 'success');
             loginForm.submit();
         }
     });
 }
 
 async function loginFormCheck() {
-
     var username = document.getElementById('username');
     var usernameErrorBox = document.getElementById('username-error');
     var usernameLabel = document.getElementById('username-label');
@@ -189,18 +193,10 @@ async function loginFormCheck() {
     }
 
     let isUsernameAvailable = await checkUsernameAvailability(username.value)
-        .then(function(available) {
-            if (!available) {
-                return true;
-            } else {
-                return ("That username isn't registered");
-            }
-        })
-        .catch(function(error) {
-            // Should redirect to the error page using javascript if it cant connect to app.py
-            console.log("error", error);
-        })
-
+    
+    if (isUsernameAvailable == false) {
+        isUsernameAvailable = "Username is not registered";
+    } 
     if (!errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)) {
         return false;
     }
@@ -210,7 +206,7 @@ async function loginFormCheck() {
             if (successful) {
                 return true;
             } else {
-                return ("Incorrect password")
+                return ("Login Unsuccessful")
             }
         })
         .catch(function(error) {
@@ -222,7 +218,7 @@ async function loginFormCheck() {
         password.dataset.attempts = unsuccessfulAttemptsLeft;
         if (password.dataset.attempts == 0) {
             password.dataset.attempts = 3;
-            updateSesssionMessage('Too many unsuccessful login attempts', 'error')
+            updateSessionMessage('Too many unsuccessful login attempts', 'error')
             clearForm();
         }
         return false;
@@ -236,10 +232,8 @@ function registerFormSubmit() {
     registerForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         let isValid = await registerFormCheck()
-        console.log(isValid)
         if (isValid == true) {
-            console.log('Why tho?')
-            updateSesssionMessage('Registration Successful', 'success')
+            updateSessionMessage('Registration Successful', 'success')
             registerForm.submit();
         }
     })
@@ -262,19 +256,12 @@ async function registerFormCheck() {
         return false;
     }
     isUsernameAvailable = await checkUsernameAvailability(username.value)
-        .then(function(available) {
-            if (available) {
-                return true;
-            } else {
-                return ('Username is not available');
-            }
-        })
-        .catch(function(error) {
-            console.log("error", error);
-        })
-    if (!errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)) {
+
+    if (isUsernameAvailable == true) {
+        isUsernameAvailable = "Username is already registered";
+        errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)
         return false;
-    }
+    } 
 
     if (!errorHandler(passwordBasicCheck(password.value), password, passwordErrorBox, passwordLabel)) {
         return false;
@@ -361,20 +348,27 @@ function errorHandler(errorMessage, input, inputErrorBox, inputLabel) {
 }
 
 // Sends AJAX request to check the availability of a username in app.py
-function checkUsernameAvailability(username) {
+async function checkUsernameAvailability(username) {
     return new Promise(function(resolve, reject) {
         $.ajax({
             url: 'check_username_availability',
             method: 'POST',
-            dataType: 'json',
+            dataType: 'JSON',
             data: {'username': username},
             success: function(response) {
-                resolve(response['available']);
+                resolve(response)
             },
             error: function(xhr, status, error) {
+                console.log('CHECK USERNAME AVAILABILITY - ERROR')
                 reject(error);
             }
         });
+    })
+    .then(function(response) {
+        return response
+    })
+    .catch(function(error) {
+        throw error
     });
 }
 
@@ -432,6 +426,86 @@ function switchHomeTabs(tab) {
             }
         });
     }
+}
+
+
+
+
+
+async function displayLastGamesPlayed() {
+    function activateMode(modeQuestions) {
+        if (modeQuestions != 0) {
+            return 'active';
+        } else {
+            return 'disabled';
+        }
+    }
+
+    const resultsContainer = document.querySelector('.results-container');
+    const resultsRows = resultsContainer.querySelectorAll('.results-row.empty');
+    
+    const iconMap = {'vanilla': 'icecream', 'timed': 'timer', 'choice': 'grid_view', 'sudden': 'skull'}
+    const lastGamesPlayed = await getLastGamesPlayed();
+
+    console.log(lastGamesPlayed)
+    
+    for (let i = 0; i < lastGamesPlayed.length; i++) {
+        let lastGamePlayed = lastGamesPlayed[i]
+        let resultsRow = resultsRows[i]
+
+        let iconContainer = resultsRow.querySelector('.material-symbols-outlined');
+        let questionsContainer = resultsRow.querySelector('.questions');
+        let percentageContainer = resultsRow.querySelector('.percentage');
+
+        let additionContainer = resultsRow.querySelector('.addition');
+        let subtractionContainer = resultsRow.querySelector('.subtraction');
+        let multiplicationContainer = resultsRow.querySelector('.multiplication');
+        let divisionContainer = resultsRow.querySelector('.division');
+        let exponentialContainer = resultsRow.querySelector('.exponential');
+
+        let timerContainer = resultsRow.querySelector('.timer');
+
+        iconContainer.innerHTML = iconMap[lastGamePlayed[0]];
+        questionsContainer.innerHTML = lastGamePlayed[1];
+        percentageContainer.innerHTML = (lastGamePlayed[2] / lastGamePlayed[1] * 100).toFixed(0) + '%';
+
+        additionContainer.innerHTML = lastGamePlayed[3];
+        subtractionContainer.innerHTML = lastGamePlayed[4];
+        multiplicationContainer.innerHTML = lastGamePlayed[5];
+        divisionContainer.innerHTML = lastGamePlayed[6];
+        exponentialContainer.innerHTML = lastGamePlayed[7];
+
+        // additionContainer.classList.add(activateMode(lastGamePlayed[3]));
+        // subtractionContainer.classList.add(activateMode(lastGamePlayed[4]));
+        // multiplicationContainer.classList.add(activateMode(lastGamePlayed[5]));
+        // divisionContainer.classList.add(activateMode(lastGamePlayed[6]));
+        // exponentialContainer.classList.add(activateMode(lastGamePlayed[7]));
+
+        timerContainer.innerHTML = lastGamePlayed[8] + 's';
+    }
+}
+
+async function getLastGamesPlayed() {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: '/get_last_games_played',
+            method: 'POST',
+            dataType: 'JSON',
+            success: function(response) {
+                resolve(response)
+            },
+            error: function(xhr, status, error) {
+                console.log('GET_LAST_GAMES_PLAYED - ERROR - ', xhr, status, error)
+                reject(error)
+            }
+        })
+    })
+    .then(function(response) {
+        return response
+    })
+    .catch(function(error) {
+        throw error
+    })
 }
 
 /**
@@ -556,6 +630,54 @@ function initButtonsAnimation() {
     })
 }
 
+function initDropdownMenu() {
+    const dropdownButton = document.getElementById('dropdown-button');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+
+    const dropdownMenuButtons = document.querySelectorAll('.dropdown-menu-button')
+    const numberOfButtons = dropdownMenuButtons.length
+
+    var dropdownMenuOpen = false
+
+    function closeDropDownMenu() {
+        dropdownMenuOpen = false;
+        dropdownMenu.style.display = 'none';
+    }
+
+    function clickOutsideOfMenu(event) {
+        console.log(event.target)
+        if (event.target == classList.contains(".dropdown-menu-button")) {
+            console.log('wut')
+        }
+        if (event.target == dropdownMenuButtons) {
+            console.log('wut2')
+        }
+
+    }
+
+    dropdownButton.addEventListener("click", () => {
+        if (dropdownMenuOpen == true) {
+            closeDropDownMenu();
+            
+        } else {
+            dropdownMenuOpen = true;
+            let buttonBounding = dropdownButton.getBoundingClientRect();
+
+            dropdownMenu.style.display = 'flex';
+            
+            dropdownMenu.style.top = buttonBounding.bottom + 'px';
+            dropdownMenu.style.left = buttonBounding.left + 'px';
+            
+            dropdownMenu.style.width = buttonBounding.width + 'px';
+            dropdownMenu.style.height = buttonBounding.height * numberOfButtons + 'px';
+
+            document.addEventListener("click", clickOutsideOfMenu);
+        }
+    })
+}
+
+
+
 // Initializes the mode select cards
 function initModeSelect() {
     let deviceMaxWidth = screen.width
@@ -613,6 +735,8 @@ function updateSliderValues() {
         });
     });
 }
+
+
 
 // Makes sure only one toggle button can be active at a time.
 function modeSelectMultipleChoice() {
@@ -701,21 +825,26 @@ async function gameLogic(activeSlide) {
 
     let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
     let switchboardState = JSON.stringify(getSwitchboardState());
+    
+    const gameProgressContainer = document.querySelector('.game-progress-container');
+
+    const questionProgressContainer = document.querySelector('.question-progress-container');
 
     let gameResults = []
+    gameResults.push({'gameMode': currentMode});
     
+    // On an activeSlide with a timer and no question amount assume 1 question per second
     let questionAmount = activeSlide.querySelector('input').value;
+
+    // Have to initialize timer here 
     let timer = 0;
     let shouldEndQuestions = false;
     
     // Array which stores the game results to send back to app.py
     let generatedQuestions = await generateQuestions(switchboardState, questionAmount)
-    console.log(generatedQuestions)
     
-
     switchHomeTabs('game-tab');
-    activateGameTimer(20, 'test');
-
+    
     // All of the operand containers
     const operand1 = document.getElementById('operand-1');
     const operand2 = document.getElementById('operand-2');
@@ -723,45 +852,47 @@ async function gameLogic(activeSlide) {
     const result = document.getElementById('input-result');
     const submitButton = document.getElementById('question-submit-button');
 
-    // If the current game mode is timed or sudden death
+    // This if statement covers all the gameplay for any timed gamemodes 
     if (activeSlide.querySelector('input').classList.contains('timer')) {
         timer = questionAmount * 1000;
+        activateTimerProgress(gameProgressContainer, timer);
+        
         setTimeout(function() {
             shouldEndQuestions = true;
             result.value = 0;
             submitButton.click();
         }, timer);
+    } else {
+        var questionProgressDivs = initQuestionProgress(gameProgressContainer, questionAmount)
     }
-    
+
+    let gameStartTime = new Date();
+
     var correct_answers = 0;
     for (let i = 0; i < generatedQuestions.length; i++) {
-                
+        result.value = '';
+
         let question = generatedQuestions[i];
-        
         let questionStartTime = new Date();
         
         operand1.innerHTML = question['operand_1'];
         operand2.innerHTML = question['operand_2']; 
-        operator.innerHTML = question['operator']
-        
-        let userSubmission = await gameInput();
+        operator.innerHTML = question['operator'];
+
+        let questionTimerTime = question['difficulty'] * 5 * 1000;
+        activateTimerProgress(questionProgressContainer, questionTimerTime, 'ease');
 
         // Question can not be accidently submitted while the input field is empty 
         while (result.value.length == 0) {
-            let userSubmission = await gameInput();
-            
-            if (result.value.length != 0) {
-                shouldEndQuestions = true
-                continue;
-            }
+            userSubmission = await gameInput();
         }
 
-        // userSubmission becomes true gameInput gets a response above
+        // userSubmission becomes true when gameInput gets a response above
         if (userSubmission === true) {
 
             if (shouldEndQuestions == true) {
-                gameResults.pop()
-                break
+                gameResults.pop();
+                break;
                 // remove the last entry of gameResult and send it to app.py 
             }
 
@@ -769,31 +900,69 @@ async function gameLogic(activeSlide) {
             let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
 
             if (result.value == question['result']) {
+                if (!activeSlide.querySelector('input').classList.contains('timer')) {
+                    // console.log(questionProgressDivs)
+                    activateQuestionProgress(questionProgressDivs[i], true);
+                }
+                
                 triggerAnimation(submitButton, 'correct', 200);
                 correct_answers++;
-                gameResults.push({'correct': true, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed,
-                                'difficulty': question['difficulty'], 'level': question['level']})
+                gameResults.push({'correct': true, 
+                                  'operator': question['operator'],
+                                  'timeElapsed': questionTimeElapsed,
+                                  'difficulty': question['difficulty'], 
+                                  'level': question['level']});
             } else {
+                if (!activeSlide.querySelector('input').classList.contains('timer')) {
+                    // console.log(questionProgressDivs)
+                    activateQuestionProgress(questionProgressDivs[i], false);
+                }
                 triggerAnimation(submitButton, 'incorrect', 200);
-                gameResults.push({'correct': false, 'operator': question['operator'], 'timeElapsed': questionTimeElapsed})
+                gameResults.push({'correct': false, 
+                                  'operator': question['operator'],
+                                  'timeElapsed': questionTimeElapsed})
+                
+                if (currentMode == 'sudden') {
+                    break;
+                }
             }
             
             result.value = '';
             continue;
         }
-    
     }
-    // AJAX request to send results and return stats while also storing results from a completed game
-    // potentially a seperate function just for successfully ending a game
+    result.value = ''
+
+    let gameEndTime = new Date();
+    let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
+    
+    // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+    // Used this to convert new Date() into something that can fit into the sql DATE type
+    let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     
     // console.log(generatedQuestions, gameResults)
-    let experienceGained = await recordResults(JSON.stringify(gameResults));
-    console.log(experienceGained)
-    successfullyFinishGame(gameResults, currentMode)
+    gameResults[0].gameTimer = gameTimeElapsed
+    gameResults[0].gameDate = gameTimeStamp
+    
+    
+    // AJAX request to send results and return stats while also saving results from a completed game
+    let resultsRecorded = await recordResults(JSON.stringify(gameResults));
+    console.log(resultsRecorded, 'p')
 
-    // let gameEndTime = new Date();
-    // let gameTimeElapsed = (gameEndTime - gameStartTime) / 1000;
-    // console.log(gameTimeElapsed);
+    successfullyFinishGame(gameResults, currentMode, resultsRecorded)
+}
+
+function successfullyFinishGame(gameResults, gameMode, resultsRecorded) {
+    if (resultsRecorded == true) {
+        updateSessionMessage('Game successfully recorded', 'success')
+    } else {
+        updateSessionMessage('Error recording game', 'error')
+        displaySessionInformation;
+    }
+
+    displayLastGamesPlayed();
+    updateUserLevels();
+    switchHomeTabs('home-tab');
 }
 
 
@@ -807,7 +976,7 @@ async function generateQuestions(types, amount) {
         $.ajax({
             url: '/generate_questions',
             method: 'POST',
-            dataType: 'json',
+            dataType: 'JSON',
             data: {'types': types, 'amount': amount},
             success: function(response) {
                 resolve(response);
@@ -838,7 +1007,7 @@ async function recordResults(results) {
             dataType: 'JSON',
             data: {'results': results},
             success: function(response) {
-                resolve(response);
+                resolve(response['successful'])
             },
             error: function(xhr, status, error) {
                 console.log('RECORD RESULTS - ERROR -', xhr, status, error);
@@ -854,32 +1023,68 @@ async function recordResults(results) {
     })
 }
 
-function successfullyFinishGame(gameResults, gameMode) {
-    switchHomeTabs('home-tab');
-    updateUserLevels();
-    console.log(gameResults, gameMode)
+
+
+function initQuestionProgress(progressContainer, questions) {
+/** 
+    Clears all of the containers inside of the progressContainer
+
+    @param {element} progressContainer - The container that holds the progress bar
+    @param TODO
+    return TODO
+*/
+    progressContainer.innerHTML = '';
+    progressContainer.style.flexDirection = 'row';
+    
+    for (let i = 0; i < questions; i++) {
+        let newQuestionProgressQuestion = document.createElement('div');
+        newQuestionProgressQuestion.classList.add('game-progress-question');
+
+        progressContainer.appendChild(newQuestionProgressQuestion)
+    }
+    return progressContainer.querySelectorAll('.game-progress-question');
 }
 
-/* 
-Starts the game timer on the game-tab when a game is started
-    @ para
-*/
-function activateGameTimer(length, direction) {
+function activateQuestionProgress(gameProgressDiv, correct) {
 /** 
-    Starts the game timer on the game-tab when a game is started
-    @param {number} length - The element that will receieve the class
-    @param {string} direction - The class that will be added to trigger the animation
-*/
-    const gameTimer = document.querySelector('.game-timer');
+    Utilizes the progress bar as a way to visualize how many questions are answered/left
+    
+    @param {element} progressContainer - The container that holds the progress bar
+    @param {number} questionNumber - The number of the div that will have a class added to it
+    @param {bool} correct - true = correct, false = incorrect, add the cooresponding class 
+*/  
+    // progressContainer.style.flexDirection = 'row';
+
+    if (correct === true) {
+        gameProgressDiv.classList.add('correct');
+    } else {
+        gameProgressDiv.classList.add('incorrect');
+    }
+
+}
+
+function activateTimerProgress(progressContainer, timer, transition='linear') {
+/** 
+    Utilizes the progress bar as a timer that can go forwards or backwards
+    
+    @param {element} progressContainer - The container that holds the progress bar
+    @param {number} timer - How long the timer animtion lasts until the bar fills/empties 
+    @param {string} transition - linear by default; can be set to any of the valid transition styles
+*/  
+    progressContainer.innerHTML = '';
+
+    let newProgressBar = document.createElement('div');
+    newProgressBar.classList.add('progress-bar');
+    progressContainer.appendChild(newProgressBar);
+    
+    let progressBar = progressContainer.querySelector('.progress-bar');
+    progressBar.style.transition = ('all ' + timer / 1000 + 's ' + transition);
+
 
     // The animation of the timer bar doesn't work if its outside of a setTimeout
     setTimeout(function() {
-        gameTimer.classList.add('active');
-      }, 10);
-    
-    // gameTimer.style.background = 'blue';
-
-    console.log(length, direction, gameTimer)
+        progressBar.style.width = '100%';
+    }, 10);
 }
 
 
@@ -916,7 +1121,7 @@ async function getUserLevels() {
                 resolve(response)
             },
             error: function(xhr, status, error) {
-                console.log('UPDATE USER LEVELS - ERROR -', xhr, status, error);
+                console.log('UPDATE USER LEVELS - ERROR - ', xhr, status, error);
                 reject(error)
             }
         })

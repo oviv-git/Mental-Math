@@ -11,7 +11,6 @@ class Game:
         self.experience = experience
 
         self.level = 1
-        
         self.amount = amount
 
 
@@ -52,7 +51,7 @@ class Game:
         Return: 
             (int): Number between 1-5 that will be the difficulty of the current question
         """
-        MODIFIERS = [-20, -15, -10, -8, -6, -5, -4, -3, -2, -1, 0, 0, 0, 0, 0, 1, 2, 4]
+        MODIFIERS = [-20, -15, -10, -8, -6, -5, -4, -3, -2, -1, 0, 0, 0, 0, 0, 1, 2]
 
         # level = int(level)
 

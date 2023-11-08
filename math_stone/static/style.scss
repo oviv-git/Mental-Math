@@ -373,27 +373,18 @@ html.light {
         }
     }
     .results-container {
-        border-bottom: .5rem solid transparent;
-        box-shadow: $blur-shadow $default-dark;
+
     
         .last-game-results {
-            flex: 8;
-            width: 100%;
+
             background: #b9b9b9;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
+
     
             .results-row {
-                padding: 0rem 1rem;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                flex: 1;
             }
             
             :nth-child(even) {
-                background: #efefef;
+                // background: #efefef;
             }
         }
     
@@ -1132,16 +1123,49 @@ form {
     position: absolute;
     top: 0;
     left: 0;
-    height: 4.5rem;
     display: flex;
     justify-content: space-around;
     width: 100%;
+
+    .navbar-btn {
+        border: none;
+        width: 100%;
+        height: 6rem;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 3rem;
+    }
 }
-.navbar-btn {
-    border: none;
-    width: 100%;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 2rem;
+
+.dropdown-menu {
+    position: absolute;
+    display: none;
+    z-index: 10;
+    flex-direction: column;
+
+    form {
+        padding: 0;
+
+        button {
+            height: 100%;
+            width: 100%;
+        }
+    }
+ 
+    // cant use the the name dropdown-content because of materialize
+    .dropdown-menu-button {
+        background: rgb(231, 198, 198);
+        z-index: 11;
+        width: 100%;
+        flex: 1;
+
+        p {
+            font-size: 2rem;
+            pointer-events: none;
+            font-family: 'Source Sans Pro', sans-serif;
+
+            // transform: scale(2);
+        }
+    }
 }
 .play-container {
     margin-top: 4.5rem;
@@ -1203,7 +1227,7 @@ form {
         flex-direction: column;
         justify-content: space-between;
         vertical-align: middle;
-        border-radius: 2rem;
+        border-radius: 1rem 1rem 2rem 2rem;
     }
 
     .submit-container {
@@ -1287,31 +1311,89 @@ form {
 .results-container {
     border-bottom: .5rem solid transparent;
     box-shadow: $blur-shadow $default-dark;
+    pointer-events: none;
 
     .last-game-results {
         flex: 8;
         width: 100%;
-        background: #73a576;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
 
-        .results-row {
-            padding: 0rem 1rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .results-information {
             flex: 1;
+            display: flex;
+
+            .questions {
+                height: 100%;
+                position: relative;
+                flex: 1;
+            }
+            .experience {
+
+            }
+        }
+
+        .results-row {
+            // padding: 0rem 2.5rem 0rem 2rem;
+            padding: 0rem 0rem 0rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+            align-items: center;
+
+            .material-symbols-outlined {
+                justify-content: center;
+                font-variation-settings:
+                    'FILL' 1,
+                    'wght' 900,
+                    'GRAD' 200,
+                    'opsz' 600;
+                transform: scale(1.4);
+            }
+            .results {
+                font-size: .8rem;
+                font-family: 'Poppins', sans-serif;
+                display: flex;
+                flex: 1;
+                justify-content: center;
+
+                p {
+                    transform: scale(1.8);
+                }
+                &.modes {
+                    flex: 2;
+                    display: flex;
+                    justify-content: space-between;
+                    
+                    .modes-fornow {
+                        justify-content: center;
+
+                        p {
+                            position: static;
+                            transform: scale(1.8);
+                            align-items: center;
+                        }
+                    }
+                }
+                &.timer {
+
+                }
+            }
+            &:nth-child(even) {
+                background: #caf6cb;
+            }
         }
         
-        :nth-child(even) {
-            background: #caf6cb;
-        }
+        
     }
 
     .levels-container {
+        overflow: hidden;
         display: flex;
         justify-content: space-evenly;
+        vertical-align: middle;
+        text-align: center;
         width: 100%;
         flex: 5;
         
@@ -1333,6 +1415,11 @@ form {
                     transform: scale(4);
                     font-size: 2rem;
                     font-family: 'Heebo', sans-serif;
+
+                    &.exponential {
+                        transform: scale(3.5);
+
+                    }
                 }
                 
             }
@@ -1682,41 +1769,50 @@ form {
     }
 }
 
-.game-timer-container {
-    border: solid .4rem black;
-    margin: 2rem 0rem 0rem 0rem;
-    height: 8%;
+.game-progress-container {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 6%;
     width: 36%;
+    border: solid .4rem black; // TODO
+    margin: 2rem 0rem 0rem 0rem;
     border-radius: 3rem;
     overflow: hidden;
-    display: block;
-    
-    .game-timer {
-        transition: all 20s;
+
+    .progress-bar {
+        transition-timing-function: linear;
         height: 100%;
         width: 0%;
-        background: red;
+        background: red; // TODO
+    }
 
-        &.active {
-            transition: width 20s;
-            width: 80%;
+    .game-progress-question {
+        flex: 1;
+        // TODO
+        &.correct {
+            background: green;
+        }
+        &.incorrect {
+            background: lightcoral;
         }
     }
 }
 
-.question-timer-container {
-    border: solid .4rem black;
-    margin: 1.5rem 0rem 1rem 0rem;
-    height: 6%;
+.question-progress-container {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 4%;
     width: 26%;
+    border: solid .4rem black; // TODO
+    margin: 1.5rem 0rem 1rem 0rem;
     border-radius: 3rem;
     overflow: hidden;
-    display: block;
     
-    .question-timer {
+    .progress-bar {
+        transition-timing-function: ease-in;
         height: 100%;
-        width: 100%;
-        background: red;
+        width: 0%;
+        background: red; // TODO
     }
 }
 
@@ -1889,7 +1985,7 @@ form {
         order: 1;
     }
     .full-page {
-        justify-content: start;
+        justify-content: flex-start;
     }
     .slider {
         margin-top: 4rem;

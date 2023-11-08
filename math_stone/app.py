@@ -1,9 +1,10 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info
+from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, record_game_results
 from werkzeug.security import check_password_hash, generate_password_hash
 from database import Database
 from game import Game
+import json
 
 
 app = Flask(__name__)
@@ -44,10 +45,10 @@ def login():
 
     return error("Invalid session id", 400)
 
-@app.route('/logout', methods=['GET'])
+@app.route('/logout', methods=['POST'])
 def logout():
     session.clear()
-    return redirect('/')
+    return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['POST'])
@@ -94,9 +95,10 @@ def check_username_availability():
         parameters = (username,)
         result = db.fetchone(query, parameters)
 
-    if result is None:
-        return jsonify({'available': True})
-    return jsonify({'available': False})
+    if (result is not None):
+        return jsonify(True)
+    return jsonify(False)
+    
 
 
 @app.route('/check_valid_login', methods=['POST'])
@@ -115,12 +117,14 @@ def check_valid_login():
 @login_required
 def profile():
     pass
+    # TODO
 
 
 @app.route('/stats', methods=['GET', 'POST'])
 @login_required
 def stats():
     pass
+    # TODO  
 
 
 @app.route('/error_redirect', methods=['GET', 'POST'])
@@ -161,16 +165,35 @@ def generate_questions():
 @app.route('/record_results', methods=['POST'])
 def record_results():
     user_id = session['user_id']
-    results = request.form.get('results')
+    results = json.loads(request.form.get('results'))
 
     user_experience = get_user_experience(user_id)
     reward_experience = generate_reward_experience(results)
 
+    record_game_results(results, reward_experience, user_id)
+
     updated_experience = [sum(i) for i in zip(user_experience, reward_experience)]
 
     with Database() as db:
-        query = 'UPDATE levels SET addition = (?), subtraction = (?), multiplication = (?), division = (?), exponential = (?) WHERE user_id = (?)'
+        query = ("UPDATE levels SET addition = (?), subtraction = (?), multiplication = (?), "
+                "division = (?), exponential = (?) WHERE user_id = (?)")
         parameters = (updated_experience[0], updated_experience[1], updated_experience[2], updated_experience[3], updated_experience[4], user_id, )
         db.execute(query, parameters)
 
-    return jsonify({'reward_experience': reward_experience, 'updated_experience': updated_experience})
+    return jsonify({'successful': True})
+
+
+@app.route('/get_last_games_played', methods=['POST'])
+def get_last_games_played():
+    user_id = session['user_id']
+
+    with Database() as db:
+        query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, division_exp, "
+                "exponential_exp, game_timer FROM games WHERE user_id = (?) ORDER BY game_id desc LIMIT 5;")
+        
+        parameters = (user_id, )
+        
+        db.execute(query, parameters)
+        last_games = db.fetchall()
+
+    return jsonify(last_games)

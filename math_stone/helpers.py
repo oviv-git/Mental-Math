@@ -11,7 +11,6 @@
         error: Render error.html with a specific code and message
 """
 
-from json import loads
 from functools import wraps
 from flask import session, render_template, redirect
 from database import Database
@@ -73,8 +72,8 @@ def validate_login(username, password):
 
     with Database() as db:
         query = "SELECT DISTINCT hash FROM users WHERE LOWER(username) = LOWER(?)"
-        paramaters = (username, )
-        user_hash = db.fetchone(query, paramaters)
+        parameters = (username, )
+        user_hash = db.fetchone(query, parameters)
 
         is_login_valid = check_password_hash(user_hash[0], password)
 
@@ -111,9 +110,13 @@ def generate_reward_experience(results):
     """
     
     reward_experience = [0, 0, 0, 0, 0]
-    results = loads(results)
+    GAME_MODE_MULTIPLIER_MAP = {'vanilla': 1, 'timed': 1.2, 'choice': 0.8, 'sudden': 1.5}
 
-    for question in results:
+    for i, question in enumerate(results):
+
+        if i == 0:
+            game_mode_multiplier = GAME_MODE_MULTIPLIER_MAP[question['gameMode']]
+            continue
 
         # If the question is wrong move onto the next one; 0 xp gained
         if question['correct'] != True:
@@ -129,15 +132,14 @@ def generate_reward_experience(results):
         difficulty_multiplier = round(difficulty * level_multiplier, 3)
         speed_multiplier = generate_speed_multiplier(time_elapsed, difficulty)
 
-        experience_gained = round(difficulty_multiplier * speed_multiplier)
+        experience_gained = round(difficulty_multiplier * speed_multiplier * game_mode_multiplier)
 
-        print(f'{question}\n    Experience: {experience_gained}     Speed: {speed_multiplier}       Level: {level_multiplier}       Difficulty: {difficulty_multiplier} ')
+        # print(f'{question}\n    Experience: {experience_gained}     Speed: {speed_multiplier}       Level: {level_multiplier}       Difficulty: {difficulty_multiplier} ')
 
         OPERATOR_MAP = {'+': 0, '-': 1, 'x': 2, '/': 3, '^': 4}
         operator = question['operator']
 
-        if operator in OPERATOR_MAP:
-            reward_experience[OPERATOR_MAP[operator]] += experience_gained
+        reward_experience[OPERATOR_MAP[operator]] += experience_gained
 
     return reward_experience
 
@@ -164,7 +166,7 @@ def generate_speed_multiplier(time, difficulty):
     MULTIPLIER_DECAY_RATE = round(0.5 / difficulty, 2)
 
     multiplier = max(MAX_MULTIPLIER * exp(-MULTIPLIER_DECAY_RATE * abs(time)), 1)
-    print(multiplier)
+    # print(multiplier)
 
     return multiplier
 
@@ -215,6 +217,35 @@ def generate_user_level_info(experience_list):
 
     return user_level_info
 
+
+def record_game_results(results, reward_experience, user_id):
+    question_types = {'+': 0, '-': 0, '×': 0, '÷': 0, '*': 0}
+    correct_count = 0
+    questions = len(results) - 1
+
+    for i, question in enumerate(results):
+
+        if i == 0:
+            game_mode = question['gameMode']
+            game_timer = question['gameTimer']
+            game_date = question['gameDate']
+            continue
+        
+        question_types[question['operator']] += 1
+        
+        if question['correct']:
+            correct_count += 1
+        
+    with Database() as db:
+        query = ("INSERT INTO games(user_id, game_mode, questions, correct, "
+                "addition_exp, subtraction_exp, multiplication_exp, division_exp, exponential_exp, game_timer, game_date) " 
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
+        
+        parameters = (user_id, game_mode, questions, correct_count, reward_experience[0], 
+                      reward_experience[1], reward_experience[2], reward_experience[3], reward_experience[4],
+                      game_timer, game_date)
+        
+        db.execute(query, parameters)
     
 
 
