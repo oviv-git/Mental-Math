@@ -5,13 +5,16 @@ $default-light: #fff;
 $default-dark: #222;
 $default-success: rgb(70, 170, 121);
 $default-error: rgb(194, 76, 76);
-$top-shadow: 0rem -0.2rem 2rem;
-$blur-shadow: 0rem 1.2em .8rem;
+$top-shadow: 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+$blur-shadow: 0rem 0em .8rem;
 
-$vanilla-mode: #3f6d96;
-$timed-mode: #615b9c;
+// $vanilla-mode: #3f6d96;
+$vanilla-mode-light: #407587;
+$vanilla-mode: #438ea7;
+// $vanilla-mode: #4f9db7;
+$timed-mode: #645da4;
 $choice-mode: #2d8471;
-$sudden-mode: #8e3c47;
+$sudden-mode: #87434c;
 
 
 // $vanilla-mode: #355d80;
@@ -43,9 +46,6 @@ html.light {
     .btn-secondary {
         color: #3e6775;
         background: #cbecf7;
-    }
-    .dark-mode-toggle {
-        background: #bfbfbf;
     }
     .caption {
         color: #5f5f5f;
@@ -113,19 +113,36 @@ html.light {
     .modal {
         background: $default-light;
     }
-    .navbar-btn {
-        color: $default-dark;
+    .navbar {
         background: darken($default-light, 15%);
 
-        &:hover {
-            background: darken($default-light, 20%);
+        .navbar-container {
+            color: $default-dark;
+            background: darken($default-light, 15%);
+
+            &.dropdown {
+                button {
+                    &.active {
+                        background: darken($default-light, 25%);
+                        border-color: darken($default-light, 25%);
+                        
+
+                    }
+                    &:hover{
+                        background: darken($default-light, 25%);
+                    }
+                }
+            } 
         }
-        &.active {
-            background: $main-cyan-light;
-            color: $default-light;
+    }
+    .dropdown-menu {     
+        .dropdown-menu-content {
+            background: darken($default-light, 15%);
+            border-color: darken($default-light, 25%);
 
             &:hover {
-                background: darken($main-cyan-light, 10%);
+                background: darken($default-light, 25%);
+
             }
         }
     }
@@ -138,54 +155,50 @@ html.light {
     }
     .switchboard-container {
         .switch {
-            .switch-button {
-                background: darken($default-light, 15%);
+                background: darken($default-light, 17%);
                 box-shadow: darken($default-light, 25%) 0rem 1.4rem 0rem;
+                border-color: darken($default-light, 22%);
                 color: #8b8b8b;
-            }
         }
         &.vanilla {
             .switch {
-                &.active {
-                    .switch-button {
-                        color: lighten(saturate($vanilla-mode, 20%), 50%);
-                        background: lighten(saturate($vanilla-mode, 5%), 20%);
-                        box-shadow: lighten($vanilla-mode, 10%) 0rem 0.4rem 0rem;
-
-                    }
+                &.active {    
+                    color: lighten(saturate($vanilla-mode-light, 20%), 50%);
+                    background: lighten(saturate($vanilla-mode-light, 5%), 20%);
+                    box-shadow: lighten($vanilla-mode-light, 10%) 0rem 0.4rem 0rem;
+                    border-color: lighten(saturate($vanilla-mode-light, 5%), 16%);
                 }
             }
         }
         &.timed {
             .switch {
                 &.active {
-                    .switch-button {
-                        color: lighten(saturate($timed-mode, 20%), 40%);
-                        background: lighten(saturate($timed-mode, 5%), 20%);
-                        box-shadow: lighten($timed-mode, 10%) 0rem 0.4rem 0rem;
-                    }
+                    color: lighten(saturate($timed-mode, 20%), 40%);
+                    background: lighten(saturate($timed-mode, 5%), 20%);
+                    box-shadow: lighten($timed-mode, 10%) 0rem 0.4rem 0rem;
+                    border-color: lighten(saturate($timed-mode, 5%), 16%);
+
                 }
             }
         }
         &.choice {
             .switch {
                 &.active {
-                    .switch-button {
-                        color: lighten(saturate($choice-mode, 20%), 55%);
-                        background: lighten($choice-mode, 10%);
-                        box-shadow: $choice-mode 0rem 0.4rem 0rem;
-                    }
+                    color: lighten(saturate($choice-mode, 20%), 55%);
+                    background: lighten($choice-mode, 10%);
+                    box-shadow: $choice-mode 0rem 0.4rem 0rem;
+                    border-color: lighten(saturate($choice-mode, 5%), 16%);
+
                 }
             }
         }
         &.sudden {
             .switch {
                 &.active {
-                    .switch-button {
-                        color: lighten(saturate($sudden-mode, 20%), 50%);
-                        background: lighten(saturate($sudden-mode, 5%), 20%);
-                        box-shadow: lighten($sudden-mode, 10%) 0rem 0.4rem 0rem;
-                    }
+                    color: lighten(saturate($sudden-mode, 20%), 45%);
+                    background: lighten(saturate($sudden-mode, 5%), 20%);
+                    box-shadow: lighten($sudden-mode, 10%) 0rem 0.4rem 0rem;
+                    border-color: lighten(saturate($sudden-mode, 5%), 16%);
                 }
             }
         }
@@ -194,46 +207,44 @@ html.light {
         background: transparent;
 
         .game-mode {
-            box-shadow: $blur-shadow lighten($default-dark, 35%);
+            // box-shadow: $blur-shadow lighten($default-dark, 35%);
 
              &.vanilla {
-                background: lighten($vanilla-mode, 45%);
-                color: lighten($vanilla-mode, 10%);
+                background: lighten(desaturate($vanilla-mode-light, 15%), 45%);
+                color: lighten($vanilla-mode-light, 10%);
 
                 .settings {
-                    color: lighten($vanilla-mode, 5%);
+                    color: lighten($vanilla-mode-light, 5%);
 
                     .settings-container {
                         input[type=range] {
                             &::-webkit-slider-runnable-track {
-                                background: lighten($vanilla-mode, 35%);
+                                background: lighten($vanilla-mode-light, 35%);
                             }
 
                             &::-moz-range-track {
-                                background: lighten($vanilla-mode, 35%);
+                                background: lighten($vanilla-mode-light, 35%);
                             }
 
                             &::-webkit-slider-thumb {
-                                background: lighten(saturate($vanilla-mode, 5%), 25%);
-                                border: .5rem solid lighten(saturate($vanilla-mode, 5%), 25%);
-                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode, 5%), 25%);
+                                background: lighten(saturate($vanilla-mode-light, 5%), 25%);
+                                border: .5rem solid lighten(saturate($vanilla-mode-light, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode-light, 5%), 25%);
                             }
 
                             &::-moz-range-thumb {
-                                background: lighten(saturate($vanilla-mode, 5%), 25%);
-                                border: .5rem solid lighten(saturate($vanilla-mode, 5%), 25%);
-                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode, 5%), 25%);
+                                background: lighten(saturate($vanilla-mode-light, 5%), 25%);
+                                border: .5rem solid lighten(saturate($vanilla-mode-light, 5%), 25%);
+                                box-shadow: -415px 0 0 400px lighten(saturate($vanilla-mode-light, 5%), 25%);
                             }
                         }
                     }
                 }
-                .settings-footer {
-                    // border-color: #F3E5AB;
-                    // color: #F3E5AB;
-                    background: lighten(saturate($vanilla-mode, 5%), 20%);
-                    border-top: .6rem solid lighten(saturate($vanilla-mode, 10%), 50%);
-                    border-bottom: .5rem solid lighten($vanilla-mode, 5%);
-                    color: lighten(saturate($vanilla-mode, 20%), 50%);
+                .settings-header {
+                    background: lighten(saturate($vanilla-mode-light, 5%), 20%);
+                    border-top-color: lighten(saturate($vanilla-mode-light, 5%), 16%);
+                    border-bottom-color: lighten(saturate($vanilla-mode-light, 5%), 15%);
+                    color: lighten(saturate($vanilla-mode-light, 20%), 50%);
 
                 }
             }
@@ -268,11 +279,11 @@ html.light {
                         }
                     }
                 }
-                .settings-footer {
+                .settings-header {
                     background: lighten(saturate($timed-mode, 5%), 20%);
-                    border-top: .6rem solid lighten(saturate($timed-mode, 10%), 45%);
-                    border-bottom: .5rem solid lighten($timed-mode, 5%);
-                    color: lighten(saturate($timed-mode, 20%), 45%);
+                    border-top-color: lighten(saturate($timed-mode, 5%), 16%);
+                    border-bottom-color: lighten(saturate($timed-mode, 5%), 15%);
+                    color: lighten(saturate($timed-mode, 20%), 40%);
 
                 }
             }
@@ -316,10 +327,10 @@ html.light {
                         }
                     }
                 }
-                .settings-footer {
+                .settings-header {
                     background: lighten($choice-mode, 10%);
-                    border-top: .6rem solid lighten(saturate($choice-mode, 5%), 55%);
-                    border-bottom: .5rem solid $choice-mode;
+                    border-top-color: lighten(saturate($choice-mode, 5%), 55%);
+                    border-bottom-color: $choice-mode;
                     color: lighten(saturate($choice-mode, 20%), 55%);
                 }
             }
@@ -336,7 +347,7 @@ html.light {
 
                         &.active {
                             background: lighten(saturate($sudden-mode, 5%), 20%);
-                            color: lighten(saturate($sudden-mode, 20%), 50%);
+                            color: lighten(saturate($sudden-mode, 20%), 45%);
                         }
                     }
                     .settings-container {
@@ -363,49 +374,50 @@ html.light {
                         }
                     }
                 }
-                .settings-footer {
+                .settings-header {
                     background: lighten(saturate($sudden-mode, 5%), 20%);
-                    border-top: .6rem solid lighten(saturate($sudden-mode, 10%), 50%);
-                    border-bottom: .5rem solid lighten($sudden-mode, 5%);
-                    color: lighten(saturate($sudden-mode, 20%), 50%);
+                    border-top-color: lighten(saturate($sudden-mode, 5%), 16%);
+                    border-bottom-color: lighten(saturate($sudden-mode, 5%), 15%);
+                    color: lighten(saturate($sudden-mode, 20%), 45%);
                 }
             }
         }
     }
-    .results-container {
-
-    
-        .last-game-results {
-
-            background: #b9b9b9;
-
-    
-            .results-row {
-            }
-            
-            :nth-child(even) {
-                // background: #efefef;
+    // cp2 - light
+    .results-container {   
+        .results-row {
+            &.vanilla {
+                span {
+                    color: darken($vanilla-mode, 15%);
+                }
             }
         }
-    
-        .levels-container {
-            .level-info-container {
-                background: #2d8471;
-
-    
-                .level-info-top {
-                    background: #2d8471;
+        &.vanilla {
+            .last-game-results {
+                .results-row.header {
+                    background: lighten(saturate($vanilla-mode-light, 5%), 20%);
+                    color: $default-light;
                 }
-                .level-info-bottom {
-                    .level-number {
-                        border: .3rem solid #222;
-                        color: #222;
-                        background: #e1e1e1;
+            }
+        
+            .levels-container {
+                .level-info-container {
+                background: lighten(saturate($vanilla-mode-light, 5%), 20%);
 
+                    .level-info-top {
+                        background: lighten(saturate($vanilla-mode-light, 5%), 20%);
                     }
-                    .level-bar {
-                
-                        .filled-xp {
+                    .level-info-bottom {
+                        .level-number {
+                            border: .3rem solid #222;
+                            color: #222;
+                            background: #e1e1e1;
+
+                        }
+                        .level-bar {
+                    
+                            .filled-xp {
+                            }
                         }
                     }
                 }
@@ -414,69 +426,68 @@ html.light {
     }
     .submit-container {
         .submit-button {
-            background: darken($default-light, 15%);
-            box-shadow: 0rem 1.5rem 0rem darken($default-light, 25%);
+            background: darken($default-light, 17%);
+            box-shadow: 0rem 1.5rem 0rem darken($default-light, 25%), $top-shadow;
 
             &.active {
-                box-shadow: 0rem 0rem 0rem darken($default-light, 25%);
-            }
+                box-shadow: 0rem 0rem 0rem darken($default-light, 25%), $top-shadow;
 
+            }
             .submit-button-text {
                 color: #8b8b8b;
             }
+
+            
         }
         &.active {
             .submit-button {
                 &.vanilla {
-                    color: lighten(saturate($vanilla-mode, 20%), 50%);
-                    box-shadow: 0rem 1.5rem 0rem lighten($vanilla-mode, 10%);
-                    background: lighten(saturate($vanilla-mode, 5%), 20%);
+                    box-shadow: 0rem 1.5rem 0rem lighten($vanilla-mode-light, 10%), $top-shadow;
+                    background: lighten(saturate($vanilla-mode-light, 5%), 15%);
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem lighten($vanilla-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem lighten($vanilla-mode-light, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
-                        color: lighten(saturate($vanilla-mode, 20%), 50%);
+                        color: lighten(saturate($vanilla-mode-light, 20%), 50%);
                     }
                 }
                 &.timed {
-                    color: lighten(saturate($timed-mode, 20%), 50%);
-                    box-shadow: 0rem 1.5rem 0rem lighten($timed-mode, 10%);
-                    background: lighten(saturate($timed-mode, 5%), 20%);
+                    box-shadow: 0rem 1.5rem 0rem lighten($timed-mode, 10%), $top-shadow;
+                    background: lighten(saturate($timed-mode, 5%), 15%);
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem lighten($timed-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem lighten($timed-mode, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
-                        color: lighten(saturate($timed-mode, 20%), 45%);
+                        color: lighten(saturate($timed-mode, 20%), 40%);
                     }
                 }
                 &.choice {
-                    color: lighten(saturate($choice-mode, 20%), 50%);
-                    box-shadow: 0rem 1.5rem 0rem $choice-mode;
-                    background: lighten($choice-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem $choice-mode, $top-shadow;
+                    background: lighten($choice-mode, 15%);
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem $choice-mode;
+                        box-shadow: 0rem 0rem 0rem $choice-mode, $top-shadow;
                     }
 
                     .submit-button-text {
-                        color: lighten(saturate($choice-mode, 20%), 50%);
+                        color: lighten(saturate($choice-mode, 20%), 40%);
                     }
                 }
                 &.sudden {
-                    color: lighten(saturate($sudden-mode, 20%), 50%);
-                    box-shadow: 0rem 1.5rem 0rem lighten($sudden-mode, 10%);
-                    background: lighten(saturate($sudden-mode, 5%), 20%);
+                    color: lighten(saturate($sudden-mode, 20%), 45%);
+                    box-shadow: 0rem 1.5rem 0rem lighten($sudden-mode, 10%), $top-shadow;
+                    background: lighten(saturate($sudden-mode, 5%), 15%);
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem lighten($sudden-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem lighten($sudden-mode, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
-                        color: lighten(saturate($sudden-mode, 20%), 50%);
+                        color: lighten(saturate($sudden-mode, 20%), 45%);
                     }
                 }
             }
@@ -527,9 +538,6 @@ html.dark {
     .btn-secondary {
         color: #abc8d2;
         background: #244753;
-    }
-    .dark-mode-toggle {
-        background: #444;
     }
     .caption {
         color: #999999;
@@ -596,19 +604,36 @@ html.dark {
     .modal {
         background: $default-dark;
     }
-    .navbar-btn {
-        color: $default-light;
-        background: #3d3d3d;
+    .navbar {
+        background: lighten($default-dark, 15%);
 
-        &:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        &.active {
-            background: $main-cyan;
+        .navbar-container {
             color: $default-light;
+            background: lighten($default-dark, 15%);
+
+            &.dropdown {
+                button {
+                    &.active {
+                        background: lighten($default-dark, 25%);
+
+                    }
+                    &:hover{
+                        background: lighten($default-dark, 25%);
+                    }
+                }
+            } 
+        }
+    }
+    // cant use the the name dropdown-content because of materialize
+    .dropdown-menu {
+        .dropdown-menu-content {
+            border-color: lighten($default-dark, 25%);;
+            background: lighten($default-dark, 15%);
+
 
             &:hover {
-                background: #66b7d2;
+                background: lighten($default-dark, 25%);
+
             }
         }
     }
@@ -621,53 +646,50 @@ html.dark {
     }
     .switchboard-container {
         .switch {
-            .switch-button {
-                background: lighten($default-dark, 30%);
-                box-shadow: lighten($default-dark, 20%) 0rem 1.4rem 0rem;
-                color: darken($default-light, 25%);
-            }
+            background: lighten($default-dark, 30%);
+            box-shadow: lighten($default-dark, 25%) 0rem 1.4rem 0rem;
+            color: darken($default-light, 25%);
         }
         &.vanilla {
             .switch {
                 &.active {
-                    .switch-button {
-                        background: $vanilla-mode;
-                        color: lighten(saturate($vanilla-mode, 15%), 30%);
-                        box-shadow: darken($vanilla-mode, 10%) 0rem 0.4rem 0rem;
-                    }
+                    background: $vanilla-mode;
+                    color: lighten(saturate($vanilla-mode, 15%), 30%);
+                    box-shadow: darken($vanilla-mode, 10%) 0rem 0.4rem 0rem;
+                    border-color: darken($vanilla-mode, 4%);
                 }
             }
         }
         &.timed {
             .switch {
                 &.active {
-                    .switch-button {
-                        background:  $timed-mode;
-                        color: lighten(saturate($timed-mode, 15%), 40%);
-                        box-shadow: darken($timed-mode, 10%) 0rem 0.4rem 0rem;
-                    }
+                    background: $timed-mode;
+                    color: lighten(saturate($timed-mode, 15%), 40%);
+                    box-shadow: darken($timed-mode, 10%) 0rem 0.4rem 0rem;
+                    border-color: darken($timed-mode, 4%);
+
                 }
             }
         }
         &.choice {
             .switch {
                 &.active {
-                    .switch-button {
-                        background:  $choice-mode;
-                        color: lighten(saturate($choice-mode, 15%), 30%);
-                        box-shadow: darken($choice-mode, 10%) 0rem 0.4rem 0rem;
-                    }
+                    background: $choice-mode;
+                    color: lighten(saturate($choice-mode, 15%), 30%);
+                    box-shadow: darken($choice-mode, 10%) 0rem 0.4rem 0rem;
+                    border-color: darken($choice-mode, 4%);
+
                 }
             }
         }
         &.sudden {
             .switch {
                 &.active {
-                    .switch-button {
-                        background:  $sudden-mode;
-                        color: lighten(saturate($sudden-mode, 15%), 40%);
-                        box-shadow: darken($sudden-mode, 10%) 0rem 0.4rem 0rem;
-                    }
+                    background: $sudden-mode;
+                    color: lighten(saturate($sudden-mode, 15%), 40%);
+                    box-shadow: darken($sudden-mode, 10%) 0rem 0.4rem 0rem;
+                    border-color: darken($sudden-mode, 4%);
+
                 }
             }
         }
@@ -707,10 +729,10 @@ html.dark {
                         }
                     }
                 }
-                .settings-footer {
+                .settings-header {
                     background:  $vanilla-mode;
-                    border-top: .6rem solid lighten($vanilla-mode, 15%);
-                    border-bottom: .5rem solid darken($vanilla-mode, 10%);
+                    border-bottom-color: darken($vanilla-mode, 10%);
+                    border-top-color: darken($vanilla-mode, 4%);
                 }
             }
             &.timed {
@@ -744,10 +766,10 @@ html.dark {
                     }
 
                 }
-                .settings-footer {
+                .settings-header {
                     background:  $timed-mode;
-                    border-top: .6rem solid lighten($timed-mode, 15%);
-                    border-bottom: .5rem solid darken($timed-mode, 10%);
+                    border-bottom-color: darken($timed-mode, 10%);
+                    border-top-color: darken($timed-mode, 4%);
                 }
             }
             &.choice {
@@ -790,10 +812,10 @@ html.dark {
                         }
                     }
                 }
-                .settings-footer {
+                .settings-header {
                     background: $choice-mode;
-                    border-top: .6rem solid lighten($choice-mode, 15%);
-                    border-bottom: .5rem solid darken($choice-mode, 10%);
+                    border-bottom-color: darken($choice-mode, 10%);
+                    border-top-color: darken($choice-mode, 4%);
                 }
             }
             &.sudden {
@@ -836,10 +858,45 @@ html.dark {
                         }
                     }
                 }
-                .settings-footer {
+                .settings-header {
                     background:  $sudden-mode;
-                    border-top: .6rem solid lighten($sudden-mode, 15%);
-                    border-bottom: .5rem solid darken($sudden-mode, 10%);
+                    border-bottom-color: darken($sudden-mode, 10%);
+                    border-top-color: darken($sudden-mode, 4%);
+                }
+            }
+        }
+    }
+    // cp2 - dark
+    .results-container {
+        &.vanilla {
+            .last-game-results {
+        
+                .results-row {
+
+                    &.header {
+                        
+                    }
+                }
+            }
+        
+            .levels-container {
+                .level-info-container {
+        
+                    .level-info-top {
+                    }
+                    .level-info-bottom {
+                        .level-number {
+                            border: .3rem solid #222;
+                            color: #222;
+                            background: #e1e1e1;
+
+                        }
+                        .level-bar {
+                    
+                            .filled-xp {
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -847,10 +904,10 @@ html.dark {
     .submit-container {
         .submit-button {
             background: lighten($default-dark, 30%);
-            box-shadow: 0rem 1.5rem 0rem lighten($default-dark, 20%);
+            box-shadow: 0rem 1.5rem 0rem lighten($default-dark, 20%), $top-shadow;
 
             &.active {
-                box-shadow: 0rem 0rem 0rem lighten($default-dark, 20%);
+                box-shadow: 0rem 0rem 0rem lighten($default-dark, 20%), $top-shadow;
             }
 
             .submit-button-text {
@@ -860,11 +917,11 @@ html.dark {
         &.active {
             .submit-button {
                 &.vanilla {
-                    box-shadow: 0rem 1.5rem 0rem darken($vanilla-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($vanilla-mode, 10%), $top-shadow;
                     background: $vanilla-mode;
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem darken($vanilla-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem darken($vanilla-mode, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
@@ -872,11 +929,11 @@ html.dark {
                     }
                 }
                 &.timed {
-                    box-shadow: 0rem 1.5rem 0rem darken($timed-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($timed-mode, 10%), $top-shadow;
                     background:  $timed-mode;
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem darken($timed-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem darken($timed-mode, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
@@ -884,11 +941,11 @@ html.dark {
                     }
                 }
                 &.choice {
-                    box-shadow: 0rem 1.5rem 0rem darken($choice-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($choice-mode, 10%), $top-shadow;
                     background:  $choice-mode;
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem darken($choice-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem darken($choice-mode, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
@@ -896,11 +953,11 @@ html.dark {
                     }
                 }
                 &.sudden {
-                    box-shadow: 0rem 1.5rem 0rem darken($sudden-mode, 10%);
+                    box-shadow: 0rem 1.5rem 0rem darken($sudden-mode, 10%), $top-shadow;
                     background:  $sudden-mode;
 
                     &.active {
-                        box-shadow: 0rem 0rem 0rem darken($sudden-mode, 10%);
+                        box-shadow: 0rem 0rem 0rem darken($sudden-mode, 10%), $top-shadow;
                     }
 
                     .submit-button-text {
@@ -913,6 +970,19 @@ html.dark {
     .question-container {
         button {
             background: $main-cyan;
+        }
+    }
+}
+
+.waves-effect {
+    &.waves-light {
+        .waves-ripple {
+            background: (rgba(255, 255, 255, 0.1));
+        }
+    }
+    &.waves-dark {
+        .waves-ripple {
+            background: (rgba(0, 0, 0, 0.1));
         }
     }
 }
@@ -970,7 +1040,6 @@ form {
     font-weight: 400;
     transition: .5s;
     height: 2rem;
-
 }
 .session-information {
     display: flex;
@@ -978,6 +1047,7 @@ form {
     font-size: 1.2rem;
 }
 .toast {
+    
     color: $default-light;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.2rem;
@@ -1124,15 +1194,58 @@ form {
     top: 0;
     left: 0;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
+    height: 6rem;
     width: 100%;
-
-    .navbar-btn {
-        border: none;
-        width: 100%;
-        height: 6rem;
+    
+    .navbar-container {
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 3rem;
+        display: flex;
+        justify-content: center;
+        border: none;
+        height: 100%;
+        flex: 1;
+        align-items: center;
+
+        button {
+            padding-left: 3rem;
+            * {
+                margin: 0rem 2rem;
+                pointer-events: none;
+                
+            }
+        }
+
+        .material-symbols-outlined {
+            font-size: 2rem;
+            transform: scale(1.8);
+        }
+        
+        &.username {
+            margin-right: 20%;
+            
+            * {
+                margin: 0rem 2rem;
+            }
+        }
+        p {
+            font-size: 1rem;
+            transform: scale(2.6);
+        }
+        &.dropdown {
+            
+            flex: 1.5;
+
+            button {
+                border-left: 0.5rem transparent solid;
+                border-right: 0.5rem transparent solid;
+
+                &:active {
+                    border-left: 0.5rem transparent solid;
+                    border-right: 0.5rem transparent solid;
+                }
+            }
+        }
     }
 }
 
@@ -1141,6 +1254,9 @@ form {
     display: none;
     z-index: 10;
     flex-direction: column;
+    align-items: center;
+    border-radius: 0rem 0rem 1rem 1rem;
+    box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.5);
 
     form {
         padding: 0;
@@ -1152,21 +1268,67 @@ form {
     }
  
     // cant use the the name dropdown-content because of materialize
-    .dropdown-menu-button {
-        background: rgb(231, 198, 198);
+    .dropdown-menu-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         z-index: 11;
         width: 100%;
         flex: 1;
+        overflow: hidden;
 
-        p {
+        .material-symbols-outlined {
+            font-variation-settings:
+                        'FILL' 0,
+                        'wght' 900,
+                        'GRAD' 200,
+                        'opsz' 600;
             font-size: 2rem;
+            // transform: scale();
+            position: relative;
+            left: 6%;
+            pointer-events: none;
+                     
+        }
+        &:not(:last-child) {
+            border-left: 0.5rem transparent solid;
+            border-right: 0.5rem transparent solid;
+            // TODO
+        }
+        
+        &:last-child {
+            border-left: 0.5rem transparent solid;
+            border-right: 0.5rem transparent solid;
+            border-bottom: 0.5rem transparent solid;
+            border-radius: 0rem 0rem 1rem 1rem !important;
+        }
+        
+        // form {
+        //     height: 100%;
+        //     width: 100%;
+        //     background: transparent;
+        //     display: flex;
+
+        .logout-button {
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            border: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        p {
+            font-size: 1rem;
+            transform: scale(2);
             pointer-events: none;
             font-family: 'Source Sans Pro', sans-serif;
-
-            // transform: scale(2);
         }
     }
 }
+
 .play-container {
     margin-top: 4.5rem;
     display: flex;
@@ -1176,47 +1338,42 @@ form {
     width: 80%;
     border-radius: 2rem;
 }
-// Outdated
-// .play-container-top {
-    //     height: 100%;
-    //     display: flex;
-    //     padding: 1rem 1rem 0rem 1rem;
-    //     flex: 4;
-    //     align-items: center;
-    // }
-    // .play-container-bottom {
-        //     height: 100%;
-//     display: flex;
-//     justify-content: center;
-//     flex: 3;
-//     padding: 0rem 1rem 1rem 1rem;
-// }
 
 .play-container-left {
     display: flex;
     flex-direction: column;
     width: 50%;
-    flex: 1;
-
-    .mode-select-container {
-        flex: 5;
-    }
+    justify-content: flex-start;
 
     .switchboard-container {
+        position: relative;
+        top: 4%;
+        align-self: auto;
+        width: 100%;
+        // padding: 1rem 0rem;
+        flex: 2;
         background: transparent;
         display: flex;
         justify-content: center;
         text-align: center;
         border-radius: 1rem;
-        padding: 0rem 2rem 1.5rem 2rem;
-        flex: 4;
+    }
+    .mode-select-container {
+        height: 53%;
+    }
+    .submit-container {
+        flex: 1;
+        display: flex;
+        width: 100%;
+        margin: 0 0 3rem 0;
+        flex-direction: column;
+        align-items: center;
     }
 }
 .play-container-right {
     display: flex;
     flex-direction: column;
     width: 50%;
-    flex: 1;
     margin: 1rem 1rem 1rem 0rem;
 
     .results-container {
@@ -1230,84 +1387,62 @@ form {
         border-radius: 1rem 1rem 2rem 2rem;
     }
 
-    .submit-container {
-        margin: 0rem 1rem 1rem 1rem;
-        flex: 1;
-        padding: 0rem 0rem 2rem 0rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    
 }
 /* Parent element to all the switches */
 
 /* pointer events:none on everything except set to :auto on the physical button div () */
 .switchboard-container * {
     pointer-events: none;
-    // transition: all .5s ease;
 }
-.switch-column {
+.switch-row {
     height: 100%;
-    width: 100%;
+    width: 90%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
 
     .switch {
-        background: transparent;
         display: flex;
-        flex-direction: column;
         justify-content: center;
-        padding: 0rem 1rem 1rem;
+        align-items: center;
         border: none;
-        height: 100%;
+        height: 78%;
         width: 100%;
         pointer-events: auto;
         cursor: grab;
-    
-        .switch-button {
+        overflow: hidden;
+        z-index: 1;
+        box-sizing: border-box;
+        border-left: 3px transparent solid;
+        border-right: 3px transparent solid;
+        // box-shadow: $blur-shadow rgba(0, 0, 0, 0.7);
+
+        &#addition {
+            border-left-width: 0px;
+            border-radius: 1.5rem 0 0 0;
+        }
+        &#exponential {
+            border-right-width: 0px;
+            border-radius: 0 1.5rem 0 0;
+        }
+
+        p {
             font-family: 'Heebo', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1rem;
-            vertical-align: middle;
-            width: 100%;
-            height: 90%;
-            overflow: hidden;
-    
-            .switch-text {
-                height: auto;
-                width: auto;
-                position: absolute;
-                font-size: 4rem;
-                transform: scale(2);
-            }
+            position: absolute;
+            font-size: 3rem;
+            transform: scale(2);
         }
-    
+
         &.active {
-            .switch-button {
-                transform: translateY(1rem);
-                position: relative;
-            }
-        }
-        &.large {
-            .switch-button {
-                height: 90%;
-                box-shadow: #3b3b3b 0rem 1.4rem 0rem;
-            }
-            &.active .switch-button {
-                box-shadow: 0rem 0.4rem 0rem, $main-cyan 0rem 0.4rem 1rem;
-                transform: translateY(1rem);
-                position: relative;
-                background: $main-cyan;
-            }
+            z-index: 1;
+            transform: translateY(1.2rem);
+            box-shadow: none;
         }
     }
 }
 
 
-
+// cp2 - the real thing
 .results-container {
     border-bottom: .5rem solid transparent;
     box-shadow: $blur-shadow $default-dark;
@@ -1315,77 +1450,120 @@ form {
 
     .last-game-results {
         flex: 8;
-        width: 100%;
+        // width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
-
-        .results-information {
-            flex: 1;
-            display: flex;
-
-            .questions {
-                height: 100%;
-                position: relative;
-                flex: 1;
-            }
-            .experience {
-
-            }
-        }
+        // justify-content: space-evenly;
 
         .results-row {
-            // padding: 0rem 2.5rem 0rem 2rem;
-            padding: 0rem 0rem 0rem 1.5rem;
             display: flex;
             justify-content: space-between;
             flex: 1;
             align-items: center;
+            width: 100%;
+            max-width: 100%;
+            padding: 0rem 0rem 0rem 1rem;
 
-            .material-symbols-outlined {
-                justify-content: center;
-                font-variation-settings:
-                    'FILL' 1,
-                    'wght' 900,
-                    'GRAD' 200,
-                    'opsz' 600;
-                transform: scale(1.4);
-            }
-            .results {
-                font-size: .8rem;
-                font-family: 'Poppins', sans-serif;
+            div {
                 display: flex;
-                flex: 1;
                 justify-content: center;
 
                 p {
-                    transform: scale(1.8);
+                    transform: scale(1.6);
+                    font-family: 'Source Sans Pro', sans-serif;
                 }
-                &.modes {
-                    flex: 2;
-                    display: flex;
-                    justify-content: space-between;
-                    
-                    .modes-fornow {
-                        justify-content: center;
+            }
 
-                        p {
-                            position: static;
-                            transform: scale(1.8);
-                            align-items: center;
-                        }
+            &.header {
+                flex: 1.5;
+                p {
+                    transform: scale(1.8);
+                    font-family: 'Source Sans Pro', sans-serif;
+                    // transform: scale(1.6);
+                    // font-family: 'Source Sans Pro', sans-serif;
+                }
+            }
+
+            .icon-container {
+                flex: .8;
+                // overflow: hidden;
+
+                .material-symbols-outlined {
+                    font-variation-settings:
+                        'FILL' 1,
+                        'wght' 900,
+                        'GRAD' 200,
+                        'opsz' 600;
+                    transform: scale(2.5);
+                    font-size: 1rem;
+                }
+            }
+
+            .question-amount-container {
+                flex: .8;
+
+                .question-amount {
+
+                }
+            }
+            p {
+                // transform: scale(1.6);
+                // font-family: 'Heebo', sans-serif;
+
+            }
+            .mode-container {
+                display: flex;
+                flex: 3;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+
+                .mode-experience-container {
+                    display: flex;
+                    justify-content: space-around;
+                    margin: 0rem 1rem;
+                    
+                    .mode-symbol {
+                        transform: scale(1.6);
+                        font-family: 'Open Sans', sans-serif;
+                        margin-right: .8rem;
+                    }
+
+                    .mode-experience {
+                        
                     }
                 }
-                &.timer {
+            }
+            .percentage-container {
+                flex: .5;
+                
+                .percentage {
+            
+                }
 
+            }
+            .timer-container {
+                flex: 1;
+
+                .timer {
+                    
                 }
             }
+
+            .material-symbols-outlined {
+                // TODO - colors 
+                
+            }
+
+            &.header {
+                justify-content: space-around;
+                padding: 0rem;
+            }
+
             &:nth-child(even) {
-                background: #caf6cb;
+                background: #dfdfdf;
             }
         }
-        
-        
     }
 
     .levels-container {
@@ -1395,7 +1573,8 @@ form {
         vertical-align: middle;
         text-align: center;
         width: 100%;
-        flex: 5;
+        flex: 4;
+        min-height: 20%;
         
         .level-info-container {
             display: flex;
@@ -1412,12 +1591,12 @@ form {
                 align-items: center;
 
                 .level-text {
-                    transform: scale(4);
-                    font-size: 2rem;
+                    transform: scale(6);
+                    font-size: 1.4rem;
                     font-family: 'Heebo', sans-serif;
 
                     &.exponential {
-                        transform: scale(3.5);
+                        transform: scale(4.8);
 
                     }
                 }
@@ -1425,7 +1604,7 @@ form {
             }
             .level-info-bottom {
                 position: relative;
-                flex: 1.4;
+                flex: 1;
                 display: flex;
                 align-items: center;
                 overflow: hidden;
@@ -1440,7 +1619,7 @@ form {
                     position: absolute;
                     color: #222;
                     height: 100%;
-                    width: 30%;
+                    width: 2.4rem;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -1485,14 +1664,16 @@ form {
     .submit-button {
         transition: all .5s !important;
         cursor: pointer;
-        background: grey;
-        border-radius: 2rem;
+        border-radius: 1.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 100%;
+        width: 90%;
         height: 100%;
         overflow: hidden;
+        z-index: 15;
+        position: relative;
+        bottom: 20%;
 
         &.active {
             transition: all .3s !important;
@@ -1504,8 +1685,8 @@ form {
             text-align: center;
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 2.5rem;
-            transform: scale(3);
+            font-size: 2rem;
+            transform: scale(3.5);
         }
     }
 
@@ -1525,7 +1706,7 @@ form {
     width: 100%;
     height: 100%;
     &.mySwiper {
-        height: 100%;
+        height: 120%;
         width: 100%;
     }
 }
@@ -1538,114 +1719,37 @@ form {
     width: 60%;
 
     .game-mode {
-        height: 85%;
+        z-index: 4;
+        height: 100%;
         width: 90%;
-        border-radius: 2rem;
         display: flex;
         flex-direction: column;
-        box-shadow: $blur-shadow $default-dark;
         cursor: auto;
+        border-radius: 0 0 1.5rem 1.5rem;
 
-        .settings-header {
-            border-radius: 2rem 2rem 0rem 0rem;
-            flex: 25;
-            display: flex;
-            justify-content: center;
-            font-size: 1rem;
-            align-items: center;
-            text-align: center;
-            font-family: 'Source Sans Pro', sans-serif;
-
-            .title-toggle{
-                transform: scale(1.8);
-                flex: 2;
-            }
-
-            .title-scroller {
-                transform: scale(1.8);
-                flex: 1;
-                padding: 0rem 2rem;
-
-            }
-        }
         .settings {
-            flex: 50;
+            height: 70%;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-
+            padding: 0rem 0rem 6rem 0rem;
 
             .settings-container {
-                flex: 10;
                 display: flex;
-                width: 100%;
+                width: 70%;
                 align-items: center;
-                justify-content: center;
+                justify-content: space-between;
+                flex-direction: column;
 
-                &.scroller {
-                    max-width: 50%;
-                    flex: 1;
-                    justify-content: space-around;
-                    flex-direction: column;
-                    padding: 0rem 2rem;
-
-                }
-                &.toggle {
-                    flex-direction: column;
-                    flex: 2;
-
-                    p {
-                        font-size: 1rem;
-                        font-family: 'Source Sans Pro', sans-serif;
-                    }
-
-                    .buttons-container {
-                        display: flex;
-                        justify-content: center;
-                        height: 100%;
-                        width: 80%;
-                        overflow: hidden;
-
-                        :first-child {
-                            border-radius: 1.5rem 0rem 0rem 1.5rem;
-                        }
-                        :last-child {
-                            border-radius: 0rem 1.5rem 1.5rem 0rem;
-                        }
-
-                        .toggle-button {
-                            font-family: 'Heebo', sans-serif;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            vertical-align: middle;
-                            width: 100%;
-                            height: 80%;
-                            // border-radius: 1rem;
-                            // margin: 0rem 1rem;
-                            transition: 0.2s;
-
-                            &.active {
-                                box-shadow: none;
-                                transform: translateY(.6rem);
-                                transition: 0.3s;
-                                color: rgba(255, 255, 255, 0.6);
-                            }
-
-                            p {
-                                font-size: 1rem;
-                                transform: scale(2.2);
-                            }
-                        }
-                    }
+                .input-information {
+                    display: flex;
+                    transform: scale(2) translateY(1rem);
+                    font-family: 'Source Sans Pro', sans-serif;
                 }
 
                 input[type=range] {
-                    // height: 38px;
-                    // -webkit-appearance: none;
-                    // margin: 10px 0;
-                    // width: 100%;
-                    // border: none;
-                    // appearance: slider;
+                    margin: 3rem 0rem 3rem;
                     -webkit-appearance: none;
                     appearance: none;
                     width: 100%;
@@ -1711,19 +1815,18 @@ form {
                 }
             }
         }
-        .settings-footer {
+        .settings-header {
+            height: 30%;
+            z-index: 3;
             cursor: grab;
             pointer-events: auto;
             display: flex;
             justify-content: center;
-            flex: 30;
             overflow: hidden;
-            height: 100%;
             width: 100%;
-            border-top: .6rem solid transparent;
+            border-top: .4rem solid transparent;
             box-shadow: $top-shadow rgba(0, 0, 0, 0.1);
             align-items: center;
-            padding-top: 0.3rem;
             border-radius: 0rem 0rem 2rem 2rem;
             border-bottom: .5rem solid transparent;
 
@@ -1998,9 +2101,18 @@ form {
         position: inherit;
         margin-bottom: 0;
         height: 4rem;
-    }
-    .navbar-btn {
-        font-size: 4vw;
+        
+        .navbar-container {
+            p {
+                font-size: 1rem;
+                transform: scale(1.6);
+            }
+            .material-symbols-outlined {
+                // margin-left: 2rem;
+                font-size: 1rem;
+                transform: scale(1.8);
+            }
+        }
     }
     .play-container {
         flex-direction: column;
@@ -2020,13 +2132,6 @@ form {
                 height: 50%;
                 margin: 0rem;
                 padding: 0rem;
-
-                .switch {
-
-                    &.large {
-                        width: 50%;
-                    }
-                }
             }
         }
         .play-container-right {
@@ -2049,7 +2154,7 @@ form {
         border-radius: 0;
         height: 100%;
 
-        .switch-column {
+        .switch-row {
             flex-direction: row;
         }
     }
@@ -2074,19 +2179,6 @@ form {
             height: 100%;
             width: 100%;
 
-            .settings-header {
-                font-size: .8rem;
-
-                
-                border-radius: 0rem;
-                .title-toggle {
-                    flex: 2
-                }
-    
-                .title-scroller {
-                    flex: 2
-                }
-            }
             .settings {
                 .settings-container {
 
@@ -2131,7 +2223,7 @@ form {
                     }
                 }
             }
-            .settings-footer {
+            .settings-header {
                 border-radius: 0rem;
 
                 p {

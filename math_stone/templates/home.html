@@ -7,36 +7,63 @@
 {% block main %}
     <div class="full-page active" id="home-tab">
         <div class="navbar">
-            <button class="navbar-btn waves-effect active">Home</button>
-            <button class="navbar-btn waves-effect">Profile</button>
-            <button id="dropdown-button" class="navbar-btn waves-effect">Menu</button>
+            <div class="navbar-container username">
+                <span class="material-symbols-outlined">person</span>
+                <p></p>
+            </div>
+            <div class="navbar-container"><p>Home</p></div>
+            <div class="navbar-container dropdown">
+                <button id="dropdown-button" class="navbar-container dropdown-toggle waves-effect">
+                    <p>Menu</p><span class="material-symbols-outlined">menu</span>
+                </button>
+            </div>
         </div>
         <div class="dropdown-menu" id="dropdown-menu">
-            <button class="dropdown-menu-button"><p>Leaderboard</p></button>
-            <button class="dropdown-menu-button dark-mode-toggle"><p>Darkmode</p></button>
-            <button class="dropdown-menu-button"><p>Settings</p></button>
-            <form action="/logout" method="POST" id="logout-form" class="dropdown-menu-button">
-                <button id="logout-button"><p>Logout</p></button>
+            <div class="dropdown-menu-content">
+                <p>Profile</p><span class="material-symbols-outlined" style="left: 5%;">account_circle</span>
+            </div>
+            <div class="dropdown-menu-content">
+                <p>Leaderboard</p><span class="material-symbols-outlined" style="left: 8%;">leaderboard</span>
+            </div>
+            <div class="dropdown-menu-content dark-mode-toggle">
+                <p>Darkmode</p><span class="material-symbols-outlined">dark_mode</span>
+            </div>
+            <div class="dropdown-menu-content">
+                <p>Settings</p><span class="material-symbols-outlined">settings</span>
+            </div>
+            <form class="dropdown-menu-content" action="/logout" method="POST" id="logout-button">
+                <button class="logout-button" id="logout-button">
+                    <p>Logout</p><span class="material-symbols-outlined">logout</span>
+                </button>
             </form>
         </div>
         <div class="play-container">
             <div class="play-container-left">
+                <div class="switchboard-container vanilla" id="switchboard">
+                    <div class="switch-row">
+                        <div class="switch" id="addition">
+                            <p class=switch-text>+</p>
+                        </div>
+                        <div class="switch" id="subtraction">
+                            <p class="switch-text">−</p>
+                        </div>
+                        <div class="switch" id="multiplication">
+                            <p class="switch-text">×</p>
+                        </div>
+                        <div class="switch" id="division">
+                            <p class="switch-text">÷</p>
+                        </div>
+                        <div class="switch" id="exponential">
+                            <p class="switch-text">x²</p> 
+                        </div>
+                    </div>
+                </div>
                 <div class="mode-select-container" id="mode-select">
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <div class="game-mode vanilla">
                                     <div class="settings-header">
-                                        <div class="title-toggle">
-                                            Questions: <span class="range-results">5</span>
-                                        </div>
-                                    </div>
-                                    <div class="settings">
-                                        <div class="settings-container scroller">
-                                            <input type="range" min="5" max="30" step="5" value="5" id="vanilla-questions" name="vanilla-questions">
-                                        </div>
-                                    </div>
-                                    <div class="settings-footer">
                                         <span class="material-symbols-outlined">icecream
                                             <div class="tooltip">
                                                 TODO
@@ -44,21 +71,18 @@
                                         </span>
                                         <p>Vanilla</p>
                                     </div>
+                                    <div class="settings">
+                                        <div class="settings-container">
+                                            <div class="input-information"><p>Questions: <span class="range-results">5</span></p></div>
+                                            <input type="range" min="1" max="20" step="1" value="5" id="vanilla-questions" name="vanilla-questions">
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="game-mode timed">
                                     <div class="settings-header">
-                                        <div class="title-toggle">
-                                            Time: <span class="range-results">20</span> s
-                                        </div>
-                                    </div>
-                                    <div class="settings">
-                                        <div class="settings-container scroller">
-                                            <input class="timer" type="range" min="20" max="120" step="20" value="20" id="timed-timer" name="timed-timer">
-                                        </div>
-                                    </div>
-                                    <div class="settings-footer">
                                         <span class="material-symbols-outlined">timer
                                             <div class="tooltip">
                                                 TODO
@@ -66,9 +90,16 @@
                                         </span>
                                         <p>Timed</p>
                                     </div>
+                                    <div class="settings">
+                                        <div class="settings-container">
+                                            <div class="input-information"><p>Time: <span class="range-results">20</span> s</p></div>
+                                            <input class="timer" type="range" min="5" max="60" step="5" value="20" id="timed-timer" name="timed-timer">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <!-- discontinued for now -->
+                            <!-- <div class="swiper-slide">
                                 <div class="game-mode choice">
                                     <div class="settings-header">
                                         <div class="title-scroller">
@@ -96,7 +127,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="settings-footer">
+                                    <div class="settings-header">
                                         <span class="material-symbols-outlined">grid_view
                                             <div class="tooltip">
                                                 TODO
@@ -105,20 +136,10 @@
                                         <p>Multiple Choice</p>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="swiper-slide">
                                 <div class="game-mode sudden">
                                     <div class="settings-header">
-                                        <div class="title-scroller">
-                                            Time: <span class="range-results">20</span> s
-                                        </div>
-                                    </div>
-                                    <div class="settings">
-                                        <div class="settings-container scroller">
-                                            <input class="timer" type="range" min="20" max="120" step="20" value="20" id="timed-timer" name="timed-timer">
-                                        </div>
-                                    </div>
-                                    <div class="settings-footer">
                                         <span class="material-symbols-outlined">Skull
                                             <div class="tooltip">
                                                 TODO
@@ -126,125 +147,115 @@
                                         </span>
                                         <p>Sudden Death</p>
                                     </div>
+                                    <div class="settings">
+                                        <div class="settings-container">
+                                            <div class="input-information"><p>Time: <span class="range-results">20</span> s</p></div>
+                                            <input class="timer" type="range" min="5" max="60" step="5" value="20" id="timed-timer" name="timed-timer">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="switchboard-container vanilla" id="switchboard">
-                    <div class="switch-column">
-                        <div class="switch" id="addition">
-                            <span class="switch-button">
-                                <p class=switch-text>+</p>
-                            </span>
-                        </div>
-                        <div class="switch" id="subtraction">
-                            <span class="switch-button">
-                                <p class="switch-text">−</p>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="switch-column">
-                        <div class="switch" id="multiplication">
-                            <span class="switch-button">
-                                <p class="switch-text">×</p>
-                            </span>
-                        </div>
-                        <div class="switch" id="division">
-                            <span class="switch-button">
-                                <p class="switch-text">÷</p>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="switch-column">
-                        <div class="switch large" id="exponential">
-                            <span class="switch-button">
-                                <p class="switch-text">x²</p>
-                            </span>
-                        </div>
+                <div class="submit-container">
+                    <div class="submit-button vanilla" id="submit-button">
+                        <p class="submit-button-text">PLAY</p>
                     </div>
                 </div>
             </div>
             <div class="play-container-right">
-                <div class="results-container" id="results">
+                <div class="results-container vanilla" id="results-container">
                     <div class="last-game-results">
+                        <div class="results-row header">
+                            <p>Game Mode</p>
+                            <p>Experience Gained</p>
+                            <p>Results</p>
+                        </div>
                         <div class="results-row">
-                            <div><span class="material-symbols-outlined">menu</span></div>
-                            <div class="results"><p class="questions">#</p></div>
-                            <div class="results"><p class="percentage">%</p></div>
-                            <div class="results modes">
-                                <div class="modes-fornow"><p class="addition">+</p></div>
-                                <div class="modes-fornow"><p class="subtraction">−</p></div>
-                                <div class="modes-fornow"><p class="multiplication">×</p></div>
-                                <div class="modes-fornow"><p class="division">÷</p></div>
-                                <div class="modes-fornow"><p class="exponential">x²</p></div>
+                            <div class="icon-container">
+                                <span class="material-symbols-outlined"></span>
                             </div>
-                            <div class="results"><p class="timer">Timer</p></div>
+                            <div class="question-amount-container">
+                                <p class="question-amount"></p>
+                            </div>
+                            <div class="mode-container">
+
+                            </div>
+                            <div class="percentage-container">
+                                <p class="percentage"></p>
+                            </div>
+                            <div class="timer-container">
+                                <p class="timer"></p>
+                            </div>
                         </div>
-                        <div class="results-row empty">
-                            <div><span class="material-symbols-outlined"></span></div>
-                            <div class="results"><p class="questions"></p></div>
-                            <div class="results"><p class="percentage"></p></div>
-                            <div class="results modes">
-                                <div class="modes-fornow"><p class="addition"></p></div>
-                                <div class="modes-fornow"><p class="subtraction"></p></div>
-                                <div class="modes-fornow"><p class="multiplication"></p></div>
-                                <div class="modes-fornow"><p class="division"></p></div>
-                                <div class="modes-fornow"><p class="exponential"></p></div>
+                        <div class="results-row">
+                            <div class="icon-container">
+                                <span class="material-symbols-outlined"></span>
                             </div>
-                            <div class="results"><p class="timer"></p></div>
+                            <div class="question-amount-container">
+                                <p class="question-amount"></p>
+                            </div>
+                            <div class="mode-container">
+
+                            </div>
+                            <div class="percentage-container">
+                                <p class="percentage"></p>
+                            </div>
+                            <div class="timer-container">
+                                <p class="timer"></p>
+                            </div>
                         </div>
-                        <div class="results-row empty">
-                            <div><span class="material-symbols-outlined"></span></div>
-                            <div class="results"><p class="questions"></p></div>
-                            <div class="results"><p class="percentage"></p></div>
-                            <div class="results modes">
-                                <div class="modes-fornow"><p class="addition"></p></div>
-                                <div class="modes-fornow"><p class="subtraction"></p></div>
-                                <div class="modes-fornow"><p class="multiplication"></p></div>
-                                <div class="modes-fornow"><p class="division"></p></div>
-                                <div class="modes-fornow"><p class="exponential"></p></div>
+                        <div class="results-row">
+                            <div class="icon-container">
+                                <span class="material-symbols-outlined"></span>
                             </div>
-                            <div class="results"><p class="timer"></p></div>
+                            <div class="question-amount-container">
+                                <p class="question-amount"></p>
+                            </div>
+                            <div class="mode-container">
+
+                            </div>
+                            <div class="percentage-container">
+                                <p class="percentage"></p>
+                            </div>
+                            <div class="timer-container">
+                                <p class="timer"></p>
+                            </div>
                         </div>
-                        <div class="results-row empty">
-                            <div><span class="material-symbols-outlined"></span></div>
-                            <div class="results"><p class="questions"></p></div>
-                            <div class="results"><p class="percentage"></p></div>
-                            <div class="results modes">
-                                <div class="modes-fornow"><p class="addition"></p></div>
-                                <div class="modes-fornow"><p class="subtraction"></p></div>
-                                <div class="modes-fornow"><p class="multiplication"></p></div>
-                                <div class="modes-fornow"><p class="division"></p></div>
-                                <div class="modes-fornow"><p class="exponential"></p></div>
+                        <div class="results-row">
+                            <div class="icon-container">
+                                <span class="material-symbols-outlined"></span>
                             </div>
-                            <div class="results"><p class="timer"></p></div>
+                            <div class="question-amount-container">
+                                <p class="question-amount"></p>
+                            </div>
+                            <div class="mode-container">
+
+                            </div>
+                            <div class="percentage-container">
+                                <p class="percentage"></p>
+                            </div>
+                            <div class="timer-container">
+                                <p class="timer"></p>
+                            </div>
                         </div>
-                        <div class="results-row empty">
-                            <div><span class="material-symbols-outlined"></span></div>
-                            <div class="results"><p class="questions"></p></div>
-                            <div class="results"><p class="percentage"></p></div>
-                            <div class="results modes">
-                                <div class="modes-fornow"><p class="addition"></p></div>
-                                <div class="modes-fornow"><p class="subtraction"></p></div>
-                                <div class="modes-fornow"><p class="multiplication"></p></div>
-                                <div class="modes-fornow"><p class="division"></p></div>
-                                <div class="modes-fornow"><p class="exponential"></p></div>
+                        <div class="results-row">
+                            <div class="icon-container">
+                                <span class="material-symbols-outlined"></span>
                             </div>
-                            <div class="results"><p class="timer"></p></div>
-                        </div>
-                        <div class="results-row empty">
-                            <div><span class="material-symbols-outlined"></span></div>
-                            <div class="results"><p class="questions"></p></div>
-                            <div class="results"><p class="percentage"></p></div>
-                            <div class="results modes">
-                                <div class="modes-fornow"><p class="addition"></p></div>
-                                <div class="modes-fornow"><p class="subtraction"></p></div>
-                                <div class="modes-fornow"><p class="multiplication"></p></div>
-                                <div class="modes-fornow"><p class="division"></p></div>
-                                <div class="modes-fornow"><p class="exponential"></p></div>
+                            <div class="question-amount-container">
+                                <p class="question-amount"></p>
                             </div>
-                            <div class="results"><p class="timer"></p></div>
+                            <div class="mode-container">
+
+                            </div>
+                            <div class="percentage-container">
+                                <p class="percentage"></p>
+                            </div>
+                            <div class="timer-container">
+                                <p class="timer"></p>
+                            </div>
                         </div>
                     </div>
                     <div class="levels-container">
@@ -273,7 +284,6 @@
                                     <span class="filled-xp"></span>
                                 </div>
                             </div>
-
                         </div>
                         <div class="level-info-container" id="multiplication-container">
                             <div class="level-info-top">
@@ -314,11 +324,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="submit-container">
-                    <div class="submit-button vanilla" id="submit-button">
-                        <p class="submit-button-text">PLAY</p>
                     </div>
                 </div>
             </div>

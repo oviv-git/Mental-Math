@@ -12,6 +12,7 @@ function main() {
             loginFormSubmit();
             break;
         case '/home':
+            displayUsername();
             updateUserLevels();
             displayLastGamesPlayed();
             switchHomeTabs();
@@ -202,16 +203,9 @@ async function loginFormCheck() {
     }
 
     isLoginSuccessful = await checkValidLogin(username.value, password.value)
-        .then(function(successful) {
-            if (successful) {
-                return true;
-            } else {
-                return ("Login Unsuccessful")
-            }
-        })
-        .catch(function(error) {
-            // Should redirect to the error page using javascript if it cant connect to app.py
-        })
+    if (isLoginSuccessful == false) {
+        isLoginSuccessful = "Login Unsuccessful";
+    }
         
     if (!errorHandler(isLoginSuccessful, password, passwordErrorBox, passwordLabel)) {
         unsuccessfulAttemptsLeft--;
@@ -223,6 +217,7 @@ async function loginFormCheck() {
         }
         return false;
     }
+    sessionStorage.setItem('username', username.value)
     return true;
 }
 
@@ -240,17 +235,17 @@ function registerFormSubmit() {
 }
 
 async function registerFormCheck() {
-    var username = document.getElementById('reg-username');
-    var usernameErrorBox = document.getElementById('reg-username-error');
-    var usernameLabel = document.getElementById('reg-username-label');
+    const username = document.getElementById('reg-username');
+    const usernameErrorBox = document.getElementById('reg-username-error');
+    const usernameLabel = document.getElementById('reg-username-label');
     
-    var password = document.getElementById('reg-password');
-    var passwordErrorBox = document.getElementById('reg-password-error')
-    var passwordLabel = document.getElementById('reg-password-label')
+    const password = document.getElementById('reg-password');
+    const passwordErrorBox = document.getElementById('reg-password-error')
+    const passwordLabel = document.getElementById('reg-password-label')
     
-    var confirm = document.getElementById('reg-confirm');
-    var confirmErrorBox = document.getElementById('reg-confirm-error')
-    var confirmLabel = document.getElementById('reg-confirm-label')
+    const confirm = document.getElementById('reg-confirm');
+    const confirmErrorBox = document.getElementById('reg-confirm-error')
+    const confirmLabel = document.getElementById('reg-confirm-label')
 
     if (!errorHandler(usernameBasicCheck(username.value), username, usernameErrorBox, usernameLabel)) {   
         return false;
@@ -429,73 +424,49 @@ function switchHomeTabs(tab) {
 }
 
 
-
-
-
-async function displayLastGamesPlayed() {
-    function activateMode(modeQuestions) {
-        if (modeQuestions != 0) {
-            return 'active';
-        } else {
-            return 'disabled';
-        }
-    }
-
-    const resultsContainer = document.querySelector('.results-container');
-    const resultsRows = resultsContainer.querySelectorAll('.results-row.empty');
+async function updateUserLevels() {
+    let userLevels = await getUserLevels();
+    let levelInfoContainers = document.querySelectorAll('.level-info-container');
     
-    const iconMap = {'vanilla': 'icecream', 'timed': 'timer', 'choice': 'grid_view', 'sudden': 'skull'}
-    const lastGamesPlayed = await getLastGamesPlayed();
+    for (let i = 0; i < levelInfoContainers.length; i++) {
+        let levelInfoContainer = levelInfoContainers[i];
+        let userLevel = userLevels[i]; 
+        
+        let levelNumber = levelInfoContainer.querySelector('.level-number p');
+        let xpBar = levelInfoContainer.querySelector('.filled-xp');
 
-    console.log(lastGamesPlayed)
-    
-    for (let i = 0; i < lastGamesPlayed.length; i++) {
-        let lastGamePlayed = lastGamesPlayed[i]
-        let resultsRow = resultsRows[i]
+        levelNumber.innerHTML = userLevel.level;
+        levelNumber.classList.add('fade-in');
 
-        let iconContainer = resultsRow.querySelector('.material-symbols-outlined');
-        let questionsContainer = resultsRow.querySelector('.questions');
-        let percentageContainer = resultsRow.querySelector('.percentage');
-
-        let additionContainer = resultsRow.querySelector('.addition');
-        let subtractionContainer = resultsRow.querySelector('.subtraction');
-        let multiplicationContainer = resultsRow.querySelector('.multiplication');
-        let divisionContainer = resultsRow.querySelector('.division');
-        let exponentialContainer = resultsRow.querySelector('.exponential');
-
-        let timerContainer = resultsRow.querySelector('.timer');
-
-        iconContainer.innerHTML = iconMap[lastGamePlayed[0]];
-        questionsContainer.innerHTML = lastGamePlayed[1];
-        percentageContainer.innerHTML = (lastGamePlayed[2] / lastGamePlayed[1] * 100).toFixed(0) + '%';
-
-        additionContainer.innerHTML = lastGamePlayed[3];
-        subtractionContainer.innerHTML = lastGamePlayed[4];
-        multiplicationContainer.innerHTML = lastGamePlayed[5];
-        divisionContainer.innerHTML = lastGamePlayed[6];
-        exponentialContainer.innerHTML = lastGamePlayed[7];
-
-        // additionContainer.classList.add(activateMode(lastGamePlayed[3]));
-        // subtractionContainer.classList.add(activateMode(lastGamePlayed[4]));
-        // multiplicationContainer.classList.add(activateMode(lastGamePlayed[5]));
-        // divisionContainer.classList.add(activateMode(lastGamePlayed[6]));
-        // exponentialContainer.classList.add(activateMode(lastGamePlayed[7]));
-
-        timerContainer.innerHTML = lastGamePlayed[8] + 's';
+        xpBar.style.width = userLevel.percentage
     }
 }
 
-async function getLastGamesPlayed() {
+function displayUsername() {
+/**
+ * Gets the username from sessionStorage and displays it on the navbar
+*/
+    const usernameContainer = document.querySelector('.navbar-container.username > p');
+    const username = sessionStorage.getItem('username');
+
+    usernameContainer.innerHTML = username;
+}
+
+async function getUserLevels() {
+/**
+ * AJAX request to get the users levels and % to next level when homepage loads
+ * and then to update the xp bars in the results container
+*/
     return new Promise(function(resolve, reject) {
         $.ajax({
-            url: '/get_last_games_played',
-            method: 'POST',
+            url: 'get_user_levels',
+            method: 'POST', 
             dataType: 'JSON',
             success: function(response) {
                 resolve(response)
             },
             error: function(xhr, status, error) {
-                console.log('GET_LAST_GAMES_PLAYED - ERROR - ', xhr, status, error)
+                console.log('UPDATE USER LEVELS - ERROR - ', xhr, status, error);
                 reject(error)
             }
         })
@@ -507,6 +478,98 @@ async function getLastGamesPlayed() {
         throw error
     })
 }
+/**
+ * Gets called when home.html first loads and again on every call of switchHomeTabs();
+ * Runs an sql query to SELECT the last 5 games of the user to populate results-container
+*/
+async function displayLastGamesPlayed() {
+
+    /**
+    * AJAX request to run the sql query
+    * @returns {promise} - Either returns up to 5 of the users previous games or an error
+    */
+    async function getLastGamesPlayed() {
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                url: '/get_last_games_played',
+                method: 'POST',
+                dataType: 'JSON',
+                success: function(response) {
+                    resolve(response)
+                },
+                error: function(xhr, status, error) {
+                    console.log('GET_LAST_GAMES_PLAYED - ERROR - ', xhr, status, error)
+                    reject(error)
+                }
+            })
+        })
+        .then(function(response) {
+            return response
+        })
+        .catch(function(error) {
+            throw error
+        })
+    }
+
+    // Its better if a skeleton of the rows already exists in home.html so it can easily be modified
+    // when a new game finishes and switchHomeTabs() gets called therefore this function gets called again
+    // with the new information, if I used createElement() I would have to have another function
+    // specifically for inserting another row and deleting the last one after switchHomeTabs() so I decided on this
+
+    const resultsContainer = document.querySelector('.results-container');
+    const resultsRows = resultsContainer.querySelectorAll('.results-row');
+    
+    // Map to associate the modes with their cooresponding google-icon name
+    const iconMap = {'vanilla': 'icecream', 'timed': 'timer', 'choice': 'grid_view', 'sudden': 'skull'}
+
+    // Map to associate the results index number to the mode
+    const modeMap = {3: '+', 4: '−', 5: '×', 6: '÷', 7: 'x²'};
+
+    const lastGamesPlayed = await getLastGamesPlayed();
+    
+    // lastGamesPlayed is limited to 5 rows.
+    for (let i = 0; i < lastGamesPlayed.length; i++) {
+        let lastGamePlayed = lastGamesPlayed[i]
+        let resultsRow = resultsRows[i + 1]
+        
+        let iconContainer = resultsRow.querySelector('span');
+        iconContainer.innerHTML = iconMap[lastGamePlayed[0]];
+
+        let question = resultsRow.querySelector('.question-amount');
+        question.innerHTML = lastGamePlayed[1];
+
+        let modeContainer = resultsRow.querySelector('.mode-container');
+        modeContainer.innerHTML = '';
+        
+        // Loops through the experience gained per mode
+        for (let j = 3; j < 8; j++) {
+            if (lastGamePlayed[j] !== 0) {
+                let modeExperienceContainer = document.createElement('div');
+                modeExperienceContainer.classList.add('mode-experience-container');
+                
+                let modeSymbol = document.createElement('p');
+                modeSymbol.classList.add('mode-symbol');
+                modeSymbol.innerHTML = modeMap[j];
+                modeExperienceContainer.appendChild(modeSymbol);
+                
+                let modeExperience = document.createElement('p');
+                modeExperience.classList.add('mode-experience');
+                modeExperience.innerHTML = lastGamePlayed[j];
+                modeExperienceContainer.appendChild(modeExperience);
+                
+                modeContainer.appendChild(modeExperienceContainer);
+            } 
+        }
+        let percentage = resultsRow.querySelector('.percentage');
+        percentage.innerHTML = (lastGamePlayed[2] / lastGamePlayed[1] * 100).toFixed(0) + '%';
+
+        let timer = resultsRow.querySelector('.timer');
+        timer.innerHTML = [lastGamePlayed[8].toFixed(2)] + 's';
+
+        resultsRow.className = 'results-row ' + lastGamePlayed[0];
+    }
+}
+
 
 /**
  * While on the play tab the key 'enter' doubles as a submit answer key.
@@ -567,6 +630,9 @@ function toggleSwitchboard() {
 }
 
 // Updates sessionStorage every time a switch is toggled on the switchboard.
+// It makes more sense to use sessionStorage since the switches have to remain at the state they were
+// when the tab is refreshed, having this function return switchBoardState would require another function
+// for saving the state of switches
 function saveSwitchboard() {
     let additionSwitchActive = document.getElementById('addition').classList.contains('active');
     let subtractionSwitchActive = document.getElementById('subtraction').classList.contains('active');
@@ -630,38 +696,43 @@ function initButtonsAnimation() {
     })
 }
 
+// TODO
 function initDropdownMenu() {
     const dropdownButton = document.getElementById('dropdown-button');
     const dropdownMenu = document.getElementById('dropdown-menu');
 
-    const dropdownMenuButtons = document.querySelectorAll('.dropdown-menu-button')
-    const numberOfButtons = dropdownMenuButtons.length
+    const dropdownMenuContents = document.querySelectorAll('.dropdown-menu-content');
+    const numberOfButtons = dropdownMenuContents.length;
 
+    // flag that says whether or not the dropdown menu is open or not
     var dropdownMenuOpen = false
 
-    function closeDropDownMenu() {
+
+    // Closes the dropdown menu
+    function closeDropdownMenu() {
         dropdownMenuOpen = false;
         dropdownMenu.style.display = 'none';
+        dropdownButton.classList.remove('active');
     }
 
     function clickOutsideOfMenu(event) {
         console.log(event.target)
-        if (event.target == classList.contains(".dropdown-menu-button")) {
-            console.log('wut')
+        if (!event.target.classList.contains('dropdown-menu-content') && !event.target.classList.contains('dropdown-toggle')) {
+            closeDropdownMenu();
         }
-        if (event.target == dropdownMenuButtons) {
-            console.log('wut2')
-        }
-
+        
     }
 
+    // Opens the menu, if the menu is open, closes the menu.
+    // If there is a click outside of the menu, close the menu.
     dropdownButton.addEventListener("click", () => {
         if (dropdownMenuOpen == true) {
-            closeDropDownMenu();
+            closeDropdownMenu();
             
         } else {
             dropdownMenuOpen = true;
             let buttonBounding = dropdownButton.getBoundingClientRect();
+            dropdownButton.classList.add('active');
 
             dropdownMenu.style.display = 'flex';
             
@@ -672,49 +743,27 @@ function initDropdownMenu() {
             dropdownMenu.style.height = buttonBounding.height * numberOfButtons + 'px';
 
             document.addEventListener("click", clickOutsideOfMenu);
+
+
         }
     })
 }
 
-
-
 // Initializes the mode select cards
 function initModeSelect() {
     let deviceMaxWidth = screen.width
-    var swiper = new Swiper();
-
-    if (deviceMaxWidth > 800) {
-        swiper = new Swiper('.swiper', {
-            grabCursor: true,
-            effect: "creative",
-            loop: true,
-            creativeEffect: {
-                prev: {
-                    shadow: false,
-                    translate: ["-120%", 0, -500],
-                },
-                next: {
-                    shadow: false,
-                    translate: ["120%", 0, -500],
-                },
-            },
-        });
-        
-    } else {
-        swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            loop: true,
-            pagination: {
-              el: ".swiper-pagination",
-              clickable: true,
-            },
-            navigation: {
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            },
-        });
-        
-    }
+    swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          prevEl: ".swiper-button-prev",
+        },
+    });
+    
     swiper.on('transitionEnd', async function () {
         submitButtonActivation();
         changeButtonColors();
@@ -727,7 +776,7 @@ function updateSliderValues() {
 
     settingsContainers.forEach((element) => {
         element.addEventListener('input', (event) => {
-            let displayedValue = element.querySelector('span');
+            let displayedValue = element.querySelector('.range-results');
             
             if (event.target.value != undefined) {
                 displayedValue.innerHTML = event.target.value;
@@ -773,7 +822,6 @@ function submitButtonActivation() {
 
 // Only gets called by submitButtonActivation(activeSlide);
 function submitButtonActivationCheck(activeSlide) {
-    const submitContainer = document.querySelector('.submit-container');
     const switchboardButtons = document.querySelectorAll('.switch');
   
     // will not activate if all the switches are off
@@ -792,15 +840,21 @@ function submitButtonActivationCheck(activeSlide) {
     return true
 }
 
+
+// Function to change the colors of everything when the game mode is switched
+// Gets called by initModeSelect()
+// TODO change name
 function changeButtonColors() {
     const switchboard = document.getElementById('switchboard');
     const submitButton = document.getElementById('submit-button');
+    const resultsContainer = document.getElementById('results-container');
 
     let activeSlide = document.querySelector('.swiper-slide.swiper-slide-active');
     let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
 
     switchboard.className = 'switchboard-container ' + currentMode;
     submitButton.className = 'submit-button ' + currentMode;
+    resultsContainer.className = 'results-container ' + currentMode;
 }
 
 function startGame() {
@@ -940,23 +994,20 @@ async function gameLogic(activeSlide) {
     // Used this to convert new Date() into something that can fit into the sql DATE type
     let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     
-    // console.log(generatedQuestions, gameResults)
     gameResults[0].gameTimer = gameTimeElapsed
     gameResults[0].gameDate = gameTimeStamp
     
-    
     // AJAX request to send results and return stats while also saving results from a completed game
     let resultsRecorded = await recordResults(JSON.stringify(gameResults));
-    console.log(resultsRecorded, 'p')
 
     successfullyFinishGame(gameResults, currentMode, resultsRecorded)
 }
 
 function successfullyFinishGame(gameResults, gameMode, resultsRecorded) {
     if (resultsRecorded == true) {
-        updateSessionMessage('Game successfully recorded', 'success')
+        updateSessionMessage('Game successfully recorded', 'success');
     } else {
-        updateSessionMessage('Error recording game', 'error')
+        updateSessionMessage('Error recording game', 'error');
         displaySessionInformation;
     }
 
@@ -1088,51 +1139,6 @@ function activateTimerProgress(progressContainer, timer, transition='linear') {
 }
 
 
-async function updateUserLevels() {
-    let userLevels = await getUserLevels();
-    let levelInfoContainers = document.querySelectorAll('.level-info-container');
-    
-    for (let i = 0; i < levelInfoContainers.length; i++) {
-        let levelInfoContainer = levelInfoContainers[i];
-        let userLevel = userLevels[i]; 
-        
-        let levelNumber = levelInfoContainer.querySelector('.level-number p');
-        let xpBar = levelInfoContainer.querySelector('.filled-xp');
-
-        levelNumber.innerHTML = userLevel.level;
-        levelNumber.classList.add('fade-in');
-
-        xpBar.style.width = userLevel.percentage
-    }
-}
-
-
-async function getUserLevels() {
-/**
- * AJAX request to get the users levels and % to next level when homepage loads
- * and then to update the xp bars in the results container
-*/
-    return new Promise(function(resolve, reject) {
-        $.ajax({
-            url: 'get_user_levels',
-            method: 'POST', 
-            dataType: 'JSON',
-            success: function(response) {
-                resolve(response)
-            },
-            error: function(xhr, status, error) {
-                console.log('UPDATE USER LEVELS - ERROR - ', xhr, status, error);
-                reject(error)
-            }
-        })
-    })
-    .then(function(response) {
-        return response
-    })
-    .catch(function(error) {
-        throw error
-    })
-}
 
 
 function triggerAnimation(element, animation, timeDelay) {
