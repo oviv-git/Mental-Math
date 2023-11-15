@@ -109,10 +109,10 @@ html.light .switchboard-container.vanilla .switch.active {
   border-color: #5ea3bb;
 }
 html.light .switchboard-container.timed .switch.active {
-  color: #dddbf2;
-  background: #9f9bcc;
-  box-shadow: #837eb6 0rem 0.4rem 0rem;
-  border-color: #938dc6;
+  color: #e1dbf2;
+  background: #a99bcc;
+  box-shadow: #8e7eb6 0rem 0.4rem 0rem;
+  border-color: #9d8dc6;
 }
 html.light .switchboard-container.choice .switch.active {
   color: #d3f7ef;
@@ -121,10 +121,10 @@ html.light .switchboard-container.choice .switch.active {
   border-color: #3dc5a8;
 }
 html.light .switchboard-container.sudden .switch.active {
-  color: #edc3c8;
-  background: #c0707b;
-  box-shadow: #a9545f 0rem 0.4rem 0rem;
-  border-color: #ba626e;
+  color: #ebc8c8;
+  background: #b97a7a;
+  box-shadow: #a15f5f 0rem 0.4rem 0rem;
+  border-color: #b26d6d;
 }
 html.light .swiper-slide {
   background: transparent;
@@ -159,33 +159,33 @@ html.light .swiper-slide .game-mode.vanilla .settings-header {
   color: #d3ebf3;
 }
 html.light .swiper-slide .game-mode.timed {
-  background: #e1e0ed;
-  color: #938ec0;
+  background: #e3e0ed;
+  color: #9c8ec0;
 }
 html.light .swiper-slide .game-mode.timed .settings {
-  color: #746dad;
+  color: #7f6dad;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #d1cfe4;
+  background: #d5cfe4;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
-  background: #d1cfe4;
+  background: #d5cfe4;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #b0acd5;
-  border: 0.5rem solid #b0acd5;
-  box-shadow: -415px 0 0 400px #b0acd5;
+  background: #b7acd5;
+  border: 0.5rem solid #b7acd5;
+  box-shadow: -415px 0 0 400px #b7acd5;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #b0acd5;
-  border: 0.5rem solid #b0acd5;
-  box-shadow: -415px 0 0 400px #b0acd5;
+  background: #b7acd5;
+  border: 0.5rem solid #b7acd5;
+  box-shadow: -415px 0 0 400px #b7acd5;
 }
 html.light .swiper-slide .game-mode.timed .settings-header {
-  background: #9f9bcc;
-  border-top-color: #938dc6;
-  border-bottom-color: #8f8ac4;
-  color: #dddbf2;
+  background: #a99bcc;
+  border-top-color: #9d8dc6;
+  border-bottom-color: #9a8ac4;
+  color: #e1dbf2;
 }
 html.light .swiper-slide .game-mode.choice {
   background: #c5ebe3;
@@ -225,48 +225,66 @@ html.light .swiper-slide .game-mode.choice .settings-header {
   color: #d3f7ef;
 }
 html.light .swiper-slide .game-mode.sudden {
-  background: #e5cbce;
-  color: #a9545f;
+  background: #e3cfcf;
+  color: #a15f5f;
 }
 html.light .swiper-slide .game-mode.sudden .settings {
-  color: #a9545f;
+  color: #a15f5f;
 }
 html.light .swiper-slide .game-mode.sudden .settings .toggle-button {
-  background: #cc979e;
-  box-shadow: 0rem 0.6rem 0rem #c3868e;
+  background: #c79f9f;
+  box-shadow: 0rem 0.6rem 0rem #bd8f8f;
 }
 html.light .swiper-slide .game-mode.sudden .settings .toggle-button.active {
-  background: #c0707b;
-  color: #edc3c8;
+  background: #b97a7a;
+  color: #ebc8c8;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #ddb9be;
+  background: #dabfbf;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-track {
-  background: #ddb9be;
+  background: #dabfbf;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #cc7d88;
-  border: 0.5rem solid #cc7d88;
-  box-shadow: -415px 0 0 400px #cc7d88;
+  background: #c68686;
+  border: 0.5rem solid #c68686;
+  box-shadow: -415px 0 0 400px #c68686;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #cc7d88;
-  border: 0.5rem solid #cc7d88;
-  box-shadow: -415px 0 0 400px #cc7d88;
+  background: #c68686;
+  border: 0.5rem solid #c68686;
+  box-shadow: -415px 0 0 400px #c68686;
 }
 html.light .swiper-slide .game-mode.sudden .settings-header {
-  background: #c0707b;
-  border-top-color: #ba626e;
-  border-bottom-color: #b85e6a;
-  color: #edc3c8;
+  background: #b97a7a;
+  border-top-color: #b26d6d;
+  border-bottom-color: #b06969;
+  color: #ebc8c8;
+}
+html.light .results-container .results-row.header {
+  background: #d9d9d9;
 }
 html.light .results-container .results-row.vanilla span {
-  color: #2d6070;
+  color: #46a0be;
+}
+html.light .results-container .results-row.timed span {
+  color: #7d68b3;
+}
+html.light .results-container .results-row.sudden span {
+  color: #bb5e5e;
+}
+html.light .results-container.vanilla {
+  border-color: #438ea7;
 }
 html.light .results-container.vanilla .last-game-results .results-row.header {
+  border-color: #4a96b0;
   background: #6cabc1;
-  color: #fff;
+}
+html.light .results-container.vanilla .last-game-results .results-row.header p {
+  color: #e7f4f8;
+}
+html.light .results-container.vanilla .levels-container {
+  border-color: #4a96b0;
 }
 html.light .results-container.vanilla .levels-container .level-info-container {
   background: #6cabc1;
@@ -274,10 +292,52 @@ html.light .results-container.vanilla .levels-container .level-info-container {
 html.light .results-container.vanilla .levels-container .level-info-container .level-info-top {
   background: #6cabc1;
 }
-html.light .results-container.vanilla .levels-container .level-info-container .level-info-bottom .level-number {
-  border: 0.3rem solid #222;
-  color: #222;
-  background: #e1e1e1;
+html.light .results-container.vanilla .levels-container .level-info-container .level-info-top p {
+  color: #274853;
+}
+html.light .results-container.timed {
+  border-color: #715da4;
+}
+html.light .results-container.timed .last-game-results .results-row.header {
+  border-color: #8b79bb;
+  background: #a99bcc;
+}
+html.light .results-container.timed .last-game-results .results-row.header p {
+  color: #f1eef9;
+}
+html.light .results-container.timed .levels-container {
+  border-color: #8b79bb;
+}
+html.light .results-container.timed .levels-container .level-info-container {
+  background: #a99bcc;
+}
+html.light .results-container.timed .levels-container .level-info-container .level-info-top {
+  background: #a99bcc;
+}
+html.light .results-container.timed .levels-container .level-info-container .level-info-top p {
+  color: #4f4174;
+}
+html.light .results-container.sudden {
+  border-color: #814c4c;
+}
+html.light .results-container.sudden .last-game-results .results-row.header {
+  border-color: #a75959;
+  background: #b97a7a;
+}
+html.light .results-container.sudden .last-game-results .results-row.header p {
+  color: #f1dbdb;
+}
+html.light .results-container.sudden .levels-container {
+  border-color: #a75959;
+}
+html.light .results-container.sudden .levels-container .level-info-container {
+  background: #b97a7a;
+}
+html.light .results-container.sudden .levels-container .level-info-container .level-info-top {
+  background: #b97a7a;
+}
+html.light .results-container.sudden .levels-container .level-info-container .level-info-top p {
+  color: #513030;
 }
 html.light .submit-container .submit-button {
   background: #d4d4d4;
@@ -300,14 +360,14 @@ html.light .submit-container.active .submit-button.vanilla .submit-button-text {
   color: #d3ebf3;
 }
 html.light .submit-container.active .submit-button.timed {
-  box-shadow: 0rem 1.5rem 0rem #837eb6, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
-  background: #8f8ac4;
+  box-shadow: 0rem 1.5rem 0rem #8e7eb6, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  background: #9a8ac4;
 }
 html.light .submit-container.active .submit-button.timed.active {
-  box-shadow: 0rem 0rem 0rem #837eb6, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #8e7eb6, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.timed .submit-button-text {
-  color: #dddbf2;
+  color: #e1dbf2;
 }
 html.light .submit-container.active .submit-button.choice {
   box-shadow: 0rem 1.5rem 0rem #2d8471, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
@@ -320,15 +380,15 @@ html.light .submit-container.active .submit-button.choice .submit-button-text {
   color: #92ebd8;
 }
 html.light .submit-container.active .submit-button.sudden {
-  color: #edc3c8;
-  box-shadow: 0rem 1.5rem 0rem #a9545f, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
-  background: #b85e6a;
+  color: #ebc8c8;
+  box-shadow: 0rem 1.5rem 0rem #a15f5f, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  background: #b06969;
 }
 html.light .submit-container.active .submit-button.sudden.active {
-  box-shadow: 0rem 0rem 0rem #a9545f, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #a15f5f, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.sudden .submit-button-text {
-  color: #edc3c8;
+  color: #ebc8c8;
 }
 html.light .question-container {
   border: 0.3rem solid #cccccc;
@@ -446,6 +506,7 @@ html.dark .switchboard-container .switch {
   background: #6f6f6f;
   box-shadow: #626262 0rem 1.4rem 0rem;
   color: #bfbfbf;
+  border-color: #646464;
 }
 html.dark .switchboard-container.vanilla .switch.active {
   background: #438ea7;
@@ -454,10 +515,10 @@ html.dark .switchboard-container.vanilla .switch.active {
   border-color: #3d8298;
 }
 html.dark .switchboard-container.timed .switch.active {
-  background: #645da4;
-  color: #dedcf1;
-  box-shadow: #504a84 0rem 0.4rem 0rem;
-  border-color: #5c5597;
+  background: #715da4;
+  color: #e2dcf1;
+  box-shadow: #5a4a84 0rem 0.4rem 0rem;
+  border-color: #685597;
 }
 html.dark .switchboard-container.choice .switch.active {
   background: #2d8471;
@@ -466,10 +527,10 @@ html.dark .switchboard-container.choice .switch.active {
   border-color: #287564;
 }
 html.dark .switchboard-container.sudden .switch.active {
-  background: #87434c;
-  color: #e4b2b8;
-  box-shadow: #653239 0rem 0.4rem 0rem;
-  border-color: #793c44;
+  background: #814c4c;
+  color: #e1b8b8;
+  box-shadow: #613939 0rem 0.4rem 0rem;
+  border-color: #744444;
 }
 html.dark .swiper-slide {
   background: transparent;
@@ -503,29 +564,29 @@ html.dark .swiper-slide .game-mode.vanilla .settings-header {
   border-top-color: #3d8298;
 }
 html.dark .swiper-slide .game-mode.timed {
-  background: #4a456f;
-  color: #bcb7e3;
+  background: #51456f;
+  color: #c4b7e3;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #746dad;
+  background: #7f6dad;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
-  background: #837eb6;
+  background: #8e7eb6;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #ada8d8;
-  border: 0.5rem solid #ada8d8;
-  box-shadow: -415px 0 0 400px #ada8d8;
+  background: #b6a8d8;
+  border: 0.5rem solid #b6a8d8;
+  box-shadow: -415px 0 0 400px #b6a8d8;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #ada8d8;
-  border: 0.5rem solid #ada8d8;
-  box-shadow: -415px 0 0 400px #ada8d8;
+  background: #b6a8d8;
+  border: 0.5rem solid #b6a8d8;
+  box-shadow: -415px 0 0 400px #b6a8d8;
 }
 html.dark .swiper-slide .game-mode.timed .settings-header {
-  background: #645da4;
-  border-bottom-color: #504a84;
-  border-top-color: #5c5597;
+  background: #715da4;
+  border-bottom-color: #5a4a84;
+  border-top-color: #685597;
 }
 html.dark .swiper-slide .game-mode.choice {
   background: #366258;
@@ -564,44 +625,123 @@ html.dark .swiper-slide .game-mode.choice .settings-header {
   border-top-color: #287564;
 }
 html.dark .swiper-slide .game-mode.sudden {
-  background: #5d3a3e;
-  color: #de9fa7;
+  background: #594141;
+  color: #daa6a6;
 }
 html.dark .swiper-slide .game-mode.sudden .settings {
-  color: #d39099;
+  color: #ce9898;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .toggle-button {
-  background: #984b56;
-  box-shadow: 0rem 0.6rem 0rem #87434c;
+  background: #915555;
+  box-shadow: 0rem 0.6rem 0rem #814c4c;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .toggle-button.active {
-  background: #bb757f;
+  background: #b47f7f;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #984b56;
+  background: #915555;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-track {
-  background: #a9545f;
+  background: #a15f5f;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #cc7d88;
-  border: 0.5rem solid #cc7d88;
-  box-shadow: -415px 0 0 400px #cc7d88;
+  background: #c68686;
+  border: 0.5rem solid #c68686;
+  box-shadow: -415px 0 0 400px #c68686;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #cc7d88;
-  border: 0.5rem solid #cc7d88;
-  box-shadow: -415px 0 0 400px #cc7d88;
+  background: #c68686;
+  border: 0.5rem solid #c68686;
+  box-shadow: -415px 0 0 400px #c68686;
 }
 html.dark .swiper-slide .game-mode.sudden .settings-header {
-  background: #87434c;
-  border-bottom-color: #653239;
-  border-top-color: #793c44;
+  background: #814c4c;
+  border-bottom-color: #613939;
+  border-top-color: #744444;
 }
-html.dark .results-container.vanilla .levels-container .level-info-container .level-info-bottom .level-number {
-  border: 0.3rem solid #222;
-  color: #222;
-  background: #e1e1e1;
+html.dark .results-container .results-row {
+  background: #3c3c3c;
+}
+html.dark .results-container .results-row.header {
+  background: #d9d9d9;
+}
+html.dark .results-container .results-row:nth-child(even) {
+  background: #4d4d4d;
+}
+html.dark .results-container .results-row.vanilla span {
+  color: #46a0be;
+}
+html.dark .results-container .results-row.timed span {
+  color: #7d68b3;
+}
+html.dark .results-container .results-row.sudden span {
+  color: #bb5e5e;
+}
+html.dark .results-container.vanilla {
+  border-color: #2d6070;
+}
+html.dark .results-container.vanilla .last-game-results .results-row.header {
+  background: #438ea7;
+  border-color: #346f83;
+}
+html.dark .results-container.vanilla .last-game-results .results-row.header p {
+  color: #b0deed;
+}
+html.dark .results-container.vanilla .levels-container {
+  border-color: #346f83;
+}
+html.dark .results-container.vanilla .levels-container .level-info-container {
+  background: #438ea7;
+}
+html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top {
+  background: #438ea7;
+}
+html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top p {
+  color: #b0deed;
+}
+html.dark .results-container.timed {
+  border-color: #4f4174;
+}
+html.dark .results-container.timed .last-game-results .results-row.header {
+  background: #715da4;
+  border-color: #5a4a84;
+}
+html.dark .results-container.timed .last-game-results .results-row.header p {
+  color: #d2c8ec;
+}
+html.dark .results-container.timed .levels-container {
+  border-color: #5a4a84;
+}
+html.dark .results-container.timed .levels-container .level-info-container {
+  background: #715da4;
+}
+html.dark .results-container.timed .levels-container .level-info-container .level-info-top {
+  background: #715da4;
+}
+html.dark .results-container.timed .levels-container .level-info-container .level-info-top p {
+  color: #d2c8ec;
+}
+html.dark .results-container.sudden {
+  border-color: #513030;
+}
+html.dark .results-container.sudden .last-game-results .results-row.header {
+  background: #814c4c;
+  border-color: #613939;
+}
+html.dark .results-container.sudden .last-game-results .results-row.header p {
+  color: #dda3a3;
+}
+html.dark .results-container.sudden .levels-container {
+  border-color: #613939;
+}
+html.dark .results-container.sudden .levels-container .level-info-container {
+  background: #814c4c;
+}
+html.dark .results-container.sudden .levels-container .level-info-container .level-info-top {
+  background: #814c4c;
+}
+html.dark .results-container.sudden .levels-container .level-info-container .level-info-top p {
+  color: #dda3a3;
 }
 html.dark .submit-container .submit-button {
   background: #6f6f6f;
@@ -624,14 +764,14 @@ html.dark .submit-container.active .submit-button.vanilla .submit-button-text {
   color: #9ed3e5;
 }
 html.dark .submit-container.active .submit-button.timed {
-  box-shadow: 0rem 1.5rem 0rem #504a84, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
-  background: #645da4;
+  box-shadow: 0rem 1.5rem 0rem #5a4a84, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  background: #715da4;
 }
 html.dark .submit-container.active .submit-button.timed.active {
-  box-shadow: 0rem 0rem 0rem #504a84, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #5a4a84, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.timed .submit-button-text {
-  color: #bcb7e3;
+  color: #c4b7e3;
 }
 html.dark .submit-container.active .submit-button.choice {
   box-shadow: 0rem 1.5rem 0rem #205e50, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
@@ -644,14 +784,14 @@ html.dark .submit-container.active .submit-button.choice .submit-button-text {
   color: #6bdfc6;
 }
 html.dark .submit-container.active .submit-button.sudden {
-  box-shadow: 0rem 1.5rem 0rem #653239, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
-  background: #87434c;
+  box-shadow: 0rem 1.5rem 0rem #613939, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  background: #814c4c;
 }
 html.dark .submit-container.active .submit-button.sudden.active {
-  box-shadow: 0rem 0rem 0rem #653239, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #613939, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.sudden .submit-button-text {
-  color: #e4b2b8;
+  color: #e1b8b8;
 }
 html.dark .question-container button {
   background: #4f9db7;
@@ -1095,10 +1235,13 @@ form {
   box-shadow: 0rem 0em 0.8rem #222;
   pointer-events: none;
 }
+.results-container * {
+  transition: all 0.3s;
+}
 .results-container .last-game-results {
-  flex: 8;
   display: flex;
   flex-direction: column;
+  flex: 7;
 }
 .results-container .last-game-results .results-row {
   display: flex;
@@ -1107,7 +1250,6 @@ form {
   align-items: center;
   width: 100%;
   max-width: 100%;
-  padding: 0rem 0rem 0rem 1rem;
 }
 .results-container .last-game-results .results-row div {
   display: flex;
@@ -1118,6 +1260,7 @@ form {
   font-family: "Source Sans Pro", sans-serif;
 }
 .results-container .last-game-results .results-row.header {
+  border-bottom: 0.8rem solid transparent;
   flex: 1.5;
 }
 .results-container .last-game-results .results-row.header p {
@@ -1162,10 +1305,8 @@ form {
   justify-content: space-around;
   padding: 0rem;
 }
-.results-container .last-game-results .results-row:nth-child(even) {
-  background: #dfdfdf;
-}
 .results-container .levels-container {
+  border-top: 0.8rem solid transparent;
   overflow: hidden;
   display: flex;
   justify-content: space-evenly;
@@ -1198,9 +1339,8 @@ form {
   transform: scale(4.8);
 }
 .results-container .levels-container .level-info-container .level-info-bottom {
-  position: relative;
-  flex: 1;
   display: flex;
+  flex: 1;
   align-items: center;
   overflow: hidden;
   margin: 0rem 0.5rem 0.5rem 0.5rem;
@@ -1209,9 +1349,10 @@ form {
 .results-container .levels-container .level-info-container .level-info-bottom .level-number {
   border: 0.3rem solid #222;
   z-index: 2;
+  flex: 0 0 auto;
   position: absolute;
   color: #222;
-  height: 100%;
+  height: 2.4rem;
   width: 2.4rem;
   display: flex;
   justify-content: center;
@@ -1229,6 +1370,8 @@ form {
   flex: 1;
   height: 100%;
   width: 100%;
+  left: 0%;
+  position: relative;
   background: #222;
   display: flex;
   justify-content: flex-start;
@@ -1236,7 +1379,6 @@ form {
   overflow: hidden;
 }
 .results-container .levels-container .level-info-container .level-info-bottom .level-bar .filled-xp {
-  position: relative;
   background: greenyellow;
   border-radius: 0rem 1rem 1rem 0rem;
   width: 0%;

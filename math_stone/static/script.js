@@ -25,6 +25,7 @@ function main() {
             modeSelectMultipleChoice();
             submitButtonActivation();
             startGame();
+            logout();
     }
 }
 
@@ -91,15 +92,15 @@ function initSlider() {
 // Initializes modals and tabs and links the correct modal tab with its cooresponding button
 function initForm() {
     // Initialize modal
-    var modal = document.querySelector('.modal')
-    var modalInstance = M.Modal.init(modal);
+    const modal = document.querySelector('.modal')
+    const modalInstance = M.Modal.init(modal);
 
     // Initialize tabs
-    var tab = document.querySelector('.tabs')
-    var tabInstances = M.Tabs.init(tab);
+    const tab = document.querySelector('.tabs')
+    const tabInstances = M.Tabs.init(tab);
     
-    var loginButton = document.getElementById('login-button')
-    var registerButton = document.getElementById('register-button')
+    const loginButton = document.getElementById('login-button')
+    const registerButton = document.getElementById('register-button')
     
     loginButton.addEventListener('click', function() {
         modalInstance.open();
@@ -119,8 +120,8 @@ function initForm() {
 
 // Resets login and registration froms back to their default values
 function clearForm() {
-    let modalOverlay = document.querySelector('.modal-overlay')
-    let forms = document.querySelectorAll('form')
+    const modalOverlay = document.querySelector('.modal-overlay')
+    const forms = document.querySelectorAll('form')
 
     for (let i = 0; i < forms.length; i++) {
         let form = forms[i]
@@ -155,7 +156,12 @@ function displaySessionInformation() {
     }
 }
 
-// messageType is success or error
+
+/**
+ * Updates the messages displayed on the toast and its class
+ * @param {string} message - The message displayed on the toast
+ * @param {string} messageType - The class that gets applied to the toast
+*/
 function updateSessionMessage(message, messageType) {
     // TODO BOTH HAVE TO BE STRINGS
     sessionStorage.setItem('message', message);
@@ -166,7 +172,7 @@ function updateSessionMessage(message, messageType) {
 // When the submit button is pressed check if the form is valid with loginFormCheck()
 // if loginFormCheck() returns true then submit the form to app.py
 function loginFormSubmit() {
-    var loginForm = document.getElementById('login-form')
+    const loginForm = document.getElementById('login-form')
 
     loginForm.addEventListener('submit', async function(e)  {
         e.preventDefault();
@@ -175,6 +181,14 @@ function loginFormSubmit() {
             updateSessionMessage('Login Successful', 'success');
             loginForm.submit();
         }
+    });
+}
+
+function logout() {
+    const logoutForm = document.getElementById('logout-form');
+
+    logoutForm.addEventListener('submit', function() {
+        updateSessionMessage('Logout Successful', 'success');
     });
 }
 
@@ -1076,13 +1090,14 @@ async function recordResults(results) {
 
 
 
+
 function initQuestionProgress(progressContainer, questions) {
 /** 
-    Clears all of the containers inside of the progressContainer
-
-    @param {element} progressContainer - The container that holds the progress bar
-    @param TODO
-    return TODO
+* Clears all of the containers inside of the progressContainer
+* 
+* @param {element} progressContainer - The container that holds the progress bar
+* @param TODO
+* return TODO
 */
     progressContainer.innerHTML = '';
     progressContainer.style.flexDirection = 'row';
@@ -1096,32 +1111,32 @@ function initQuestionProgress(progressContainer, questions) {
     return progressContainer.querySelectorAll('.game-progress-question');
 }
 
-function activateQuestionProgress(gameProgressDiv, correct) {
-/** 
-    Utilizes the progress bar as a way to visualize how many questions are answered/left
-    
-    @param {element} progressContainer - The container that holds the progress bar
-    @param {number} questionNumber - The number of the div that will have a class added to it
-    @param {bool} correct - true = correct, false = incorrect, add the cooresponding class 
-*/  
-    // progressContainer.style.flexDirection = 'row';
 
+/** 
+* Utilizes the progress bar as a way to visualize how many questions are answered/left
+*
+* @param {element} progressContainer - The container that holds the progress bar
+* @param {number} questionNumber - The number of the div that will have a class added to it
+* @param {bool} correct - true = correct, false = incorrect, add the cooresponding class 
+*/  
+function activateQuestionProgress(gameProgressDiv, correct) {
     if (correct === true) {
         gameProgressDiv.classList.add('correct');
     } else {
         gameProgressDiv.classList.add('incorrect');
     }
-
 }
 
-function activateTimerProgress(progressContainer, timer, transition='linear') {
+
 /** 
-    Utilizes the progress bar as a timer that can go forwards or backwards
-    
-    @param {element} progressContainer - The container that holds the progress bar
-    @param {number} timer - How long the timer animtion lasts until the bar fills/empties 
-    @param {string} transition - linear by default; can be set to any of the valid transition styles
+* Utilizes the progress bar as a timer that can go forwards or backwards
+*
+* @param {element} progressContainer - The container that holds the progress bar
+* @param {number} timer - How long the timer animtion lasts until the bar fills/empties 
+* @param {string} transition - linear by default; can be set to any of the valid transition styles
 */  
+function activateTimerProgress(progressContainer, timer, transition='linear') {
+
     progressContainer.innerHTML = '';
 
     let newProgressBar = document.createElement('div');
@@ -1139,15 +1154,14 @@ function activateTimerProgress(progressContainer, timer, transition='linear') {
 }
 
 
-
-
-function triggerAnimation(element, animation, timeDelay) {
 /** 
- * Triggers animations when the user submits their answer
- * @param {object} element - The element that will receieve the class
- * @param {string} animation - The class that will be added to trigger the animation
- * @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset
+    Triggers animations when the user submits their answer
+
+    @param {object} element - The element that will receieve the class
+    @param {string} animation - The class that will be added to trigger the animation
+    @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset
 */
+function triggerAnimation(element, animation, timeDelay) {
 
     // console.log(element, animation, timeDelay)
     // console.log(typeof(element), typeof(animation), typeof(timeDelay))

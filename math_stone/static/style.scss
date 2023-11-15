@@ -12,9 +12,9 @@ $blur-shadow: 0rem 0em .8rem;
 $vanilla-mode-light: #407587;
 $vanilla-mode: #438ea7;
 // $vanilla-mode: #4f9db7;
-$timed-mode: #645da4;
+$timed-mode: #715da4;
 $choice-mode: #2d8471;
-$sudden-mode: #87434c;
+$sudden-mode: #814c4c;
 
 
 // $vanilla-mode: #355d80;
@@ -207,8 +207,6 @@ html.light {
         background: transparent;
 
         .game-mode {
-            // box-shadow: $blur-shadow lighten($default-dark, 35%);
-
              &.vanilla {
                 background: lighten(desaturate($vanilla-mode-light, 15%), 45%);
                 color: lighten($vanilla-mode-light, 10%);
@@ -386,42 +384,105 @@ html.light {
     // cp2 - light
     .results-container {   
         .results-row {
-            &.vanilla {
+            &.header {
+                background: darken($default-light, 15%);
+            }
+            &.vanilla {                
                 span {
-                    color: darken($vanilla-mode, 15%);
+                    color: lighten(saturate($vanilla-mode, 5%), 5%);
+                }
+            }
+            &.timed {
+                span {
+                    color: lighten(saturate($timed-mode, 5%), 5%);
+                }
+            }
+            &.sudden {
+                span {
+                    color: lighten(saturate($sudden-mode, 15%), 15%);
                 }
             }
         }
         &.vanilla {
             .last-game-results {
                 .results-row.header {
+                    border-color: lighten(saturate($vanilla-mode-light, 5%), 10%);
                     background: lighten(saturate($vanilla-mode-light, 5%), 20%);
-                    color: $default-light;
+
+                    p {
+                        color: lighten(saturate($vanilla-mode-light, 20%), 55%);
+                    }
                 }
             }
-        
             .levels-container {
                 .level-info-container {
                 background: lighten(saturate($vanilla-mode-light, 5%), 20%);
 
                     .level-info-top {
                         background: lighten(saturate($vanilla-mode-light, 5%), 20%);
-                    }
-                    .level-info-bottom {
-                        .level-number {
-                            border: .3rem solid #222;
-                            color: #222;
-                            background: #e1e1e1;
-
-                        }
-                        .level-bar {
-                    
-                            .filled-xp {
-                            }
+                        
+                        p {
+                            color: darken($vanilla-mode-light, 15%);
                         }
                     }
                 }
+                border-color: lighten(saturate($vanilla-mode-light, 5%), 10%);
             }
+            border-color: $vanilla-mode;
+        }
+        &.timed {
+            .last-game-results {
+                .results-row.header {
+                    border-color: lighten(saturate($timed-mode, 5%), 10%);
+                    background: lighten(saturate($timed-mode, 5%), 20%);
+
+                    p {
+                        color: lighten(saturate($timed-mode, 20%), 45%);
+                    }
+                }
+            }
+            .levels-container {
+                .level-info-container {
+                background: lighten(saturate($timed-mode, 5%), 20%);
+
+                    .level-info-top {
+                        background: lighten(saturate($timed-mode, 5%), 20%);
+
+                        p {
+                            color: darken($timed-mode, 15%);
+                        }
+                    }
+                }
+                border-color: lighten(saturate($timed-mode, 5%), 10%);
+            }
+            border-color: $timed-mode;
+        }
+        &.sudden {
+            .last-game-results {
+                .results-row.header {
+                    border-color: lighten(saturate($sudden-mode, 5%), 10%);
+                    background: lighten(saturate($sudden-mode, 5%), 20%);
+
+                    p {
+                        color: lighten(saturate($sudden-mode, 20%), 50%);
+                    }
+                }
+            }
+            .levels-container {
+                .level-info-container {
+                background: lighten(saturate($sudden-mode, 5%), 20%);
+
+                    .level-info-top {
+                        background: lighten(saturate($sudden-mode, 5%), 20%);
+
+                        p {
+                            color: darken($sudden-mode, 15%);
+                        }
+                    }
+                }
+                border-color: lighten(saturate($sudden-mode, 5%), 10%);
+            }
+            border-color: $sudden-mode;
         }
     }
     .submit-container {
@@ -431,13 +492,10 @@ html.light {
 
             &.active {
                 box-shadow: 0rem 0rem 0rem darken($default-light, 25%), $top-shadow;
-
             }
             .submit-button-text {
                 color: #8b8b8b;
             }
-
-            
         }
         &.active {
             .submit-button {
@@ -649,6 +707,7 @@ html.dark {
             background: lighten($default-dark, 30%);
             box-shadow: lighten($default-dark, 25%) 0rem 1.4rem 0rem;
             color: darken($default-light, 25%);
+            border-color: lighten($default-dark, 26%);
         }
         &.vanilla {
             .switch {
@@ -859,7 +918,7 @@ html.dark {
                     }
                 }
                 .settings-header {
-                    background:  $sudden-mode;
+                    background: $sudden-mode;
                     border-bottom-color: darken($sudden-mode, 10%);
                     border-top-color: darken($sudden-mode, 4%);
                 }
@@ -867,38 +926,111 @@ html.dark {
         }
     }
     // cp2 - dark
-    .results-container {
+    .results-container {   
+        .results-row {
+            background: lighten($default-dark, 10%);
+            &.header {
+                background: darken($default-light, 15%);
+            }
+            &:nth-child(even) {
+                background: lighten($default-dark, 17%);
+            }
+            &.vanilla {                
+                span {
+                    color: lighten(saturate($vanilla-mode, 5%), 5%);
+                }
+            }
+            &.timed {
+                span {
+                    color: lighten(saturate($timed-mode, 5%), 5%);
+                }
+            }
+            &.sudden {
+                span {
+                    color: lighten(saturate($sudden-mode, 15%), 15%);
+                }
+            }
+        }
         &.vanilla {
             .last-game-results {
-        
-                .results-row {
+                .results-row.header {
+                    background:  $vanilla-mode;
+                    border-color: darken($vanilla-mode, 10%);
 
-                    &.header {
-                        
+                    p {
+                        color: lighten(saturate($vanilla-mode, 20%), 35%);
                     }
                 }
             }
-        
             .levels-container {
                 .level-info-container {
-        
-                    .level-info-top {
-                    }
-                    .level-info-bottom {
-                        .level-number {
-                            border: .3rem solid #222;
-                            color: #222;
-                            background: #e1e1e1;
+                    background:  $vanilla-mode;
 
-                        }
-                        .level-bar {
-                    
-                            .filled-xp {
-                            }
+                    .level-info-top {
+                        background:  $vanilla-mode;
+                        
+                        p {
+                            color: lighten(saturate($vanilla-mode, 20%), 35%);
                         }
                     }
                 }
+                border-color: darken($vanilla-mode, 10%);
             }
+            border-color: darken($vanilla-mode, 15%);
+        }
+        &.timed {
+            .last-game-results {
+                .results-row.header {
+                    background:  $timed-mode;
+                    border-color: darken($timed-mode, 10%);
+
+                    p {
+                        color: lighten(saturate($timed-mode, 20%), 35%);
+                    }
+                }
+            }
+            .levels-container {
+                .level-info-container {
+                    background:  $timed-mode;
+
+                    .level-info-top {
+                        background:  $timed-mode;
+                        
+                        p {
+                            color: lighten(saturate($timed-mode, 20%), 35%);
+                        }
+                    }
+                }
+                border-color: darken($timed-mode, 10%);
+            }
+            border-color: darken($timed-mode, 15%);
+        }
+        &.sudden {
+            .last-game-results {
+                .results-row.header {
+                    background:  $sudden-mode;
+                    border-color: darken($sudden-mode, 10%);
+
+                    p {
+                        color: lighten(saturate($sudden-mode, 20%), 35%);
+                    }
+                }
+            }
+            .levels-container {
+                .level-info-container {
+                    background:  $sudden-mode;
+
+                    .level-info-top {
+                        background:  $sudden-mode;
+                        
+                        p {
+                            color: lighten(saturate($sudden-mode, 20%), 35%);
+                        }
+                    }
+                }
+                border-color: darken($sudden-mode, 10%);
+            }
+            border-color: darken($sudden-mode, 15%);
         }
     }
     .submit-container {
@@ -1415,7 +1547,6 @@ form {
         box-sizing: border-box;
         border-left: 3px transparent solid;
         border-right: 3px transparent solid;
-        // box-shadow: $blur-shadow rgba(0, 0, 0, 0.7);
 
         &#addition {
             border-left-width: 0px;
@@ -1448,12 +1579,14 @@ form {
     box-shadow: $blur-shadow $default-dark;
     pointer-events: none;
 
+    * {
+        transition: all .3s;
+    }
+
     .last-game-results {
-        flex: 8;
-        // width: 100%;
         display: flex;
         flex-direction: column;
-        // justify-content: space-evenly;
+        flex: 7;
 
         .results-row {
             display: flex;
@@ -1462,7 +1595,6 @@ form {
             align-items: center;
             width: 100%;
             max-width: 100%;
-            padding: 0rem 0rem 0rem 1rem;
 
             div {
                 display: flex;
@@ -1475,18 +1607,17 @@ form {
             }
 
             &.header {
+                border-bottom: .8rem solid transparent;
                 flex: 1.5;
+
                 p {
                     transform: scale(1.8);
                     font-family: 'Source Sans Pro', sans-serif;
-                    // transform: scale(1.6);
-                    // font-family: 'Source Sans Pro', sans-serif;
                 }
             }
 
             .icon-container {
                 flex: .8;
-                // overflow: hidden;
 
                 .material-symbols-outlined {
                     font-variation-settings:
@@ -1505,11 +1636,6 @@ form {
                 .question-amount {
 
                 }
-            }
-            p {
-                // transform: scale(1.6);
-                // font-family: 'Heebo', sans-serif;
-
             }
             .mode-container {
                 display: flex;
@@ -1559,14 +1685,11 @@ form {
                 justify-content: space-around;
                 padding: 0rem;
             }
-
-            &:nth-child(even) {
-                background: #dfdfdf;
-            }
         }
     }
 
     .levels-container {
+        border-top: .8rem solid transparent;
         overflow: hidden;
         display: flex;
         justify-content: space-evenly;
@@ -1603,22 +1726,22 @@ form {
                 
             }
             .level-info-bottom {
-                position: relative;
-                flex: 1;
                 display: flex;
+                flex: 1;
                 align-items: center;
                 overflow: hidden;
                 margin: 0rem .5rem .5rem .5rem;
-                border-radius: 2rem;
+                border-radius: 2rem; 
                 // border: .3rem solid #222;
                 // outline: .3rem solid #222;
 
                 .level-number {
                     border: .3rem solid #222;
                     z-index: 2;
+                    flex: 0 0 auto;
                     position: absolute;
                     color: #222;
-                    height: 100%;
+                    height: 2.4rem;
                     width: 2.4rem;
                     display: flex;
                     justify-content: center;
@@ -1634,20 +1757,18 @@ form {
                 }
                 .level-bar {
                     border: .3rem solid #222 ;
-
                     flex: 1;
                     height: 100%;
                     width: 100%;
-                    // padding: .3rem .4rem .3rem 0rem;
+                    left: 0%;
+                    position: relative;
                     background: $default-dark;
                     display: flex;
                     justify-content: flex-start;
                     border-radius: 1rem 1rem 1rem 1rem;
                     overflow: hidden;
-
                     
                     .filled-xp {
-                        position: relative;
                         background: greenyellow;
                         border-radius: 0rem 1rem 1rem 0rem;
                         width: 0%;
