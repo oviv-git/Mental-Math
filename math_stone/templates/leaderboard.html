@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    MathStone Leaderboard
+{% endblock %}
+
+{% block main %}
+<div class="full-page active" id="home-tab">
+    <div class="navbar">
+        <div class="navbar-container username">
+            <span class="material-symbols-outlined">person</span>
+            <p></p>
+        </div>
+        <div class="navbar-container"><p>Leaderboard</p></div>
+        <div class="navbar-container dropdown">
+            <button id="dropdown-button" class="navbar-container dropdown-toggle waves-effect">
+                <p>Menu</p><span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu">
+        <div class="dropdown-menu-content dark-mode-toggle">
+            <p>Darkmode</p><span class="material-symbols-outlined">dark_mode</span>
+        </div>
+        <form class="dropdown-menu-content" action="/home" method="post" id="home-form">
+            <button class="dropdown-button">
+                <p>Home</p><span class="material-symbols-outlined" style="left: 4%">home</span>
+            </button>
+        </form>
+        <div class="dropdown-menu-content">
+            <p>Profile</p><span class="material-symbols-outlined" style="left: 5%;">account_circle</span>
+        </div>
+        <div class="dropdown-menu-content">
+            <p>Settings</p><span class="material-symbols-outlined">settings</span>
+        </div>
+        <form class="dropdown-menu-content" action="/logout" method="post" id="logout-form">
+            <button class="dropdown-button" id="logout-button">
+                <p>Logout</p><span class="material-symbols-outlined">logout</span>
+            </button>
+        </form>
+    </div>
+    {% for leaderboard in leaderboards %}
+        <p> {{ leaderboard }}</p>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

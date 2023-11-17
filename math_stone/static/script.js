@@ -1,5 +1,6 @@
 function main() {
-
+    // TODO MODULARIZE ALL THHESE FUNCTIONS like initHomePage, initLeaderboard, etc
+    
     storedColorScheme();
     wavesEffectToggle();
     displaySessionInformation();
@@ -26,6 +27,13 @@ function main() {
             submitButtonActivation();
             startGame();
             logout();
+            break;
+        case '/leaderboard':
+            initDropdownMenu();
+            toggleColorScheme();
+            displayUsername();
+            logout();
+            break;
     }
 }
 
@@ -42,19 +50,28 @@ function storedColorScheme() {
 
 // switches the class the html element between light/dark with with a button toggle
 function toggleColorScheme() {
-    var toggle = document.querySelector('.dark-mode-toggle')
-    var html = document.querySelector('html')
+    const toggle = document.querySelector('.dark-mode-toggle');
+    const html = document.querySelector('html');
+    const icon = toggle.querySelector('span');
+
+    console.log(icon);
 
     toggle.addEventListener('click', function() {
         if (html.classList.contains('light') == true) {
             html.classList.remove('light');
             html.classList.add('dark');
-            sessionStorage.setItem('prefferedMode', 'dark')
+            sessionStorage.setItem('prefferedMode', 'dark');
+            if (icon !== null) {
+                icon.innerHTML = 'dark_mode';
+            }
         } 
         else if (html.classList.contains('dark') == true) {
-            html.classList.remove('dark')
-            html.classList.add('light')
-            sessionStorage.setItem('prefferedMode', 'light')
+            html.classList.remove('dark');
+            html.classList.add('light');
+            sessionStorage.setItem('prefferedMode', 'light');
+            if (icon !== null) {
+                icon.innerHTML = 'light_mode';
+            }
         }
         wavesEffectToggle();
     });

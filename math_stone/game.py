@@ -27,13 +27,12 @@ class Game:
     # Converts the users experience into a level
     def convert_experience(self, user_experience):
         """
-        TODO
+
         """
         with open('levels.csv', 'r+', encoding="utf-8") as csvfile:
             levels_list = csv.reader(csvfile, delimiter=',')
 
             for level in levels_list:
-                # print(type(level[1]), type(user_experience))
                 if user_experience < int(level[1]):
                     return int(level[0])
                     
@@ -41,7 +40,7 @@ class Game:
     
     
 
-    def select_difficulty(self, level):
+    def select_difficulty(self, user_level):
         """
         Based on the users level and some randomness selects the difficulty level of the question.
         
@@ -51,25 +50,20 @@ class Game:
         Return: 
             (int): Number between 1-5 that will be the difficulty of the current question
         """
+        LEVELS_MAP = {0: 5, 1: 10, 2: 15, 3: 20, 4: 25, 5: 30, 6: 35, 7: 40, 8: 45, 9: 50}
+
+        # TODO: Clean up the way modifiers works.
         MODIFIERS = [-20, -15, -10, -8, -6, -5, -4, -3, -2, -1, 0, 0, 0, 0, 0, 1, 2]
-
-        # level = int(level)
-
         selected_modifier = choice(MODIFIERS)
-        level += selected_modifier
-        
-        # TODO : Clean up this code
 
-        if level <= 5:
-            return 1
-        if level <= 15:
-            return 2
-        if level <= 25:
-            return 3
-        if level <= 35:
-            return 4
-        if level <= 45:
-            return 5
+        # Adds the modifier to the user level for a chance at an easier or harder question
+        user_level += selected_modifier
+        
+        for difficulity, game_level in LEVELS_MAP.items():
+            if user_level <= game_level:
+                return difficulity
+            
+        return 0
 
 
     # TODO: explanation
@@ -80,17 +74,29 @@ class Game:
             question = getattr(self, question_type)()
 
             questions_list.append(question)
+
+        print('quesitons-list: ', questions_list)
         return questions_list
     
 
     # TODO : explanation
     def addition(self):
-        # TODO: Replace the auto-selected level with the users level sheet.
         level = self.convert_experience(self.experience[0])
         difficulty = self.select_difficulty(level)
 
-        operand_1 = self.generate_number(difficulty)
-        operand_2 = self.generate_number(difficulty)
+        ADDITION_MAP = [{'operand_1': 10, 'operand_2': 10},
+                        {'operand_1': 50, 'operand_2': 20},
+                        {'operand_1': 100, 'operand_2': 50},
+                        {'operand_1': 200, 'operand_2': 100},
+                        {'operand_1': 500, 'operand_2': 200},
+                        {'operand_1': 1000, 'operand_2': 500},
+                        {'operand_1': 1000, 'operand_2': 1000},
+                        {'operand_1': 5000, 'operand_2': 1000},
+                        {'operand_1': 10000, 'operand_2': 5000},
+                        {'operand_1': 10000, 'operand_2': 10000}] 
+
+        operand_1 = self.generate_number(ADDITION_MAP[difficulty]['operand_1'])
+        operand_2 = self.generate_number(ADDITION_MAP[difficulty]['operand_2'])
         result = operand_1 + operand_2
 
         return {"operator": "+", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
@@ -102,11 +108,20 @@ class Game:
         level = self.convert_experience(self.experience[1])
         difficulty = self.select_difficulty(level)
 
-        operand_1 = self.generate_number(difficulty)
-        operand_2 = self.generate_number(difficulty)
+        SUBTRACTION_MAP = [{'operand_1': 10, 'operand_2': 9},
+                           {'operand_1': 50, 'operand_2': 49},
+                           {'operand_1': 100, 'operand_2': 99},
+                           {'operand_1': 200, 'operand_2': 199},
+                           {'operand_1': 500, 'operand_2': 300},
+                           {'operand_1': 1000, 'operand_2': 500},
+                           {'operand_1': 1000, 'operand_2': 999},
+                           {'operand_1': 5000, 'operand_2': 3000},
+                           {'operand_1': 10000, 'operand_2': 5000},
+                           {'operand_1': 10000, 'operand_2': 9999}]
 
-        if operand_2 > operand_1:
-            operand_2, operand_1 = operand_1, operand_2
+        operand_1 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_1'])
+        operand_2 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_2'])
+
 
         result = operand_1 - operand_2
 
@@ -116,6 +131,18 @@ class Game:
     # TODO
     def multiplication(self):
         level = self.convert_experience(self.experience[2])
+        difficulty = self.select_difficulty(level)
+
+        MULTIPLICATION_MAP = [{'operand_1': 5, 'operand_2': 5},
+                              {'operand_1': 10, 'operand_2': 5},
+                              {'operand_1': 15, 'operand_2': 10},
+                              {'operand_1': 25, 'operand_2': 10},
+                              {'operand_1': 50, 'operand_2': 15},
+                              {'operand_1': 100, 'operand_2': 20},
+                              {'operand_1': 150, 'operand_2': 25},
+                              {'operand_1': 200, 'operand_2': 50},
+                              {'operand_1': 200, 'operand_2': 75},
+                              {'operand_1': 200, 'operand_2': 100}]
 
         return 'multiplication'
 
@@ -132,9 +159,6 @@ class Game:
         return 'exponential'
     
     # TODO
-    def generate_number(self, length):
-        min_num = 10 ** (length - 1)
-        max_num = (10 ** length) - 1
-
-        return randint(min_num, max_num)
+    def generate_number(self, max_num):
+        return randint(1, max_num)
         

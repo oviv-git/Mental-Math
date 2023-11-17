@@ -261,8 +261,11 @@ html.light .swiper-slide .game-mode.sudden .settings-header {
   border-bottom-color: #b06969;
   color: #ebc8c8;
 }
-html.light .results-container .results-row.header {
-  background: #d9d9d9;
+html.light .results-container .results-row {
+  color: #222;
+}
+html.light .results-container .results-row:nth-child(even) {
+  background: #e6e6e6;
 }
 html.light .results-container .results-row.vanilla span {
   color: #46a0be;
@@ -274,7 +277,7 @@ html.light .results-container .results-row.sudden span {
   color: #bb5e5e;
 }
 html.light .results-container.vanilla {
-  border-color: #438ea7;
+  border-color: #4a96b0;
 }
 html.light .results-container.vanilla .last-game-results .results-row.header {
   border-color: #4a96b0;
@@ -288,6 +291,7 @@ html.light .results-container.vanilla .levels-container {
 }
 html.light .results-container.vanilla .levels-container .level-info-container {
   background: #6cabc1;
+  border-color: #4a96b0;
 }
 html.light .results-container.vanilla .levels-container .level-info-container .level-info-top {
   background: #6cabc1;
@@ -296,7 +300,7 @@ html.light .results-container.vanilla .levels-container .level-info-container .l
   color: #274853;
 }
 html.light .results-container.timed {
-  border-color: #715da4;
+  border-color: #8b79bb;
 }
 html.light .results-container.timed .last-game-results .results-row.header {
   border-color: #8b79bb;
@@ -318,7 +322,7 @@ html.light .results-container.timed .levels-container .level-info-container .lev
   color: #4f4174;
 }
 html.light .results-container.sudden {
-  border-color: #814c4c;
+  border-color: #a75959;
 }
 html.light .results-container.sudden .last-game-results .results-row.header {
   border-color: #a75959;
@@ -661,6 +665,7 @@ html.dark .swiper-slide .game-mode.sudden .settings-header {
 }
 html.dark .results-container .results-row {
   background: #3c3c3c;
+  color: #fff;
 }
 html.dark .results-container .results-row.header {
   background: #d9d9d9;
@@ -900,8 +905,26 @@ form {
   background: #6bacc2;
 }
 
-.dark-mode-toggle {
-  width: 20%;
+.dark-mode-toggle.index {
+  position: absolute;
+  top: 4%;
+  left: 94%;
+  width: 5rem;
+  height: 5rem;
+  z-index: 3rem;
+}
+.dark-mode-toggle.index button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+  border: none;
+}
+.dark-mode-toggle.index button span {
+  font-variation-settings: "FILL" 1, "wght" 900, "GRAD" 0, "opsz" 600;
+  transform: scale(2);
 }
 
 .card {
@@ -1109,7 +1132,7 @@ form {
   border-bottom: 0.5rem transparent solid;
   border-radius: 0rem 0rem 1rem 1rem !important;
 }
-.dropdown-menu .dropdown-menu-content .logout-button {
+.dropdown-menu .dropdown-menu-content .dropdown-button {
   height: 100%;
   width: 100%;
   background: transparent;
@@ -1319,14 +1342,12 @@ form {
 .results-container .levels-container .level-info-container {
   display: flex;
   flex-direction: column;
-  background: #2d8471;
   height: 100%;
   width: 100%;
 }
 .results-container .levels-container .level-info-container .level-info-top {
   display: flex;
   justify-content: center;
-  background: #2d8471;
   flex: 5;
   align-items: center;
 }
@@ -1336,7 +1357,7 @@ form {
   font-family: "Heebo", sans-serif;
 }
 .results-container .levels-container .level-info-container .level-info-top .level-text.exponential {
-  transform: scale(4.8);
+  transform: scale(5);
 }
 .results-container .levels-container .level-info-container .level-info-bottom {
   display: flex;

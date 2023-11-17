@@ -19,6 +19,7 @@ Session(app)
 
 @app.route("/", )
 def index():
+    print('???')
     return render_template("/index.html")
 
 
@@ -45,7 +46,9 @@ def login():
 
     return error("Invalid session id", 400)
 
+
 @app.route('/logout', methods=['POST'])
+@login_required
 def logout():
     session.clear()
     return redirect(url_for('index'))
@@ -124,7 +127,18 @@ def profile():
 @login_required
 def stats():
     pass
-    # TODO  
+    # TODO
+
+
+@app.route('/leaderboard', methods=['POST'])
+@login_required
+def leaderboard():
+    user_id = session['user_id']
+    print(user_id)
+
+    leaderboards = [[0, 0, 0], [1, 2, 2], [3, 4, 5], [6, 7, 8]]
+
+    return render_template('leaderboard.html', leaderboards=leaderboards)
 
 
 @app.route('/error_redirect', methods=['GET', 'POST'])
@@ -149,11 +163,14 @@ def get_user_levels():
 
 
 @app.route('/generate_questions', methods=['POST'])
+@login_required
 def generate_questions():
     user_id = session['user_id']
     types = request.form.get('types')
     amount = request.form.get('amount')
     experience = get_user_experience(user_id)
+
+    print(types, amount, experience)
 
     game = Game(types, amount, experience)
     questions = game.generate_questions()
@@ -163,6 +180,7 @@ def generate_questions():
 
 # Gets called when a game completes successfully. Records results - Updates experience
 @app.route('/record_results', methods=['POST'])
+@login_required
 def record_results():
     user_id = session['user_id']
     results = json.loads(request.form.get('results'))
@@ -184,6 +202,7 @@ def record_results():
 
 
 @app.route('/get_last_games_played', methods=['POST'])
+@login_required
 def get_last_games_played():
     user_id = session['user_id']
 
