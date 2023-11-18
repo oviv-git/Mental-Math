@@ -79,7 +79,6 @@
                                             <input type="range" min="1" max="20" step="1" value="5" id="vanilla-questions" name="vanilla-questions">
                                         </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                             <div class="swiper-slide">
@@ -174,6 +173,7 @@
                             <p>Experience Gained</p>
                             <p>Results</p>
                         </div>
+                        <!-- Cant use Jinja here because the results have to filled after a tab-switch and not refresh -->
                         <div class="results-row">
                             <div class="icon-container">
                                 <span class="material-symbols-outlined"></span>
@@ -332,43 +332,52 @@
         </div>
     </div>
     <div class="full-page" id="game-tab">
-        <!-- Js will insert an extra class depending on the question type -->
-        <div class="game-progress-container"></div>
-        <div class="question-progress-container"></div>
-        <div class="question-container">
-            <div class="question-row operand">
-                <p class="question-text" id="operand-1"></p>
-            </div>
-            <div class="question-row operator">
-                <p class="question-text" id="operator"></p>
-                <p class="question-text" id="operand-2"></p>
-            </div>
-            <div class="question-row result">
-                <input type="number" class="question-result" id="input-result" autofocus>
-            </div>
-            <div class="question-row number-input">
-                <div class="number-row">
-                    <button class="number">1</button>
-                    <button class="number">2</button>
-                    <button class="number">3</button>
+        <button class="game-exit-button">
+            <span class="material-symbols-outlined">cancel</span>
+        </button>
+        <div class="game-tab-container">
+            <div class="progress-container game-questions"></div>
+            
+            <div class="progress-container game-timer"></div>
+            
+            <div class="progress-container question-timer"></div>
+            
+            
+            <div class="question-container">
+                <div class="question-row operand">
+                    <p class="question-text" id="operand-1"></p>
                 </div>
-                <div class="number-row">
-                    <button class="number">4</button>
-                    <button class="number">5</button>
-                    <button class="number">6</button>
+                <div class="question-row operator">
+                    <p class="question-text" id="operator"></p>
+                    <p class="question-text" id="operand-2"></p>
                 </div>
-                <div class="number-row">
-                    <button class="number">7</button>
-                    <button class="number">8</button>
-                    <button class="number">9</button>
+                <div class="question-row result">
+                    <input type="number" class="question-result" id="input-result" autofocus>
                 </div>
-                <div class="number-row">
-                    <button class="number" style="flex: 1">0</button>
-                    <button class="number" style="flex: 2.015">0</button>
+                <div class="question-row number-input">
+                    <div class="number-row">
+                        <button class="number">1</button>
+                        <button class="number">2</button>
+                        <button class="number">3</button>
+                    </div>
+                    <div class="number-row">
+                        <button class="number">4</button>
+                        <button class="number">5</button>
+                        <button class="number">6</button>
+                    </div>
+                    <div class="number-row">
+                        <button class="number">7</button>
+                        <button class="number">8</button>
+                        <button class="number">9</button>
+                    </div>
+                    <div class="number-row">
+                        <button class="number" style="flex: 1">0</button>
+                        <button class="number" style="flex: 2.015">0</button>
+                    </div>
                 </div>
-            </div>
-            <div class="question-row submit">
-                <button class="question-submit-btn" id="question-submit-button">SUBMIT</button>
+                <div class="question-row submit">
+                    <button class="question-submit-btn" id="question-submit-button">SUBMIT</button>
+                </div>
             </div>
         </div>
     </div>

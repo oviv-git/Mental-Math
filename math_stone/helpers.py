@@ -136,7 +136,7 @@ def generate_reward_experience(results):
 
         # print(f'{question}\n    Experience: {experience_gained}     Speed: {speed_multiplier}       Level: {level_multiplier}       Difficulty: {difficulty_multiplier} ')
 
-        OPERATOR_MAP = {'+': 0, '-': 1, 'x': 2, '/': 3, '^': 4}
+        OPERATOR_MAP = {'+': 0, '-': 1, 'x': 2, '÷': 3, '^': 4}
         operator = question['operator']
 
         reward_experience[OPERATOR_MAP[operator]] += experience_gained
@@ -219,7 +219,7 @@ def generate_user_level_info(experience_list):
 
 
 def record_game_results(results, reward_experience, user_id):
-    question_types = {'+': 0, '-': 0, '×': 0, '÷': 0, '*': 0}
+    question_types = {'+': 0, '-': 0, 'x': 0, '÷': 0, '^': 0}
     correct_count = 0
     questions = len(results) - 1
 

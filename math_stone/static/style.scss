@@ -5,7 +5,7 @@ $default-light: #fff;
 $default-dark: #222;
 $default-success: rgb(70, 170, 121);
 $default-error: rgb(194, 76, 76);
-$top-shadow: 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+$top-shadow: 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 $blur-shadow: 0rem 0em .8rem;
 
 // $vanilla-mode: #3f6d96;
@@ -1353,6 +1353,10 @@ form {
         align-items: center;
         height: 100vh;
 
+        &.leaderboard {
+            height: auto;
+        }
+
         &#game-tab {
             justify-content: start;
         }
@@ -2024,154 +2028,209 @@ form {
     }
 }
 
-.game-progress-container {
+.game-exit-button {
+    background: red; // TODO
+    align-items: center;
+    height: 5rem;
+    width: 5rem;
+    position: absolute;
     display: flex;
-    flex-direction: row-reverse;
-    height: 6%;
-    width: 36%;
-    border: solid .4rem black; // TODO
-    margin: 2rem 0rem 0rem 0rem;
-    border-radius: 3rem;
-    overflow: hidden;
+    justify-content: center;
+    left: 70%;
+    top: 5%;
+    border-radius: 100%;
+    border: none;
 
-    .progress-bar {
-        transition-timing-function: linear;
-        height: 100%;
-        width: 0%;
-        background: red; // TODO
-    }
+    .material-symbols-outlined {
+        font-variation-settings:
+                    'FILL' 0,
+                    'wght' 900,
+                    'GRAD' 0,
+                    'opsz' 600;
+                font-size: 4rem;
+        transform: scale(1.5);
 
-    .game-progress-question {
-        flex: 1;
-        // TODO
-        &.correct {
-            background: green;
-        }
-        &.incorrect {
-            background: lightcoral;
-        }
     }
 }
 
-.question-progress-container {
-    display: flex;
-    flex-direction: row-reverse;
-    height: 4%;
-    width: 26%;
-    border: solid .4rem black; // TODO
-    margin: 1.5rem 0rem 1rem 0rem;
-    border-radius: 3rem;
-    overflow: hidden;
-    
-    .progress-bar {
-        transition-timing-function: ease-in;
-        height: 100%;
-        width: 0%;
-        background: red; // TODO
-    }
-}
-
-
-.question-container {
-    border-radius: 2rem;
+.game-tab-container {
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 4rem;
-    height: 60%;
-    width: 24%;
+    justify-content: center;
+    width: 30%;
+    height: 90%;
     overflow: hidden;
-    
-    // Removes the arrows that come default with input[type='number']
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    .question-row {
-        flex: 1;
+    border-radius: 2rem;
+    align-items: center;
+
+    .progress-container {
         display: flex;
-        align-items: center;
+        height: 6%;
+        width: 100%;
+        border: solid .4rem #afafaf;
 
-        &.operand {
-            justify-content: right;
-            padding: 0rem 1.5rem;
-        }
-        &.operator {
-            justify-content: space-between;
-            padding: 0rem 1.5rem;
-        }
-        .question-text {
-            margin: 0;
-            color: $default-dark;
-            justify-content: right;
+        &.game-questions {
+            display: flex;
+            justify-content: flex-start;
+            height: 10%;
+            width: 100%;
+            margin: 1.5rem 0rem 1rem 0rem;
+            overflow: hidden;
 
-            &#operator {
-                // right: 78%;
-                transform: scale(1.2);
+            .game-progress-question {
+                flex: 1;
+                
+                // TODO
+                &.correct {
+                    background: green;
+                }
+                &.incorrect {
+                    background: lightcoral;
+                }
             }
         }
-        &.result {
-            margin: 0rem;
-            padding: 0rem;
-            // padding: 0rem 1rem;
-            // background: rgba(0, 0, 0 ,0.2);
-            // border: 0.2rem solid rgba(0, 0, 0, 0.4);
-
-            // border-radius: .5rem .5rem 0rem 0rem;
-
-            input[type="number"] {
-                font-size: 4rem;
+        &.game-timer {
+            .progress-bar {
+                transition-timing-function: linear;
                 height: 100%;
-                margin: 0;
-                padding: 0rem 1.5rem;
-                font-family: 'Open Sans', sans-serif;
-                // font-size: 1rem;
-                caret-color: transparent;
-                appearance: textfield;
-                -moz-appearance: textfield;
-                text-align: right;
-                border: none;
-                box-shadow: none;
-                outline: none;
+                width: 0%;
+                background: red; // TODO
+            }
+        }
+        &.question-timer {
+            flex-direction: row-reverse;
+            
+            .progress-bar {
+                transition-timing-function: ease-in;
+                height: 100%;
+                width: 0%;
+                background: red; // TODO
+            }
+        }
+    }
+    .question-container {
+        border-radius: 2rem;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Open Sans', sans-serif;
+        font-size: 4rem;
+        height: 60%;
+        width: 100%;
+        overflow: hidden;
+        
+        // Removes the arrows that come default with input[type='number']
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .question-row {
+            flex: 1;
+            display: flex;
+            align-items: center;
     
-                &:focus {
+            &.operand {
+                justify-content: right;
+                padding: 0rem 1.5rem;
+            }
+            &.operator {
+                justify-content: space-between;
+                padding: 0rem 1.5rem;
+            }
+            .question-text {
+                margin: 0;
+                color: $default-dark;
+                justify-content: right;
+    
+                &#operator {
+                    // right: 78%;
+                    transform: scale(1.2);
+                }
+            }
+            &.result {
+                margin: 0rem;
+                padding: 0rem;
+                // padding: 0rem 1rem;
+                // background: rgba(0, 0, 0 ,0.2);
+                // border: 0.2rem solid rgba(0, 0, 0, 0.4);
+    
+                // border-radius: .5rem .5rem 0rem 0rem;
+    
+                input[type="number"] {
+                    font-size: 4rem;
+                    height: 100%;
+                    margin: 0;
+                    padding: 0rem 1.5rem;
+                    font-family: 'Open Sans', sans-serif;
+                    // font-size: 1rem;
+                    caret-color: transparent;
+                    appearance: textfield;
+                    -moz-appearance: textfield;
+                    text-align: right;
                     border: none;
                     box-shadow: none;
                     outline: none;
+        
+                    &:focus {
+                        border: none;
+                        box-shadow: none;
+                        outline: none;
+                    }
                 }
             }
-        }
-
-        &.number-input {
-            display: none;
-        }
-        &.submit {
-            margin: 0rem;
-            margin: 0;
-            justify-content: center;
-
-            .question-submit-btn {
-                height: 100%;
-                width: 100%;
-                border: none;
-                transition: all .1s;
-
-                &.correct {
+    
+            &.number-input {
+                display: none;
+            }
+            &.submit {
+                margin: 0rem;
+                margin: 0;
+                justify-content: center;
+    
+                .question-submit-btn {
+                    height: 100%;
+                    width: 100%;
+                    border: none;
                     transition: all .1s;
-                    background: rgb(126, 218, 128);
-                }
-                &.incorrect {
-                    background: rgb(210, 96, 96);
+    
+                    &.correct {
+                        transition: all .1s;
+                        background: rgb(126, 218, 128);
+                    }
+                    &.incorrect {
+                        background: rgb(210, 96, 96);
+                    }
                 }
             }
         }
     }
-    .question-seperator {
-        border-radius: 1rem;
-        background: $default-dark;
-        height: .15rem;
-        width: 40%;
+}
+
+
+
+
+.leaderboards-container {
+    margin-top: 6rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .leaderboard {
+        height: 40rem;
+        width: 25%;
+        padding: 2rem;
+        margin: 8rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // height: 16rem;
+        // width: 8rem;
+        display: flex;
+        background: rgb(0, 255, 123);
     }
 }
 

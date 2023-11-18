@@ -19,7 +19,6 @@ Session(app)
 
 @app.route("/", )
 def index():
-    print('???')
     return render_template("/index.html")
 
 
@@ -134,7 +133,6 @@ def stats():
 @login_required
 def leaderboard():
     user_id = session['user_id']
-    print(user_id)
 
     leaderboards = [[0, 0, 0], [1, 2, 2], [3, 4, 5], [6, 7, 8]]
 
@@ -170,8 +168,6 @@ def generate_questions():
     amount = request.form.get('amount')
     experience = get_user_experience(user_id)
 
-    print(types, amount, experience)
-
     game = Game(types, amount, experience)
     questions = game.generate_questions()
 
@@ -186,6 +182,7 @@ def record_results():
     results = json.loads(request.form.get('results'))
 
     user_experience = get_user_experience(user_id)
+    
     reward_experience = generate_reward_experience(results)
 
     record_game_results(results, reward_experience, user_id)

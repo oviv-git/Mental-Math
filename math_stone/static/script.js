@@ -54,8 +54,6 @@ function toggleColorScheme() {
     const html = document.querySelector('html');
     const icon = toggle.querySelector('span');
 
-    console.log(icon);
-
     toggle.addEventListener('click', function() {
         if (html.classList.contains('light') == true) {
             html.classList.remove('light');
@@ -907,13 +905,12 @@ function startGame() {
 
 // The activeSlide parameter denotes what game mode the user selected
 async function gameLogic(activeSlide) {
-
-    let currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
-    let switchboardState = JSON.stringify(getSwitchboardState());
+    const currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
+    const switchboardState = JSON.stringify(getSwitchboardState());    
     
-    const gameProgressContainer = document.querySelector('.game-progress-container');
-
-    const questionProgressContainer = document.querySelector('.question-progress-container');
+    const progressContainerGameQuestions = document.querySelector('.progress-container.game-questions');
+    const progressContainerGameTimer = document.querySelector('.progress-container.game-timer');
+    const progressContainerQuestionTimer = document.querySelector('.progress-container.question-timer');
 
     let gameResults = []
     gameResults.push({'gameMode': currentMode});
@@ -924,11 +921,23 @@ async function gameLogic(activeSlide) {
     // Have to initialize timer here 
     let timer = 0;
     let shouldEndQuestions = false;
+
+    let shouldRecordResults = true;
+    let resultsRecorded = false;
     
     // Array which stores the game results to send back to app.py
     let generatedQuestions = await generateQuestions(switchboardState, questionAmount)
     
     switchHomeTabs('game-tab');
+
+    const gameExitButton = document.querySelector('.game-exit-button');
+    gameExitButton.addEventListener('click', function(event){
+        shouldRecordResults = false;
+        shouldEndQuestions = true;
+        result.value = 0;
+        submitButton.click();
+    })
+
     
     // All of the operand containers
     const operand1 = document.getElementById('operand-1');
@@ -940,7 +949,7 @@ async function gameLogic(activeSlide) {
     // This if statement covers all the gameplay for any timed gamemodes 
     if (activeSlide.querySelector('input').classList.contains('timer')) {
         timer = questionAmount * 1000;
-        activateTimerProgress(gameProgressContainer, timer);
+        activateTimerProgress(progressContainerGameTimer, timer);
         
         setTimeout(function() {
             shouldEndQuestions = true;
@@ -948,13 +957,17 @@ async function gameLogic(activeSlide) {
             submitButton.click();
         }, timer);
     } else {
-        var questionProgressDivs = initQuestionProgress(gameProgressContainer, questionAmount)
+        var questionProgressDivs = initQuestionProgress(progressContainerGameQuestions, questionAmount)
     }
 
-    let gameStartTime = new Date();
+    const gameStartTime = new Date();
 
     var correct_answers = 0;
     for (let i = 0; i < generatedQuestions.length; i++) {
+        gameExitButton.addEventListener('click', function(event) {
+            successfullyFinishGame(false)
+        })
+
         result.value = '';
 
         let question = generatedQuestions[i];
@@ -964,8 +977,9 @@ async function gameLogic(activeSlide) {
         operand2.innerHTML = question['operand_2']; 
         operator.innerHTML = question['operator'];
 
-        let questionTimerTime = question['difficulty'] * 5 * 1000;
-        activateTimerProgress(questionProgressContainer, questionTimerTime, 'ease');
+        let questionTimerTime = question['difficulty'] * 3 * 1000;
+
+        activateTimerProgress(progressContainerQuestionTimer, questionTimerTime, 'ease');
 
         // Question can not be accidently submitted while the input field is empty 
         while (result.value.length == 0) {
@@ -1029,17 +1043,19 @@ async function gameLogic(activeSlide) {
     gameResults[0].gameDate = gameTimeStamp
     
     // AJAX request to send results and return stats while also saving results from a completed game
-    let resultsRecorded = await recordResults(JSON.stringify(gameResults));
+    
+    if (shouldRecordResults) {
+        resultsRecorded = await recordResults(JSON.stringify(gameResults));
+    }
 
-    successfullyFinishGame(gameResults, currentMode, resultsRecorded)
+    successfullyFinishGame(resultsRecorded)
 }
 
-function successfullyFinishGame(gameResults, gameMode, resultsRecorded) {
+function successfullyFinishGame(resultsRecorded) {
     if (resultsRecorded == true) {
         updateSessionMessage('Game successfully recorded', 'success');
     } else {
-        updateSessionMessage('Error recording game', 'error');
-        displaySessionInformation;
+        updateSessionMessage('Game results not recorded', 'error');
     }
 
     displayLastGamesPlayed();
@@ -1154,6 +1170,8 @@ function activateQuestionProgress(gameProgressDiv, correct) {
 */  
 function activateTimerProgress(progressContainer, timer, transition='linear') {
 
+
+    console.log(progressContainer, timer)
     progressContainer.innerHTML = '';
 
     let newProgressBar = document.createElement('div');

@@ -345,51 +345,51 @@ html.light .results-container.sudden .levels-container .level-info-container .le
 }
 html.light .submit-container .submit-button {
   background: #d4d4d4;
-  box-shadow: 0rem 1.5rem 0rem #bfbfbf, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #bfbfbf, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container .submit-button.active {
-  box-shadow: 0rem 0rem 0rem #bfbfbf, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #bfbfbf, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container .submit-button .submit-button-text {
   color: #8b8b8b;
 }
 html.light .submit-container.active .submit-button.vanilla {
-  box-shadow: 0rem 1.5rem 0rem #5093aa, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #5093aa, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #5aa1b9;
 }
 html.light .submit-container.active .submit-button.vanilla.active {
-  box-shadow: 0rem 0rem 0rem #5093aa, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #5093aa, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.vanilla .submit-button-text {
   color: #d3ebf3;
 }
 html.light .submit-container.active .submit-button.timed {
-  box-shadow: 0rem 1.5rem 0rem #8e7eb6, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #8e7eb6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #9a8ac4;
 }
 html.light .submit-container.active .submit-button.timed.active {
-  box-shadow: 0rem 0rem 0rem #8e7eb6, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #8e7eb6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.timed .submit-button-text {
   color: #e1dbf2;
 }
 html.light .submit-container.active .submit-button.choice {
-  box-shadow: 0rem 1.5rem 0rem #2d8471, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #2d8471, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #40bda2;
 }
 html.light .submit-container.active .submit-button.choice.active {
-  box-shadow: 0rem 0rem 0rem #2d8471, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #2d8471, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.choice .submit-button-text {
   color: #92ebd8;
 }
 html.light .submit-container.active .submit-button.sudden {
   color: #ebc8c8;
-  box-shadow: 0rem 1.5rem 0rem #a15f5f, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #a15f5f, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #b06969;
 }
 html.light .submit-container.active .submit-button.sudden.active {
-  box-shadow: 0rem 0rem 0rem #a15f5f, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #a15f5f, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.sudden .submit-button-text {
   color: #ebc8c8;
@@ -750,50 +750,50 @@ html.dark .results-container.sudden .levels-container .level-info-container .lev
 }
 html.dark .submit-container .submit-button {
   background: #6f6f6f;
-  box-shadow: 0rem 1.5rem 0rem #555555, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container .submit-button.active {
-  box-shadow: 0rem 0rem 0rem #555555, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container .submit-button .submit-button-text {
   color: #bfbfbf;
 }
 html.dark .submit-container.active .submit-button.vanilla {
-  box-shadow: 0rem 1.5rem 0rem #346f83, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #346f83, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #438ea7;
 }
 html.dark .submit-container.active .submit-button.vanilla.active {
-  box-shadow: 0rem 0rem 0rem #346f83, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #346f83, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.vanilla .submit-button-text {
   color: #9ed3e5;
 }
 html.dark .submit-container.active .submit-button.timed {
-  box-shadow: 0rem 1.5rem 0rem #5a4a84, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #5a4a84, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #715da4;
 }
 html.dark .submit-container.active .submit-button.timed.active {
-  box-shadow: 0rem 0rem 0rem #5a4a84, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #5a4a84, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.timed .submit-button-text {
   color: #c4b7e3;
 }
 html.dark .submit-container.active .submit-button.choice {
-  box-shadow: 0rem 1.5rem 0rem #205e50, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #205e50, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #2d8471;
 }
 html.dark .submit-container.active .submit-button.choice.active {
-  box-shadow: 0rem 0rem 0rem #205e50, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #205e50, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.choice .submit-button-text {
   color: #6bdfc6;
 }
 html.dark .submit-container.active .submit-button.sudden {
-  box-shadow: 0rem 1.5rem 0rem #613939, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 1.5rem 0rem #613939, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   background: #814c4c;
 }
 html.dark .submit-container.active .submit-button.sudden.active {
-  box-shadow: 0rem 0rem 0rem #613939, 0rem -1rem 1rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #613939, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.sudden .submit-button-text {
   color: #e1b8b8;
@@ -1034,6 +1034,9 @@ form {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+}
+.full-page.active.leaderboard {
+  height: auto;
 }
 .full-page.active#game-tab {
   justify-content: start;
@@ -1543,7 +1546,7 @@ form {
   overflow: hidden;
   width: 100%;
   border-top: 0.4rem solid transparent;
-  box-shadow: 0rem -1rem 1rem rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1);
   align-items: center;
   border-radius: 0rem 0rem 2rem 2rem;
   border-bottom: 0.5rem solid transparent;
@@ -1578,90 +1581,115 @@ form {
   display: block;
 }
 
-.game-progress-container {
+.game-exit-button {
+  background: red;
+  align-items: center;
+  height: 5rem;
+  width: 5rem;
+  position: absolute;
   display: flex;
-  flex-direction: row-reverse;
+  justify-content: center;
+  left: 70%;
+  top: 5%;
+  border-radius: 100%;
+  border: none;
+}
+.game-exit-button .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 900, "GRAD" 0, "opsz" 600;
+  font-size: 4rem;
+  transform: scale(1.5);
+}
+
+.game-tab-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30%;
+  height: 90%;
+  overflow: hidden;
+  border-radius: 2rem;
+  align-items: center;
+}
+.game-tab-container .progress-container {
+  display: flex;
   height: 6%;
-  width: 36%;
-  border: solid 0.4rem black;
-  margin: 2rem 0rem 0rem 0rem;
-  border-radius: 3rem;
+  width: 100%;
+  border: solid 0.4rem #afafaf;
+}
+.game-tab-container .progress-container.game-questions {
+  display: flex;
+  justify-content: flex-start;
+  height: 10%;
+  width: 100%;
+  margin: 1.5rem 0rem 1rem 0rem;
   overflow: hidden;
 }
-.game-progress-container .progress-bar {
+.game-tab-container .progress-container.game-questions .game-progress-question {
+  flex: 1;
+}
+.game-tab-container .progress-container.game-questions .game-progress-question.correct {
+  background: green;
+}
+.game-tab-container .progress-container.game-questions .game-progress-question.incorrect {
+  background: lightcoral;
+}
+.game-tab-container .progress-container.game-timer .progress-bar {
   transition-timing-function: linear;
   height: 100%;
   width: 0%;
   background: red;
 }
-.game-progress-container .game-progress-question {
-  flex: 1;
-}
-.game-progress-container .game-progress-question.correct {
-  background: green;
-}
-.game-progress-container .game-progress-question.incorrect {
-  background: lightcoral;
-}
-
-.question-progress-container {
-  display: flex;
+.game-tab-container .progress-container.question-timer {
   flex-direction: row-reverse;
-  height: 4%;
-  width: 26%;
-  border: solid 0.4rem black;
-  margin: 1.5rem 0rem 1rem 0rem;
-  border-radius: 3rem;
-  overflow: hidden;
 }
-.question-progress-container .progress-bar {
+.game-tab-container .progress-container.question-timer .progress-bar {
   transition-timing-function: ease-in;
   height: 100%;
   width: 0%;
   background: red;
 }
-
-.question-container {
+.game-tab-container .question-container {
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
   font-family: "Open Sans", sans-serif;
   font-size: 4rem;
   height: 60%;
-  width: 24%;
+  width: 100%;
   overflow: hidden;
 }
-.question-container input::-webkit-outer-spin-button,
-.question-container input::-webkit-inner-spin-button {
+.game-tab-container .question-container input::-webkit-outer-spin-button,
+.game-tab-container .question-container input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.question-container .question-row {
+.game-tab-container .question-container .question-row {
   flex: 1;
   display: flex;
   align-items: center;
 }
-.question-container .question-row.operand {
+.game-tab-container .question-container .question-row.operand {
   justify-content: right;
   padding: 0rem 1.5rem;
 }
-.question-container .question-row.operator {
+.game-tab-container .question-container .question-row.operator {
   justify-content: space-between;
   padding: 0rem 1.5rem;
 }
-.question-container .question-row .question-text {
+.game-tab-container .question-container .question-row .question-text {
   margin: 0;
   color: #222;
   justify-content: right;
 }
-.question-container .question-row .question-text#operator {
+.game-tab-container .question-container .question-row .question-text#operator {
   transform: scale(1.2);
 }
-.question-container .question-row.result {
+.game-tab-container .question-container .question-row.result {
   margin: 0rem;
   padding: 0rem;
 }
-.question-container .question-row.result input[type=number] {
+.game-tab-container .question-container .question-row.result input[type=number] {
   font-size: 4rem;
   height: 100%;
   margin: 0;
@@ -1676,37 +1704,52 @@ form {
   box-shadow: none;
   outline: none;
 }
-.question-container .question-row.result input[type=number]:focus {
+.game-tab-container .question-container .question-row.result input[type=number]:focus {
   border: none;
   box-shadow: none;
   outline: none;
 }
-.question-container .question-row.number-input {
+.game-tab-container .question-container .question-row.number-input {
   display: none;
 }
-.question-container .question-row.submit {
+.game-tab-container .question-container .question-row.submit {
   margin: 0rem;
   margin: 0;
   justify-content: center;
 }
-.question-container .question-row.submit .question-submit-btn {
+.game-tab-container .question-container .question-row.submit .question-submit-btn {
   height: 100%;
   width: 100%;
   border: none;
   transition: all 0.1s;
 }
-.question-container .question-row.submit .question-submit-btn.correct {
+.game-tab-container .question-container .question-row.submit .question-submit-btn.correct {
   transition: all 0.1s;
   background: rgb(126, 218, 128);
 }
-.question-container .question-row.submit .question-submit-btn.incorrect {
+.game-tab-container .question-container .question-row.submit .question-submit-btn.incorrect {
   background: rgb(210, 96, 96);
 }
-.question-container .question-seperator {
-  border-radius: 1rem;
-  background: #222;
-  height: 0.15rem;
-  width: 40%;
+
+.leaderboards-container {
+  margin-top: 6rem;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.leaderboards-container .leaderboard {
+  height: 40rem;
+  width: 25%;
+  padding: 2rem;
+  margin: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: rgb(0, 255, 123);
 }
 
 @keyframes fadeIn {

@@ -100,7 +100,7 @@ class Game:
         result = operand_1 + operand_2
 
         return {"operator": "+", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
-                "difficulty": difficulty, "level": level}
+                "difficulty": difficulty + 1, "level": level}
 
 
     # TODO : explanation 
@@ -122,11 +122,13 @@ class Game:
         operand_1 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_1'])
         operand_2 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_2'])
 
+        if operand_1 < operand_2:
+            operand_1, operand_2 = operand_2, operand_1
 
         result = operand_1 - operand_2
 
         return {"operator": "-", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
-                "difficulty": difficulty, "level": level}
+                "difficulty": difficulty + 1, "level": level}
 
     # TODO
     def multiplication(self):
@@ -143,22 +145,69 @@ class Game:
                               {'operand_1': 200, 'operand_2': 50},
                               {'operand_1': 200, 'operand_2': 75},
                               {'operand_1': 200, 'operand_2': 100}]
+        
+        operand_1 = self.generate_number(MULTIPLICATION_MAP[difficulty]['operand_1'])
+        operand_2 = self.generate_number(MULTIPLICATION_MAP[difficulty]['operand_2'])
+        
+        result = round(operand_1 * operand_2)
 
-        return 'multiplication'
+        return {"operator": "x", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
+                "difficulty": difficulty + 1, "level": level}
 
     # TODO
     def division(self):
         level = self.convert_experience(self.experience[3])
+        difficulty = self.select_difficulty(level)
 
-        return 'division'
+        DIVISION_MAP = [{'operand_1': 5, 'operand_2': 5},
+                        {'operand_1': 5, 'operand_2': 10},
+                        {'operand_1': 10, 'operand_2': 15},
+                        {'operand_1': 10, 'operand_2': 25},
+                        {'operand_1': 15, 'operand_2': 50},
+                        {'operand_1': 20, 'operand_2': 100},
+                        {'operand_1': 25, 'operand_2': 150},
+                        {'operand_1': 50, 'operand_2': 200},
+                        {'operand_1': 75, 'operand_2': 200},
+                        {'operand_1': 100, 'operand_2': 200}]
+
+        operand_1 = self.generate_number(DIVISION_MAP[difficulty]['operand_1'], 2)
+        result = self.generate_number(DIVISION_MAP[difficulty]['operand_2'], 2)
+
+        operand_2 = round(operand_1 * result)
+
+        if operand_1 < operand_2:
+            operand_1, operand_2 = operand_2, operand_1
+
+
+        return {"operator": "÷", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
+                "difficulty": difficulty + 1, "level": level}
 
     # TODO
     def exponential(self):
         level = self.convert_experience(self.experience[4])
+        difficulty = self.select_difficulty(level)
+        
+        # TODO: Filler map so far.
+        EXPONENTIAL_MAP = [{'operand_1': 6, 'operand_2': 2},
+                        {'operand_1': 9, 'operand_2': 2},
+                        {'operand_1': 12, 'operand_2': 2},
+                        {'operand_1': 18, 'operand_2': 2},
+                        {'operand_1': 24, 'operand_2': 2},
+                        {'operand_1': 24, 'operand_2': 3},
+                        {'operand_1': 24, 'operand_2': 4},
+                        {'operand_1': 3, 'operand_2': 6},
+                        {'operand_1': 5, 'operand_2': 4},
+                        {'operand_1': 2, 'operand_2': 8}]
 
-        return 'exponential'
+        operand_1 = self.generate_number(EXPONENTIAL_MAP[difficulty]['operand_1'], 2)
+        operand_2 = self.generate_number(EXPONENTIAL_MAP[difficulty]['operand_2'], 2)
+
+        result = round(operand_1 ** operand_2)
+
+        return {"operator": "^", "operand_1": operand_1, "operand_2": operand_2, "result": result, 
+                "difficulty": difficulty + 1, "level": level}
     
     # TODO
-    def generate_number(self, max_num):
-        return randint(1, max_num)
+    def generate_number(self, max_num, min_num = 1):
+        return randint(min_num, max_num)
         

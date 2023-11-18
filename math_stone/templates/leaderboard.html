@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-<div class="full-page active" id="home-tab">
+<div class="full-page active leaderboard" id="leaderboard-tab">
     <div class="navbar">
         <div class="navbar-container username">
             <span class="material-symbols-outlined">person</span>
@@ -39,9 +39,12 @@
             </button>
         </form>
     </div>
-    {% for leaderboard in leaderboards %}
-        <p> {{ leaderboard }}</p>
-    {% endfor %}
+    <div class="leaderboards-container">
+
+        {% for leaderboard in leaderboards %}
+        <div class="leaderboard"> {{ leaderboard }} </div>
+        {% endfor %}
+    </div>
 </div>
 
 
