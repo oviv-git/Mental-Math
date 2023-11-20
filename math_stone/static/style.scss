@@ -599,6 +599,25 @@ html.light {
             }
         }
     }
+    .game-exit-container {
+        .game-exit-button {
+            background: red; // TODO
+            
+            .material-symbols-outlined {
+                    }
+                }
+        .tooltip-container {
+            background: red;
+
+    
+            &.active {
+
+            }
+            p {
+
+            }
+        }
+    }
 }
 
 // cp1
@@ -1144,6 +1163,24 @@ html.dark {
                         color: lighten(saturate($sudden-mode, 15%), 40%);
                     }
                 }
+            }
+        }
+    }
+    .game-exit-container {
+        .game-exit-button {
+            background: red; // TODO
+            
+            .material-symbols-outlined {
+                    }
+                }
+        .tooltip-container {
+            background: red;
+
+            &.active {
+
+            }
+            p {
+
             }
         }
     }
@@ -2044,7 +2081,7 @@ form {
                 }
             }
             .tooltip-container {
-                transition: visbility 0s, opacity 0.5s linear;
+                transition: visbility 0s, opacity 0.8s linear;
                 opacity: 0;
                 visibility: hidden;
                 display: flex;
@@ -2068,38 +2105,67 @@ form {
                     width: 100%;
                     word-wrap: break-word;
                     font-family: 'Heebo', sans-serif;
-                    font-size: 3rem;
+                    font-size: 2.4rem;
                 }
             }
         }
     }
 }
 
-.game-exit-button {
-    background: red; // TODO
-    align-items: center;
-    height: 5rem;
-    width: 5rem;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    left: 70%;
-    top: 5%;
-    border-radius: 100%;
-    border: none;
-
-    .material-symbols-outlined {
-        font-variation-settings:
+.game-exit-container {
+    .game-exit-button {
+        background: red; // TODO
+        align-items: center;
+        height: 5rem;
+        width: 5rem;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        left: 65%;
+        top: 2%;
+        border-radius: 100%;
+        border: none;
+        
+        .material-symbols-outlined {
+            font-variation-settings:
                     'FILL' 0,
                     'wght' 900,
                     'GRAD' 0,
                     'opsz' 600;
-                font-size: 4rem;
-        transform: scale(1.5);
+                    font-size: 4rem;
+                    transform: scale(1.5);
+                }
+            }
+    .tooltip-container {
+        transition: visbility 0s, opacity 0.8s linear;
+        opacity: 0;
+        position: absolute;
+        left: 35%;
+        top: 10%;
+        width: 30%;
+        height: 16rem;
+        visibility: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0rem 1rem;
+        justify-content: center;
+        align-items: center;
 
+        &.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        p {
+            text-align: center;
+            overflow-wrap: break-word;
+            width: 100%;
+            word-wrap: break-word;
+            font-family: 'Heebo', sans-serif;
+            font-size: 2.4rem;
+        }
     }
 }
-
+            
 .game-tab-container {
     margin-top: 2rem;
     display: flex;

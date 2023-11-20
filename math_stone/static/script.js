@@ -29,7 +29,7 @@ function main() {
             logout();
             
             // beginning of modularization 
-            initPlayTab();
+            initGameTab();
             break;
         case '/leaderboard':
             initDropdownMenu();
@@ -455,9 +455,11 @@ function switchHomeTabs(tab) {
 }
 
 
-// TODO: START OF MODULARIZATION - inits everything on play tab
-function initPlayTab() {
-    const exitButtonNodeList = document.querySelectorAll('.game-exit-button');
+// TODO: START OF MODULARIZATION - inits everything on game tab
+function initGameTab() {
+    const exitButtonNodeList = document.querySelectorAll('.game-exit-container');
+
+    initToolTips(exitButtonNodeList)
 }
 
 
@@ -834,7 +836,6 @@ function initToolTips(toolTipsNodeList) {
     if (matchMedia('(pointer:fine)').matches) {
         isMobileDevice = false
     }
-
 
     // TOOD
     function toggleToolTip(toolTipContainer) {
