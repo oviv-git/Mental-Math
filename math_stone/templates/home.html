@@ -66,11 +66,10 @@
                             <div class="swiper-slide">
                                 <div class="game-mode vanilla">
                                     <div class="settings-header">
-                                        <span class="material-symbols-outlined">icecream
-                                            <div class="tooltip">
-                                                TODO
-                                            </div>
-                                        </span>
+                                        <span class="material-symbols-outlined">icecream</span>
+                                        <div class="tooltip-container">
+                                            <p>The generic game experience, answer at your own pace</p>
+                                        </div>
                                         <p>Vanilla</p>
                                     </div>
                                     <div class="settings">
@@ -84,11 +83,10 @@
                             <div class="swiper-slide">
                                 <div class="game-mode timed">
                                     <div class="settings-header">
-                                        <span class="material-symbols-outlined">timer
-                                            <div class="tooltip">
-                                                TODO
-                                            </div>
-                                        </span>
+                                        <span class="material-symbols-outlined">timer</span>
+                                        <div class="tooltip-container">
+                                            <p>Race against the clock to see how many questions you can answer</p>
+                                        </div>
                                         <p>Timed</p>
                                     </div>
                                     <div class="settings">
@@ -130,7 +128,7 @@
                                     </div>
                                     <div class="settings-header">
                                         <span class="material-symbols-outlined">grid_view
-                                            <div class="tooltip">
+                                            <div class="tooltip-container">
                                                 TODO
                                             </div>
                                         </span>
@@ -141,11 +139,10 @@
                             <div class="swiper-slide">
                                 <div class="game-mode sudden">
                                     <div class="settings-header">
-                                        <span class="material-symbols-outlined">Skull
-                                            <div class="tooltip">
-                                                TODO
-                                            </div>
-                                        </span>
+                                        <span class="material-symbols-outlined">Skull</span>
+                                        <div class="tooltip-container">
+                                            <p>One wrong answer, and it's game over</p>
+                                        </div>
                                         <p>Sudden Death</p>
                                     </div>
                                     <div class="settings">
@@ -334,6 +331,9 @@
     <div class="full-page" id="game-tab">
         <button class="game-exit-button">
             <span class="material-symbols-outlined">cancel</span>
+            <div class="tooltip-container">
+                <p>This takes you back to the home tab without saving your game</p>
+            </div>
         </button>
         <div class="game-tab-container">
             <div class="progress-container game-questions"></div>
@@ -341,8 +341,6 @@
             <div class="progress-container game-timer"></div>
             
             <div class="progress-container question-timer"></div>
-            
-            
             <div class="question-container">
                 <div class="question-row operand">
                     <p class="question-text" id="operand-1"></p>

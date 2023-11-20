@@ -4,9 +4,10 @@ function main() {
     storedColorScheme();
     wavesEffectToggle();
     displaySessionInformation();
+    toggleColorScheme();
+
     switch (window.location.pathname) {
         case '/':
-            toggleColorScheme();
             initSlider();
             initForm();
             registerFormSubmit();
@@ -18,7 +19,6 @@ function main() {
             displayLastGamesPlayed();
             switchHomeTabs();
             loadSwitchboard();
-            toggleColorScheme();
             initDropdownMenu();
             toggleSwitchboard();
             initModeSelect();
@@ -27,10 +27,12 @@ function main() {
             submitButtonActivation();
             startGame();
             logout();
+            
+            // beginning of modularization 
+            initPlayTab();
             break;
         case '/leaderboard':
             initDropdownMenu();
-            toggleColorScheme();
             displayUsername();
             logout();
             break;
@@ -225,7 +227,7 @@ async function loginFormCheck() {
     let isUsernameAvailable = await checkUsernameAvailability(username.value)
     
     if (isUsernameAvailable == false) {
-        isUsernameAvailable = "Username is not registered";
+        isUsernameAvailable = 'Username is not registered';
     } 
     if (!errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)) {
         return false;
@@ -233,7 +235,7 @@ async function loginFormCheck() {
 
     isLoginSuccessful = await checkValidLogin(username.value, password.value)
     if (isLoginSuccessful == false) {
-        isLoginSuccessful = "Login Unsuccessful";
+        isLoginSuccessful = 'Login Unsuccessful';
     }
         
     if (!errorHandler(isLoginSuccessful, password, passwordErrorBox, passwordLabel)) {
@@ -282,7 +284,7 @@ async function registerFormCheck() {
     isUsernameAvailable = await checkUsernameAvailability(username.value)
 
     if (isUsernameAvailable == true) {
-        isUsernameAvailable = "Username is already registered";
+        isUsernameAvailable = 'Username is already registered';
         errorHandler(isUsernameAvailable, username, usernameErrorBox, usernameLabel)
         return false;
     } 
@@ -301,7 +303,7 @@ function usernameBasicCheck(username) {
     // TODO: checks for a username and returns an error message if its false. 
     // No error message will be returned for a success and therefore no need to return a bool, just count the return
     if (username.length == 0) {
-        return "Must enter a username"
+        return 'Must enter a username'
     }
 
     if (/\s/.test(username)) {
@@ -309,11 +311,11 @@ function usernameBasicCheck(username) {
     }
 
     if (username.length < 1 || username.length > 32) {
-        return "Username must be between 1-32 characters long";
+        return 'Username must be between 1-32 characters long';
     }
 
     if (/^[A-z]/.test(username) == false) {
-        return "Username must start with a letter";
+        return 'Username must start with a letter';
     }
 
     return true;
@@ -321,11 +323,11 @@ function usernameBasicCheck(username) {
 
 function passwordBasicCheck(password) {
     if (password.length == 0 ) {
-        return "Must enter a password"
+        return 'Must enter a password'
     }
     
     if (password.length < 8) {
-        return "Password must be atleast 8 characters long"
+        return 'Password must be atleast 8 characters long'
     }
     
     if (/\s/.test(password)) {
@@ -333,7 +335,7 @@ function passwordBasicCheck(password) {
     }
 
     if (/^[a-zA-Z]+$/.test(password)) {
-        return "Password must contain atleast one letter and number"
+        return 'Password must contain atleast one letter and number'
     }
     
     return true
@@ -341,7 +343,7 @@ function passwordBasicCheck(password) {
 
 function confirmBasicCheck(password, confirm) {
     if (password != confirm) {
-        return "Confirmation and password must match"
+        return 'Confirmation and password must match'
     }
     return true
 }
@@ -453,6 +455,12 @@ function switchHomeTabs(tab) {
 }
 
 
+// TODO: START OF MODULARIZATION - inits everything on play tab
+function initPlayTab() {
+    const exitButtonNodeList = document.querySelectorAll('.game-exit-button');
+}
+
+
 async function updateUserLevels() {
     let userLevels = await getUserLevels();
     let levelInfoContainers = document.querySelectorAll('.level-info-container');
@@ -470,6 +478,8 @@ async function updateUserLevels() {
         xpBar.style.width = userLevel.percentage
     }
 }
+
+
 
 function displayUsername() {
 /**
@@ -629,9 +639,9 @@ function gameInput() {
                 };
             });
     
-            submitButton.addEventListener('click', (event) => {
+            submitButton.addEventListener('click', () => {
                 resolve(true)
-            })
+            }, once=true)
         } else {
             document.removeEventListener('keydown');
         }
@@ -745,7 +755,6 @@ function initDropdownMenu() {
     }
 
     function clickOutsideOfMenu(event) {
-        console.log(event.target)
         if (!event.target.classList.contains('dropdown-menu-content') && !event.target.classList.contains('dropdown-toggle')) {
             closeDropdownMenu();
         }
@@ -754,7 +763,7 @@ function initDropdownMenu() {
 
     // Opens the menu, if the menu is open, closes the menu.
     // If there is a click outside of the menu, close the menu.
-    dropdownButton.addEventListener("click", () => {
+    dropdownButton.addEventListener('click', () => {
         if (dropdownMenuOpen == true) {
             closeDropdownMenu();
             
@@ -771,9 +780,7 @@ function initDropdownMenu() {
             dropdownMenu.style.width = buttonBounding.width + 'px';
             dropdownMenu.style.height = buttonBounding.height * numberOfButtons + 'px';
 
-            document.addEventListener("click", clickOutsideOfMenu);
-
-
+            document.addEventListener('click', clickOutsideOfMenu);
         }
     })
 }
@@ -781,15 +788,15 @@ function initDropdownMenu() {
 // Initializes the mode select cards
 function initModeSelect() {
     let deviceMaxWidth = screen.width
-    swiper = new Swiper(".mySwiper", {
+    swiper = new Swiper('.mySwiper', {
         slidesPerView: 1,
         loop: true,
         pagination: {
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
           clickable: true,
         },
         navigation: {
-          prevEl: ".swiper-button-prev",
+          prevEl: '.swiper-button-prev',
         },
     });
     
@@ -797,6 +804,10 @@ function initModeSelect() {
         submitButtonActivation();
         changeButtonColors();
     });
+    
+    // Initializes all the tooltips in the settingsHeaders on the home-tab
+    const settingsHeaders = document.querySelectorAll('.settings-header');
+    initToolTips(settingsHeaders);
 }
 
 // Updates the span value container for whatever settings-container is being modified
@@ -811,6 +822,51 @@ function updateSliderValues() {
                 displayedValue.innerHTML = event.target.value;
             }
         });
+    });
+}
+
+
+// TODO : toggles the tooltips on mobile with click and hover on pc
+function initToolTips(toolTipsNodeList) {
+   
+    // Assumes the user is on a mobile device unless pointer is detected then they have a mouse
+    var isMobileDevice = true
+    if (matchMedia('(pointer:fine)').matches) {
+        isMobileDevice = false
+    }
+
+
+    // TOOD
+    function toggleToolTip(toolTipContainer) {
+        let isToolTipActive = toolTipContainer.classList.contains('active');
+
+        if (!isToolTipActive) {
+            toolTipContainer.classList.add('active');
+        } else {
+            toolTipContainer.classList.remove('active');
+        }
+    }
+
+    // TODO - comments
+    toolTipsNodeList.forEach(toolTips => {
+        let iconContainer = toolTips.querySelector('span')
+        let toolTipContainer = toolTips.querySelector('.tooltip-container');
+
+        console.log(iconContainer, toolTipContainer)
+
+        if (isMobileDevice) {
+            iconContainer.addEventListener('click', function() {
+                toggleToolTip(toolTipContainer);
+                document.addEventListener('');
+            });
+        } else {
+            iconContainer.addEventListener('mouseover', function() {
+                toggleToolTip(toolTipContainer);
+            })
+            iconContainer.addEventListener('mouseout', function() {
+                toggleToolTip(toolTipContainer)
+            })
+        }
     });
 }
 
@@ -936,7 +992,7 @@ async function gameLogic(activeSlide) {
         shouldEndQuestions = true;
         result.value = 0;
         submitButton.click();
-    })
+    }, once=true)
 
     
     // All of the operand containers
@@ -946,27 +1002,25 @@ async function gameLogic(activeSlide) {
     const result = document.getElementById('input-result');
     const submitButton = document.getElementById('question-submit-button');
 
-    // This if statement covers all the gameplay for any timed gamemodes 
+    // This if statement covers all the gameplay for any timed modes: Timed, 
     if (activeSlide.querySelector('input').classList.contains('timer')) {
         timer = questionAmount * 1000;
-        activateTimerProgress(progressContainerGameTimer, timer);
+        activateTimerProgress(progressContainerGameTimer, timer);``
         
         setTimeout(function() {
             shouldEndQuestions = true;
             result.value = 0;
             submitButton.click();
         }, timer);
+    // For all non-timer modes: Vanilla
     } else {
-        var questionProgressDivs = initQuestionProgress(progressContainerGameQuestions, questionAmount)
+        initQuestionProgress(progressContainerGameQuestions, questionAmount);
     }
 
     const gameStartTime = new Date();
 
     var correct_answers = 0;
     for (let i = 0; i < generatedQuestions.length; i++) {
-        gameExitButton.addEventListener('click', function(event) {
-            successfullyFinishGame(false)
-        })
 
         result.value = '';
 
@@ -999,11 +1053,11 @@ async function gameLogic(activeSlide) {
             let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
 
             if (result.value == question['result']) {
-                if (!activeSlide.querySelector('input').classList.contains('timer')) {
-                    // console.log(questionProgressDivs)
-                    activateQuestionProgress(questionProgressDivs[i], true);
-                }
-                
+                // if (!activeSlide.querySelector('input').classList.contains('timer')) {
+                //     activateQuestionProgress(questionProgressDivs[i], true);
+                // }
+                    
+                activateQuestionProgress(progressContainerGameQuestions, true);
                 triggerAnimation(submitButton, 'correct', 200);
                 correct_answers++;
                 gameResults.push({'correct': true, 
@@ -1012,10 +1066,11 @@ async function gameLogic(activeSlide) {
                                   'difficulty': question['difficulty'], 
                                   'level': question['level']});
             } else {
-                if (!activeSlide.querySelector('input').classList.contains('timer')) {
-                    // console.log(questionProgressDivs)
-                    activateQuestionProgress(questionProgressDivs[i], false);
-                }
+                // if (!activeSlide.querySelector('input').classList.contains('timer')) {
+                //     // console.log(questionProgressDivs)
+                //     activateQuestionProgress(questionProgressDivs[i], false);
+                // }
+                activateQuestionProgress(progressContainerGameQuestions, false);
                 triggerAnimation(submitButton, 'incorrect', 200);
                 gameResults.push({'correct': false, 
                                   'operator': question['operator'],
@@ -1030,22 +1085,21 @@ async function gameLogic(activeSlide) {
             continue;
         }
     }
-    result.value = ''
 
-    let gameEndTime = new Date();
-    let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
-    
-    // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-    // Used this to convert new Date() into something that can fit into the sql DATE type
-    let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    
-    gameResults[0].gameTimer = gameTimeElapsed
-    gameResults[0].gameDate = gameTimeStamp
-    
     // AJAX request to send results and return stats while also saving results from a completed game
     
     if (shouldRecordResults) {
+        // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+        // Used this to convert new Date() into something that can fit into the sql DATE type
+        let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+        let gameEndTime = new Date();
+        let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
+        
+        gameResults[0].gameTimer = gameTimeElapsed
+        gameResults[0].gameDate = gameTimeStamp
+
         resultsRecorded = await recordResults(JSON.stringify(gameResults));
+
     }
 
     successfullyFinishGame(resultsRecorded)
@@ -1123,15 +1177,14 @@ async function recordResults(results) {
 
 
 
-
-function initQuestionProgress(progressContainer, questions) {
 /** 
 * Clears all of the containers inside of the progressContainer
 * 
 * @param {element} progressContainer - The container that holds the progress bar
 * @param TODO
 * return TODO
-*/
+*/  
+function initQuestionProgress(progressContainer, questions) {
     progressContainer.innerHTML = '';
     progressContainer.style.flexDirection = 'row';
     
@@ -1141,7 +1194,6 @@ function initQuestionProgress(progressContainer, questions) {
 
         progressContainer.appendChild(newQuestionProgressQuestion)
     }
-    return progressContainer.querySelectorAll('.game-progress-question');
 }
 
 
@@ -1150,13 +1202,20 @@ function initQuestionProgress(progressContainer, questions) {
 *
 * @param {element} progressContainer - The container that holds the progress bar
 * @param {number} questionNumber - The number of the div that will have a class added to it
-* @param {bool} correct - true = correct, false = incorrect, add the cooresponding class 
+* @param {bool} answer - true = correct, false = incorrect, adds the cooresponding class
 */  
-function activateQuestionProgress(gameProgressDiv, correct) {
-    if (correct === true) {
-        gameProgressDiv.classList.add('correct');
+function activateQuestionProgress(progressContainer, answer) {
+    const answerBinaryMap = {true: 'correct', false: 'incorrect'}
+    
+    var gameProgressDiv = progressContainer.querySelector('.game-progress-question');
+    var gameProgressDivs = progressContainer.querySelectorAll('.game-progress-question');
+    
+    if (gameProgressDiv != null) {
+        gameProgressDiv.classList.add(answerBinaryMap[answer])
     } else {
-        gameProgressDiv.classList.add('incorrect');
+        let newProgressDiv = document.createElement('div');
+        newProgressDiv.classList.add(answerBinaryMap[answer])
+        progressContainer.appendChild(newProgressDiv);
     }
 }
 

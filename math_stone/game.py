@@ -75,7 +75,6 @@ class Game:
 
             questions_list.append(question)
 
-        print('quesitons-list: ', questions_list)
         return questions_list
     
 

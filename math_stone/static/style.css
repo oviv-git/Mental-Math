@@ -158,6 +158,10 @@ html.light .swiper-slide .game-mode.vanilla .settings-header {
   border-bottom-color: #5aa1b9;
   color: #d3ebf3;
 }
+html.light .swiper-slide .game-mode.vanilla .settings-header .tooltip-container {
+  color: #5093aa;
+  background: #cedadf;
+}
 html.light .swiper-slide .game-mode.timed {
   background: #e3e0ed;
   color: #9c8ec0;
@@ -186,6 +190,10 @@ html.light .swiper-slide .game-mode.timed .settings-header {
   border-top-color: #9d8dc6;
   border-bottom-color: #9a8ac4;
   color: #e1dbf2;
+}
+html.light .swiper-slide .game-mode.timed .settings-header .tooltip-container {
+  background: #e3e0ed;
+  color: #9c8ec0;
 }
 html.light .swiper-slide .game-mode.choice {
   background: #c5ebe3;
@@ -224,6 +232,10 @@ html.light .swiper-slide .game-mode.choice .settings-header {
   border-bottom-color: #2d8471;
   color: #d3f7ef;
 }
+html.light .swiper-slide .game-mode.choice .settings-header .tooltip-container {
+  background: #c5ebe3;
+  color: #2d8471;
+}
 html.light .swiper-slide .game-mode.sudden {
   background: #e3cfcf;
   color: #a15f5f;
@@ -260,6 +272,10 @@ html.light .swiper-slide .game-mode.sudden .settings-header {
   border-top-color: #b26d6d;
   border-bottom-color: #b06969;
   color: #ebc8c8;
+}
+html.light .swiper-slide .game-mode.sudden .settings-header .tooltip-container {
+  background: #e3cfcf;
+  color: #a15f5f;
 }
 html.light .results-container .results-row {
   color: #222;
@@ -400,7 +416,7 @@ html.light .question-container {
 }
 html.light .question-container .question-row.result input[type=number] {
   color: #222;
-  border-top: 0.3rem solid #cccccc;
+  border-top-color: #cccccc;
 }
 html.light .question-container .question-submit-btn {
   background: #70bdd6;
@@ -567,6 +583,10 @@ html.dark .swiper-slide .game-mode.vanilla .settings-header {
   border-bottom-color: #346f83;
   border-top-color: #3d8298;
 }
+html.dark .swiper-slide .game-mode.vanilla .settings-header .tooltip-container {
+  background: #3e6a79;
+  color: #b0deed;
+}
 html.dark .swiper-slide .game-mode.timed {
   background: #51456f;
   color: #c4b7e3;
@@ -591,6 +611,10 @@ html.dark .swiper-slide .game-mode.timed .settings-header {
   background: #715da4;
   border-bottom-color: #5a4a84;
   border-top-color: #685597;
+}
+html.dark .swiper-slide .game-mode.timed .settings-header .tooltip-container {
+  background: #51456f;
+  color: #c4b7e3;
 }
 html.dark .swiper-slide .game-mode.choice {
   background: #366258;
@@ -628,6 +652,9 @@ html.dark .swiper-slide .game-mode.choice .settings-header {
   border-bottom-color: #205e50;
   border-top-color: #287564;
 }
+html.dark .swiper-slide .game-mode.choice .settings-header .tooltip-container {
+  background: #366258;
+}
 html.dark .swiper-slide .game-mode.sudden {
   background: #594141;
   color: #daa6a6;
@@ -662,6 +689,10 @@ html.dark .swiper-slide .game-mode.sudden .settings-header {
   background: #814c4c;
   border-bottom-color: #613939;
   border-top-color: #744444;
+}
+html.dark .swiper-slide .game-mode.sudden .settings-header .tooltip-container {
+  background: #594141;
+  color: #daa6a6;
 }
 html.dark .results-container .results-row {
   background: #3c3c3c;
@@ -1558,6 +1589,7 @@ form {
 }
 .swiper-slide .game-mode .settings-header .material-symbols-outlined {
   position: absolute;
+  cursor: help;
   left: 8%;
   font-variation-settings: "FILL" 1, "wght" 900, "GRAD" 0, "opsz" 600;
   font-size: 4rem;
@@ -1565,20 +1597,31 @@ form {
 .swiper-slide .game-mode .settings-header .material-symbols-outlined.results {
   font-size: 3rem;
 }
-.swiper-slide .game-mode .settings-header .material-symbols-outlined .tooltip {
-  overflow: visible;
+.swiper-slide .game-mode .settings-header .tooltip-container {
+  transition: visbility 0s, opacity 0.5s linear;
+  opacity: 0;
+  visibility: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  height: 50%;
+  padding: 0rem 1rem;
+  top: 8rem;
   position: fixed;
-  top: 2rem;
-  margin: 0rem 2rem 2rem 2rem;
-  display: none;
-  font-family: "Heebo", sans-serif;
-  width: 40rem;
-  height: 18rem;
-  background: #3b7b91;
-  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
 }
-.swiper-slide .game-mode .settings-header .material-symbols-outlined:hover .tooltip {
-  display: block;
+.swiper-slide .game-mode .settings-header .tooltip-container.active {
+  visibility: visible;
+  opacity: 1;
+}
+.swiper-slide .game-mode .settings-header .tooltip-container p {
+  text-align: center;
+  overflow-wrap: break-word;
+  width: 100%;
+  word-wrap: break-word;
+  font-family: "Heebo", sans-serif;
+  font-size: 3rem;
 }
 
 .game-exit-button {
@@ -1690,6 +1733,7 @@ form {
   padding: 0rem;
 }
 .game-tab-container .question-container .question-row.result input[type=number] {
+  border-top: 0.3rem solid black;
   font-size: 4rem;
   height: 100%;
   margin: 0;
@@ -1700,7 +1744,6 @@ form {
           appearance: textfield;
   -moz-appearance: textfield;
   text-align: right;
-  border: none;
   box-shadow: none;
   outline: none;
 }

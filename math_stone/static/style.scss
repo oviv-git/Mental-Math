@@ -250,6 +250,10 @@ html.light {
                     border-bottom-color: lighten(saturate($vanilla-mode-light, 5%), 15%);
                     color: lighten(saturate($vanilla-mode-light, 20%), 50%);
 
+                    .tooltip-container {
+                        color: lighten($vanilla-mode-light, 10%);
+                        background: lighten(desaturate($vanilla-mode-light, 15%), 45%);
+                    }
                 }
             }
             &.timed {
@@ -289,6 +293,10 @@ html.light {
                     border-bottom-color: lighten(saturate($timed-mode, 5%), 15%);
                     color: lighten(saturate($timed-mode, 20%), 40%);
 
+                    .tooltip-container {
+                        background: lighten($timed-mode, 40%);
+                        color: lighten($timed-mode, 15%);
+                    }
                 }
             }
             &.choice {
@@ -336,6 +344,11 @@ html.light {
                     border-top-color: lighten(saturate($choice-mode, 5%), 55%);
                     border-bottom-color: $choice-mode;
                     color: lighten(saturate($choice-mode, 20%), 55%);
+
+                    .tooltip-container {
+                        background: lighten($choice-mode, 50%);
+                        color: $choice-mode;
+                    }
                 }
             }
             &.sudden {
@@ -383,6 +396,11 @@ html.light {
                     border-top-color: lighten(saturate($sudden-mode, 5%), 16%);
                     border-bottom-color: lighten(saturate($sudden-mode, 5%), 15%);
                     color: lighten(saturate($sudden-mode, 20%), 45%);
+
+                    .tooltip-container {
+                        background: lighten($sudden-mode, 45%);
+                        color: lighten($sudden-mode, 10%);
+                    }
                 }
             }
         }
@@ -568,7 +586,7 @@ html.light {
             &.result {
                 input[type="number"] {
                     color: $default-dark;
-                    border-top: .3rem solid darken($default-light, 20%);
+                    border-top-color: darken($default-light, 20%);
                 }
             }
         }
@@ -802,6 +820,11 @@ html.dark {
                     background:  $vanilla-mode;
                     border-bottom-color: darken($vanilla-mode, 10%);
                     border-top-color: darken($vanilla-mode, 4%);
+
+                    .tooltip-container {
+                        background: desaturate(darken($vanilla-mode, 10%), 10%);
+                        color: lighten(saturate($vanilla-mode, 20%), 35%);
+                    }
                 }
             }
             &.timed {
@@ -839,6 +862,11 @@ html.dark {
                     background:  $timed-mode;
                     border-bottom-color: darken($timed-mode, 10%);
                     border-top-color: darken($timed-mode, 4%);
+
+                    .tooltip-container {
+                        background: desaturate(darken($timed-mode, 15%), 5%);
+                        color: lighten(saturate($timed-mode, 15%), 30%);
+                    }
                 }
             }
             &.choice {
@@ -885,6 +913,10 @@ html.dark {
                     background: $choice-mode;
                     border-bottom-color: darken($choice-mode, 10%);
                     border-top-color: darken($choice-mode, 4%);
+
+                    .tooltip-container {
+                        background: desaturate(darken($choice-mode, 5%), 20%);
+                    }
                 }
             }
             &.sudden {
@@ -931,6 +963,11 @@ html.dark {
                     background: $sudden-mode;
                     border-bottom-color: darken($sudden-mode, 10%);
                     border-top-color: darken($sudden-mode, 4%);
+
+                    .tooltip-container {
+                        background: desaturate(darken($sudden-mode, 10%), 10%);
+                        color: lighten(saturate($sudden-mode, 15%), 35%);
+                    }
                 }
             }
         }
@@ -1993,6 +2030,7 @@ form {
             }
             .material-symbols-outlined {
                 position: absolute;
+                cursor: help;
                 left: 8%;
                 font-variation-settings:
                     'FILL' 1,
@@ -2004,24 +2042,33 @@ form {
                 &.results {
                     font-size: 3rem;
                 }
+            }
+            .tooltip-container {
+                transition: visbility 0s, opacity 0.5s linear;
+                opacity: 0;
+                visibility: hidden;
+                display: flex;
+                flex-wrap: wrap;
+                width: 80%;
+                height: 50%;
+                padding: 0rem 1rem;
+                top: 8rem;
+                position: fixed;
+                justify-content: center;
+                align-items: center;
 
-                .tooltip {
-                    overflow: visible;
-                    position: fixed;
-                    top: 2rem;
-                    margin: 0rem 2rem 2rem 2rem;
-                    display: none;
-                    font-family: 'Heebo', sans-serif;
-                    width: 40rem;
-                    height: 18rem;
-                    background: #3b7b91;
-                    font-size: 1rem;
+                &.active {
+                    visibility: visible;
+                    opacity: 1;
                 }
 
-                &:hover {
-                    .tooltip {
-                        display: block;
-                    }
+                p {
+                    text-align: center;
+                    overflow-wrap: break-word;
+                    width: 100%;
+                    word-wrap: break-word;
+                    font-family: 'Heebo', sans-serif;
+                    font-size: 3rem;
                 }
             }
         }
@@ -2158,6 +2205,7 @@ form {
                 // border-radius: .5rem .5rem 0rem 0rem;
     
                 input[type="number"] {
+                    border-top: .3rem solid black;
                     font-size: 4rem;
                     height: 100%;
                     margin: 0;
@@ -2168,7 +2216,6 @@ form {
                     appearance: textfield;
                     -moz-appearance: textfield;
                     text-align: right;
-                    border: none;
                     box-shadow: none;
                     outline: none;
         
@@ -2438,14 +2485,6 @@ form {
                 border-radius: 0rem;
 
                 p {
-                }
-    
-                .material-symbols-outlined {
-                    &.results {
-                    }
-    
-                    .tooltip {
-                    }
                 }
             }
         }
