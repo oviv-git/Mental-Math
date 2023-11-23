@@ -135,13 +135,14 @@ def leaderboard():
     user_id = session['user_id']
 
     leaderboards = [
-    [[1, 'Stefan'], [2, 'Petia'], [3, 'Ivan'], [4, 'Maria'], [5, 'Nikolai'], [6, 'Anna'], [7, 'Elena'], [8, 'Silvia'], [9, 'Dimitar'], [10, 'Georgi']],
-    [[11, 'Dimitar'], [12, 'Silvia'], [13, 'Georgi'], [14, 'Anna'], [15, 'Petia'], [16, 'Ivan'], [17, 'Nikolai'], [18, 'Elena'], [19, 'Stefan'], [20, 'Maria']],
-    [[21, 'Elena'], [22, 'Stefan'], [23, 'Petia'], [24, 'Dimitar'], [25, 'Silvia'], [26, 'Nikolai'], [27, 'Ivan'], [28, 'Georgi'], [29, 'Anna'], [30, 'Maria']],
-    [[31, 'Maria'], [32, 'Ivan'], [33, 'Petia'], [34, 'Silvia'], [35, 'Stefan'], [36, 'Nikolai'], [37, 'Dimitar'], [38, 'Anna'], [39, 'Elena'], [40, 'Georgi']],
-    [[41, 'Georgi'], [42, 'Anna'], [43, 'Ivan'], [44, 'Dimitar'], [45, 'Silvia'], [46, 'Petia'], [47, 'Elena'], [48, 'Stefan'], [49, 'Nikolai'], [50, 'Maria']],
-    [[51, 'Petia'], [52, 'Georgi'], [53, 'Anna'], [54, 'Elena'], [55, 'Nikolai'], [56, 'Dimitar'], [57, 'Ivan'], [58, 'Silvia'], [59, 'Stefan'], [60, 'Maria']]
+    [{ 'id': 1, 'username': 'Stefan' }, { 'id': 2, 'username': 'Petia' }, { 'id': 3, 'username': 'Ivan' }, { 'id': 4, 'username': 'Maria' }, { 'id': 5, 'username': 'Nikolai' }, { 'id': 6, 'username': 'Anna' }, { 'id': 7, 'username': 'Elena' }, { 'id': 8, 'username': 'Silvia' }, { 'id': 9, 'username': 'Dimitar' }, { 'id': 10, 'username': 'Georgi' }],
+    [{ 'id': 11, 'username': 'Dimitar' }, { 'id': 12, 'username': 'Silvia' }, { 'id': 13, 'username': 'Georgi' }, { 'id': 14, 'username': 'Anna' }, { 'id': 15, 'username': 'Petia' }, { 'id': 16, 'username': 'Ivan' }, { 'id': 17, 'username': 'Nikolai' }, { 'id': 18, 'username': 'Elena' }, { 'id': 19, 'username': 'Stefan' }, { 'id': 20, 'username': 'Maria' }],
+    [{ 'id': 21, 'username': 'Elena' }, { 'id': 22, 'username': 'Stefan' }, { 'id': 23, 'username': 'Petia' }, { 'id': 24, 'username': 'Dimitar' }, { 'id': 25, 'username': 'Silvia' }, { 'id': 26, 'username': 'Nikolai' }, { 'id': 27, 'username': 'Ivan' }, { 'id': 28, 'username': 'Georgi' }, { 'id': 29, 'username': 'Anna' }, { 'id': 30, 'username': 'Maria' }],
+    [{ 'id': 31, 'username': 'Maria' }, { 'id': 32, 'username': 'Ivan' }, { 'id': 33, 'username': 'Petia' }, { 'id': 34, 'username': 'Silvia' }, { 'id': 35, 'username': 'Stefan' }, { 'id': 36, 'username': 'Nikolai' }, { 'id': 37, 'username': 'Dimitar' }, { 'id': 38, 'username': 'Anna' }, { 'id': 39, 'username': 'Elena' }, { 'id': 40, 'username': 'Georgi' }],
+    [{ 'id': 41, 'username': 'Georgi' }, { 'id': 42, 'username': 'Anna' }, { 'id': 43, 'username': 'Ivan' }, { 'id': 44, 'username': 'Dimitar' }, { 'id': 45, 'username': 'Silvia' }, { 'id': 46, 'username': 'Petia' }, { 'id': 47, 'username': 'Elena' }, { 'id': 48, 'username': 'Stefan' }, { 'id': 49, 'username': 'Nikolai' }, { 'id': 50, 'username': 'Maria' }],
+    [{ 'id': 51, 'username': 'Petia' }, { 'id': 52, 'username': 'Georgi' }, { 'id': 53, 'username': 'Anna' }, { 'id': 54, 'username': 'Elena' }, { 'id': 55, 'username': 'Nikolai' }, { 'id': 56, 'username': 'Dimitar' }, { 'id': 57, 'username': 'Ivan' }, { 'id': 58, 'username': 'Silvia' }, { 'id': 59, 'username': 'Stefan' }, { 'id': 60, 'username': 'Maria' }]
 ]
+
 
     return render_template('leaderboard.html', leaderboards=leaderboards)
 

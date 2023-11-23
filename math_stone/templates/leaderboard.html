@@ -46,7 +46,7 @@
             <div class="leaderboard-header"></div>
             {% for leaderboard_row in leaderboard %}
             <div class="leaderboard-row">
-                
+                {{ leaderboard_row['id'] }} {{ leaderboard_row['username'] }}
             </div>
             {% endfor %}
         </div>
