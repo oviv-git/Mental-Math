@@ -14,22 +14,10 @@ function main() {
             loginFormSubmit();
             break;
         case '/home':
-            displayUsername();
-            updateUserLevels();
-            displayLastGamesPlayed();
-            switchHomeTabs();
-            loadSwitchboard();
-            initDropdownMenu();
-            toggleSwitchboard();
-            initModeSelect();
-            updateSliderValues();
-            modeSelectMultipleChoice();
-            submitButtonActivation();
-            startGame();
+            // beginning of modularization 
+            initHomePage();
             logout();
             
-            // beginning of modularization 
-            initGameTab();
             break;
         case '/leaderboard':
             initDropdownMenu();
@@ -37,6 +25,32 @@ function main() {
             logout();
             break;
     }
+}
+
+
+// Makes sure everything in home.html runs when the page loads
+// Seperating the tabs into seperate functions themselves just makes the code too messy
+function initHomePage() {
+    // Everything in Home-Tab
+    loadSwitchboard();
+    saveSwitchboard();
+
+    displayUsername();
+    updateUserLevels();
+    displayLastGamesPlayed();
+    switchHomeTabs();
+
+    initDropdownMenu();
+    initModeSelect();
+    toggleSwitchboard();
+    updateSliderValues();
+    modeSelectMultipleChoice();
+    submitButtonActivation();
+    startGame();
+
+    // Everything for Game-Tab
+    const exitButtonNodeList = document.querySelectorAll('.header-bar');
+    initToolTips(exitButtonNodeList)
 }
 
 // Loads the page with the preffered color scheme stored in session.storage
@@ -162,9 +176,8 @@ function clearForm() {
 }
 
 // Finds the session-information class and set the innerHTML to session.storage
+// TODO: 
 function displaySessionInformation() {
-    // TODO
-
     let message = sessionStorage.getItem('message');
     let messageType = sessionStorage.getItem('messageType')
     
@@ -178,12 +191,24 @@ function displaySessionInformation() {
  * Updates the messages displayed on the toast and its class
  * @param {string} message - The message displayed on the toast
  * @param {string} messageType - The class that gets applied to the toast
+ * @param {bool} displayNow - if True, display the sessionMessage regardless of the displayMessage flag
 */
-function updateSessionMessage(message, messageType) {
-    // TODO BOTH HAVE TO BE STRINGS
+function updateSessionMessage(message, messageType, displayNow=false) {
     sessionStorage.setItem('message', message);
     sessionStorage.setItem('messageType', messageType);
-    displaySessionInformation();
+
+    if (displayNow) {
+        sessionStorage.setItem('displayMessage', true);
+    }
+            
+    if (sessionStorage.getItem('displayMessage' != true)) {
+        sessionStorage.setItem('displayMessage', true);
+        
+    } else {
+        sessionStorage.setItem('displayMessage', false);
+        displaySessionInformation();
+    }
+    
 }
 
 // When the submit button is pressed check if the form is valid with loginFormCheck()
@@ -203,9 +228,10 @@ function loginFormSubmit() {
 
 function logout() {
     const logoutForm = document.getElementById('logout-form');
-
+    
     logoutForm.addEventListener('submit', function() {
         updateSessionMessage('Logout Successful', 'success');
+        sessionStorage.clear();
     });
 }
 
@@ -455,12 +481,8 @@ function switchHomeTabs(tab) {
 }
 
 
-// TODO: START OF MODULARIZATION - inits everything on game tab
-function initGameTab() {
-    const exitButtonNodeList = document.querySelectorAll('.game-exit-container');
 
-    initToolTips(exitButtonNodeList)
-}
+
 
 
 async function updateUserLevels() {
@@ -617,38 +639,72 @@ async function displayLastGamesPlayed() {
  * @returns Only returns true when the enter key or submit button is pressed.
 */
 function gameInput() {
+    const gameTabInput = document.getElementById('input-result');
+    const submitButton = document.getElementById('question-submit-button');
+    var currentTab = document.querySelector('.full-page.active');
+
+    const numberPad = document.getElementById('number-pad')
+    const numberPadKeys = numberPad.querySelectorAll('.number-button')
+
     return new Promise((resolve) => {
-        
-        const gameTabInput = document.getElementById('input-result');
-
-        var currentTab = document.querySelector('.full-page.active');
-        const submitButton = document.getElementById('question-submit-button');
-
-        // Functionally adds autofocus for valid input[type='number'] keypresses
-
-        if (currentTab.id === 'game-tab') {
+        function keydownEvent(event) {
+            let name = event.key;
+            console.log(name, event)
             
-            document.addEventListener('keydown', (event) => {
-                let name = event.key;
-                
-                if (currentTab.id === 'game-tab') {
-                    gameTabInput.focus();
-                };
+            if (currentTab.id === 'game-tab') {
+                // Functionally adds autofocus for valid input[type='number'] keypresses
+                gameTabInput.focus();
+            };
 
-                // If the key pressed is enter the question gets submitted 
-                if (name === 'Enter') {
-                    resolve(true);
-                };
-            });
-    
-            submitButton.addEventListener('click', () => {
-                resolve(true)
-            }, once=true)
-        } else {
-            document.removeEventListener('keydown');
+            // If the key pressed is enter the question gets submitted 
+            if (name === 'Enter') {
+                removeAllEventListeners();
+                resolve(true);
+            };
         }
+
+       
+
+        function clickEvent() {
+            removeAllEventListeners();
+            resolve(true);
+        }
+
+        function numpadEvent(event) {
+            simulateKeydown(event.target.dataset.button);
+        }
+
+        function simulateKeydown(key) {
+            console.log(key)
+
+            gameTabInput.focus();
+            if (key != 'Backspace') {
+                gameTabInput.value += key
+            } else {
+                gameTabInput.value = gameTabInput.value.slice(0, -1)
+            }
+            
+            // gameTabInput.dispatchEvent(event);
+        }
+        
+        function removeAllEventListeners() {
+            document.removeEventListener('keydown', keydownEvent);
+            submitButton.removeEventListener('click', clickEvent);
+
+            numberPadKeys.forEach((element) => {
+                element.removeEventListener('click', numpadEvent);
+            });
+        }
+
+        document.addEventListener('keydown', keydownEvent)
+        submitButton.addEventListener('click', clickEvent)
+
+        numberPadKeys.forEach((element) => {
+            element.addEventListener('click', numpadEvent)
+        });
     })
 }
+
 
 // Main function for when the switchboard is toggled, all other switchboard functions will be called here
 function toggleSwitchboard() {
@@ -697,8 +753,8 @@ function saveSwitchboard() {
 function loadSwitchboard() {
     if (!sessionStorage.getItem('switchState')) {
         const defaultSwitches = {
-            addition: true,
-            subtraction: true,
+            addition: false,
+            subtraction: false,
             multiplication: false,
             division: false,
             exponential: false
@@ -853,8 +909,6 @@ function initToolTips(toolTipsNodeList) {
         let iconContainer = toolTips.querySelector('span')
         let toolTipContainer = toolTips.querySelector('.tooltip-container');
 
-        console.log(iconContainer, toolTipContainer)
-
         if (isMobileDevice) {
             iconContainer.addEventListener('click', function() {
                 toggleToolTip(toolTipContainer);
@@ -967,35 +1021,26 @@ async function gameLogic(activeSlide) {
     
     const progressContainerGameQuestions = document.querySelector('.progress-container.game-questions');
     const progressContainerGameTimer = document.querySelector('.progress-container.game-timer');
-    const progressContainerQuestionTimer = document.querySelector('.progress-container.question-timer');
+    // const progressContainerQuestionTimer = document.querySelector('.progress-container.question-timer');
 
-    let gameResults = []
-    gameResults.push({'gameMode': currentMode});
+    let gameResults = [{'gameMode': currentMode}]
     
     // On an activeSlide with a timer and no question amount assume 1 question per second
     let questionAmount = activeSlide.querySelector('input').value;
 
     // Have to initialize timer here 
     let timer = 0;
-    let shouldEndQuestions = false;
 
-    let shouldRecordResults = true;
-    let resultsRecorded = false;
+    // Different flags
+    var shouldEndQuestions = false;
+    var shouldRecordResults = false;
+    var resultsRecorded = false;
     
     // Array which stores the game results to send back to app.py
     let generatedQuestions = await generateQuestions(switchboardState, questionAmount)
     
     switchHomeTabs('game-tab');
 
-    const gameExitButton = document.querySelector('.game-exit-button');
-    gameExitButton.addEventListener('click', function(event){
-        shouldRecordResults = false;
-        shouldEndQuestions = true;
-        result.value = 0;
-        submitButton.click();
-    }, once=true)
-
-    
     // All of the operand containers
     const operand1 = document.getElementById('operand-1');
     const operand2 = document.getElementById('operand-2');
@@ -1006,23 +1051,24 @@ async function gameLogic(activeSlide) {
     // This if statement covers all the gameplay for any timed modes: Timed, 
     if (activeSlide.querySelector('input').classList.contains('timer')) {
         timer = questionAmount * 1000;
-        activateTimerProgress(progressContainerGameTimer, timer);``
+        activateTimerProgress(progressContainerGameTimer, timer, true, 'linear');
         
         setTimeout(function() {
             shouldEndQuestions = true;
             result.value = 0;
             submitButton.click();
+            triggerAnimation(result, 'invisible', 150)
         }, timer);
     // For all non-timer modes: Vanilla
     } else {
+        activateTimerProgress(progressContainerGameTimer, (questionAmount * 10000), false, 'ease');
         initQuestionProgress(progressContainerGameQuestions, questionAmount);
     }
 
     const gameStartTime = new Date();
-
     var correct_answers = 0;
+    
     for (let i = 0; i < generatedQuestions.length; i++) {
-
         result.value = '';
 
         let question = generatedQuestions[i];
@@ -1032,9 +1078,11 @@ async function gameLogic(activeSlide) {
         operand2.innerHTML = question['operand_2']; 
         operator.innerHTML = question['operator'];
 
-        let questionTimerTime = question['difficulty'] * 3 * 1000;
-
-        activateTimerProgress(progressContainerQuestionTimer, questionTimerTime, 'ease');
+        // If the progressContainerGameQuestions' divs weren't generated earlier 
+        // then generate a new one for each question
+        if (currentMode !== 'vanilla') {
+            initQuestionProgress(progressContainerGameQuestions, 1);
+        }
 
         // Question can not be accidently submitted while the input field is empty 
         while (result.value.length == 0) {
@@ -1044,7 +1092,7 @@ async function gameLogic(activeSlide) {
         // userSubmission becomes true when gameInput gets a response above
         if (userSubmission === true) {
 
-            if (shouldEndQuestions == true) {
+            if (shouldEndQuestions) {
                 gameResults.pop();
                 break;
                 // remove the last entry of gameResult and send it to app.py 
@@ -1052,57 +1100,51 @@ async function gameLogic(activeSlide) {
 
             let questionEndTime = new Date();
             let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
-
+            
             if (result.value == question['result']) {
-                // if (!activeSlide.querySelector('input').classList.contains('timer')) {
-                //     activateQuestionProgress(questionProgressDivs[i], true);
-                // }
-                    
+                correct_answers++;
+                
                 activateQuestionProgress(progressContainerGameQuestions, true);
                 triggerAnimation(submitButton, 'correct', 200);
-                correct_answers++;
+                
                 gameResults.push({'correct': true, 
                                   'operator': question['operator'],
                                   'timeElapsed': questionTimeElapsed,
                                   'difficulty': question['difficulty'], 
                                   'level': question['level']});
+                
             } else {
-                // if (!activeSlide.querySelector('input').classList.contains('timer')) {
-                //     // console.log(questionProgressDivs)
-                //     activateQuestionProgress(questionProgressDivs[i], false);
-                // }
                 activateQuestionProgress(progressContainerGameQuestions, false);
                 triggerAnimation(submitButton, 'incorrect', 200);
+                
                 gameResults.push({'correct': false, 
                                   'operator': question['operator'],
-                                  'timeElapsed': questionTimeElapsed})
+                                  'timeElapsed': questionTimeElapsed});
                 
                 if (currentMode == 'sudden') {
                     break;
                 }
             }
-            
-            result.value = '';
-            continue;
         }
     }
-
+    switchHomeTabs('home-tab');
     // AJAX request to send results and return stats while also saving results from a completed game
+
+    // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+    // Used this to convert new Date() into something that can fit into the sql DATE type
+    let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    let gameEndTime = new Date();
+    let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
+
+    // console.log(gameTimeElapsed, gameEndTime, gameStartTime)
+    console.log(gameResults, gameResults[0])
     
-    if (shouldRecordResults) {
-        // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-        // Used this to convert new Date() into something that can fit into the sql DATE type
-        let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
-        let gameEndTime = new Date();
-        let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
-        
-        gameResults[0].gameTimer = gameTimeElapsed
-        gameResults[0].gameDate = gameTimeStamp
+    gameResults[0].gameTimer = gameTimeElapsed
+    gameResults[0].gameDate = gameTimeStamp
 
-        resultsRecorded = await recordResults(JSON.stringify(gameResults));
+    resultsRecorded = await recordResults(JSON.stringify(gameResults));
 
-    }
-
+    progressContainerGameQuestions.innerHTML = ''
     successfullyFinishGame(resultsRecorded)
 }
 
@@ -1115,7 +1157,7 @@ function successfullyFinishGame(resultsRecorded) {
 
     displayLastGamesPlayed();
     updateUserLevels();
-    switchHomeTabs('home-tab');
+    
 }
 
 
@@ -1185,13 +1227,10 @@ async function recordResults(results) {
 * @param TODO
 * return TODO
 */  
-function initQuestionProgress(progressContainer, questions) {
-    progressContainer.innerHTML = '';
-    progressContainer.style.flexDirection = 'row';
-    
+function initQuestionProgress(progressContainer, questions) {    
     for (let i = 0; i < questions; i++) {
         let newQuestionProgressQuestion = document.createElement('div');
-        newQuestionProgressQuestion.classList.add('game-progress-question');
+        newQuestionProgressQuestion.classList.add('game-progress-question', 'empty');
 
         progressContainer.appendChild(newQuestionProgressQuestion)
     }
@@ -1207,44 +1246,42 @@ function initQuestionProgress(progressContainer, questions) {
 */  
 function activateQuestionProgress(progressContainer, answer) {
     const answerBinaryMap = {true: 'correct', false: 'incorrect'}
-    
-    var gameProgressDiv = progressContainer.querySelector('.game-progress-question');
-    var gameProgressDivs = progressContainer.querySelectorAll('.game-progress-question');
-    
-    if (gameProgressDiv != null) {
-        gameProgressDiv.classList.add(answerBinaryMap[answer])
-    } else {
-        let newProgressDiv = document.createElement('div');
-        newProgressDiv.classList.add(answerBinaryMap[answer])
-        progressContainer.appendChild(newProgressDiv);
-    }
-}
 
+    let gameProgressDiv = progressContainer.querySelector('.game-progress-question.empty');
+
+    gameProgressDiv.classList.add(answerBinaryMap[answer]);
+    gameProgressDiv.style.width = '100%';
+    gameProgressDiv.classList.remove('empty');
+}
 
 /** 
 * Utilizes the progress bar as a timer that can go forwards or backwards
 *
 * @param {element} progressContainer - The container that holds the progress bar
 * @param {number} timer - How long the timer animtion lasts until the bar fills/empties 
+  @param {bool} reverse - If true then the timer will decrease instead of increasing
 * @param {string} transition - linear by default; can be set to any of the valid transition styles
 */  
-function activateTimerProgress(progressContainer, timer, transition='linear') {
-
-
-    console.log(progressContainer, timer)
+function activateTimerProgress(progressContainer, timer, reverse=false, transition='linear') {
     progressContainer.innerHTML = '';
 
     let newProgressBar = document.createElement('div');
-    newProgressBar.classList.add('progress-bar');
-    progressContainer.appendChild(newProgressBar);
+    newProgressBar.classList.add('progress-bar', 'correct');
+    newProgressBar.style.transition = ('all ' + timer / 1000 + 's ' + transition);
     
-    let progressBar = progressContainer.querySelector('.progress-bar');
-    progressBar.style.transition = ('all ' + timer / 1000 + 's ' + transition);
-
+    if (reverse) {
+        progressContainer.style.flexDirection = 'row-reverse';
+    }
+    progressContainer.appendChild(newProgressBar);
 
     // The animation of the timer bar doesn't work if its outside of a setTimeout
     setTimeout(function() {
-        progressBar.style.width = '100%';
+        newProgressBar.style.width = '100%';
+
+        if (reverse) {
+            newProgressBar.classList.remove('correct');
+            newProgressBar.classList.add('incorrect');
+        }
     }, 10);
 }
 

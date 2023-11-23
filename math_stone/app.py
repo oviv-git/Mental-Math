@@ -134,7 +134,14 @@ def stats():
 def leaderboard():
     user_id = session['user_id']
 
-    leaderboards = [[0, 0, 0], [1, 2, 2], [3, 4, 5], [6, 7, 8]]
+    leaderboards = [
+    [[1, 'Stefan'], [2, 'Petia'], [3, 'Ivan'], [4, 'Maria'], [5, 'Nikolai'], [6, 'Anna'], [7, 'Elena'], [8, 'Silvia'], [9, 'Dimitar'], [10, 'Georgi']],
+    [[11, 'Dimitar'], [12, 'Silvia'], [13, 'Georgi'], [14, 'Anna'], [15, 'Petia'], [16, 'Ivan'], [17, 'Nikolai'], [18, 'Elena'], [19, 'Stefan'], [20, 'Maria']],
+    [[21, 'Elena'], [22, 'Stefan'], [23, 'Petia'], [24, 'Dimitar'], [25, 'Silvia'], [26, 'Nikolai'], [27, 'Ivan'], [28, 'Georgi'], [29, 'Anna'], [30, 'Maria']],
+    [[31, 'Maria'], [32, 'Ivan'], [33, 'Petia'], [34, 'Silvia'], [35, 'Stefan'], [36, 'Nikolai'], [37, 'Dimitar'], [38, 'Anna'], [39, 'Elena'], [40, 'Georgi']],
+    [[41, 'Georgi'], [42, 'Anna'], [43, 'Ivan'], [44, 'Dimitar'], [45, 'Silvia'], [46, 'Petia'], [47, 'Elena'], [48, 'Stefan'], [49, 'Nikolai'], [50, 'Maria']],
+    [[51, 'Petia'], [52, 'Georgi'], [53, 'Anna'], [54, 'Elena'], [55, 'Nikolai'], [56, 'Dimitar'], [57, 'Ivan'], [58, 'Silvia'], [59, 'Stefan'], [60, 'Maria']]
+]
 
     return render_template('leaderboard.html', leaderboards=leaderboards)
 

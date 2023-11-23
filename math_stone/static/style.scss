@@ -114,7 +114,7 @@ html.light {
         }
     }
     .full-page {
-        background: darken($default-light, 5%);
+        background: darken($default-light, 10%);
     }
     .modal {
         background: $default-light;
@@ -131,7 +131,6 @@ html.light {
                     &.active {
                         background: darken($default-light, 25%);
                         border-color: darken($default-light, 25%);
-                        
 
                     }
                     &:hover{
@@ -578,43 +577,84 @@ html.light {
             }
         }
     }
-    .question-container {
-        border: .3rem solid darken($default-light, 20%);
-        color: $default-dark;
+    .game-tab-container {
+        background: darken($default-light, 10%);
+        border-color: darken($default-light, 25%);
 
-        .question-row {
-            &.result {
-                input[type="number"] {
-                    color: $default-dark;
-                    border-top-color: darken($default-light, 20%);
+        .progress-container.game-timer {   
+            border-color: darken($default-light, 25%);
+
+            .progress-bar {     
+                &.correct {
+                    background:#69ba69; 
+                }
+                &.incorrect {
+                    background:#db6c6c;
+                }   
+            }
+        }
+        .progress-container.game-questions {
+            .game-progress-question {
+                &.empty {
+                    background: darken($default-light, 10%);
+                    border-color: darken($default-light, 25%);
+                }
+                &.correct {
+                    background:#69ba69; 
+                }
+                &.incorrect {
+                    background:#db6c6c;
+                }
+            }
+            
+        }
+        .question-container {
+            color: $default-dark;
+
+            .question-row {
+                &.result {
+                    border-color: darken($default-light, 25%);
+
+                    input[type="number"] {
+                        color: $default-dark;
+                    }
+                }
+            }
+            .question-submit-btn {
+                width: 100%;
+                background: $main-cyan-light;
+                color: $default-dark;
+
+                &.active {
+                    background: lighten($main-cyan-light, 15%);
                 }
             }
         }
-        .question-submit-btn {
-            background: $main-cyan-light;
-            color: $default-dark;
+        .game-exit-container {
+            .game-exit-button {
+                background: darken($default-light, 15%);
+                
+                .material-symbols-outlined {
+                    color: darken($default-light, 65%);
+                }
+            }
+            .tooltip-container {
+                background: darken($default-light, 15%);
+                color: darken($default-light, 65%);
 
-            &.active {
-                background: lighten($main-cyan-light, 15%);
+                &.active {
+
+                }
+                p {
+
+                }
             }
         }
     }
-    .game-exit-container {
-        .game-exit-button {
-            background: red; // TODO
-            
-            .material-symbols-outlined {
-                    }
-                }
-        .tooltip-container {
-            background: red;
-
-    
-            &.active {
-
-            }
-            p {
-
+    .number-pad {
+        .number-row {
+            .number-button {
+                background: darken($default-light, 15%);
             }
         }
     }
@@ -732,7 +772,7 @@ html.dark {
     // cant use the the name dropdown-content because of materialize
     .dropdown-menu {
         .dropdown-menu-content {
-            border-color: lighten($default-dark, 25%);;
+            border-color: lighten($default-dark, 25%);
             background: lighten($default-dark, 15%);
 
 
@@ -1166,27 +1206,66 @@ html.dark {
             }
         }
     }
-    .game-exit-container {
-        .game-exit-button {
-            background: red; // TODO
-            
-            .material-symbols-outlined {
-                    }
+    .game-tab-container {
+        border-color: darken($default-light, 65%);
+
+        .progress-container.game-timer {   
+            border-color: darken($default-light, 65%);
+
+            .progress-bar {     
+                &.correct {
+                    background:#69ba69; 
                 }
-        .tooltip-container {
-            background: red;
-
-            &.active {
-
-            }
-            p {
-
+                &.incorrect {
+                    background:#db6c6c;
+                }    
             }
         }
+        .progress-container.game-questions {
+            .game-progress-question {
+                &.empty {
+                    background: lighten($default-dark, 10%);
+                }
+                &.correct {
+                    background:#69ba69; 
+                }
+                &.incorrect {
+                    background:#db6c6c;
+                }
+            }
+            
+        }
+
+        .question-container {
+            .question-row {
+                color: darken($default-light, 25%);
+
+                &.result {
+                    border-color: darken($default-light, 65%);
+
+                    input[type="number"] {
+
+                        color: darken($default-light, 25%);
+                    }
+                }
+            }
+            .question-submit-btn {
+                background: $main-cyan-light;
+                color: $default-dark;
+
+                &.active {
+                    background: lighten($main-cyan-light, 15%);
+                }
+            }
+        }
+
     }
-    .question-container {
-        button {
-            background: $main-cyan;
+    .number-pad {
+        .number-row {
+            .number-button {
+                background: lighten($default-dark, 15%);
+                color: darken($default-light, 25%);
+            }
         }
     }
 }
@@ -1444,7 +1523,8 @@ form {
     justify-content: flex-end;
     height: 6rem;
     width: 100%;
-    
+    z-index: 20;
+
     .navbar-container {
         font-family: 'Source Sans Pro', sans-serif;
         display: flex;
@@ -1504,6 +1584,7 @@ form {
     align-items: center;
     border-radius: 0rem 0rem 1rem 1rem;
     box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 
     form {
         padding: 0;
@@ -1523,6 +1604,7 @@ form {
         width: 100%;
         flex: 1;
         overflow: hidden;
+        
 
         .material-symbols-outlined {
             font-variation-settings:
@@ -1557,6 +1639,8 @@ form {
         //     display: flex;
 
         .dropdown-button {
+            cursor: pointer;
+
             height: 100%;
             width: 100%;
             background: transparent;
@@ -2022,19 +2106,19 @@ form {
                         height: 3rem;
                         width: 3rem;
                         border-radius: 50%;
-                        border: .5rem solid #f50;
-                        box-shadow: -415px 0 0 400px #f50;
+                        border: .5rem solid transparent;
+                        box-shadow: -415px 0 0 400px transparent;
                         margin-top: .02rem;
                     }
 
                     &::-moz-range-thumb {
                         outline: none;
-                        height: 15px;
-                        background: #f50;
-                        width: 15px;
+                        height: 3rem;
+                        background: transparent;
+                        width: 3rem;
                         border-radius: 50%;
-                        border: .5rem solid #f50;
-                        box-shadow: -407px 0 0 400px #f50;
+                        border: .5rem solid transparent;
+                        box-shadow: -407px 0 0 400px transparent;
                     }
                 }
                 // Controls the label of the slider
@@ -2112,123 +2196,54 @@ form {
     }
 }
 
-.game-exit-container {
-    .game-exit-button {
-        background: red; // TODO
-        align-items: center;
-        height: 5rem;
-        width: 5rem;
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        left: 65%;
-        top: 2%;
-        border-radius: 100%;
-        border: none;
-        
-        .material-symbols-outlined {
-            font-variation-settings:
-                    'FILL' 0,
-                    'wght' 900,
-                    'GRAD' 0,
-                    'opsz' 600;
-                    font-size: 4rem;
-                    transform: scale(1.5);
-                }
-            }
-    .tooltip-container {
-        transition: visbility 0s, opacity 0.8s linear;
-        opacity: 0;
-        position: absolute;
-        left: 35%;
-        top: 10%;
-        width: 30%;
-        height: 16rem;
-        visibility: hidden;
-        display: flex;
-        flex-wrap: wrap;
-        padding: 0rem 1rem;
-        justify-content: center;
-        align-items: center;
 
-        &.active {
-            visibility: visible;
-            opacity: 1;
-        }
-        p {
-            text-align: center;
-            overflow-wrap: break-word;
-            width: 100%;
-            word-wrap: break-word;
-            font-family: 'Heebo', sans-serif;
-            font-size: 2.4rem;
-        }
-    }
-}
             
 .game-tab-container {
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    width: 30%;
+    justify-content: flex-start;
+    width: 22%;
     height: 90%;
     overflow: hidden;
     border-radius: 2rem;
     align-items: center;
+    border: solid .4rem;
 
-    .progress-container {
-        display: flex;
+    .progress-container.game-timer {
         height: 6%;
         width: 100%;
-        border: solid .4rem #afafaf;
-
-        &.game-questions {
-            display: flex;
-            justify-content: flex-start;
-            height: 10%;
-            width: 100%;
-            margin: 1.5rem 0rem 1rem 0rem;
-            overflow: hidden;
-
-            .game-progress-question {
-                flex: 1;
-                
-                // TODO
-                &.correct {
-                    background: green;
-                }
-                &.incorrect {
-                    background: lightcoral;
-                }
-            }
+        display: flex;
+        border-bottom: solid .4rem;
+        
+        .progress-bar {
+            transition: 60s;
+            width: 0%;
         }
-        &.game-timer {
-            .progress-bar {
-                transition-timing-function: linear;
-                height: 100%;
+    }
+
+    .progress-container.game-questions {
+        height: 8%;
+        width: 100%;
+        display: flex;
+
+        .game-progress-question {
+            transition: all 1s;
+            height: 100%;
+            flex: 1;
+
+            &.empty {
                 width: 0%;
-                background: red; // TODO
-            }
-        }
-        &.question-timer {
-            flex-direction: row-reverse;
-            
-            .progress-bar {
-                transition-timing-function: ease-in;
-                height: 100%;
-                width: 0%;
-                background: red; // TODO
             }
         }
     }
+    
     .question-container {
-        border-radius: 2rem;
+        height: 40%;
         display: flex;
         flex-direction: column;
         font-family: 'Open Sans', sans-serif;
-        font-size: 4rem;
-        height: 60%;
+        font-size: 3.8rem;
         width: 100%;
         overflow: hidden;
         
@@ -2242,48 +2257,41 @@ form {
             flex: 1;
             display: flex;
             align-items: center;
-    
+            padding: 0rem 2rem;
+
             &.operand {
                 justify-content: right;
-                padding: 0rem 1.5rem;
             }
             &.operator {
                 justify-content: space-between;
-                padding: 0rem 1.5rem;
             }
             .question-text {
                 margin: 0;
-                color: $default-dark;
                 justify-content: right;
-    
-                &#operator {
-                    // right: 78%;
-                    transform: scale(1.2);
-                }
             }
             &.result {
+                border-top: .4rem black solid;
+                border-bottom: .4rem black solid;
                 margin: 0rem;
                 padding: 0rem;
-                // padding: 0rem 1rem;
-                // background: rgba(0, 0, 0 ,0.2);
-                // border: 0.2rem solid rgba(0, 0, 0, 0.4);
-    
-                // border-radius: .5rem .5rem 0rem 0rem;
     
                 input[type="number"] {
-                    border-top: .3rem solid black;
-                    font-size: 4rem;
+                    border: none;
+                    font-size: 3.8rem;
                     height: 100%;
                     margin: 0;
-                    padding: 0rem 1.5rem;
+                    padding: 0rem 2rem;
                     font-family: 'Open Sans', sans-serif;
-                    // font-size: 1rem;
                     caret-color: transparent;
                     appearance: textfield;
                     -moz-appearance: textfield;
                     text-align: right;
                     box-shadow: none;
                     outline: none;
+
+                    &.invisible {
+                        opacity: 0;
+                    }
         
                     &:focus {
                         border: none;
@@ -2292,13 +2300,9 @@ form {
                     }
                 }
             }
-    
-            &.number-input {
-                display: none;
-            }
             &.submit {
-                margin: 0rem;
                 margin: 0;
+                padding: 0;
                 justify-content: center;
     
                 .question-submit-btn {
@@ -2308,11 +2312,45 @@ form {
                     transition: all .1s;
     
                     &.correct {
-                        transition: all .1s;
                         background: rgb(126, 218, 128);
                     }
                     &.incorrect {
                         background: rgb(210, 96, 96);
+                    }
+                }
+            }
+        }
+    }
+    .number-pad {
+        width: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .number-row {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            box-sizing: border-box;
+            
+            .number-button {
+                box-sizing: border-box;
+                flex: 1;
+                font-size: 1rem;
+                align-items: center;
+                overflow: hidden;
+                border: none;
+                color: $default-dark;
+
+                span {
+                    font-family: 'Open Sans', sans-serif;
+                    pointer-events: none;
+                    font-size: 3.4rem;
+                    
+                    &.material-symbols-outlined {
+                        font-family: 'Material Symbols Outlined';
+                        transform: scale(1.4);
                     }
                 }
             }
@@ -2333,17 +2371,30 @@ form {
     align-items: center;
 
     .leaderboard {
-        height: 40rem;
+        height: 42rem;
         width: 25%;
-        padding: 2rem;
         margin: 8rem;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
         // height: 16rem;
         // width: 8rem;
-        display: flex;
-        background: rgb(0, 255, 123);
+        background: #118d81;
+
+        .leaderboard-header {
+            background: #0e5c54;
+            height: 12%;
+            width: 100%;
+        }
+        .leaderboard-row {
+            background: #578480;
+            height: 8.8%;
+
+            &:nth-child(even) {
+                background: #83b5af;
+ 
+            }
+        }
     }
 }
 
@@ -2577,7 +2628,6 @@ form {
             font-size: 4rem;
             padding: 0rem 3rem; 
 
-
             &.operand {
                 justify-content: right;
                 padding: 0rem 2rem;
@@ -2597,7 +2647,7 @@ form {
                 padding: 0rem;
             }
 
-            &.number-input {
+            &.number-pad {
                 display: flex;
                 flex-direction: column;
                 text-align: center;
@@ -2614,6 +2664,8 @@ form {
                     padding: 0;
 
                     .number {
+                        font-size: 2rem;
+                        overflow: hidden;
                         font-family: 'Open Sans', sans-serif;
                         display: flex;
                         justify-content: center;

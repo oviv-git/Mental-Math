@@ -145,8 +145,8 @@ class Game:
                               {'operand_1': 200, 'operand_2': 75},
                               {'operand_1': 200, 'operand_2': 100}]
         
-        operand_1 = self.generate_number(MULTIPLICATION_MAP[difficulty]['operand_1'])
-        operand_2 = self.generate_number(MULTIPLICATION_MAP[difficulty]['operand_2'])
+        operand_1 = self.generate_number(MULTIPLICATION_MAP[difficulty]['operand_1'], 2)
+        operand_2 = self.generate_number(MULTIPLICATION_MAP[difficulty]['operand_2'], 2)
         
         result = round(operand_1 * operand_2)
 
@@ -186,17 +186,16 @@ class Game:
         level = self.convert_experience(self.experience[4])
         difficulty = self.select_difficulty(level)
         
-        # TODO: Filler map so far.
         EXPONENTIAL_MAP = [{'operand_1': 6, 'operand_2': 2},
-                        {'operand_1': 9, 'operand_2': 2},
-                        {'operand_1': 12, 'operand_2': 2},
-                        {'operand_1': 18, 'operand_2': 2},
-                        {'operand_1': 24, 'operand_2': 2},
-                        {'operand_1': 24, 'operand_2': 3},
-                        {'operand_1': 24, 'operand_2': 4},
-                        {'operand_1': 3, 'operand_2': 6},
-                        {'operand_1': 5, 'operand_2': 4},
-                        {'operand_1': 2, 'operand_2': 8}]
+                           {'operand_1': 9, 'operand_2': 2},
+                           {'operand_1': 12, 'operand_2': 2},
+                           {'operand_1': 14, 'operand_2': 2},
+                           {'operand_1': 16, 'operand_2': 3},
+                           {'operand_1': 20, 'operand_2': 3},
+                           {'operand_1': 24, 'operand_2': 3},
+                           {'operand_1': 26, 'operand_2': 4},
+                           {'operand_1': 30, 'operand_2': 4},
+                           {'operand_1': 30, 'operand_2': 5}]
 
         operand_1 = self.generate_number(EXPONENTIAL_MAP[difficulty]['operand_1'], 2)
         operand_2 = self.generate_number(EXPONENTIAL_MAP[difficulty]['operand_2'], 2)

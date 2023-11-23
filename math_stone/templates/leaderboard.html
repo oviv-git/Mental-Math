@@ -42,7 +42,15 @@
     <div class="leaderboards-container">
 
         {% for leaderboard in leaderboards %}
-        <div class="leaderboard"> {{ leaderboard }} </div>
+        <div class="leaderboard">  
+            <div class="leaderboard-header"></div>
+            {% for leaderboard_row in leaderboard %}
+            <div class="leaderboard-row">
+                
+            </div>
+            {% endfor %}
+        </div>
+
         {% endfor %}
     </div>
 </div>

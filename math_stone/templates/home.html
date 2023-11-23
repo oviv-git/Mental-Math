@@ -329,20 +329,11 @@
         </div>
     </div>
     <div class="full-page" id="game-tab">
-        <div class="game-exit-container">
-            <button class="game-exit-button">
-                <span class="material-symbols-outlined">cancel</span>
-            </button>
-            <div class="tooltip-container">
-                <p>This takes you back to the home tab without saving your game</p>
-            </div>
-        </div>
         <div class="game-tab-container">
+            <div class="progress-container game-timer"></div>
+
             <div class="progress-container game-questions"></div>
             
-            <div class="progress-container game-timer"></div>
-            
-            <div class="progress-container question-timer"></div>
             <div class="question-container">
                 <div class="question-row operand">
                     <p class="question-text" id="operand-1"></p>
@@ -353,30 +344,32 @@
                 </div>
                 <div class="question-row result">
                     <input type="number" class="question-result" id="input-result" autofocus>
+                </div>        
+            </div>
+            <div class="number-pad" id="number-pad">
+                <div class="number-row">
+                    <button class="number-button waves-effect" data-button="1"><span>1</span></button>
+                    <button class="number-button waves-effect" data-button="2"><span>2</span></button>
+                    <button class="number-button waves-effect" data-button="3"><span>3</span></button>
                 </div>
-                <div class="question-row number-input">
-                    <div class="number-row">
-                        <button class="number">1</button>
-                        <button class="number">2</button>
-                        <button class="number">3</button>
-                    </div>
-                    <div class="number-row">
-                        <button class="number">4</button>
-                        <button class="number">5</button>
-                        <button class="number">6</button>
-                    </div>
-                    <div class="number-row">
-                        <button class="number">7</button>
-                        <button class="number">8</button>
-                        <button class="number">9</button>
-                    </div>
-                    <div class="number-row">
-                        <button class="number" style="flex: 1">0</button>
-                        <button class="number" style="flex: 2.015">0</button>
-                    </div>
+                <div class="number-row">
+                    <button class="number-button waves-effect" data-button="4"><span>4</span></button>
+                    <button class="number-button waves-effect" data-button="5"><span>5</span></button>
+                    <button class="number-button waves-effect" data-button="6"><span>6</span></button>
                 </div>
-                <div class="question-row submit">
-                    <button class="question-submit-btn" id="question-submit-button">SUBMIT</button>
+                <div class="number-row">
+                    <button class="number-button waves-effect" data-button="7"><span>7</span></button>
+                    <button class="number-button waves-effect" data-button="8"><span>8</span></button>
+                    <button class="number-button waves-effect" data-button="9"><span>9</span></button>
+                </div>
+                <div class="number-row">
+                    <button class="number-button waves-effect" data-button="Backspace">
+                        <span class="material-symbols-outlined">keyboard_backspace</span>
+                    </button>
+                    <button class="number-button waves-effect" data-button="0"><span>0</span></button>
+                    <button class="number-button waves-effect" data-button="Enter" id="question-submit-button">
+                        <span class="material-symbols-outlined">keyboard_return</span>
+                    </button>
                 </div>
             </div>
         </div>

@@ -65,7 +65,7 @@ html.light input.failure {
   border-bottom: 1px solid #d1214d !important;
 }
 html.light .full-page {
-  background: #f2f2f2;
+  background: #e6e6e6;
 }
 html.light .modal {
   background: #fff;
@@ -410,27 +410,60 @@ html.light .submit-container.active .submit-button.sudden.active {
 html.light .submit-container.active .submit-button.sudden .submit-button-text {
   color: #ebc8c8;
 }
-html.light .question-container {
-  border: 0.3rem solid #cccccc;
+html.light .game-tab-container {
+  background: #e6e6e6;
+  border-color: #bfbfbf;
+}
+html.light .game-tab-container .progress-container.game-timer {
+  border-color: #bfbfbf;
+}
+html.light .game-tab-container .progress-container.game-timer .progress-bar.correct {
+  background: #69ba69;
+}
+html.light .game-tab-container .progress-container.game-timer .progress-bar.incorrect {
+  background: #db6c6c;
+}
+html.light .game-tab-container .progress-container.game-questions .game-progress-question.empty {
+  background: #e6e6e6;
+  border-color: #bfbfbf;
+}
+html.light .game-tab-container .progress-container.game-questions .game-progress-question.correct {
+  background: #69ba69;
+}
+html.light .game-tab-container .progress-container.game-questions .game-progress-question.incorrect {
+  background: #db6c6c;
+}
+html.light .game-tab-container .question-container {
   color: #222;
 }
-html.light .question-container .question-row.result input[type=number] {
-  color: #222;
-  border-top-color: #cccccc;
+html.light .game-tab-container .question-container .question-row.result {
+  border-color: #bfbfbf;
 }
-html.light .question-container .question-submit-btn {
+html.light .game-tab-container .question-container .question-row.result input[type=number] {
+  color: #222;
+}
+html.light .game-tab-container .question-container .question-submit-btn {
+  width: 100%;
   background: #70bdd6;
   color: #222;
 }
-html.light .question-container .question-submit-btn.active {
+html.light .game-tab-container .question-container .question-submit-btn.active {
   background: #abd8e7;
 }
-html.light .game-exit-container .game-exit-button {
-  background: red;
+html.light .game-tab-container .game-exit-container .game-exit-button {
+  background: #d9d9d9;
 }
-html.light .game-exit-container .tooltip-container {
-  background: red;
+html.light .game-tab-container .game-exit-container .game-exit-button .material-symbols-outlined {
+  color: #595959;
 }
+html.light .game-tab-container .game-exit-container .tooltip-container {
+  background: #d9d9d9;
+  color: #595959;
+}
+html.light .number-pad .number-row .number-button {
+  background: #d9d9d9;
+}
+
 html.dark {
   background: #222;
   color: #fff;
@@ -834,14 +867,46 @@ html.dark .submit-container.active .submit-button.sudden.active {
 html.dark .submit-container.active .submit-button.sudden .submit-button-text {
   color: #e1b8b8;
 }
-html.dark .game-exit-container .game-exit-button {
-  background: red;
+html.dark .game-tab-container {
+  border-color: #595959;
 }
-html.dark .game-exit-container .tooltip-container {
-  background: red;
+html.dark .game-tab-container .progress-container.game-timer {
+  border-color: #595959;
 }
-html.dark .question-container button {
-  background: #4f9db7;
+html.dark .game-tab-container .progress-container.game-timer .progress-bar.correct {
+  background: #69ba69;
+}
+html.dark .game-tab-container .progress-container.game-timer .progress-bar.incorrect {
+  background: #db6c6c;
+}
+html.dark .game-tab-container .progress-container.game-questions .game-progress-question.empty {
+  background: #3c3c3c;
+}
+html.dark .game-tab-container .progress-container.game-questions .game-progress-question.correct {
+  background: #69ba69;
+}
+html.dark .game-tab-container .progress-container.game-questions .game-progress-question.incorrect {
+  background: #db6c6c;
+}
+html.dark .game-tab-container .question-container .question-row {
+  color: #bfbfbf;
+}
+html.dark .game-tab-container .question-container .question-row.result {
+  border-color: #595959;
+}
+html.dark .game-tab-container .question-container .question-row.result input[type=number] {
+  color: #bfbfbf;
+}
+html.dark .game-tab-container .question-container .question-submit-btn {
+  background: #70bdd6;
+  color: #222;
+}
+html.dark .game-tab-container .question-container .question-submit-btn.active {
+  background: #abd8e7;
+}
+html.dark .number-pad .number-row .number-button {
+  background: #484848;
+  color: #bfbfbf;
 }
 
 .waves-effect.waves-light .waves-ripple {
@@ -1092,6 +1157,7 @@ form {
   justify-content: flex-end;
   height: 6rem;
   width: 100%;
+  z-index: 20;
 }
 .navbar .navbar-container {
   font-family: "Source Sans Pro", sans-serif;
@@ -1143,6 +1209,7 @@ form {
   align-items: center;
   border-radius: 0rem 0rem 1rem 1rem;
   box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.5);
+  cursor: pointer;
 }
 .dropdown-menu form {
   padding: 0;
@@ -1178,6 +1245,7 @@ form {
   border-radius: 0rem 0rem 1rem 1rem !important;
 }
 .dropdown-menu .dropdown-menu-content .dropdown-button {
+  cursor: pointer;
   height: 100%;
   width: 100%;
   background: transparent;
@@ -1561,18 +1629,18 @@ form {
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
-  border: 0.5rem solid #f50;
-  box-shadow: -415px 0 0 400px #f50;
+  border: 0.5rem solid transparent;
+  box-shadow: -415px 0 0 400px transparent;
   margin-top: 0.02rem;
 }
 .swiper-slide .game-mode .settings .settings-container input[type=range]::-moz-range-thumb {
   outline: none;
-  height: 15px;
-  background: #f50;
-  width: 15px;
+  height: 3rem;
+  background: transparent;
+  width: 3rem;
   border-radius: 50%;
-  border: 0.5rem solid #f50;
-  box-shadow: -407px 0 0 400px #f50;
+  border: 0.5rem solid transparent;
+  box-shadow: -407px 0 0 400px transparent;
 }
 .swiper-slide .game-mode .settings .settings-container label {
   font-size: 1rem;
@@ -1635,108 +1703,47 @@ form {
   font-size: 2.4rem;
 }
 
-.game-exit-container .game-exit-button {
-  background: red;
-  align-items: center;
-  height: 5rem;
-  width: 5rem;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  left: 65%;
-  top: 2%;
-  border-radius: 100%;
-  border: none;
-}
-.game-exit-container .game-exit-button .material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 900, "GRAD" 0, "opsz" 600;
-  font-size: 4rem;
-  transform: scale(1.5);
-}
-.game-exit-container .tooltip-container {
-  transition: visbility 0s, opacity 0.8s linear;
-  opacity: 0;
-  position: absolute;
-  left: 35%;
-  top: 10%;
-  width: 30%;
-  height: 16rem;
-  visibility: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0rem 1rem;
-  justify-content: center;
-  align-items: center;
-}
-.game-exit-container .tooltip-container.active {
-  visibility: visible;
-  opacity: 1;
-}
-.game-exit-container .tooltip-container p {
-  text-align: center;
-  overflow-wrap: break-word;
-  width: 100%;
-  word-wrap: break-word;
-  font-family: "Heebo", sans-serif;
-  font-size: 2.4rem;
-}
-
 .game-tab-container {
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 30%;
+  justify-content: flex-start;
+  width: 22%;
   height: 90%;
   overflow: hidden;
   border-radius: 2rem;
   align-items: center;
+  border: solid 0.4rem;
 }
-.game-tab-container .progress-container {
-  display: flex;
+.game-tab-container .progress-container.game-timer {
   height: 6%;
   width: 100%;
-  border: solid 0.4rem #afafaf;
-}
-.game-tab-container .progress-container.game-questions {
   display: flex;
-  justify-content: flex-start;
-  height: 10%;
-  width: 100%;
-  margin: 1.5rem 0rem 1rem 0rem;
-  overflow: hidden;
-}
-.game-tab-container .progress-container.game-questions .game-progress-question {
-  flex: 1;
-}
-.game-tab-container .progress-container.game-questions .game-progress-question.correct {
-  background: green;
-}
-.game-tab-container .progress-container.game-questions .game-progress-question.incorrect {
-  background: lightcoral;
+  border-bottom: solid 0.4rem;
 }
 .game-tab-container .progress-container.game-timer .progress-bar {
-  transition-timing-function: linear;
-  height: 100%;
+  transition: 60s;
   width: 0%;
-  background: red;
 }
-.game-tab-container .progress-container.question-timer {
-  flex-direction: row-reverse;
+.game-tab-container .progress-container.game-questions {
+  height: 8%;
+  width: 100%;
+  display: flex;
 }
-.game-tab-container .progress-container.question-timer .progress-bar {
-  transition-timing-function: ease-in;
+.game-tab-container .progress-container.game-questions .game-progress-question {
+  transition: all 1s;
   height: 100%;
+  flex: 1;
+}
+.game-tab-container .progress-container.game-questions .game-progress-question.empty {
   width: 0%;
-  background: red;
 }
 .game-tab-container .question-container {
-  border-radius: 2rem;
+  height: 40%;
   display: flex;
   flex-direction: column;
   font-family: "Open Sans", sans-serif;
-  font-size: 4rem;
-  height: 60%;
+  font-size: 3.8rem;
   width: 100%;
   overflow: hidden;
 }
@@ -1749,33 +1756,30 @@ form {
   flex: 1;
   display: flex;
   align-items: center;
+  padding: 0rem 2rem;
 }
 .game-tab-container .question-container .question-row.operand {
   justify-content: right;
-  padding: 0rem 1.5rem;
 }
 .game-tab-container .question-container .question-row.operator {
   justify-content: space-between;
-  padding: 0rem 1.5rem;
 }
 .game-tab-container .question-container .question-row .question-text {
   margin: 0;
-  color: #222;
   justify-content: right;
 }
-.game-tab-container .question-container .question-row .question-text#operator {
-  transform: scale(1.2);
-}
 .game-tab-container .question-container .question-row.result {
+  border-top: 0.4rem black solid;
+  border-bottom: 0.4rem black solid;
   margin: 0rem;
   padding: 0rem;
 }
 .game-tab-container .question-container .question-row.result input[type=number] {
-  border-top: 0.3rem solid black;
-  font-size: 4rem;
+  border: none;
+  font-size: 3.8rem;
   height: 100%;
   margin: 0;
-  padding: 0rem 1.5rem;
+  padding: 0rem 2rem;
   font-family: "Open Sans", sans-serif;
   caret-color: transparent;
   -webkit-appearance: textfield;
@@ -1785,17 +1789,17 @@ form {
   box-shadow: none;
   outline: none;
 }
+.game-tab-container .question-container .question-row.result input[type=number].invisible {
+  opacity: 0;
+}
 .game-tab-container .question-container .question-row.result input[type=number]:focus {
   border: none;
   box-shadow: none;
   outline: none;
 }
-.game-tab-container .question-container .question-row.number-input {
-  display: none;
-}
 .game-tab-container .question-container .question-row.submit {
-  margin: 0rem;
   margin: 0;
+  padding: 0;
   justify-content: center;
 }
 .game-tab-container .question-container .question-row.submit .question-submit-btn {
@@ -1805,11 +1809,41 @@ form {
   transition: all 0.1s;
 }
 .game-tab-container .question-container .question-row.submit .question-submit-btn.correct {
-  transition: all 0.1s;
   background: rgb(126, 218, 128);
 }
 .game-tab-container .question-container .question-row.submit .question-submit-btn.incorrect {
   background: rgb(210, 96, 96);
+}
+.game-tab-container .number-pad {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game-tab-container .number-pad .number-row {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+.game-tab-container .number-pad .number-row .number-button {
+  box-sizing: border-box;
+  flex: 1;
+  font-size: 1rem;
+  align-items: center;
+  overflow: hidden;
+  border: none;
+  color: #222;
+}
+.game-tab-container .number-pad .number-row .number-button span {
+  font-family: "Open Sans", sans-serif;
+  pointer-events: none;
+  font-size: 3.4rem;
+}
+.game-tab-container .number-pad .number-row .number-button span.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  transform: scale(1.4);
 }
 
 .leaderboards-container {
@@ -1822,15 +1856,25 @@ form {
   align-items: center;
 }
 .leaderboards-container .leaderboard {
-  height: 40rem;
+  height: 42rem;
   width: 25%;
-  padding: 2rem;
   margin: 8rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  background: rgb(0, 255, 123);
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #118d81;
+}
+.leaderboards-container .leaderboard .leaderboard-header {
+  background: #0e5c54;
+  height: 12%;
+  width: 100%;
+}
+.leaderboards-container .leaderboard .leaderboard-row {
+  background: #578480;
+  height: 8.8%;
+}
+.leaderboards-container .leaderboard .leaderboard-row:nth-child(even) {
+  background: #83b5af;
 }
 
 @keyframes fadeIn {
@@ -2013,14 +2057,14 @@ form {
     margin: 0rem;
     padding: 0rem;
   }
-  .question-container .question-row.number-input {
+  .question-container .question-row.number-pad {
     display: flex;
     flex-direction: column;
     text-align: center;
     margin: 0;
     padding: 0;
   }
-  .question-container .question-row.number-input .number-row {
+  .question-container .question-row.number-pad .number-row {
     flex: 1;
     display: flex;
     width: 100%;
@@ -2029,7 +2073,9 @@ form {
     margin: 0;
     padding: 0;
   }
-  .question-container .question-row.number-input .number-row .number {
+  .question-container .question-row.number-pad .number-row .number {
+    font-size: 2rem;
+    overflow: hidden;
     font-family: "Open Sans", sans-serif;
     display: flex;
     justify-content: center;
