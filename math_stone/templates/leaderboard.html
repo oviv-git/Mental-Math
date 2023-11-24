@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block main %}
-<div class="full-page active leaderboard" id="leaderboard-tab">
+<div class="full-page active" id="leaderboard-tab">
     <div class="navbar">
         <div class="navbar-container username">
             <span class="material-symbols-outlined">person</span>
@@ -39,19 +39,35 @@
             </button>
         </form>
     </div>
-    <div class="leaderboards-container">
+    <div class="swiper mySwiper leaderboards">
+        <div class="swiper-wrapper">
 
-        {% for leaderboard in leaderboards %}
-        <div class="leaderboard">  
-            <div class="leaderboard-header"></div>
-            {% for leaderboard_row in leaderboard %}
-            <div class="leaderboard-row">
-                {{ leaderboard_row['id'] }} {{ leaderboard_row['username'] }}
+            {% for leaderboard in leaderboards %}
+            <div class="swiper-slide" id="{{ leaderboard[0].lower() }}">
+                <table>
+                    <caption> 
+                        <span class="material-symbols-outlined arrow">keyboard_double_arrow_left</span>
+                        {{ leaderboard[0] }} 
+                        <span class="material-symbols-outlined arrow">keyboard_double_arrow_right</span>
+                    </caption>
+                    <tr class="header">
+                        <th><p>Username</p></th>
+                        <th><p>Experience</p></th>
+                    </tr>
+                    {% for leaderboard_row in leaderboard[1] %}
+                    <tr>
+                        <td>
+                            <p class="username">{{ leaderboard_row[0] }}</p> 
+                        </td>
+                        <td>
+                            <p class="experience">{{ leaderboard_row[1] }}</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
             </div>
             {% endfor %}
         </div>
-
-        {% endfor %}
     </div>
 </div>
 

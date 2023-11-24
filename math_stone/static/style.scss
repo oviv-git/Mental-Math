@@ -1,6 +1,7 @@
 $border-radius-size: 1rem;
 $main-cyan: #4f9db7;
 $main-cyan-light: #70bdd6;
+$main-cyan-light2: #5dbcad;
 $default-light: #fff;
 $default-dark: #222;
 $default-success: rgb(70, 170, 121);
@@ -16,7 +17,6 @@ $timed-mode: #715da4;
 $choice-mode: #2d8471;
 $sudden-mode: #814c4c;
 
-
 // $vanilla-mode: #355d80;
 // $timed-mode: #544e89;
 // $choice-mode: #236a66;
@@ -26,7 +26,6 @@ html
 {
     scroll-behavior: smooth;
 }
-
 
 // cp1
 html.light {
@@ -658,6 +657,28 @@ html.light {
             }
         }
     }
+    table {
+        background: darken($default-light, 20%);
+
+        tr {
+            &:nth-child(even) {
+                background: darken($default-light, 22%);
+            }
+        }
+        caption {
+            background: darken($default-light, 25%);
+
+            &.active {
+                background: $main-cyan-light2;
+
+            }
+            border-color: black;
+    
+            span {
+
+            }
+        }
+    }
 }
 
 // cp1
@@ -1268,6 +1289,24 @@ html.dark {
             }
         }
     }
+    table {
+        background: lighten($default-dark, 15%);
+
+        tr {
+            &:nth-child(even) {
+                background: lighten($default-dark, 17%);
+            }
+        }
+        
+        caption {
+            background: #118d81;
+            border-color: black;
+    
+            span {
+
+            }
+        }
+    }
 }
 
 .waves-effect {
@@ -1506,10 +1545,6 @@ form {
         align-items: center;
         height: 100vh;
 
-        &.leaderboard {
-            height: auto;
-        }
-
         &#game-tab {
             justify-content: start;
         }
@@ -1542,25 +1577,23 @@ form {
                 
             }
         }
-
         .material-symbols-outlined {
-            font-size: 2rem;
-            transform: scale(1.8);
+            font-size: 3rem;
+            transform: scale(1.2);
         }
         
         &.username {
             margin-right: 20%;
             
             * {
-                margin: 0rem 2rem;
+                margin: 0rem 1rem;
             }
         }
         p {
-            font-size: 1rem;
-            transform: scale(2.6);
+            font-size: 2rem;
+            transform: scale(1.2);
         }
         &.dropdown {
-            
             flex: 1.5;
 
             button {
@@ -1631,12 +1664,6 @@ form {
             border-bottom: 0.5rem transparent solid;
             border-radius: 0rem 0rem 1rem 1rem !important;
         }
-        
-        // form {
-        //     height: 100%;
-        //     width: 100%;
-        //     background: transparent;
-        //     display: flex;
 
         .dropdown-button {
             cursor: pointer;
@@ -2361,42 +2388,80 @@ form {
 
 
 
-.leaderboards-container {
-    margin-top: 6rem;
+.swiper.myswiper.leaderboards {
+    margin-top: 8rem;
     width: 100%;
     height: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    
+    .swiper-wrapper {
+        box-shadow: $blur-shadow;
 
-    .leaderboard {
-        height: 42rem;
-        width: 25%;
-        margin: 8rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        // height: 16rem;
-        // width: 8rem;
-        background: #118d81;
+        .swiper-slide{
+            box-shadow: $blur-shadow;
 
-        .leaderboard-header {
-            background: #0e5c54;
-            height: 12%;
-            width: 100%;
         }
-        .leaderboard-row {
-            background: #578480;
-            height: 8.8%;
+    }
 
-            &:nth-child(even) {
-                background: #83b5af;
- 
+}
+
+table {
+    height: auto;
+    width: auto;
+    margin-top: 4rem;
+    border-radius: 0 0 2rem 2rem;
+    
+    caption {
+        font-family: 'Open Sans', sans-serif;
+        border-radius: 2rem 2rem 0 0;
+        padding-top: 1.6rem;
+        padding-bottom: .4rem;
+        width: 100%;
+        height: 4rem;
+        font-size: 2rem;
+        border-bottom: .2rem solid;
+        cursor: grab;
+        font-weight: bold;
+
+        span {
+            margin: 0 0.5rem;
+            transform: scaleY(1.4) scale(2.4);
+        }
+    }
+    tr {
+        text-align: center;
+        align-items: center;
+        height: auto;
+        max-height: 8%;
+        overflow: hidden;
+        width: 100%;
+
+        &:last-child {
+            border: none;
+        }
+
+        th {
+            padding: 0;
+            font-size: 1.4rem;
+            padding: 0rem 5rem;
+        }
+
+        td {
+            padding: 10px 5px;
+            text-align: center;
+            font-size: .6rem;
+            
+            p {
+                transform: scale(2);
+                font-family: 'Open Sans', sans-serif;
             }
         }
     }
 }
+
 
 
 @keyframes fadeIn

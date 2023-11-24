@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, record_game_results
+from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results
 from werkzeug.security import check_password_hash, generate_password_hash
 from database import Database
 from game import Game
@@ -15,8 +15,6 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 Session(app)
 
 # remember res.fetchone() https://docs.python.org/3/library/sqlite3.html
-
-
 @app.route("/", )
 def index():
     return render_template("/index.html")
@@ -102,7 +100,6 @@ def check_username_availability():
     return jsonify(False)
     
 
-
 @app.route('/check_valid_login', methods=['POST'])
 def check_valid_login():
     username = request.form.get('username')
@@ -132,17 +129,10 @@ def stats():
 @app.route('/leaderboard', methods=['POST'])
 @login_required
 def leaderboard():
-    user_id = session['user_id']
+    quantity = request.form.get('quantity')
+    query_type = request.form.get('query_type')
 
-    leaderboards = [
-    [{ 'id': 1, 'username': 'Stefan' }, { 'id': 2, 'username': 'Petia' }, { 'id': 3, 'username': 'Ivan' }, { 'id': 4, 'username': 'Maria' }, { 'id': 5, 'username': 'Nikolai' }, { 'id': 6, 'username': 'Anna' }, { 'id': 7, 'username': 'Elena' }, { 'id': 8, 'username': 'Silvia' }, { 'id': 9, 'username': 'Dimitar' }, { 'id': 10, 'username': 'Georgi' }],
-    [{ 'id': 11, 'username': 'Dimitar' }, { 'id': 12, 'username': 'Silvia' }, { 'id': 13, 'username': 'Georgi' }, { 'id': 14, 'username': 'Anna' }, { 'id': 15, 'username': 'Petia' }, { 'id': 16, 'username': 'Ivan' }, { 'id': 17, 'username': 'Nikolai' }, { 'id': 18, 'username': 'Elena' }, { 'id': 19, 'username': 'Stefan' }, { 'id': 20, 'username': 'Maria' }],
-    [{ 'id': 21, 'username': 'Elena' }, { 'id': 22, 'username': 'Stefan' }, { 'id': 23, 'username': 'Petia' }, { 'id': 24, 'username': 'Dimitar' }, { 'id': 25, 'username': 'Silvia' }, { 'id': 26, 'username': 'Nikolai' }, { 'id': 27, 'username': 'Ivan' }, { 'id': 28, 'username': 'Georgi' }, { 'id': 29, 'username': 'Anna' }, { 'id': 30, 'username': 'Maria' }],
-    [{ 'id': 31, 'username': 'Maria' }, { 'id': 32, 'username': 'Ivan' }, { 'id': 33, 'username': 'Petia' }, { 'id': 34, 'username': 'Silvia' }, { 'id': 35, 'username': 'Stefan' }, { 'id': 36, 'username': 'Nikolai' }, { 'id': 37, 'username': 'Dimitar' }, { 'id': 38, 'username': 'Anna' }, { 'id': 39, 'username': 'Elena' }, { 'id': 40, 'username': 'Georgi' }],
-    [{ 'id': 41, 'username': 'Georgi' }, { 'id': 42, 'username': 'Anna' }, { 'id': 43, 'username': 'Ivan' }, { 'id': 44, 'username': 'Dimitar' }, { 'id': 45, 'username': 'Silvia' }, { 'id': 46, 'username': 'Petia' }, { 'id': 47, 'username': 'Elena' }, { 'id': 48, 'username': 'Stefan' }, { 'id': 49, 'username': 'Nikolai' }, { 'id': 50, 'username': 'Maria' }],
-    [{ 'id': 51, 'username': 'Petia' }, { 'id': 52, 'username': 'Georgi' }, { 'id': 53, 'username': 'Anna' }, { 'id': 54, 'username': 'Elena' }, { 'id': 55, 'username': 'Nikolai' }, { 'id': 56, 'username': 'Dimitar' }, { 'id': 57, 'username': 'Ivan' }, { 'id': 58, 'username': 'Silvia' }, { 'id': 59, 'username': 'Stefan' }, { 'id': 60, 'username': 'Maria' }]
-]
-
+    leaderboards = generate_leaderboards(quantity, query_type)
 
     return render_template('leaderboard.html', leaderboards=leaderboards)
 
@@ -163,7 +153,7 @@ def get_user_levels():
     user_id = session['user_id']
     experience = get_user_experience(user_id)
 
-    level_info_list = generate_user_level_info(experience)
+    level_info_list = generate_user_level_info(experience[:-1])
 
     return jsonify(level_info_list)
 
@@ -190,17 +180,15 @@ def record_results():
     results = json.loads(request.form.get('results'))
 
     user_experience = get_user_experience(user_id)
-    
     reward_experience = generate_reward_experience(results)
-
     record_game_results(results, reward_experience, user_id)
 
     updated_experience = [sum(i) for i in zip(user_experience, reward_experience)]
 
     with Database() as db:
         query = ("UPDATE levels SET addition = (?), subtraction = (?), multiplication = (?), "
-                "division = (?), exponential = (?) WHERE user_id = (?)")
-        parameters = (updated_experience[0], updated_experience[1], updated_experience[2], updated_experience[3], updated_experience[4], user_id, )
+                "division = (?), exponential = (?), total = (?) WHERE user_id = (?)")
+        parameters = (updated_experience[0], updated_experience[1], updated_experience[2], updated_experience[3], updated_experience[4], updated_experience[5], user_id, )
         db.execute(query, parameters)
 
     return jsonify({'successful': True})

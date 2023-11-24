@@ -118,7 +118,7 @@ class Game:
                            {'operand_1': 10000, 'operand_2': 5000},
                            {'operand_1': 10000, 'operand_2': 9999}]
 
-        operand_1 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_1'])
+        operand_1 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_1'], 2)
         operand_2 = self.generate_number(SUBTRACTION_MAP[difficulty]['operand_2'])
 
         if operand_1 < operand_2:

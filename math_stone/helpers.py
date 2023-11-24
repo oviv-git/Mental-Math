@@ -93,7 +93,7 @@ def get_user_experience(user_id):
     """
     
     with Database() as db:
-        query = "SELECT addition, subtraction, multiplication, division, exponential FROM levels WHERE user_id = (?)"
+        query = "SELECT addition, subtraction, multiplication, division, exponential, total FROM levels WHERE user_id = (?)"
         parameters = (user_id, )
         return db.fetchone(query, parameters)
 
@@ -109,8 +109,9 @@ def generate_reward_experience(results):
         reward_experience (list): A list containing 5 numbers
     """
     
-    reward_experience = [0, 0, 0, 0, 0]
+    reward_experience = [0, 0, 0, 0, 0, 0]
     GAME_MODE_MULTIPLIER_MAP = {'vanilla': 1, 'timed': 1.2, 'choice': 0.8, 'sudden': 1.5}
+    total = 0;
 
     for i, question in enumerate(results):
 
@@ -140,7 +141,9 @@ def generate_reward_experience(results):
         operator = question['operator']
 
         reward_experience[OPERATOR_MAP[operator]] += experience_gained
+        total += experience_gained
 
+    reward_experience[-1] = total
     return reward_experience
 
 
@@ -217,7 +220,7 @@ def generate_user_level_info(experience_list):
 
     return user_level_info
 
-
+# TODO - DONT FORGET TO ADD TOP MESSAGE
 def record_game_results(results, reward_experience, user_id):
     question_types = {'+': 0, '-': 0, 'x': 0, '÷': 0, '^': 0}
     correct_count = 0
@@ -248,7 +251,23 @@ def record_game_results(results, reward_experience, user_id):
         db.execute(query, parameters)
     
 
+# TODO - DONT FORGET TO ADD TOP MSG
+def generate_leaderboards(quantity, query_type):
+    MATH_TYPES_MAP = ['total', 'addition', 'subtraction', 'multiplication', 'division', 'exponential']
+    leaderboards = []
+    db = Database()
+    
+    for math_type in MATH_TYPES_MAP:
+        query = (f"SELECT U.username, L.{math_type} FROM users U LEFT JOIN levels L ON U.id = L.user_id ORDER BY L.{math_type} DESC LIMIT (?);")
+        paramaters = (quantity, )
+        db.execute(query, paramaters)
+        leaderboard = db.fetchall()
+        leaderboards.append([math_type.upper(), leaderboard])
+        
+    return leaderboards
 
+
+# TODO - DONT FORGET TO ADD TOP MSG
 def error(message, code=400):
     """
     Redirects to error.html with an error code and a message detaling the nature of the error to the user

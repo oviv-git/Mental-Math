@@ -23,7 +23,9 @@
                 <p>Darkmode</p><span class="material-symbols-outlined">dark_mode</span>
             </div>
             <form class="dropdown-menu-content" action="/leaderboard" method="post" id="leaderboard-form">
-                <button class="dropdown-button">
+                <input type="hidden" name="query_type" value="default">
+                <input type="hidden" name="quantity" value="10">
+                <button class="dropdown-button" >
                     <p>Leaderboard</p><span class="material-symbols-outlined" style="left: 8%;">leaderboard</span>
                 </button>
             </form>

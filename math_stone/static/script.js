@@ -21,6 +21,7 @@ function main() {
             break;
         case '/leaderboard':
             initDropdownMenu();
+            initLeaderboardSwiper();
             displayUsername();
             logout();
             break;
@@ -41,7 +42,7 @@ function initHomePage() {
     switchHomeTabs();
 
     initDropdownMenu();
-    initModeSelect();
+    initModeSelectSwiper();
     toggleSwitchboard();
     updateSliderValues();
     modeSelectMultipleChoice();
@@ -274,6 +275,7 @@ async function loginFormCheck() {
         }
         return false;
     }
+
     sessionStorage.setItem('username', username.value)
     return true;
 }
@@ -322,6 +324,7 @@ async function registerFormCheck() {
     if (!errorHandler(confirmBasicCheck(password.value, confirm.value), confirm, confirmErrorBox, confirmLabel)) {
         return false;
     }
+    sessionStorage.setItem('username', username.value)
     return true;
 }
 
@@ -481,10 +484,6 @@ function switchHomeTabs(tab) {
 }
 
 
-
-
-
-
 async function updateUserLevels() {
     let userLevels = await getUserLevels();
     let levelInfoContainers = document.querySelectorAll('.level-info-container');
@@ -504,7 +503,6 @@ async function updateUserLevels() {
 }
 
 
-
 function displayUsername() {
 /**
  * Gets the username from sessionStorage and displays it on the navbar
@@ -514,6 +512,7 @@ function displayUsername() {
 
     usernameContainer.innerHTML = username;
 }
+
 
 async function getUserLevels() {
 /**
@@ -844,7 +843,7 @@ function initDropdownMenu() {
 }
 
 // Initializes the mode select cards
-function initModeSelect() {
+function initModeSelectSwiper() {
     let deviceMaxWidth = screen.width
     swiper = new Swiper('.mySwiper', {
         slidesPerView: 1,
@@ -982,7 +981,7 @@ function submitButtonActivationCheck(activeSlide) {
 
 
 // Function to change the colors of everything when the game mode is switched
-// Gets called by initModeSelect()
+// Gets called by initModeSelectSwiper()
 // TODO change name
 function changeButtonColors() {
     const switchboard = document.getElementById('switchboard');
@@ -1048,17 +1047,19 @@ async function gameLogic(activeSlide) {
     const result = document.getElementById('input-result');
     const submitButton = document.getElementById('question-submit-button');
 
+    function timerEndGame() {
+        shouldEndQuestions = true;
+        result.value = 0;
+        submitButton.click();
+        triggerAnimation(result, 'invisible', 150)
+    } 
+
     // This if statement covers all the gameplay for any timed modes: Timed, 
     if (activeSlide.querySelector('input').classList.contains('timer')) {
         timer = questionAmount * 1000;
         activateTimerProgress(progressContainerGameTimer, timer, true, 'linear');
         
-        setTimeout(function() {
-            shouldEndQuestions = true;
-            result.value = 0;
-            submitButton.click();
-            triggerAnimation(result, 'invisible', 150)
-        }, timer);
+        var timerTimeout = setTimeout(timerEndGame, timer);
     // For all non-timer modes: Vanilla
     } else {
         activateTimerProgress(progressContainerGameTimer, (questionAmount * 10000), false, 'ease');
@@ -1136,7 +1137,12 @@ async function gameLogic(activeSlide) {
     let gameEndTime = new Date();
     let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
 
+    console.log(gameTimeElapsed, typeof(gameTimeElapsed))
+    
+
     // console.log(gameTimeElapsed, gameEndTime, gameStartTime)
+    clearTimeout(timerTimeout)
+
     console.log(gameResults, gameResults[0])
     
     gameResults[0].gameTimer = gameTimeElapsed
@@ -1284,6 +1290,47 @@ function activateTimerProgress(progressContainer, timer, reverse=false, transiti
         }
     }, 10);
 }
+
+// TODO 
+function initLeaderboardSwiper() {
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 0,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+    });
+
+    const swiperSlides = document.querySelectorAll('.swiper-slide');
+    let startWithActiveSlide = document.querySelector('.swiper-slide-next');
+    let startWithActiveCaption = startWithActiveSlide.querySelector('caption');
+    let lastActiveCaption = null;
+
+    startWithActiveCaption.classList.add('active');
+
+    swiper.on('transitionEnd', async function () {
+        
+
+        let currentActiveSlide = document.querySelector('.swiper-slide-next');
+        let currentActiveCaption = currentActiveSlide.querySelector('caption');
+
+        currentActiveCaption.classList.add('active');
+
+        if (lastActiveCaption != null) {
+            lastActiveCaption.classList.remove('active');
+        }
+
+        lastActiveCaption = currentActiveCaption
+
+        
+    });
+    
+
+}
+
+
 
 
 /** 
