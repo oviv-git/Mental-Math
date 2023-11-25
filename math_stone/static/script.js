@@ -1291,7 +1291,8 @@ function activateTimerProgress(progressContainer, timer, reverse=false, transiti
     }, 10);
 }
 
-// TODO 
+// Initializes swiper.js on leaderboard.html and also has a bonus functionality of
+// transfering the active class the current slides caption element for styling purposes
 function initLeaderboardSwiper() {
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 3,
@@ -1303,31 +1304,22 @@ function initLeaderboardSwiper() {
         },
     });
 
-    const swiperSlides = document.querySelectorAll('.swiper-slide');
-    let startWithActiveSlide = document.querySelector('.swiper-slide-next');
-    let startWithActiveCaption = startWithActiveSlide.querySelector('caption');
-    let lastActiveCaption = null;
-
+    const startWithActiveSlide = document.querySelector('.swiper-slide-next');
+    const startWithActiveCaption = startWithActiveSlide.querySelector('caption');
+    
     startWithActiveCaption.classList.add('active');
-
-    swiper.on('transitionEnd', async function () {
+    let lastActiveCaption = startWithActiveCaption;
+    
+    swiper.on('slideChangeTransitionEnd', function () {
         
-
         let currentActiveSlide = document.querySelector('.swiper-slide-next');
         let currentActiveCaption = currentActiveSlide.querySelector('caption');
 
         currentActiveCaption.classList.add('active');
-
-        if (lastActiveCaption != null) {
-            lastActiveCaption.classList.remove('active');
-        }
-
-        lastActiveCaption = currentActiveCaption
-
+        lastActiveCaption.classList.remove('active');
         
+        lastActiveCaption = currentActiveCaption
     });
-    
-
 }
 
 

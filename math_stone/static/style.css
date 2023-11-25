@@ -444,11 +444,11 @@ html.light .game-tab-container .question-container .question-row.result input[ty
 }
 html.light .game-tab-container .question-container .question-submit-btn {
   width: 100%;
-  background: #70bdd6;
+  background: #4eb1d2;
   color: #222;
 }
 html.light .game-tab-container .question-container .question-submit-btn.active {
-  background: #abd8e7;
+  background: #8bcce2;
 }
 html.light .game-tab-container .game-exit-container .game-exit-button {
   background: #d9d9d9;
@@ -464,17 +464,17 @@ html.light .number-pad .number-row .number-button {
   background: #d9d9d9;
 }
 html.light table {
-  background: #cccccc;
+  background: #d9d9d9;
 }
 html.light table tr:nth-child(even) {
-  background: #c7c7c7;
+  background: #d1d1d1;
 }
 html.light table caption {
-  background: #bfbfbf;
+  background: #9fc2cd;
   border-color: black;
 }
 html.light table caption.active {
-  background: #5dbcad;
+  background: #4f9db7;
 }
 html.dark {
   background: #222;
@@ -575,7 +575,7 @@ html.dark .play-container {
 html.dark .switchboard-container .switch {
   background: #6f6f6f;
   box-shadow: #626262 0rem 1.4rem 0rem;
-  color: #bfbfbf;
+  color: #b3b3b3;
   border-color: #646464;
 }
 html.dark .switchboard-container.vanilla .switch.active {
@@ -586,7 +586,7 @@ html.dark .switchboard-container.vanilla .switch.active {
 }
 html.dark .switchboard-container.timed .switch.active {
   background: #715da4;
-  color: #e2dcf1;
+  color: #c4b7e3;
   box-shadow: #5a4a84 0rem 0.4rem 0rem;
   border-color: #685597;
 }
@@ -910,11 +910,11 @@ html.dark .game-tab-container .question-container .question-row.result input[typ
   color: #bfbfbf;
 }
 html.dark .game-tab-container .question-container .question-submit-btn {
-  background: #70bdd6;
+  background: #4eb1d2;
   color: #222;
 }
 html.dark .game-tab-container .question-container .question-submit-btn.active {
-  background: #abd8e7;
+  background: #8bcce2;
 }
 html.dark .number-pad .number-row .number-button {
   background: #484848;
@@ -1897,6 +1897,7 @@ table caption {
   border-bottom: 0.2rem solid;
   cursor: grab;
   font-weight: bold;
+  transition: background 0.4s;
 }
 table caption span {
   margin: 0 0.5rem;

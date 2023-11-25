@@ -1,7 +1,8 @@
 $border-radius-size: 1rem;
 $main-cyan: #4f9db7;
-$main-cyan-light: #70bdd6;
-$main-cyan-light2: #5dbcad;
+$leaderboard: #118d81;
+$main-cyan-light: #4eb1d2;
+$main-cyan-light2: rgb(64, 188, 199);
 $default-light: #fff;
 $default-dark: #222;
 $default-success: rgb(70, 170, 121);
@@ -657,19 +658,24 @@ html.light {
             }
         }
     }
+
     table {
-        background: darken($default-light, 20%);
+        background: darken($default-light, 15%);
 
         tr {
             &:nth-child(even) {
-                background: darken($default-light, 22%);
+                background: darken($default-light, 18%);
             }
         }
         caption {
-            background: darken($default-light, 25%);
-
+            // background: darken($default-light, 25%);
+            // background: darken(desaturate($main-cyan-light, 10%), 20%);
+            // background: lighten(saturate($main-cyan, 10%), 15%);
+            background: lighten(desaturate($main-cyan, 10%), 20%);
+            
             &.active {
-                background: $main-cyan-light2;
+                // background: lighten(saturate($main-cyan, 5%), 10%);
+                background: $main-cyan;
 
             }
             border-color: black;
@@ -814,7 +820,7 @@ html.dark {
         .switch {
             background: lighten($default-dark, 30%);
             box-shadow: lighten($default-dark, 25%) 0rem 1.4rem 0rem;
-            color: darken($default-light, 25%);
+            color: darken($default-light, 30%);
             border-color: lighten($default-dark, 26%);
         }
         &.vanilla {
@@ -831,7 +837,7 @@ html.dark {
             .switch {
                 &.active {
                     background: $timed-mode;
-                    color: lighten(saturate($timed-mode, 15%), 40%);
+                    color: lighten(saturate($timed-mode, 15%), 30%);
                     box-shadow: darken($timed-mode, 10%) 0rem 0.4rem 0rem;
                     border-color: darken($timed-mode, 4%);
 
@@ -2425,6 +2431,7 @@ table {
         border-bottom: .2rem solid;
         cursor: grab;
         font-weight: bold;
+        transition: background 0.4s;
 
         span {
             margin: 0 0.5rem;
