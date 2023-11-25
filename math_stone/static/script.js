@@ -428,6 +428,7 @@ async function checkUsernameAvailability(username) {
 }
 
 // Sends AJAX request to check if the login is successful 
+// TODO - Probably remake this since its a very eary function
 function checkValidLogin(username, password) {
     return new Promise(function(resolve, reject) {
         $.ajax({
@@ -447,6 +448,7 @@ function checkValidLogin(username, password) {
 }
 
 // Sends AJAX request to redirect to error.html with errorMessage and errorCode
+// TODO - remake this - or find a use for it. idk 
 function errorRedirect(errorMessage, errorCode) {
     $.ajax({
         url: '/error_redirect',
@@ -462,6 +464,8 @@ function errorRedirect(errorMessage, errorCode) {
     })
 }
 
+
+// TODO - COMMENT
 function pathnameRedirect(pathname) {
     window.location.pathname = pathname;
 }
@@ -484,6 +488,7 @@ function switchHomeTabs(tab) {
 }
 
 
+// TOOD - 
 async function updateUserLevels() {
     let userLevels = await getUserLevels();
     let levelInfoContainers = document.querySelectorAll('.level-info-container');
@@ -513,12 +518,11 @@ function displayUsername() {
     usernameContainer.innerHTML = username;
 }
 
-
-async function getUserLevels() {
 /**
  * AJAX request to get the users levels and % to next level when homepage loads
  * and then to update the xp bars in the results container
 */
+async function getUserLevels() {
     return new Promise(function(resolve, reject) {
         $.ajax({
             url: 'get_user_levels',
@@ -540,6 +544,8 @@ async function getUserLevels() {
         throw error
     })
 }
+
+
 /**
  * Gets called when home.html first loads and again on every call of switchHomeTabs();
  * Runs an sql query to SELECT the last 5 games of the user to populate results-container
@@ -635,7 +641,7 @@ async function displayLastGamesPlayed() {
 
 /**
  * While on the play tab the key 'enter' doubles as a submit answer key.
- * @returns Only returns true when the enter key or submit button is pressed.
+ * @returns Only resolves true when the enter key (keyboard) or submit button(numpad) is pressed.
 */
 function gameInput() {
     const gameTabInput = document.getElementById('input-result');
@@ -645,10 +651,10 @@ function gameInput() {
     const numberPad = document.getElementById('number-pad')
     const numberPadKeys = numberPad.querySelectorAll('.number-button')
 
+    // Autofocuses on the input when on game-tab and tracks keyboard key-presses
     return new Promise((resolve) => {
         function keydownEvent(event) {
             let name = event.key;
-            console.log(name, event)
             
             if (currentTab.id === 'game-tab') {
                 // Functionally adds autofocus for valid input[type='number'] keypresses
@@ -662,30 +668,25 @@ function gameInput() {
             };
         }
 
-       
-
+        // Event listener function that gets called if the user clicks on the submit button on game-tab
         function clickEvent() {
             removeAllEventListeners();
             resolve(true);
         }
 
+        // Event Listener function that gets called when any of the keys on the numpad are called on game-tab
+        // Simulates numpad button clicks by adding the number to the end of input, also tracks for backspace
         function numpadEvent(event) {
-            simulateKeydown(event.target.dataset.button);
-        }
-
-        function simulateKeydown(key) {
-            console.log(key)
-
-            gameTabInput.focus();
+            let key = event.target.dataset.button
+            
             if (key != 'Backspace') {
                 gameTabInput.value += key
             } else {
                 gameTabInput.value = gameTabInput.value.slice(0, -1)
             }
-            
-            // gameTabInput.dispatchEvent(event);
         }
         
+        // Has to be called before any resolve(true) otherwise eventListeners stack up
         function removeAllEventListeners() {
             document.removeEventListener('keydown', keydownEvent);
             submitButton.removeEventListener('click', clickEvent);
@@ -1136,14 +1137,8 @@ async function gameLogic(activeSlide) {
     let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let gameEndTime = new Date();
     let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
-
-    console.log(gameTimeElapsed, typeof(gameTimeElapsed))
     
-
-    // console.log(gameTimeElapsed, gameEndTime, gameStartTime)
     clearTimeout(timerTimeout)
-
-    console.log(gameResults, gameResults[0])
     
     gameResults[0].gameTimer = gameTimeElapsed
     gameResults[0].gameDate = gameTimeStamp
@@ -1293,6 +1288,7 @@ function activateTimerProgress(progressContainer, timer, reverse=false, transiti
 
 // Initializes swiper.js on leaderboard.html and also has a bonus functionality of
 // transfering the active class the current slides caption element for styling purposes
+// Also in charge of adding the active class to the fake box shadow.
 function initLeaderboardSwiper() {
     var swiper = new Swiper(".mySwiper", {
         slidesPerView: 3,
@@ -1303,22 +1299,31 @@ function initLeaderboardSwiper() {
           clickable: true,
         },
     });
-
     const startWithActiveSlide = document.querySelector('.swiper-slide-next');
-    const startWithActiveCaption = startWithActiveSlide.querySelector('caption');
+
+    const startWithActiveTable = startWithActiveSlide.querySelector('table');
+    const startWithActiveShadow = startWithActiveSlide.querySelector('.box-shadow');
     
-    startWithActiveCaption.classList.add('active');
-    let lastActiveCaption = startWithActiveCaption;
+    startWithActiveTable.classList.add('active');
+    startWithActiveShadow.classList.add('active');
+
+    let lastActiveTable = startWithActiveTable;
+    let lastActiveShadow = startWithActiveShadow;
     
     swiper.on('slideChangeTransitionEnd', function () {
-        
         let currentActiveSlide = document.querySelector('.swiper-slide-next');
-        let currentActiveCaption = currentActiveSlide.querySelector('caption');
 
-        currentActiveCaption.classList.add('active');
-        lastActiveCaption.classList.remove('active');
+        let currentActiveTable = currentActiveSlide.querySelector('table');
+        let currentActiveShadow = currentActiveSlide.querySelector('.box-shadow')
         
-        lastActiveCaption = currentActiveCaption
+        currentActiveTable.classList.add('active');
+        currentActiveShadow.classList.add('active');
+
+        lastActiveTable.classList.remove('active');
+        lastActiveShadow.classList.remove('active');
+        
+        lastActiveTable = currentActiveTable;
+        lastActiveShadow = currentActiveShadow;
     });
 }
 
@@ -1333,9 +1338,6 @@ function initLeaderboardSwiper() {
     @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset
 */
 function triggerAnimation(element, animation, timeDelay) {
-
-    // console.log(element, animation, timeDelay)
-    // console.log(typeof(element), typeof(animation), typeof(timeDelay))
     const removeAnimation = function () {
         element.classList.remove(animation);
     };

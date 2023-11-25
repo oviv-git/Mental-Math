@@ -442,14 +442,6 @@ html.light .game-tab-container .question-container .question-row.result {
 html.light .game-tab-container .question-container .question-row.result input[type=number] {
   color: #222;
 }
-html.light .game-tab-container .question-container .question-submit-btn {
-  width: 100%;
-  background: #4eb1d2;
-  color: #222;
-}
-html.light .game-tab-container .question-container .question-submit-btn.active {
-  background: #8bcce2;
-}
 html.light .game-tab-container .game-exit-container .game-exit-button {
   background: #d9d9d9;
 }
@@ -465,17 +457,21 @@ html.light .number-pad .number-row .number-button {
 }
 html.light table {
   background: #d9d9d9;
+  box-shadow: 0rem 0.4rem 0rem #cccccc;
 }
 html.light table tr:nth-child(even) {
   background: #d1d1d1;
 }
 html.light table caption {
-  background: #9fc2cd;
-  border-color: black;
+  border-color: #999999;
+  background: #cccccc;
+  color: #222;
 }
-html.light table caption.active {
-  background: #4f9db7;
+html.light table.active caption {
+  background: #84bccf;
+  border-color: #3d8096;
 }
+
 html.dark {
   background: #222;
   color: #fff;
@@ -909,27 +905,30 @@ html.dark .game-tab-container .question-container .question-row.result {
 html.dark .game-tab-container .question-container .question-row.result input[type=number] {
   color: #bfbfbf;
 }
-html.dark .game-tab-container .question-container .question-submit-btn {
-  background: #4eb1d2;
-  color: #222;
-}
-html.dark .game-tab-container .question-container .question-submit-btn.active {
-  background: #8bcce2;
-}
 html.dark .number-pad .number-row .number-button {
   background: #484848;
   color: #bfbfbf;
 }
+html.dark .box-shadow {
+  box-shadow: 0 2rem 1.4rem rgba(0, 0, 0, 0.4);
+}
 html.dark table {
   background: #484848;
+  box-shadow: 0rem 0.4rem 0rem #3c3c3c;
 }
 html.dark table tr:nth-child(even) {
   background: #4d4d4d;
 }
 html.dark table caption {
-  background: #118d81;
-  border-color: black;
+  border-color: #6f6f6f;
+  background: #5d5d5d;
+  color: default-light;
 }
+html.dark table.active caption {
+  background: #4f9db7;
+  border-color: #2e6172;
+}
+
 .waves-effect.waves-light .waves-ripple {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -1865,19 +1864,25 @@ form {
 }
 
 .swiper.myswiper.leaderboards {
-  margin-top: 8rem;
   width: 100%;
   height: 100%;
-  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
-.swiper.myswiper.leaderboards .swiper-wrapper {
-  box-shadow: 0rem 0em 0.8rem;
+
+.box-shadow {
+  bottom: 12%;
+  z-index: -1;
+  position: absolute;
+  border-radius: 2rem;
+  width: 76%;
+  height: 70%;
+  box-shadow: 0 2rem 1rem rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s;
 }
-.swiper.myswiper.leaderboards .swiper-wrapper .swiper-slide {
-  box-shadow: 0rem 0em 0.8rem;
+.box-shadow.active {
+  transform: translateY(-1rem);
 }
 
 table {
@@ -1885,6 +1890,10 @@ table {
   width: auto;
   margin-top: 4rem;
   border-radius: 0 0 2rem 2rem;
+  transition: transform 0.4s;
+}
+table.active {
+  transform: translateY(-1rem);
 }
 table caption {
   font-family: "Open Sans", sans-serif;
@@ -1897,11 +1906,12 @@ table caption {
   border-bottom: 0.2rem solid;
   cursor: grab;
   font-weight: bold;
-  transition: background 0.4s;
+  transition: all 0.4s;
 }
 table caption span {
-  margin: 0 0.5rem;
-  transform: scaleY(1.4) scale(2.4);
+  margin: 0 3rem;
+  transform: scaleY(1.4) scale(2.8);
+  opacity: 0.08;
 }
 table tr {
   text-align: center;
@@ -1912,6 +1922,7 @@ table tr {
   width: 100%;
 }
 table tr:last-child {
+  border-radius: 0 0 2rem 2rem;
   border: none;
 }
 table tr th {
