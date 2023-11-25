@@ -858,7 +858,7 @@ function initModeSelectSwiper() {
         },
     });
     
-    swiper.on('transitionEnd', async function () {
+    swiper.on('slideChangeTransitionStart', async function () {
         submitButtonActivation();
         changeButtonColors();
     });

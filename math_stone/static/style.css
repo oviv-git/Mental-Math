@@ -455,6 +455,9 @@ html.light .game-tab-container .game-exit-container .tooltip-container {
 html.light .number-pad .number-row .number-button {
   background: #d9d9d9;
 }
+html.light .box-shadow {
+  box-shadow: 0 2rem 1.4rem rgba(0, 0, 0, 0.25);
+}
 html.light table {
   background: #d9d9d9;
   box-shadow: 0rem 0.4rem 0rem #cccccc;
@@ -463,13 +466,13 @@ html.light table tr:nth-child(even) {
   background: #d1d1d1;
 }
 html.light table caption {
-  border-color: #999999;
+  border-color: #b3b3b3;
   background: #cccccc;
   color: #222;
 }
 html.light table.active caption {
   background: #84bccf;
-  border-color: #3d8096;
+  border-color: #458fa8;
 }
 
 html.dark {
@@ -926,7 +929,7 @@ html.dark table caption {
 }
 html.dark table.active caption {
   background: #4f9db7;
-  border-color: #2e6172;
+  border-color: #73b1c6;
 }
 
 .waves-effect.waves-light .waves-ripple {
@@ -1878,7 +1881,6 @@ form {
   border-radius: 2rem;
   width: 76%;
   height: 70%;
-  box-shadow: 0 2rem 1rem rgba(0, 0, 0, 0.2);
   transition: transform 0.4s;
 }
 .box-shadow.active {

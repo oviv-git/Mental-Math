@@ -648,7 +648,9 @@ html.light {
             }
         }
     }
-
+    .box-shadow {
+        box-shadow: 0 2rem 1.4rem rgba(0, 0, 0, 0.25);
+    }
     table {
         background: darken($default-light, 15%);
         box-shadow: 0rem .4rem 0rem darken($default-light, 20%);
@@ -659,14 +661,14 @@ html.light {
             }
         }
         caption {
-            border-color: darken($default-light, 40%);
+            border-color: darken($default-light, 30%);
             background: darken($default-light, 20%);
             color: $default-dark;
 
         }
         &.active caption {
             background: saturate(lighten($main-cyan, 15%), 2%);
-            border-color: darken($main-cyan, 10%);
+            border-color: darken($main-cyan, 5%);
         }
     }
 }
@@ -1289,7 +1291,7 @@ html.dark {
         }
         &.active caption {
             background: $main-cyan;
-            border-color: darken($main-cyan, 20%);
+            border-color: lighten($main-cyan, 10%);
         }
         
     }
@@ -2391,7 +2393,6 @@ form {
     border-radius: 2rem;
     width: 76%;
     height: 70%;
-    box-shadow: 0 2rem 1rem rgba(0, 0, 0, 0.2);
     transition: transform .4s;
 
     &.active {

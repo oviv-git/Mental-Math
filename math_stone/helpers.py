@@ -253,17 +253,67 @@ def record_game_results(results, reward_experience, user_id):
 
 # TODO - DONT FORGET TO ADD TOP MSG
 def generate_leaderboards(quantity, query_type):
-    MATH_TYPES_MAP = ['total', 'addition', 'subtraction', 'multiplication', 'division', 'exponential']
+    levels_list = []
+
+    with open('levels.csv', 'r+', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=',')
+        # for level in levels_list:
+        for row in reader:
+            levels_list.append(row)
+
     leaderboards = []
     db = Database()
     
+    MATH_TYPES_MAP = ['total', 'addition', 'subtraction', 'multiplication', 'division', 'exponential']
     for math_type in MATH_TYPES_MAP:
-        query = (f"SELECT U.username, L.{math_type} FROM users U LEFT JOIN levels L ON U.id = L.user_id ORDER BY L.{math_type} DESC LIMIT (?);")
-        paramaters = (quantity, )
-        db.execute(query, paramaters)
-        leaderboard = db.fetchall()
-        leaderboards.append([math_type.upper(), leaderboard])
         
+        query = (f"SELECT U.username, L.{math_type} FROM users U LEFT JOIN levels L ON U.id = L.user_id ORDER BY L.{math_type} DESC LIMIT (?);")
+        parameters = (quantity, )
+
+        db.execute(query, parameters)
+        user_experience = db.fetchall()
+
+        for user in user_experience:
+            for level in levels_list:
+                leaderboard = [user[0], user[1]]
+                if user[1] < int(level[1]):
+                    user_level = level[0]
+                    leaderboard.append(user_level)
+                    break
+
+        for r in leaderboards:
+            print(r)
+        leaderboards.append({'math_type':math_type, 'leaderboard': leaderboard})
+        
+    # for leaderboard in leaderboards[1:]:
+    # for leaderboard in leaderboards:
+    #     for user in leaderboard.get('leaderboard'):
+
+                
+        # for user in list(leaderboard[1]):
+
+        #     print(type(user))
+            # for level in levels_list:
+            #     if user[1] < int(level[1]):
+                    
+            #         # leaderboard[2] = level[0]
+            #         break
+
+    # for leaderboard in leaderboard[1:]:
+    #     print(type(leaderboard))
+
+
+
+            # for level in levels_list:
+            #     if leaderboard_row[0] >= level[1]:
+            #         level_number = level[0]
+            #         break
+            #     leaderboard_row.append(level_number)
+            #     break
+
+    # for row in leaderboards:
+    #     print(row)
+
     return leaderboards
 
 
@@ -280,3 +330,6 @@ def error(message, code=400):
     """
 
     return render_template("error.html", code=code, message=message)
+
+
+#
