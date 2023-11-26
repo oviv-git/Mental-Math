@@ -12,15 +12,21 @@ $blur-shadow: 0rem 0em .8rem;
 // $vanilla-mode: #3f6d96;
 $vanilla-mode-light: #407587;
 $vanilla-mode: #438ea7;
-// $vanilla-mode: #4f9db7;
-$timed-mode: #715da4;
-$choice-mode: #2d8471;
-$sudden-mode: #814c4c;
 
-// $vanilla-mode: #355d80;
-// $timed-mode: #544e89;
-// $choice-mode: #236a66;
-// $sudden-mode: #8e3c47;
+$vanilla-mode: #4f9db7;
+$timed-mode: #5d65a4;
+// $choice-mode: #2d8471;
+$sudden-mode: #925353;
+
+// Original Colors 
+
+$choice-mode: #2d8471;
+
+// $vanilla-mode: #438ea7;
+// $timed-mode: #715da4;
+// $choice-mode: #2d8471;
+// $sudden-mode: #814c4c;
+
 
 html
 {
@@ -2374,18 +2380,6 @@ form {
 }
 
 
-
-
-.swiper.myswiper.leaderboards {
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-
-}
-
-
 .box-shadow {
     bottom: 12%;
     z-index: -1;
@@ -2394,21 +2388,33 @@ form {
     width: 76%;
     height: 70%;
     transition: transform .4s;
+    // transform: scale(0.6);
 
     &.active {
-        transform: translateY(-1rem);
+        transform: translateY(-1.2rem);
     }
 }
 
 table {
+    border-collapse: collapse;
     height: auto;
-    width: auto;
+    width: 40%;
     margin-top: 4rem;
     border-radius: 0 0 2rem 2rem;
     transition: transform .4s;
 
+    tr {
+        th {
+            padding: 0px;
+            border-spacing: 0;
+        }
+        padding: 0px;
+        border-spacing: 0;
+    }
+    
+
     &.active {
-        transform: translateY(-1rem);
+        transform: translateY(-1.2rem);
     }
     
     caption {
@@ -2423,6 +2429,7 @@ table {
         cursor: grab;
         font-weight: bold;
         transition: all 0.4s;
+        overflow: hidden;
 
         span {
             margin: 0 3rem;
@@ -2436,7 +2443,7 @@ table {
         height: auto;
         max-height: 8%;
         overflow: hidden;
-        width: 100%;
+        width: 60%;
 
         &:last-child {
             border-radius: 0 0 2rem 2rem;
@@ -2444,15 +2451,20 @@ table {
         }
 
         th {
-            padding: 0;
-            font-size: 1.4rem;
-            padding: 0rem 5rem;
+            padding: 0px;
+            font-size: 1.2rem;
+            padding: 0rem 3.5rem;
         }
 
         td {
-            padding: 10px 5px;
+            padding: 10px 15px;
             text-align: center;
             font-size: .6rem;
+
+            &.experience {
+                padding: 0;
+                margin: 0;
+            }
             
             p {
                 transform: scale(2);

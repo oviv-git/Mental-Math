@@ -109,10 +109,10 @@ html.light .switchboard-container.vanilla .switch.active {
   border-color: #5ea3bb;
 }
 html.light .switchboard-container.timed .switch.active {
-  color: #e1dbf2;
-  background: #a99bcc;
-  box-shadow: #8e7eb6 0rem 0.4rem 0rem;
-  border-color: #9d8dc6;
+  color: #dbddf2;
+  background: #9ba0cc;
+  box-shadow: #7e84b6 0rem 0.4rem 0rem;
+  border-color: #8d93c6;
 }
 html.light .switchboard-container.choice .switch.active {
   color: #d3f7ef;
@@ -121,10 +121,10 @@ html.light .switchboard-container.choice .switch.active {
   border-color: #3dc5a8;
 }
 html.light .switchboard-container.sudden .switch.active {
-  color: #ebc8c8;
-  background: #b97a7a;
-  box-shadow: #a15f5f 0rem 0.4rem 0rem;
-  border-color: #b26d6d;
+  color: #f1d9d9;
+  background: #c38888;
+  box-shadow: #ac6c6c 0rem 0.4rem 0rem;
+  border-color: #bc7b7b;
 }
 html.light .swiper-slide {
   background: transparent;
@@ -163,37 +163,37 @@ html.light .swiper-slide .game-mode.vanilla .settings-header .tooltip-container 
   background: #cedadf;
 }
 html.light .swiper-slide .game-mode.timed {
-  background: #e3e0ed;
-  color: #9c8ec0;
+  background: #e0e1ed;
+  color: #8e94c0;
 }
 html.light .swiper-slide .game-mode.timed .settings {
-  color: #7f6dad;
+  color: #6d75ad;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #d5cfe4;
+  background: #cfd2e4;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
-  background: #d5cfe4;
+  background: #cfd2e4;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #b7acd5;
-  border: 0.5rem solid #b7acd5;
-  box-shadow: -415px 0 0 400px #b7acd5;
+  background: #acb0d5;
+  border: 0.5rem solid #acb0d5;
+  box-shadow: -415px 0 0 400px #acb0d5;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #b7acd5;
-  border: 0.5rem solid #b7acd5;
-  box-shadow: -415px 0 0 400px #b7acd5;
+  background: #acb0d5;
+  border: 0.5rem solid #acb0d5;
+  box-shadow: -415px 0 0 400px #acb0d5;
 }
 html.light .swiper-slide .game-mode.timed .settings-header {
-  background: #a99bcc;
-  border-top-color: #9d8dc6;
-  border-bottom-color: #9a8ac4;
-  color: #e1dbf2;
+  background: #9ba0cc;
+  border-top-color: #8d93c6;
+  border-bottom-color: #8a90c4;
+  color: #dbddf2;
 }
 html.light .swiper-slide .game-mode.timed .settings-header .tooltip-container {
-  background: #e3e0ed;
-  color: #9c8ec0;
+  background: #e0e1ed;
+  color: #8e94c0;
 }
 html.light .swiper-slide .game-mode.choice {
   background: #c5ebe3;
@@ -237,45 +237,45 @@ html.light .swiper-slide .game-mode.choice .settings-header .tooltip-container {
   color: #2d8471;
 }
 html.light .swiper-slide .game-mode.sudden {
-  background: #e3cfcf;
-  color: #a15f5f;
+  background: #ecdede;
+  color: #ac6c6c;
 }
 html.light .swiper-slide .game-mode.sudden .settings {
-  color: #a15f5f;
+  color: #ac6c6c;
 }
 html.light .swiper-slide .game-mode.sudden .settings .toggle-button {
-  background: #c79f9f;
-  box-shadow: 0rem 0.6rem 0rem #bd8f8f;
+  background: #d1adad;
+  box-shadow: 0rem 0.6rem 0rem #c79d9d;
 }
 html.light .swiper-slide .game-mode.sudden .settings .toggle-button.active {
-  background: #b97a7a;
-  color: #ebc8c8;
+  background: #c38888;
+  color: #f1d9d9;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #dabfbf;
+  background: #e3cece;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-track {
-  background: #dabfbf;
+  background: #e3cece;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #c68686;
-  border: 0.5rem solid #c68686;
-  box-shadow: -415px 0 0 400px #c68686;
+  background: #cf9595;
+  border: 0.5rem solid #cf9595;
+  box-shadow: -415px 0 0 400px #cf9595;
 }
 html.light .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #c68686;
-  border: 0.5rem solid #c68686;
-  box-shadow: -415px 0 0 400px #c68686;
+  background: #cf9595;
+  border: 0.5rem solid #cf9595;
+  box-shadow: -415px 0 0 400px #cf9595;
 }
 html.light .swiper-slide .game-mode.sudden .settings-header {
-  background: #b97a7a;
-  border-top-color: #b26d6d;
-  border-bottom-color: #b06969;
-  color: #ebc8c8;
+  background: #c38888;
+  border-top-color: #bc7b7b;
+  border-bottom-color: #ba7878;
+  color: #f1d9d9;
 }
 html.light .swiper-slide .game-mode.sudden .settings-header .tooltip-container {
-  background: #e3cfcf;
-  color: #a15f5f;
+  background: #ecdede;
+  color: #ac6c6c;
 }
 html.light .results-container .results-row {
   color: #222;
@@ -284,13 +284,13 @@ html.light .results-container .results-row:nth-child(even) {
   background: #e6e6e6;
 }
 html.light .results-container .results-row.vanilla span {
-  color: #46a0be;
+  color: #5caac4;
 }
 html.light .results-container .results-row.timed span {
-  color: #7d68b3;
+  color: #6870b3;
 }
 html.light .results-container .results-row.sudden span {
-  color: #bb5e5e;
+  color: #c46d6d;
 }
 html.light .results-container.vanilla {
   border-color: #4a96b0;
@@ -316,48 +316,48 @@ html.light .results-container.vanilla .levels-container .level-info-container .l
   color: #274853;
 }
 html.light .results-container.timed {
-  border-color: #8b79bb;
+  border-color: #7980bb;
 }
 html.light .results-container.timed .last-game-results .results-row.header {
-  border-color: #8b79bb;
-  background: #a99bcc;
+  border-color: #7980bb;
+  background: #9ba0cc;
 }
 html.light .results-container.timed .last-game-results .results-row.header p {
-  color: #f1eef9;
+  color: #eeeff9;
 }
 html.light .results-container.timed .levels-container {
-  border-color: #8b79bb;
+  border-color: #7980bb;
 }
 html.light .results-container.timed .levels-container .level-info-container {
-  background: #a99bcc;
+  background: #9ba0cc;
 }
 html.light .results-container.timed .levels-container .level-info-container .level-info-top {
-  background: #a99bcc;
+  background: #9ba0cc;
 }
 html.light .results-container.timed .levels-container .level-info-container .level-info-top p {
-  color: #4f4174;
+  color: #414774;
 }
 html.light .results-container.sudden {
-  border-color: #a75959;
+  border-color: #b16767;
 }
 html.light .results-container.sudden .last-game-results .results-row.header {
-  border-color: #a75959;
-  background: #b97a7a;
+  border-color: #b16767;
+  background: #c38888;
 }
 html.light .results-container.sudden .last-game-results .results-row.header p {
-  color: #f1dbdb;
+  color: #f8ecec;
 }
 html.light .results-container.sudden .levels-container {
-  border-color: #a75959;
+  border-color: #b16767;
 }
 html.light .results-container.sudden .levels-container .level-info-container {
-  background: #b97a7a;
+  background: #c38888;
 }
 html.light .results-container.sudden .levels-container .level-info-container .level-info-top {
-  background: #b97a7a;
+  background: #c38888;
 }
 html.light .results-container.sudden .levels-container .level-info-container .level-info-top p {
-  color: #513030;
+  color: #613737;
 }
 html.light .submit-container .submit-button {
   background: #d4d4d4;
@@ -380,14 +380,14 @@ html.light .submit-container.active .submit-button.vanilla .submit-button-text {
   color: #d3ebf3;
 }
 html.light .submit-container.active .submit-button.timed {
-  box-shadow: 0rem 1.5rem 0rem #8e7eb6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
-  background: #9a8ac4;
+  box-shadow: 0rem 1.5rem 0rem #7e84b6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  background: #8a90c4;
 }
 html.light .submit-container.active .submit-button.timed.active {
-  box-shadow: 0rem 0rem 0rem #8e7eb6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #7e84b6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.timed .submit-button-text {
-  color: #e1dbf2;
+  color: #dbddf2;
 }
 html.light .submit-container.active .submit-button.choice {
   box-shadow: 0rem 1.5rem 0rem #2d8471, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
@@ -400,15 +400,15 @@ html.light .submit-container.active .submit-button.choice .submit-button-text {
   color: #92ebd8;
 }
 html.light .submit-container.active .submit-button.sudden {
-  color: #ebc8c8;
-  box-shadow: 0rem 1.5rem 0rem #a15f5f, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
-  background: #b06969;
+  color: #f1d9d9;
+  box-shadow: 0rem 1.5rem 0rem #ac6c6c, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  background: #ba7878;
 }
 html.light .submit-container.active .submit-button.sudden.active {
-  box-shadow: 0rem 0rem 0rem #a15f5f, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #ac6c6c, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.light .submit-container.active .submit-button.sudden .submit-button-text {
-  color: #ebc8c8;
+  color: #f1d9d9;
 }
 html.light .game-tab-container {
   background: #e6e6e6;
@@ -578,16 +578,16 @@ html.dark .switchboard-container .switch {
   border-color: #646464;
 }
 html.dark .switchboard-container.vanilla .switch.active {
-  background: #438ea7;
-  color: #9ed3e5;
-  box-shadow: #346f83 0rem 0.4rem 0rem;
-  border-color: #3d8298;
+  background: #4f9db7;
+  color: #b4ddeb;
+  box-shadow: #3d8096 0rem 0.4rem 0rem;
+  border-color: #4692ab;
 }
 html.dark .switchboard-container.timed .switch.active {
-  background: #715da4;
-  color: #c4b7e3;
-  box-shadow: #5a4a84 0rem 0.4rem 0rem;
-  border-color: #685597;
+  background: #5d65a4;
+  color: #b7bce3;
+  box-shadow: #4a5184 0rem 0.4rem 0rem;
+  border-color: #555d97;
 }
 html.dark .switchboard-container.choice .switch.active {
   background: #2d8471;
@@ -596,10 +596,10 @@ html.dark .switchboard-container.choice .switch.active {
   border-color: #287564;
 }
 html.dark .switchboard-container.sudden .switch.active {
-  background: #814c4c;
-  color: #e1b8b8;
-  box-shadow: #613939 0rem 0.4rem 0rem;
-  border-color: #744444;
+  background: #925353;
+  color: #e9c8c8;
+  box-shadow: #714141 0rem 0.4rem 0rem;
+  border-color: #854c4c;
 }
 html.dark .swiper-slide {
   background: transparent;
@@ -608,62 +608,62 @@ html.dark .swiper-slide .game-mode {
   background: #666666;
 }
 html.dark .swiper-slide .game-mode.vanilla {
-  background: #3e6a79;
-  color: #b0deed;
+  background: #487a8b;
+  color: #c7e7f2;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #4c9db7;
+  background: #61a7be;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-track {
-  background: #5ea7bf;
+  background: #73b1c6;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #8ec8dc;
-  border: 0.5rem solid #8ec8dc;
-  box-shadow: -415px 0 0 400px #8ec8dc;
+  background: #a3d2e2;
+  border: 0.5rem solid #a3d2e2;
+  box-shadow: -415px 0 0 400px #a3d2e2;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #8ec8dc;
-  border: 0.5rem solid #8ec8dc;
-  box-shadow: -415px 0 0 400px #8ec8dc;
+  background: #a3d2e2;
+  border: 0.5rem solid #a3d2e2;
+  box-shadow: -415px 0 0 400px #a3d2e2;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings-header {
-  background: #438ea7;
-  border-bottom-color: #346f83;
-  border-top-color: #3d8298;
+  background: #4f9db7;
+  border-bottom-color: #3d8096;
+  border-top-color: #4692ab;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings-header .tooltip-container {
-  background: #3e6a79;
-  color: #b0deed;
+  background: #487a8b;
+  color: #c7e7f2;
 }
 html.dark .swiper-slide .game-mode.timed {
-  background: #51456f;
-  color: #c4b7e3;
+  background: #454a6f;
+  color: #b7bce3;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #7f6dad;
+  background: #6d75ad;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
-  background: #8e7eb6;
+  background: #7e84b6;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #b6a8d8;
-  border: 0.5rem solid #b6a8d8;
-  box-shadow: -415px 0 0 400px #b6a8d8;
+  background: #a8aed8;
+  border: 0.5rem solid #a8aed8;
+  box-shadow: -415px 0 0 400px #a8aed8;
 }
 html.dark .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #b6a8d8;
-  border: 0.5rem solid #b6a8d8;
-  box-shadow: -415px 0 0 400px #b6a8d8;
+  background: #a8aed8;
+  border: 0.5rem solid #a8aed8;
+  box-shadow: -415px 0 0 400px #a8aed8;
 }
 html.dark .swiper-slide .game-mode.timed .settings-header {
-  background: #715da4;
-  border-bottom-color: #5a4a84;
-  border-top-color: #685597;
+  background: #5d65a4;
+  border-bottom-color: #4a5184;
+  border-top-color: #555d97;
 }
 html.dark .swiper-slide .game-mode.timed .settings-header .tooltip-container {
-  background: #51456f;
-  color: #c4b7e3;
+  background: #454a6f;
+  color: #b7bce3;
 }
 html.dark .swiper-slide .game-mode.choice {
   background: #366258;
@@ -705,43 +705,43 @@ html.dark .swiper-slide .game-mode.choice .settings-header .tooltip-container {
   background: #366258;
 }
 html.dark .swiper-slide .game-mode.sudden {
-  background: #594141;
-  color: #daa6a6;
+  background: #694949;
+  color: #e2b6b6;
 }
 html.dark .swiper-slide .game-mode.sudden .settings {
-  color: #ce9898;
+  color: #d7a7a7;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .toggle-button {
-  background: #915555;
-  box-shadow: 0rem 0.6rem 0rem #814c4c;
+  background: #a25c5c;
+  box-shadow: 0rem 0.6rem 0rem #925353;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .toggle-button.active {
-  background: #b47f7f;
+  background: #be8d8d;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #915555;
+  background: #a25c5c;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-track {
-  background: #a15f5f;
+  background: #ac6c6c;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #c68686;
-  border: 0.5rem solid #c68686;
-  box-shadow: -415px 0 0 400px #c68686;
+  background: #cf9595;
+  border: 0.5rem solid #cf9595;
+  box-shadow: -415px 0 0 400px #cf9595;
 }
 html.dark .swiper-slide .game-mode.sudden .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #c68686;
-  border: 0.5rem solid #c68686;
-  box-shadow: -415px 0 0 400px #c68686;
+  background: #cf9595;
+  border: 0.5rem solid #cf9595;
+  box-shadow: -415px 0 0 400px #cf9595;
 }
 html.dark .swiper-slide .game-mode.sudden .settings-header {
-  background: #814c4c;
-  border-bottom-color: #613939;
-  border-top-color: #744444;
+  background: #925353;
+  border-bottom-color: #714141;
+  border-top-color: #854c4c;
 }
 html.dark .swiper-slide .game-mode.sudden .settings-header .tooltip-container {
-  background: #594141;
-  color: #daa6a6;
+  background: #694949;
+  color: #e2b6b6;
 }
 html.dark .results-container .results-row {
   background: #3c3c3c;
@@ -754,79 +754,79 @@ html.dark .results-container .results-row:nth-child(even) {
   background: #4d4d4d;
 }
 html.dark .results-container .results-row.vanilla span {
-  color: #46a0be;
+  color: #5caac4;
 }
 html.dark .results-container .results-row.timed span {
-  color: #7d68b3;
+  color: #6870b3;
 }
 html.dark .results-container .results-row.sudden span {
-  color: #bb5e5e;
+  color: #c46d6d;
 }
 html.dark .results-container.vanilla {
-  border-color: #2d6070;
+  border-color: #367084;
 }
 html.dark .results-container.vanilla .last-game-results .results-row.header {
-  background: #438ea7;
-  border-color: #346f83;
+  background: #4f9db7;
+  border-color: #3d8096;
 }
 html.dark .results-container.vanilla .last-game-results .results-row.header p {
-  color: #b0deed;
+  color: #c7e7f2;
 }
 html.dark .results-container.vanilla .levels-container {
-  border-color: #346f83;
+  border-color: #3d8096;
 }
 html.dark .results-container.vanilla .levels-container .level-info-container {
-  background: #438ea7;
+  background: #4f9db7;
 }
 html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top {
-  background: #438ea7;
+  background: #4f9db7;
 }
 html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top p {
-  color: #b0deed;
+  color: #c7e7f2;
 }
 html.dark .results-container.timed {
-  border-color: #4f4174;
+  border-color: #414774;
 }
 html.dark .results-container.timed .last-game-results .results-row.header {
-  background: #715da4;
-  border-color: #5a4a84;
+  background: #5d65a4;
+  border-color: #4a5184;
 }
 html.dark .results-container.timed .last-game-results .results-row.header p {
-  color: #d2c8ec;
+  color: #c8ccec;
 }
 html.dark .results-container.timed .levels-container {
-  border-color: #5a4a84;
+  border-color: #4a5184;
 }
 html.dark .results-container.timed .levels-container .level-info-container {
-  background: #715da4;
+  background: #5d65a4;
 }
 html.dark .results-container.timed .levels-container .level-info-container .level-info-top {
-  background: #715da4;
+  background: #5d65a4;
 }
 html.dark .results-container.timed .levels-container .level-info-container .level-info-top p {
-  color: #d2c8ec;
+  color: #c8ccec;
 }
 html.dark .results-container.sudden {
-  border-color: #513030;
+  border-color: #613737;
 }
 html.dark .results-container.sudden .last-game-results .results-row.header {
-  background: #814c4c;
-  border-color: #613939;
+  background: #925353;
+  border-color: #714141;
 }
 html.dark .results-container.sudden .last-game-results .results-row.header p {
-  color: #dda3a3;
+  color: #e4b3b3;
 }
 html.dark .results-container.sudden .levels-container {
-  border-color: #613939;
+  border-color: #714141;
 }
 html.dark .results-container.sudden .levels-container .level-info-container {
-  background: #814c4c;
+  background: #925353;
 }
 html.dark .results-container.sudden .levels-container .level-info-container .level-info-top {
-  background: #814c4c;
+  background: #925353;
 }
 html.dark .results-container.sudden .levels-container .level-info-container .level-info-top p {
-  color: #dda3a3;
+  color: #e4b3b3;
 }
 html.dark .submit-container .submit-button {
   background: #6f6f6f;
@@ -839,24 +839,24 @@ html.dark .submit-container .submit-button .submit-button-text {
   color: #bfbfbf;
 }
 html.dark .submit-container.active .submit-button.vanilla {
-  box-shadow: 0rem 1.5rem 0rem #346f83, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
-  background: #438ea7;
+  box-shadow: 0rem 1.5rem 0rem #3d8096, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  background: #4f9db7;
 }
 html.dark .submit-container.active .submit-button.vanilla.active {
-  box-shadow: 0rem 0rem 0rem #346f83, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #3d8096, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.vanilla .submit-button-text {
-  color: #9ed3e5;
+  color: #b4ddeb;
 }
 html.dark .submit-container.active .submit-button.timed {
-  box-shadow: 0rem 1.5rem 0rem #5a4a84, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
-  background: #715da4;
+  box-shadow: 0rem 1.5rem 0rem #4a5184, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  background: #5d65a4;
 }
 html.dark .submit-container.active .submit-button.timed.active {
-  box-shadow: 0rem 0rem 0rem #5a4a84, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #4a5184, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.timed .submit-button-text {
-  color: #c4b7e3;
+  color: #b7bce3;
 }
 html.dark .submit-container.active .submit-button.choice {
   box-shadow: 0rem 1.5rem 0rem #205e50, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
@@ -869,14 +869,14 @@ html.dark .submit-container.active .submit-button.choice .submit-button-text {
   color: #6bdfc6;
 }
 html.dark .submit-container.active .submit-button.sudden {
-  box-shadow: 0rem 1.5rem 0rem #613939, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
-  background: #814c4c;
+  box-shadow: 0rem 1.5rem 0rem #714141, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  background: #925353;
 }
 html.dark .submit-container.active .submit-button.sudden.active {
-  box-shadow: 0rem 0rem 0rem #613939, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #714141, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.sudden .submit-button-text {
-  color: #e1b8b8;
+  color: #e9c8c8;
 }
 html.dark .game-tab-container {
   border-color: #595959;
@@ -1866,14 +1866,6 @@ form {
   transform: scale(1.4);
 }
 
-.swiper.myswiper.leaderboards {
-  width: 100%;
-  height: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-
 .box-shadow {
   bottom: 12%;
   z-index: -1;
@@ -1884,18 +1876,27 @@ form {
   transition: transform 0.4s;
 }
 .box-shadow.active {
-  transform: translateY(-1rem);
+  transform: translateY(-1.2rem);
 }
 
 table {
+  border-collapse: collapse;
   height: auto;
-  width: auto;
+  width: 40%;
   margin-top: 4rem;
   border-radius: 0 0 2rem 2rem;
   transition: transform 0.4s;
 }
+table tr {
+  padding: 0px;
+  border-spacing: 0;
+}
+table tr th {
+  padding: 0px;
+  border-spacing: 0;
+}
 table.active {
-  transform: translateY(-1rem);
+  transform: translateY(-1.2rem);
 }
 table caption {
   font-family: "Open Sans", sans-serif;
@@ -1909,6 +1910,7 @@ table caption {
   cursor: grab;
   font-weight: bold;
   transition: all 0.4s;
+  overflow: hidden;
 }
 table caption span {
   margin: 0 3rem;
@@ -1921,21 +1923,25 @@ table tr {
   height: auto;
   max-height: 8%;
   overflow: hidden;
-  width: 100%;
+  width: 60%;
 }
 table tr:last-child {
   border-radius: 0 0 2rem 2rem;
   border: none;
 }
 table tr th {
-  padding: 0;
-  font-size: 1.4rem;
-  padding: 0rem 5rem;
+  padding: 0px;
+  font-size: 1.2rem;
+  padding: 0rem 3.5rem;
 }
 table tr td {
-  padding: 10px 5px;
+  padding: 10px 15px;
   text-align: center;
   font-size: 0.6rem;
+}
+table tr td.experience {
+  padding: 0;
+  margin: 0;
 }
 table tr td p {
   transform: scale(2);

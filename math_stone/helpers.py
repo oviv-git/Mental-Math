@@ -265,54 +265,38 @@ def generate_leaderboards(quantity, query_type):
     db = Database()
     
     MATH_TYPES_MAP = ['total', 'addition', 'subtraction', 'multiplication', 'division', 'exponential']
+    
     for math_type in MATH_TYPES_MAP:
-        
         query = (f"SELECT U.username, L.{math_type} FROM users U LEFT JOIN levels L ON U.id = L.user_id ORDER BY L.{math_type} DESC LIMIT (?);")
         parameters = (quantity, )
 
         db.execute(query, parameters)
-        user_experience = db.fetchall()
+        temp_user_experience = db.fetchall()
+        user_experience = []
 
-        for user in user_experience:
+        for user in temp_user_experience:
             for level in levels_list:
-                leaderboard = [user[0], user[1]]
-                if user[1] < int(level[1]):
-                    user_level = level[0]
-                    leaderboard.append(user_level)
-                    break
-
-        for r in leaderboards:
-            print(r)
-        leaderboards.append({'math_type':math_type, 'leaderboard': leaderboard})
+                temp_user = [user[0], user[1]]
+                if (math_type != 'total'):
+                    if user[1] < int(level[1]):
+                        user_level = level[0]
+                        temp_user.append(user_level)
+                        break
+                else:
+                    if user[1] < (int(level[1]) * 5):
+                        user_level = level[0]
+                        temp_user.append(user_level)
+                        break
+            user_experience.append(temp_user)
         
-    # for leaderboard in leaderboards[1:]:
-    # for leaderboard in leaderboards:
-    #     for user in leaderboard.get('leaderboard'):
+        leaderboards.append({'math_type':math_type, 'leaderboard': user_experience})
+    
+    # query2 = (f"SELECT U.username, L.total FROM users U LEFT JOIN levels L ON U.id = L.user_id ORDER BY L.total DESC LIMIT (?);")
+    # parameters2 = (quantity, )
 
-                
-        # for user in list(leaderboard[1]):
-
-        #     print(type(user))
-            # for level in levels_list:
-            #     if user[1] < int(level[1]):
-                    
-            #         # leaderboard[2] = level[0]
-            #         break
-
-    # for leaderboard in leaderboard[1:]:
-    #     print(type(leaderboard))
-
-
-
-            # for level in levels_list:
-            #     if leaderboard_row[0] >= level[1]:
-            #         level_number = level[0]
-            #         break
-            #     leaderboard_row.append(level_number)
-            #     break
-
-    # for row in leaderboards:
-    #     print(row)
+    # db.execute(query2, parameters2)
+    # temp_user_experience = db.fetchall()
+    # user_experience = []
 
     return leaderboards
 

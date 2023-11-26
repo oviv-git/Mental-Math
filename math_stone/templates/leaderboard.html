@@ -43,7 +43,7 @@
         <div class="swiper-wrapper">
             {% for leaderboard in leaderboards %}
             <div class="swiper-slide" id="{{ leaderboard[0] }}">
-                <table>
+                <table cellspacing="1">
                     <div class="box-shadow"></div>
                     <caption> 
                         <span class="material-symbols-outlined arrow">keyboard_double_arrow_left</span>
@@ -53,14 +53,18 @@
                     <tr class="header">
                         <th><p>Username</p></th>
                         <th><p>Experience</p></th>
+                        <th><p>Level</p></th>
                     </tr>
                     {% for leaderboard_row in leaderboard['leaderboard'] %}
                     <tr>
                         <td>
-                            <p class="username">{{ leaderboard_row[0] }}</p> 
+                            <p>{{ leaderboard_row[0] }}</p> 
                         </td>
                         <td>
-                            <p class="experience">{{ leaderboard_row[1] }}</p>
+                            <p>{{ leaderboard_row[1] }}</p>
+                        </td>
+                        <td>
+                            <p>{{ leaderboard_row[2] }}</p>
                         </td>
                     </tr>
                     {% endfor %}
