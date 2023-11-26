@@ -870,7 +870,7 @@ function initModeSelectSwiper() {
 
 // Updates the span value container for whatever settings-container is being modified
 function updateSliderValues() {
-    const settingsContainers = document.querySelectorAll('.game-mode');
+    const settingsContainers = document.querySelectorAll('.settings-container');
 
     settingsContainers.forEach((element) => {
         element.addEventListener('input', (event) => {
@@ -1030,10 +1030,10 @@ async function gameLogic(activeSlide) {
 
     // Have to initialize timer here 
     let timer = 0;
+    let livesRemaining = document.getElementById('lives').value;
 
     // Different flags
     var shouldEndQuestions = false;
-    var shouldRecordResults = false;
     var resultsRecorded = false;
     
     // Array which stores the game results to send back to app.py
@@ -1124,7 +1124,10 @@ async function gameLogic(activeSlide) {
                                   'timeElapsed': questionTimeElapsed});
                 
                 if (currentMode == 'sudden') {
-                    break;
+                    livesRemaining -= 1;
+                    if (livesRemaining <= 0 ) {
+                        break;
+                    }
                 }
             }
         }
@@ -1290,16 +1293,35 @@ function activateTimerProgress(progressContainer, timer, reverse=false, transiti
 // transfering the active class the current slides caption element for styling purposes
 // Also in charge of adding the active class to the fake box shadow.
 function initLeaderboardSwiper() {
-    var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 3,
-        spaceBetween: 0,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-    });
-    const startWithActiveSlide = document.querySelector('.swiper-slide-next');
+    const windowWidth = window.innerWidth
+    let startWithActiveSlide = null;
+
+    // Less than 800 width = user is on a mobile device 
+    if (windowWidth <= 800 ) {
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: true,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+            },
+        });
+        startWithActiveSlide = document.querySelector('.swiper-slide-active');
+    
+    // Desktop users 
+    } else {   
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 3,
+            spaceBetween: 0,
+            loop: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+        });
+        startWithActiveSlide = document.querySelector('.swiper-slide-next');
+    }
 
     const startWithActiveTable = startWithActiveSlide.querySelector('table');
     const startWithActiveShadow = startWithActiveSlide.querySelector('.box-shadow');
@@ -1309,9 +1331,15 @@ function initLeaderboardSwiper() {
 
     let lastActiveTable = startWithActiveTable;
     let lastActiveShadow = startWithActiveShadow;
+
+    let currentActiveSlide = null;
     
     swiper.on('slideChangeTransitionEnd', function () {
-        let currentActiveSlide = document.querySelector('.swiper-slide-next');
+        if (windowWidth <= 800 ) {
+            currentActiveSlide = document.querySelector('.swiper-slide-active');
+        } else {
+            currentActiveSlide = document.querySelector('.swiper-slide-next');
+        }
 
         let currentActiveTable = currentActiveSlide.querySelector('table');
         let currentActiveShadow = currentActiveSlide.querySelector('.box-shadow')
