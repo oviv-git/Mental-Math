@@ -137,10 +137,10 @@ html.light .swiper-slide .game-mode.vanilla .settings {
   color: #488498;
 }
 html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #a5c8d4;
+  background: #b6d3dd;
 }
 html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-track {
-  background: #a5c8d4;
+  background: #b6d3dd;
 }
 html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-thumb {
   background: #7eb6c9;
@@ -154,7 +154,7 @@ html.light .swiper-slide .game-mode.vanilla .settings .settings-container input[
 }
 html.light .swiper-slide .game-mode.vanilla .settings-header {
   background: #6cabc1;
-  border-top-color: #5ea3bb;
+  border-top-color: #5aa1b9;
   border-bottom-color: #5aa1b9;
   color: #d3ebf3;
 }
@@ -163,17 +163,17 @@ html.light .swiper-slide .game-mode.vanilla .settings-header .tooltip-container 
   background: #cedadf;
 }
 html.light .swiper-slide .game-mode.timed {
-  background: #e0e1ed;
+  background: #cfd2e4;
   color: #8e94c0;
 }
 html.light .swiper-slide .game-mode.timed .settings {
   color: #6d75ad;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #cfd2e4;
+  background: #bfc2db;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-moz-range-track {
-  background: #cfd2e4;
+  background: #bfc2db;
 }
 html.light .swiper-slide .game-mode.timed .settings .settings-container input[type=range]::-webkit-slider-thumb {
   background: #acb0d5;
@@ -187,12 +187,12 @@ html.light .swiper-slide .game-mode.timed .settings .settings-container input[ty
 }
 html.light .swiper-slide .game-mode.timed .settings-header {
   background: #9ba0cc;
-  border-top-color: #8d93c6;
+  border-top-color: #8a90c4;
   border-bottom-color: #8a90c4;
   color: #dbddf2;
 }
 html.light .swiper-slide .game-mode.timed .settings-header .tooltip-container {
-  background: #e0e1ed;
+  background: #cfd2e4;
   color: #8e94c0;
 }
 html.light .swiper-slide .game-mode.choice {
@@ -238,7 +238,7 @@ html.light .swiper-slide .game-mode.choice .settings-header .tooltip-container {
 }
 html.light .swiper-slide .game-mode.sudden {
   background: #ecdede;
-  color: #ac6c6c;
+  color: #925353;
 }
 html.light .swiper-slide .game-mode.sudden .settings {
   color: #ac6c6c;
@@ -284,7 +284,7 @@ html.light .results-container .results-row:nth-child(even) {
   background: #e6e6e6;
 }
 html.light .results-container .results-row.vanilla span {
-  color: #5caac4;
+  color: #3d91ad;
 }
 html.light .results-container .results-row.timed span {
   color: #6870b3;
@@ -313,7 +313,7 @@ html.light .results-container.vanilla .levels-container .level-info-container .l
   background: #6cabc1;
 }
 html.light .results-container.vanilla .levels-container .level-info-container .level-info-top p {
-  color: #274853;
+  color: #d6e9f0;
 }
 html.light .results-container.timed {
   border-color: #7980bb;
@@ -578,10 +578,10 @@ html.dark .switchboard-container .switch {
   border-color: #646464;
 }
 html.dark .switchboard-container.vanilla .switch.active {
-  background: #4f9db7;
-  color: #b4ddeb;
-  box-shadow: #3d8096 0rem 0.4rem 0rem;
-  border-color: #4692ab;
+  background: #3c7f95;
+  color: #8acbe0;
+  box-shadow: #2d6071 0rem 0.4rem 0rem;
+  border-color: #367386;
 }
 html.dark .switchboard-container.timed .switch.active {
   background: #5d65a4;
@@ -597,7 +597,7 @@ html.dark .switchboard-container.choice .switch.active {
 }
 html.dark .switchboard-container.sudden .switch.active {
   background: #925353;
-  color: #e9c8c8;
+  color: #daa4a4;
   box-shadow: #714141 0rem 0.4rem 0rem;
   border-color: #854c4c;
 }
@@ -608,33 +608,33 @@ html.dark .swiper-slide .game-mode {
   background: #666666;
 }
 html.dark .swiper-slide .game-mode.vanilla {
-  background: #487a8b;
-  color: #c7e7f2;
+  background: #355c69;
+  color: #9bd5e8;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
-  background: #61a7be;
+  background: #438ea7;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-track {
-  background: #73b1c6;
+  background: #4d9db7;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-webkit-slider-thumb {
-  background: #a3d2e2;
-  border: 0.5rem solid #a3d2e2;
-  box-shadow: -415px 0 0 400px #a3d2e2;
+  background: #7bbfd6;
+  border: 0.5rem solid #7bbfd6;
+  box-shadow: -415px 0 0 400px #7bbfd6;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings .settings-container input[type=range]::-moz-range-thumb {
-  background: #a3d2e2;
-  border: 0.5rem solid #a3d2e2;
-  box-shadow: -415px 0 0 400px #a3d2e2;
+  background: #7bbfd6;
+  border: 0.5rem solid #7bbfd6;
+  box-shadow: -415px 0 0 400px #7bbfd6;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings-header {
-  background: #4f9db7;
-  border-bottom-color: #3d8096;
-  border-top-color: #4692ab;
+  background: #3c7f95;
+  border-bottom-color: #2d6071;
+  border-top-color: #367386;
 }
 html.dark .swiper-slide .game-mode.vanilla .settings-header .tooltip-container {
-  background: #487a8b;
-  color: #c7e7f2;
+  background: #355c69;
+  color: #9bd5e8;
 }
 html.dark .swiper-slide .game-mode.timed {
   background: #454a6f;
@@ -754,7 +754,7 @@ html.dark .results-container .results-row:nth-child(even) {
   background: #4d4d4d;
 }
 html.dark .results-container .results-row.vanilla span {
-  color: #5caac4;
+  color: #3d91ad;
 }
 html.dark .results-container .results-row.timed span {
   color: #6870b3;
@@ -763,26 +763,26 @@ html.dark .results-container .results-row.sudden span {
   color: #c46d6d;
 }
 html.dark .results-container.vanilla {
-  border-color: #367084;
+  border-color: #26515e;
 }
 html.dark .results-container.vanilla .last-game-results .results-row.header {
-  background: #4f9db7;
-  border-color: #3d8096;
+  background: #3c7f95;
+  border-color: #2d6071;
 }
 html.dark .results-container.vanilla .last-game-results .results-row.header p {
-  color: #c7e7f2;
+  color: #9bd5e8;
 }
 html.dark .results-container.vanilla .levels-container {
-  border-color: #3d8096;
+  border-color: #2d6071;
 }
 html.dark .results-container.vanilla .levels-container .level-info-container {
-  background: #4f9db7;
+  background: #3c7f95;
 }
 html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top {
-  background: #4f9db7;
+  background: #3c7f95;
 }
 html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top p {
-  color: #c7e7f2;
+  color: #9bd5e8;
 }
 html.dark .results-container.timed {
   border-color: #414774;
@@ -828,6 +828,9 @@ html.dark .results-container.sudden .levels-container .level-info-container .lev
 html.dark .results-container.sudden .levels-container .level-info-container .level-info-top p {
   color: #e4b3b3;
 }
+html.dark .levels-container .level-info-container .level-info-bottom .level-bar .filled-xp {
+  background: #6aaf00;
+}
 html.dark .submit-container .submit-button {
   background: #6f6f6f;
   box-shadow: 0rem 1.5rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
@@ -839,14 +842,14 @@ html.dark .submit-container .submit-button .submit-button-text {
   color: #bfbfbf;
 }
 html.dark .submit-container.active .submit-button.vanilla {
-  box-shadow: 0rem 1.5rem 0rem #3d8096, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
-  background: #4f9db7;
+  box-shadow: 0rem 1.5rem 0rem #2d6071, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  background: #3c7f95;
 }
 html.dark .submit-container.active .submit-button.vanilla.active {
-  box-shadow: 0rem 0rem 0rem #3d8096, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0rem 0rem 0rem #2d6071, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.vanilla .submit-button-text {
-  color: #b4ddeb;
+  color: #8acbe0;
 }
 html.dark .submit-container.active .submit-button.timed {
   box-shadow: 0rem 1.5rem 0rem #4a5184, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
@@ -876,7 +879,7 @@ html.dark .submit-container.active .submit-button.sudden.active {
   box-shadow: 0rem 0rem 0rem #714141, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 }
 html.dark .submit-container.active .submit-button.sudden .submit-button-text {
-  color: #e9c8c8;
+  color: #daa4a4;
 }
 html.dark .game-tab-container {
   border-color: #595959;
@@ -1287,7 +1290,7 @@ form {
   margin-top: 4.5rem;
   display: flex;
   overflow: hidden;
-  height: 80%;
+  height: 75%;
   width: 80%;
   border-radius: 2rem;
 }
@@ -1299,22 +1302,22 @@ form {
   justify-content: flex-start;
 }
 .play-container-left .switchboard-container {
-  position: relative;
-  top: 4%;
-  align-self: auto;
-  width: 100%;
-  flex: 2;
   background: transparent;
+  position: relative;
+  width: 100%;
+  flex: 6;
+  top: 4%;
   display: flex;
   justify-content: center;
   text-align: center;
   border-radius: 1rem;
 }
 .play-container-left .mode-select-container {
-  height: 53%;
+  height: 50%;
+  flex: 4;
 }
 .play-container-left .submit-container {
-  flex: 1;
+  flex: 2;
   display: flex;
   width: 100%;
   margin: 0 0 3rem 0;
@@ -1366,23 +1369,26 @@ form {
   border-left: 3px transparent solid;
   border-right: 3px transparent solid;
 }
-.switch-row .switch#addition {
+.switch-row .switch:first-child {
   border-left-width: 0px;
-  border-radius: 1.5rem 0 0 0;
+  border-radius: 1rem 0 0 0;
 }
-.switch-row .switch#exponential {
+.switch-row .switch:last-child {
   border-right-width: 0px;
-  border-radius: 0 1.5rem 0 0;
+  border-radius: 0 1rem 0 0;
+}
+.switch-row .switch:last-child p {
+  font-size: 3.4rem;
 }
 .switch-row .switch p {
   font-family: "Heebo", sans-serif;
   position: absolute;
-  font-size: 3rem;
+  font-size: 4rem;
   transform: scale(2);
 }
 .switch-row .switch.active {
   z-index: 1;
-  transform: translateY(1.2rem);
+  transform: translateY(0.8rem);
   box-shadow: none;
 }
 
@@ -1496,7 +1502,6 @@ form {
   display: flex;
   flex: 1;
   align-items: center;
-  overflow: hidden;
   margin: 0rem 0.5rem 0.5rem 0.5rem;
   border-radius: 2rem;
 }
@@ -1522,14 +1527,14 @@ form {
 .results-container .levels-container .level-info-container .level-info-bottom .level-bar {
   border: 0.3rem solid #222;
   flex: 1;
-  height: 100%;
+  height: 2.4rem;
   width: 100%;
   left: 0%;
   position: relative;
   background: #222;
   display: flex;
   justify-content: flex-start;
-  border-radius: 1rem 1rem 1rem 1rem;
+  border-radius: 2rem;
   overflow: hidden;
 }
 .results-container .levels-container .level-info-container .level-info-bottom .level-bar .filled-xp {
@@ -1549,9 +1554,8 @@ form {
   width: 90%;
   height: 100%;
   overflow: hidden;
-  z-index: 15;
-  position: relative;
-  bottom: 20%;
+  z-index: 8;
+  margin-bottom: 2rem;
 }
 .submit-container .submit-button.active {
   transition: all 0.3s !important;
@@ -1598,11 +1602,11 @@ form {
   border-radius: 0 0 1.5rem 1.5rem;
 }
 .swiper-slide .game-mode .settings {
-  height: 70%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0rem 0rem 8rem 0rem;
+  padding: 0rem 0rem 6rem 0rem;
 }
 .swiper-slide .game-mode .settings .settings-container {
   display: flex;
@@ -1666,7 +1670,7 @@ form {
   font-family: "Source Sans Pro", sans-serif;
 }
 .swiper-slide .game-mode .settings-header {
-  height: 30%;
+  height: 60%;
   z-index: 3;
   cursor: grab;
   pointer-events: auto;
@@ -1685,15 +1689,26 @@ form {
   font-family: "Heebo", sans-serif;
   font-weight: 900;
 }
-.swiper-slide .game-mode .settings-header .material-symbols-outlined {
+.swiper-slide .game-mode .settings-header .icon {
   position: absolute;
   cursor: help;
   left: 8%;
   font-variation-settings: "FILL" 1, "wght" 900, "GRAD" 0, "opsz" 600;
   font-size: 4rem;
 }
-.swiper-slide .game-mode .settings-header .material-symbols-outlined.results {
+.swiper-slide .game-mode .settings-header .icon.results {
   font-size: 3rem;
+}
+.swiper-slide .game-mode .settings-header .arrow {
+  font-size: 3rem;
+  opacity: 0.2;
+  transform: scale(2) scaleY(1.6);
+}
+.swiper-slide .game-mode .settings-header .arrow.left {
+  margin-right: 3rem;
+}
+.swiper-slide .game-mode .settings-header .arrow.right {
+  margin-left: 3rem;
 }
 .swiper-slide .game-mode .settings-header .tooltip-container {
   transition: visbility 0s, opacity 0.8s linear;
@@ -1704,7 +1719,7 @@ form {
   width: 80%;
   height: 50%;
   padding: 0rem 1rem;
-  top: 8rem;
+  top: 10rem;
   position: fixed;
   justify-content: center;
   align-items: center;
@@ -1937,6 +1952,7 @@ table tr td {
   font-size: 0.6rem;
 }
 table tr td p {
+  font-family: "Heebo", sans-serif;
   transform: scale(2);
 }
 
@@ -2010,7 +2026,7 @@ table tr td p {
   .navbar {
     position: inherit;
     margin-bottom: 0;
-    height: 4rem;
+    height: 5rem;
   }
   .navbar .navbar-container {
     padding: 0;
@@ -2034,7 +2050,7 @@ table tr td p {
   }
   .navbar .navbar-container p {
     margin: 0 1rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
   .dropdown-menu {
     position: absolute;
@@ -2070,41 +2086,47 @@ table tr td p {
   .play-container-left {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    height: 60%;
+    justify-content: center;
+    height: 50%;
     width: 100%;
     margin: 0;
-    order: 2;
+    order: 1;
+    flex: 2;
   }
   .play-container-left .switchboard-container {
     top: 4%;
     width: 100%;
+    flex: 2;
     background: transparent;
     display: flex;
     justify-content: center;
     text-align: center;
-    border-radius: 1rem;
-    height: 10% !important;
     margin: 0rem;
     padding: 0rem;
   }
   .play-container-left .mode-select-container {
+    flex: 4;
     height: 40%;
   }
   .play-container-left .submit-container {
+    flex: 2;
     height: 20%;
     display: flex;
     width: 100%;
-    margin: 0 0 3rem 0;
+    margin: 0;
+    position: relative;
+    top: 0.5%;
     flex-direction: column;
     align-items: center;
   }
   .play-container-right {
-    order: 1;
+    height: 50%;
+    order: 2;
     width: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;
+    flex: 3;
   }
   .play-container-right .results-container {
     width: 100%;
@@ -2115,8 +2137,8 @@ table tr td p {
     flex-direction: column;
     justify-content: space-between;
     vertical-align: middle;
-    border-radius: 1rem 1rem 1rem 1rem;
-    border-bottom: 0.5rem solid transparent;
+    border-radius: 0rem;
+    border-width: 0;
     box-shadow: 0rem 0em 0.8rem #222;
     pointer-events: none;
   }
@@ -2130,11 +2152,36 @@ table tr td p {
     height: 100%;
     width: 100%;
   }
-  .swiper-slide .game-mode .settings .settings-container.scroller {
-    flex: 2;
+  .swiper-slide .game-mode .settings {
+    height: 50%;
+    padding: 0;
+  }
+  .swiper-slide .game-mode .settings .settings-container .input-information {
+    display: flex;
+    transform: scale(1.5) translateY(1.8rem);
+    font-family: "Source Sans Pro", sans-serif;
   }
   .swiper-slide .game-mode .settings-header {
+    height: 25%;
     border-radius: 0rem;
+  }
+  .swiper-slide .game-mode .settings-header p {
+    font-size: 3rem;
+  }
+  .swiper-slide .game-mode .settings-header .icon {
+    left: 4%;
+    font-size: 3rem;
+  }
+  .swiper-slide .game-mode .settings-header .arrow {
+    font-size: 3rem;
+    opacity: 0.2;
+    transform: scale(1.4) scaleY(1.6);
+  }
+  .swiper-slide .game-mode .settings-header .arrow.left {
+    margin-right: 2rem;
+  }
+  .swiper-slide .game-mode .settings-header .arrow.right {
+    margin-left: 2rem;
   }
   .results-container * {
     transition: all 0.3s;
@@ -2160,7 +2207,7 @@ table tr td p {
     transform: scale(1);
   }
   .results-container .last-game-results .results-row.header {
-    border-bottom: 0.8rem solid transparent;
+    border-width: 0.3rem;
     flex: 1;
   }
   .results-container .last-game-results .results-row.header p {
@@ -2187,12 +2234,17 @@ table tr td p {
   .results-container .last-game-results .results-row .mode-container .mode-experience-container {
     display: flex;
     justify-content: space-around;
-    margin: 0rem 1rem;
+    margin: 0rem 0.2rem;
+    align-items: center;
+    text-align: center;
   }
   .results-container .last-game-results .results-row .mode-container .mode-experience-container .mode-symbol {
     transform: scale(1.6);
     font-family: "Open Sans", sans-serif;
-    margin-right: 0.8rem;
+    margin: 0 0.2rem;
+  }
+  .results-container .last-game-results .results-row .mode-container .mode-experience-container .mode-symbol {
+    transform: scale(1.2);
   }
   .results-container .last-game-results .results-row .percentage-container {
     flex: 0.5;
@@ -2205,7 +2257,7 @@ table tr td p {
     padding: 0rem;
   }
   .results-container .levels-container {
-    border-top: 0.8rem solid transparent;
+    border-width: 0.4rem;
     overflow: hidden;
     display: flex;
     justify-content: space-evenly;
@@ -2228,55 +2280,217 @@ table tr td p {
     align-items: center;
   }
   .results-container .levels-container .level-info-container .level-info-top .level-text {
-    transform: scale(6);
-    font-size: 1.4rem;
+    transform: scale(4);
+    font-size: 1.6rem;
     font-family: "Heebo", sans-serif;
   }
   .results-container .levels-container .level-info-container .level-info-top .level-text.exponential {
-    transform: scale(5);
+    transform: scale(3.4);
   }
   .results-container .levels-container .level-info-container .level-info-bottom {
     display: flex;
-    flex: 1;
+    flex: 1.2;
     align-items: center;
     overflow: hidden;
-    margin: 0rem 0.5rem 0.5rem 0.5rem;
-    border-radius: 2rem;
+    margin: 0rem 0.2rem 0.5rem 0.2rem;
   }
   .results-container .levels-container .level-info-container .level-info-bottom .level-number {
-    border: 0.3rem solid #222;
-    z-index: 2;
-    flex: 0 0 auto;
-    position: absolute;
-    color: #222;
-    height: 2.4rem;
-    width: 2.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #e1e1e1;
+    border-width: 0.2rem;
+    height: 1.8rem;
+    width: 1.8rem;
     border-radius: 100%;
-    z-index: 2;
   }
   .results-container .levels-container .level-info-container .level-info-bottom .level-number p {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
   }
   .results-container .levels-container .level-info-container .level-info-bottom .level-bar {
-    border: 0.3rem solid #222;
-    flex: 1;
-    height: 100%;
-    width: 100%;
-    left: 0%;
-    position: relative;
-    background: #222;
-    display: flex;
-    justify-content: flex-start;
+    height: 1.8rem;
+    border-width: 0.2rem;
   }
   .results-container .levels-container .level-info-container .level-info-bottom .level-bar .filled-xp {
     border-radius: 0rem 1rem 1rem 0rem;
     width: 0%;
-    transition: all 3s;
+    transition: all 3s ease;
+  }
+  .submit-container .submit-button {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    top: 14%;
+    border-radius: 0;
+  }
+  .submit-container .submit-button.active {
+    transition: all 0.3s !important;
+    transform: translateY(0.5rem);
+  }
+  .submit-container .submit-button .submit-button-text {
+    transition: color 1s;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    transform: scale(2);
+  }
+  html.light .submit-container .submit-button {
+    box-shadow: 0rem 1rem 0rem #999999, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container .submit-button.active {
+    box-shadow: 0rem 0.5rem 0rem #bfbfbf, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container.active .submit-button.vanilla {
+    box-shadow: 0rem 1rem 0rem #488498, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container.active .submit-button.vanilla.active {
+    box-shadow: 0rem 0.5rem 0rem #488498, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container.active .submit-button.timed {
+    box-shadow: 0rem 1rem 0rem #6d75ad, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container.active .submit-button.timed.active {
+    box-shadow: 0rem 0.5rem 0rem #6d75ad, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container.active .submit-button.sudden {
+    box-shadow: 0rem 1rem 0rem #a25c5c, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .submit-container.active .submit-button.sudden.active {
+    box-shadow: 0rem 0.5rem 0rem #a25c5c, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.light .results-container.vanilla .last-game-results .results-row.header {
+    background: #cedadf;
+  }
+  html.light .results-container.vanilla .last-game-results .results-row.header p {
+    color: #274853;
+  }
+  html.light .results-container.vanilla .levels-container {
+    border-color: #4a96b0;
+  }
+  html.light .results-container.vanilla .levels-container .level-info-container {
+    background: #cedadf;
+  }
+  html.light .results-container.vanilla .levels-container .level-info-container .level-info-top {
+    background: #cedadf;
+  }
+  html.light .results-container.vanilla .levels-container .level-info-container .level-info-top p {
+    color: #407587;
+  }
+  html.light .results-container.timed .last-game-results .results-row.header {
+    background: #cfd2e4;
+  }
+  html.light .results-container.timed .last-game-results .results-row.header p {
+    color: #5d65a4;
+  }
+  html.light .results-container.timed .levels-container {
+    border-color: #8a90c4;
+  }
+  html.light .results-container.timed .levels-container .level-info-container {
+    background: #cfd2e4;
+  }
+  html.light .results-container.timed .levels-container .level-info-container .level-info-top {
+    background: #cfd2e4;
+  }
+  html.light .results-container.timed .levels-container .level-info-container .level-info-top p {
+    color: #5d65a4;
+  }
+  html.light .results-container.sudden .last-game-results .results-row.header {
+    background: #ecdede;
+  }
+  html.light .results-container.sudden .last-game-results .results-row.header p {
+    color: #925353;
+  }
+  html.light .results-container.sudden .levels-container {
+    border-color: #ba7878;
+  }
+  html.light .results-container.sudden .levels-container .level-info-container {
+    background: #ecdede;
+  }
+  html.light .results-container.sudden .levels-container .level-info-container .level-info-top {
+    background: #ecdede;
+  }
+  html.light .results-container.sudden .levels-container .level-info-container .level-info-top p {
+    color: #925353;
+  }
+  html.dark .submit-container .submit-button {
+    box-shadow: 0rem 1rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container .submit-button.active {
+    box-shadow: 0rem 0rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container.active .submit-button.vanilla {
+    box-shadow: 0rem 1rem 0rem #357083, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container.active .submit-button.vanilla.active {
+    box-shadow: 0rem 0rem 0rem #2d6071, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container.active .submit-button.timed {
+    box-shadow: 0rem 1rem 0rem #535b94, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container.active .submit-button.timed.active {
+    box-shadow: 0rem 0rem 0rem #414774, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container.active .submit-button.sudden {
+    box-shadow: 0rem 1rem 0rem #824a4a, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .submit-container.active .submit-button.sudden.active {
+    box-shadow: 0rem 0rem 0rem #613737, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+  }
+  html.dark .results-container.vanilla .last-game-results .results-row.header {
+    background: #355c69;
+    border-color: #3c7f95;
+  }
+  html.dark .results-container.vanilla .last-game-results .results-row.header p {
+    color: #9bd5e8;
+  }
+  html.dark .results-container.vanilla .levels-container {
+    border-color: #3c7f95;
+  }
+  html.dark .results-container.vanilla .levels-container .level-info-container {
+    background: #355c69;
+  }
+  html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top {
+    background: #355c69;
+  }
+  html.dark .results-container.vanilla .levels-container .level-info-container .level-info-top p {
+    color: #76c2da;
+  }
+  html.dark .results-container.timed .last-game-results .results-row.header {
+    background: #454a6f;
+    border-color: #5d65a4;
+  }
+  html.dark .results-container.timed .last-game-results .results-row.header p {
+    color: #b7bce3;
+  }
+  html.dark .results-container.timed .levels-container {
+    border-color: #5d65a4;
+  }
+  html.dark .results-container.timed .levels-container .level-info-container {
+    background: #454a6f;
+  }
+  html.dark .results-container.timed .levels-container .level-info-container .level-info-top {
+    background: #454a6f;
+  }
+  html.dark .results-container.timed .levels-container .level-info-container .level-info-top p {
+    color: #b7bce3;
+  }
+  html.dark .results-container.sudden .last-game-results .results-row.header {
+    background: #694949;
+    border-color: #925353;
+  }
+  html.dark .results-container.sudden .last-game-results .results-row.header p {
+    color: #daa4a4;
+  }
+  html.dark .results-container.sudden .levels-container {
+    border-color: #925353;
+  }
+  html.dark .results-container.sudden .levels-container .level-info-container {
+    background: #694949;
+  }
+  html.dark .results-container.sudden .levels-container .level-info-container .level-info-top {
+    background: #694949;
+  }
+  html.dark .results-container.sudden .levels-container .level-info-container .level-info-top p {
+    color: #daa4a4;
   }
   .full-page.active#game-tab {
     justify-content: start;
@@ -2335,6 +2549,37 @@ table tr td p {
     overflow: hidden;
     margin: 0;
     padding: 0;
+  }
+  .switchboard-container * {
+    pointer-events: none;
+  }
+  .switch-row {
+    height: 100%;
+    width: 100%;
+  }
+  .switch-row .switch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    height: 78%;
+    width: 100%;
+    pointer-events: auto;
+    cursor: grab;
+    overflow: hidden;
+    z-index: 1;
+    box-sizing: border-box;
+    border-left: 2px transparent solid;
+    border-right: 2px transparent solid;
+  }
+  .switch-row .switch:last-child p {
+    font-size: 1.2rem;
+  }
+  .switch-row .switch p {
+    font-family: "Heebo", sans-serif;
+    position: absolute;
+    font-size: 1.4rem;
+    transform: scale(2.5);
   }
   .box-shadow {
     bottom: 16%;

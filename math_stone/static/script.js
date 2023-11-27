@@ -1030,7 +1030,6 @@ async function gameLogic(activeSlide) {
 
     // Have to initialize timer here 
     let timer = 0;
-    let livesRemaining = document.getElementById('lives').value;
 
     // Different flags
     var shouldEndQuestions = false;
@@ -1124,10 +1123,7 @@ async function gameLogic(activeSlide) {
                                   'timeElapsed': questionTimeElapsed});
                 
                 if (currentMode == 'sudden') {
-                    livesRemaining -= 1;
-                    if (livesRemaining <= 0 ) {
-                        break;
-                    }
+                    break;
                 }
             }
         }

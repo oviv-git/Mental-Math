@@ -68,13 +68,15 @@
                             <div class="swiper-slide">
                                 <div class="game-mode vanilla">
                                     <div class="settings-header">
-                                        <span class="material-symbols-outlined">icecream</span>
+                                        <span class="material-symbols-outlined icon">icecream</span>
                                         <div class="tooltip-container">
                                             <p>Select your questions and answer at your own pace</p>
                                         </div>
+                                        <span class="material-symbols-outlined arrow left">keyboard_double_arrow_left</span>
                                         <p>Vanilla</p>
+                                        <span class="material-symbols-outlined arrow right">keyboard_double_arrow_right</span>
                                     </div>
-                                    <div class="settings">
+                                    <div class="settings swiper-no-swiping">
                                         <div class="settings-container">
                                             <div class="input-information"><p>Questions: <span class="range-results">5</span></p></div>
                                             <input type="range" min="1" max="20" step="1" value="5" id="vanilla-questions" name="vanilla-questions">
@@ -85,13 +87,16 @@
                             <div class="swiper-slide">
                                 <div class="game-mode timed">
                                     <div class="settings-header">
-                                        <span class="material-symbols-outlined">timer</span>
+                                        <span class="material-symbols-outlined icon">timer</span>
                                         <div class="tooltip-container">
                                             <p>Race against time! Answer as many questions as you can</p>
                                         </div>
+                                        <span class="material-symbols-outlined arrow left">keyboard_double_arrow_left</span>
                                         <p>Timed</p>
+                                        <span class="material-symbols-outlined arrow right">keyboard_double_arrow_right</span>
+
                                     </div>
-                                    <div class="settings">
+                                    <div class="settings swiper-no-swiping">
                                         <div class="settings-container">
                                             <div class="input-information"><p>Time: <span class="range-results">20</span> s</p></div>
                                             <input class="timer" type="range" min="5" max="60" step="5" value="20" id="timed-timer" name="timed-timer">
@@ -102,20 +107,18 @@
                             <div class="swiper-slide">
                                 <div class="game-mode sudden">
                                     <div class="settings-header">
-                                        <span class="material-symbols-outlined">Skull</span>
+                                        <span class="material-symbols-outlined icon">Skull</span>
                                         <div class="tooltip-container">
                                             <p>One wrong move and it's game over</p>
                                         </div>
-                                        <p>Sudden Death</p>
+                                        <span class="material-symbols-outlined arrow left">keyboard_double_arrow_left</span>
+                                        <p>Sudden</p>
+                                        <span class="material-symbols-outlined arrow right">keyboard_double_arrow_right</span>
                                     </div>
-                                    <div class="settings">
+                                    <div class="settings swiper-no-swiping">
                                         <div class="settings-container">
                                             <div class="input-information"><p>Time: <span class="range-results">20</span> s</p></div>
                                             <input class="timer" type="range" min="5" max="60" step="5" value="20" id="timed-timer" name="timed-timer">
-                                        </div>
-                                        <div class="settings-container">
-                                            <div class="input-information"><p>Lives: <span class="range-results">1</span></p></div>
-                                            <input class="timer" type="range" min="1" max="5" step="1" value="1" id="lives" name="sudden-lives">
                                         </div>
                                     </div>
                                 </div>

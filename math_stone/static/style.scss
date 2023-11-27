@@ -11,9 +11,8 @@ $blur-shadow: 0rem 0em .8rem;
 
 // $vanilla-mode: #3f6d96;
 $vanilla-mode-light: #407587;
-$vanilla-mode: #438ea7;
+$vanilla-mode: #3c7f95;
 
-$vanilla-mode: #4f9db7;
 $timed-mode: #5d65a4;
 // $choice-mode: #2d8471;
 $sudden-mode: #925353;
@@ -227,11 +226,11 @@ html.light {
                     .settings-container {
                         input[type=range] {
                             &::-webkit-slider-runnable-track {
-                                background: lighten($vanilla-mode-light, 35%);
+                                background: lighten($vanilla-mode-light, 40%);
                             }
 
                             &::-moz-range-track {
-                                background: lighten($vanilla-mode-light, 35%);
+                                background: lighten($vanilla-mode-light, 40%);
                             }
 
                             &::-webkit-slider-thumb {
@@ -250,7 +249,7 @@ html.light {
                 }
                 .settings-header {
                     background: lighten(saturate($vanilla-mode-light, 5%), 20%);
-                    border-top-color: lighten(saturate($vanilla-mode-light, 5%), 16%);
+                    border-top-color: lighten(saturate($vanilla-mode-light, 5%), 15%);
                     border-bottom-color: lighten(saturate($vanilla-mode-light, 5%), 15%);
                     color: lighten(saturate($vanilla-mode-light, 20%), 50%);
 
@@ -261,7 +260,7 @@ html.light {
                 }
             }
             &.timed {
-                background: lighten($timed-mode, 40%);
+                background: lighten($timed-mode, 35%);
                 color: lighten($timed-mode, 15%);
 
                 .settings {
@@ -270,11 +269,11 @@ html.light {
                     .settings-container {
                         input[type=range] {
                             &::-webkit-slider-runnable-track {
-                                background: lighten($timed-mode, 35%);
+                                background: lighten($timed-mode, 30%);
                             }
 
                             &::-moz-range-track {
-                                background: lighten($timed-mode, 35%);
+                                background: lighten($timed-mode, 30%);
                             }
 
                             &::-webkit-slider-thumb {
@@ -293,12 +292,12 @@ html.light {
                 }
                 .settings-header {
                     background: lighten(saturate($timed-mode, 5%), 20%);
-                    border-top-color: lighten(saturate($timed-mode, 5%), 16%);
+                    border-top-color: lighten(saturate($timed-mode, 5%), 15%);
                     border-bottom-color: lighten(saturate($timed-mode, 5%), 15%);
                     color: lighten(saturate($timed-mode, 20%), 40%);
 
                     .tooltip-container {
-                        background: lighten($timed-mode, 40%);
+                        background: lighten($timed-mode, 35%);
                         color: lighten($timed-mode, 15%);
                     }
                 }
@@ -357,7 +356,7 @@ html.light {
             }
             &.sudden {
                 background: lighten($sudden-mode, 45%);
-                color: lighten($sudden-mode, 10%);
+                color: $sudden-mode;
 
                 .settings {
                     color: lighten($sudden-mode, 10%);
@@ -453,7 +452,7 @@ html.light {
                         background: lighten(saturate($vanilla-mode-light, 5%), 20%);
                         
                         p {
-                            color: darken($vanilla-mode-light, 15%);
+                            color: lighten(saturate($vanilla-mode-light, 10%), 50%);
                         }
                     }
                 }
@@ -851,7 +850,7 @@ html.dark {
             .switch {
                 &.active {
                     background: $sudden-mode;
-                    color: lighten(saturate($sudden-mode, 15%), 40%);
+                    color: lighten(saturate($sudden-mode, 15%), 30%);
                     box-shadow: darken($sudden-mode, 10%) 0rem 0.4rem 0rem;
                     border-color: darken($sudden-mode, 4%);
 
@@ -1159,6 +1158,11 @@ html.dark {
             border-color: darken($sudden-mode, 15%);
         }
     }
+    .levels-container .level-info-container .level-info-bottom .level-bar .filled-xp {
+        // background: desaturate(greenyellow, 10%);
+        // background-color: red !important;
+        background: darken(greenyellow, 25%);
+    }
     .submit-container {
         .submit-button {
             background: lighten($default-dark, 30%);
@@ -1219,7 +1223,7 @@ html.dark {
                     }
 
                     .submit-button-text {
-                        color: lighten(saturate($sudden-mode, 15%), 40%);
+                        color: lighten(saturate($sudden-mode, 15%), 30%);
                     }
                 }
             }
@@ -1686,7 +1690,7 @@ form {
     margin-top: 4.5rem;
     display: flex;
     overflow: hidden;
-    height: 80%;
+    height: 75%;
     width: 80%;
     border-radius: 2rem;
 }
@@ -1698,23 +1702,22 @@ form {
     justify-content: flex-start;
 
     .switchboard-container {
-        position: relative;
-        top: 4%;
-        align-self: auto;
-        width: 100%;
-        // padding: 1rem 0rem;
-        flex: 2;
         background: transparent;
+        position: relative;
+        width: 100%;
+        flex: 6;
+        top: 4%;
         display: flex;
         justify-content: center;
         text-align: center;
         border-radius: 1rem;
     }
     .mode-select-container {
-        height: 53%;
+        height: 50%;
+        flex: 4;
     }
     .submit-container {
-        flex: 1;
+        flex: 2;
         display: flex;
         width: 100%;
         margin: 0 0 3rem 0;
@@ -1766,25 +1769,29 @@ form {
         border-left: 3px transparent solid;
         border-right: 3px transparent solid;
 
-        &#addition {
+        &:first-child {
             border-left-width: 0px;
-            border-radius: 1.5rem 0 0 0;
+            border-radius: 1rem 0 0 0;
         }
-        &#exponential {
+        &:last-child {
             border-right-width: 0px;
-            border-radius: 0 1.5rem 0 0;
+            border-radius: 0 1rem 0 0;
+
+            p {
+                font-size: 3.4rem;
+            }
         }
 
         p {
             font-family: 'Heebo', sans-serif;
             position: absolute;
-            font-size: 3rem;
+            font-size: 4rem;
             transform: scale(2);
         }
 
         &.active {
             z-index: 1;
-            transform: translateY(1.2rem);
+            transform: translateY(.8rem);
             box-shadow: none;
         }
     }
@@ -1943,7 +1950,7 @@ form {
                 display: flex;
                 flex: 1;
                 align-items: center;
-                overflow: hidden;
+                // overflow: hidden;
                 margin: 0rem .5rem .5rem .5rem;
                 border-radius: 2rem; 
 
@@ -1970,14 +1977,14 @@ form {
                 .level-bar {
                     border: .3rem solid #222 ;
                     flex: 1;
-                    height: 100%;
+                    height: 2.4rem;
                     width: 100%;
                     left: 0%;
                     position: relative;
                     background: $default-dark;
                     display: flex;
                     justify-content: flex-start;
-                    border-radius: 1rem 1rem 1rem 1rem;
+                    border-radius: 2rem;
                     overflow: hidden;
                     
                     .filled-xp {
@@ -2004,9 +2011,8 @@ form {
         width: 90%;
         height: 100%;
         overflow: hidden;
-        z-index: 15;
-        position: relative;
-        bottom: 20%;
+        z-index: 8;
+        margin-bottom: 2rem;
 
         &.active {
             transition: all .3s !important;
@@ -2061,17 +2067,15 @@ form {
         border-radius: 0 0 1.5rem 1.5rem;
 
         .settings {
-            height: 70%;
+            height: 100%;
             display: flex;
-            // flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 0rem 0rem 8rem 0rem;
+            padding: 0rem 0rem 6rem 0rem;
 
             .settings-container {
                 display: flex;
                 width: 100%;
-                // padding: 0 2rem;
                 align-items: center;
                 justify-content: space-between;
                 flex-direction: column;
@@ -2150,7 +2154,7 @@ form {
             }
         }
         .settings-header {
-            height: 30%;
+            height: 60%;
             z-index: 3;
             cursor: grab;
             pointer-events: auto;
@@ -2169,7 +2173,7 @@ form {
                 font-family: 'Heebo', sans-serif;
                 font-weight: 900;
             }
-            .material-symbols-outlined {
+            .icon {
                 position: absolute;
                 cursor: help;
                 left: 8%;
@@ -2184,6 +2188,19 @@ form {
                     font-size: 3rem;
                 }
             }
+            .arrow {
+                font-size: 3rem;
+                opacity: 0.2;
+                transform: scale(2) scaleY(1.6);
+                
+                &.left {
+                    margin-right: 3rem;
+                }
+                &.right {
+                    margin-left: 3rem;
+
+                }
+            }
             .tooltip-container {
                 transition: visbility 0s, opacity 0.8s linear;
                 opacity: 0;
@@ -2193,7 +2210,7 @@ form {
                 width: 80%;
                 height: 50%;
                 padding: 0rem 1rem;
-                top: 8rem;
+                top: 10rem;
                 position: fixed;
                 justify-content: center;
                 align-items: center;
@@ -2450,6 +2467,7 @@ table {
         }
 
         th {
+            
             font-size: 1.2rem;
             padding: 0rem 3.5rem;
         }
@@ -2459,6 +2477,8 @@ table {
             font-size: .6rem;
             
             p {
+                font-family: 'Heebo', sans-serif;
+
                 transform: scale(2);
             }
         }
@@ -2543,7 +2563,7 @@ table {
     .navbar {
         position: inherit;
         margin-bottom: 0;
-        height: 4rem;
+        height: 5rem;
         
         .navbar-container {
             padding: 0;
@@ -2570,7 +2590,7 @@ table {
             }
             p {
                 margin: 0 1rem;
-                font-size: 1.3rem;
+                font-size: 1.5rem;
             }
         }
     }
@@ -2616,44 +2636,48 @@ table {
     .play-container-left {
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-        height: 60%;
+        justify-content: center;
+        height: 50%;
         width: 100%;
         margin: 0;
-        order: 2;
+        order: 1;
+        flex: 2;
     
         .switchboard-container {
             top: 4%;
             width: 100%;
-            // padding: 1rem 0rem;
+            flex: 2;
             background: transparent;
             display: flex;
             justify-content: center;
             text-align: center;
-            border-radius: 1rem;
-
-            height: 10% !important;
             margin: 0rem;
             padding: 0rem;
         }
         .mode-select-container {
+            flex: 4;
             height: 40%;
         }
         .submit-container {
+            flex: 2;
             height: 20%;
             display: flex;
             width: 100%;
-            margin: 0 0 3rem 0;
+            margin: 0;
+            position: relative;
+            top: .5%;
             flex-direction: column;
             align-items: center;
         }
     }
     .play-container-right {
-        order: 1;
+        height: 50%;
+        order: 2;
         width: 100%;
         margin: 0;
         display: flex;
         flex-direction: column;
+        flex: 3;
     
         .results-container {
             width: 100%;
@@ -2664,8 +2688,8 @@ table {
             flex-direction: column;
             justify-content: space-between;
             vertical-align: middle;
-            border-radius: 1rem 1rem 1rem 1rem;
-            border-bottom: .5rem solid transparent;
+            border-radius: 0rem;
+            border-width: 0;
             box-shadow: $blur-shadow $default-dark;
             pointer-events: none;
         }
@@ -2682,53 +2706,40 @@ table {
             width: 100%;
 
             .settings {
+                height: 50%;
+                padding: 0;
+
                 .settings-container {
-
-
-                    &.scroller {
-                        flex: 2
-                    }
-    
-                    &.toggle {
-                        p {
-                        }
-    
-                        .buttons-container {
-                            :first-child {
-                            }
-    
-                            :last-child {
-                            }
-    
-                            .toggle-button {
-                                p {
-                                }
-                            }
-                        }
-                    }
-    
-                    input[type=range] {
-                        &::-webkit-slider-runnable-track {
-                        }
-    
-                        &::-moz-range-track {
-                        }
-    
-                        &::-webkit-slider-thumb {
-                        }
-    
-                        &::-moz-range-thumb {
-                        }
-                    }
-    
-                    label {
+                    .input-information {
+                        display: flex;
+                        transform: scale(1.5) translateY(1.8rem);
+                        font-family: 'Source Sans Pro', sans-serif;
                     }
                 }
             }
             .settings-header {
+                height: 25%;
                 border-radius: 0rem;
 
                 p {
+                    font-size: 3rem;
+                }
+                .icon {
+                    left: 4%;
+                    font-size: 3rem;
+                }
+                .arrow {
+                    font-size: 3rem;
+                    opacity: 0.2;
+                    transform: scale(1.4) scaleY(1.6);
+                    
+                    &.left {
+                        margin-right: 2rem;
+                    }
+                    &.right {
+                        margin-left: 2rem;
+    
+                    }
                 }
             }
         }
@@ -2761,7 +2772,7 @@ table {
                 }
     
                 &.header {
-                    border-bottom: .8rem solid transparent;
+                    border-width: .3rem;
                     flex: 1;
     
                     p {
@@ -2800,14 +2811,20 @@ table {
                     .mode-experience-container {
                         display: flex;
                         justify-content: space-around;
-                        margin: 0rem 1rem;
+                        margin: 0rem .2rem;
+                        align-items: center;
+                        text-align: center;
                         
                         .mode-symbol {
                             transform: scale(1.6);
                             font-family: 'Open Sans', sans-serif;
-                            margin-right: .8rem;
+                            margin: 0 0.2rem;
                         }
-    
+                        
+                        .mode-symbol {
+                            transform: scale(1.2);
+                        }
+
                         .mode-experience {
                             
                         }
@@ -2842,7 +2859,8 @@ table {
         }
     
         .levels-container {
-            border-top: .8rem solid transparent;
+            // border-top: .4rem solid transparent;
+            border-width: .4rem;
             overflow: hidden;
             display: flex;
             justify-content: space-evenly;
@@ -2865,67 +2883,292 @@ table {
                     align-items: center;
     
                     .level-text {
-                        transform: scale(6);
-                        font-size: 1.4rem;
+                        transform: scale(4);
+                        font-size: 1.6rem;
                         font-family: 'Heebo', sans-serif;
     
                         &.exponential {
-                            transform: scale(5);
+                            transform: scale(3.4);
                         }
                     }
                 }
                 .level-info-bottom {
                     display: flex;
-                    flex: 1;
+                    flex: 1.2;
                     align-items: center;
                     overflow: hidden;
-                    margin: 0rem .5rem .5rem .5rem;
-                    border-radius: 2rem; 
+                    margin: 0rem .2rem .5rem .2rem;
+                    // border-radius: 2rem; 
     
                     .level-number {
-                        border: .3rem solid #222;
-                        z-index: 2;
-                        flex: 0 0 auto;
-                        position: absolute;
-                        color: #222;
-                        height: 2.4rem;
-                        width: 2.4rem;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        background: #e1e1e1;
+                        border-width: .2rem;
+                        height: 1.8rem;
+                        width: 1.8rem;
                         border-radius: 100%;
-                        z-index: 2;
                         
                         p {
-                            font-size: 1.5rem;
+                            font-size: 1rem;
                             font-weight: 500;
                         }
                     }
                     .level-bar {
-                        border: .3rem solid #222 ;
-                        flex: 1;
-                        height: 100%;
-                        width: 100%;
-                        left: 0%;
-                        position: relative;
-                        background: $default-dark;
-                        display: flex;
-                        justify-content: flex-start;
-                        // border-radius: 1rem 1rem 1rem 1rem;
-                        // overflow: hidden;
+                        height: 1.8rem;
+                        border-width: .2rem;
                         
                         .filled-xp {
                             border-radius: 0rem 1rem 1rem 0rem;
                             width: 0%;
-                            transition: all 3s;
+                            transition: all 3s ease;
                         }
                     }
                 }
             }
         }
     }
+    .submit-container {
+        .submit-button {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            top: 14%;
+            border-radius: 0;
+    
+            &.active {
+                transition: all .3s !important;
+                transform: translateY(.5rem);
+            }
+    
+            .submit-button-text {
+                transition: color 1s;
+                text-align: center;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 900;
+                font-size: 2rem;
+                transform: scale(2);
+            }
+        }
+    }
+    html.light {
+        .submit-container {
+            .submit-button {
+                box-shadow: 0rem 1rem 0rem darken($default-light, 40%), $top-shadow;
+                
+                &.active {
+                    box-shadow: 0rem .5rem 0rem darken($default-light, 25%), $top-shadow;
+                }
+            }
+            &.active .submit-button {
+                &.vanilla {
+                    box-shadow: 0rem 1rem 0rem lighten($vanilla-mode-light, 5%), $top-shadow;
+                    &.active {
+                        box-shadow: 0rem .5rem 0rem lighten($vanilla-mode-light, 5%), $top-shadow;
+                    }
+                } 
+                &.timed {
+                    box-shadow: 0rem 1rem 0rem lighten($timed-mode, 5%), $top-shadow;
+                    &.active {
+                        box-shadow: 0rem .5rem 0rem lighten($timed-mode, 5%), $top-shadow;
+                    }
+                }
+                &.sudden {
+                    box-shadow: 0rem 1rem 0rem lighten($sudden-mode, 5%), $top-shadow;
+                    &.active {
+                        box-shadow: 0rem .5rem 0rem lighten($sudden-mode, 5%), $top-shadow;
+                    }
+                }
+            }
+        }
+        .results-container {
+            &.vanilla {
+                .last-game-results {
+                    .results-row.header {
+                        background: lighten(desaturate($vanilla-mode-light, 15%), 45%);
+                        
+                        p {
+                            color: darken($vanilla-mode-light, 15%);
+                        }
+                    }
+                }
+                .levels-container {
+                    .level-info-container {
+                        background: lighten(desaturate($vanilla-mode-light, 15%), 45%);
+    
+                        .level-info-top {
+                            background: lighten(desaturate($vanilla-mode-light, 15%), 45%);
+                            
+                            p {
+                                color: $vanilla-mode-light;
+                            }
+                        }
+                    }
+                    border-color: lighten(saturate($vanilla-mode-light, 5%), 10%);
+                }
+            }
+            &.timed {
+                .last-game-results {
+                    .results-row.header {
+                        background: lighten($timed-mode, 35%);
+                        
+                        p {
+                            color: $timed-mode;
+                        }
+                    }
+                }
+                .levels-container {
+                    .level-info-container {
+                        background: lighten($timed-mode, 35%);
+    
+                        .level-info-top {
+                            background: lighten($timed-mode, 35%);
+                            
+                            p {
+                                color: $timed-mode;
+                            }
+                        }
+                    }
+                    border-color: lighten(saturate($timed-mode, 5%), 15%);
+                }
+            }
+            &.sudden {
+                .last-game-results {
+                    .results-row.header {
+                        background: lighten($sudden-mode, 45%);
+                        
+                        p {
+                            color: $sudden-mode;
+                        }
+                    }
+                }
+                .levels-container {
+                    .level-info-container {
+                        background: lighten($sudden-mode, 45%);
+    
+                        .level-info-top {
+                            background: lighten($sudden-mode, 45%);
+                            
+                            p {
+                                color: $sudden-mode;
+                            }
+                        }
+                    }
+                    border-color: lighten(saturate($sudden-mode, 5%), 15%);
+                }
+            }
+        }
+    }
+    html.dark {
+        .submit-container {
+            .submit-button {
+                box-shadow: 0rem 1rem 0rem lighten($default-dark, 20%), $top-shadow;
+                
+                &.active {
+                    box-shadow: 0rem 0rem 0rem lighten($default-dark, 20%), $top-shadow;
+                }
+            }
+            &.active .submit-button {
+                &.vanilla {
+                    box-shadow: 0rem 1rem 0rem darken($vanilla-mode, 5%), $top-shadow;
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($vanilla-mode, 10%), $top-shadow;
+                    }
+                } 
+                &.timed {
+                    box-shadow: 0rem 1rem 0rem darken($timed-mode, 5%), $top-shadow;
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($timed-mode, 15%), $top-shadow;
+                    }
+                }
+                &.sudden {
+                    box-shadow: 0rem 1rem 0rem darken($sudden-mode, 5%), $top-shadow;
+                    &.active {
+                        box-shadow: 0rem 0rem 0rem darken($sudden-mode, 15%), $top-shadow;
+                    }
+                }
+            }
+        }
+        .results-container {
+            &.vanilla {
+                .last-game-results {
+                    .results-row.header {
+                        background: desaturate(darken($vanilla-mode, 10%), 10%);
+                        border-color: $vanilla-mode;
 
+                        p {
+                            color: lighten(saturate($vanilla-mode, 20%), 35%);
+                        }
+                    }
+                }
+                .levels-container {
+                    .level-info-container {
+                        background: desaturate(darken($vanilla-mode, 10%), 10%);
+    
+                        .level-info-top {
+                            background: desaturate(darken($vanilla-mode, 10%), 10%);
+                            
+                            p {
+                                color: lighten(saturate($vanilla-mode, 15%), 25%);
+                            }
+                        }
+                    }
+                    border-color: $vanilla-mode;
+                }
+            }
+            &.timed {
+                .last-game-results {
+                    .results-row.header {
+                        background: desaturate(darken($timed-mode, 15%), 5%);
+                        border-color: $timed-mode;
+                        
+                        p {
+                            color: lighten(saturate($timed-mode, 15%), 30%);
+                        }
+                    }
+                }
+                .levels-container {
+                    .level-info-container {
+                        background: desaturate(darken($timed-mode, 15%), 5%);
+    
+                        .level-info-top {
+                            background: desaturate(darken($timed-mode, 15%), 5%);
+                            
+                            p {
+                                color: lighten(saturate($timed-mode, 15%), 30%);
+                            }
+                        }
+                    }
+                    border-color: $timed-mode;
+                }
+            }
+            &.sudden {
+                .last-game-results {
+                    .results-row.header {
+                        background: desaturate(darken($sudden-mode, 10%), 10%);
+                        border-color: $sudden-mode;
+
+                        
+                        p {
+                            color: lighten(saturate($sudden-mode, 15%), 30%);
+                        }
+                    }
+                }
+                .levels-container {
+                    .level-info-container {
+                        background: desaturate(darken($sudden-mode, 10%), 10%);
+    
+                        .level-info-top {
+                            background: desaturate(darken($sudden-mode, 10%), 10%);
+                            
+                            p {
+                                color: lighten(saturate($sudden-mode, 15%), 30%);
+                            }
+                        }
+                    }
+                    border-color: $sudden-mode;
+                }
+            }
+        }
+    }
     .full-page.active#game-tab {
         justify-content: start;
     }
@@ -2994,6 +3237,41 @@ table {
             }
         }
     }
+    .switchboard-container * {
+        pointer-events: none;
+    }
+    .switch-row {
+        height: 100%;
+        width: 100%;
+    
+        .switch {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            height: 78%;
+            width: 100%;
+            pointer-events: auto;
+            cursor: grab;
+            overflow: hidden;
+            z-index: 1;
+            box-sizing: border-box;
+            border-left: 2px transparent solid;
+            border-right: 2px transparent solid;
+
+            &:last-child {
+                p {
+                    font-size: 1.2rem;
+                }
+            }
+            p {
+                font-family: 'Heebo', sans-serif;
+                position: absolute;
+                font-size: 1.4rem;
+                transform: scale(2.5);
+            }
+        }
+    }
     .box-shadow {
         bottom: 16%;
         z-index: -1;
@@ -3042,7 +3320,6 @@ table {
             }
         }
         tr {
-            
             &:last-child {
                 border-radius: 0 0 2rem 2rem;
                 border: none;

@@ -50,13 +50,13 @@
                         {{ leaderboard['math_type'].upper() }} 
                         <span class="material-symbols-outlined arrow">keyboard_double_arrow_right</span>
                     </caption>
-                    <tr class="header">
+                    <tr class="header swiper-no-swiping">
                         <th colspan="5"><p>Username</p></th>
                         <th colspan="3"><p>Exp</p></th>
                         <th colspan="3"><p>Level</p></th>
                     </tr>
                     {% for leaderboard_row in leaderboard['leaderboard'] %}
-                    <tr>
+                    <tr class="swiper-no-swiping">
                         <td colspan="5">
                             <p>{{ leaderboard_row[0] }}</p> 
                         </td>
