@@ -1044,7 +1044,7 @@ form {
   left: 94%;
   width: 5rem;
   height: 5rem;
-  z-index: 3rem;
+  z-index: 3;
 }
 .dark-mode-toggle.index button {
   display: flex;
@@ -2007,6 +2007,11 @@ table tr td p {
   .section-small {
     width: 100%;
     order: 2;
+  }
+  .dark-mode-toggle.index {
+    position: absolute;
+    top: 4%;
+    left: 70%;
   }
   .section-large {
     width: 100%;

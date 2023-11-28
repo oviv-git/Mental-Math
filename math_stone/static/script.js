@@ -1142,6 +1142,7 @@ async function gameLogic(activeSlide) {
     gameResults[0].gameTimer = gameTimeElapsed
     gameResults[0].gameDate = gameTimeStamp
 
+    console.log(gameResults)
     resultsRecorded = await recordResults(JSON.stringify(gameResults));
 
     progressContainerGameQuestions.innerHTML = ''
