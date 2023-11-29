@@ -9,15 +9,11 @@ $default-error: rgb(194, 76, 76);
 $top-shadow: 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
 $blur-shadow: 0rem 0em .8rem;
 
-// $vanilla-mode: #3f6d96;
+// Original Colors 
 $vanilla-mode-light: #407587;
 $vanilla-mode: #3c7f95;
-
 $timed-mode: #5d65a4;
-// $choice-mode: #2d8471;
 $sudden-mode: #925353;
-
-// Original Colors 
 
 $choice-mode: #2d8471;
 
@@ -2788,7 +2784,7 @@ table {
                 }
     
                 .icon-container {
-                    flex: .8;
+                    flex: 0;
     
                     .material-symbols-outlined {
                         font-variation-settings:

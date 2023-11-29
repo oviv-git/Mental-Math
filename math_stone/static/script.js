@@ -1023,7 +1023,7 @@ async function gameLogic(activeSlide) {
     const progressContainerGameTimer = document.querySelector('.progress-container.game-timer');
     // const progressContainerQuestionTimer = document.querySelector('.progress-container.question-timer');
 
-    let gameResults = [{'gameMode': currentMode}]
+    let gameResults = [{'game_mode': currentMode}]
     
     // On an activeSlide with a timer and no question amount assume 1 question per second
     let questionAmount = activeSlide.querySelector('input').value;
@@ -1031,7 +1031,7 @@ async function gameLogic(activeSlide) {
     // Have to initialize timer here 
     let timer = 0;
 
-    // Different flags
+    // Various flags
     var shouldEndQuestions = false;
     var resultsRecorded = false;
     
@@ -1058,8 +1058,8 @@ async function gameLogic(activeSlide) {
     if (activeSlide.querySelector('input').classList.contains('timer')) {
         timer = questionAmount * 1000;
         activateTimerProgress(progressContainerGameTimer, timer, true, 'linear');
-        
         var timerTimeout = setTimeout(timerEndGame, timer);
+
     // For all non-timer modes: Vanilla
     } else {
         activateTimerProgress(progressContainerGameTimer, (questionAmount * 10000), false, 'ease');
@@ -1067,7 +1067,7 @@ async function gameLogic(activeSlide) {
     }
 
     const gameStartTime = new Date();
-    var correct_answers = 0;
+    let correct_answers = 0;
     
     for (let i = 0; i < generatedQuestions.length; i++) {
         result.value = '';
@@ -1092,39 +1092,36 @@ async function gameLogic(activeSlide) {
 
         // userSubmission becomes true when gameInput gets a response above
         if (userSubmission === true) {
-
             if (shouldEndQuestions) {
-                gameResults.pop();
                 break;
-                // remove the last entry of gameResult and send it to app.py 
             }
 
             let questionEndTime = new Date();
             let questionTimeElapsed = ((questionEndTime - questionStartTime) / 1000).toFixed(2);
+            let isUserCorrect = false;
             
             if (result.value == question['result']) {
+                isUserCorrect = true;
                 correct_answers++;
-                
-                activateQuestionProgress(progressContainerGameQuestions, true);
-                triggerAnimation(submitButton, 'correct', 200);
-                
-                gameResults.push({'correct': true, 
-                                  'operator': question['operator'],
-                                  'timeElapsed': questionTimeElapsed,
-                                  'difficulty': question['difficulty'], 
-                                  'level': question['level']});
-                
-            } else {
-                activateQuestionProgress(progressContainerGameQuestions, false);
-                triggerAnimation(submitButton, 'incorrect', 200);
-                
-                gameResults.push({'correct': false, 
-                                  'operator': question['operator'],
-                                  'timeElapsed': questionTimeElapsed});
-                
-                if (currentMode == 'sudden') {
-                    break;
-                }
+            } 
+
+            let triggerAnimationMap = {true: 'correct', false: 'incorrect'}
+            triggerAnimation(submitButton, triggerAnimationMap[isUserCorrect], 200);
+            activateQuestionProgress(progressContainerGameQuestions, isUserCorrect);
+            
+            gameResults.push({'correct': isUserCorrect, 
+                              'operator': question['operator'],
+                              'operand_1': question['operand_1'],
+                              'operand_2': question['operand_2'],
+                              'user_result': result.value,
+                              'question_result': question['result'], 
+                              'time_elapsed': questionTimeElapsed,
+                              'difficulty': question['difficulty'], 
+                              'level': question['level'],
+                              'question_timer': questionTimeElapsed});
+
+            if (currentMode == 'sudden' && isUserCorrect == false) {
+                break;
             }
         }
     }
@@ -1137,10 +1134,11 @@ async function gameLogic(activeSlide) {
     let gameEndTime = new Date();
     let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
     
+    // Makes it so the timer function from a previous game can never affect a future game
     clearTimeout(timerTimeout)
     
-    gameResults[0].gameTimer = gameTimeElapsed
-    gameResults[0].gameDate = gameTimeStamp
+    gameResults[0].game_timer = gameTimeElapsed
+    gameResults[0].game_date = gameTimeStamp
 
     console.log(gameResults)
     resultsRecorded = await recordResults(JSON.stringify(gameResults));
@@ -1320,7 +1318,7 @@ function initLeaderboardSwiper() {
         startWithActiveSlide = document.querySelector('.swiper-slide-next');
     }
 
-    const startWithActiveTable = startWithActiveSlide.querySelector('table');
+    const startWithActiveTable = startWithActiveSlide.querySelector('table');    
     const startWithActiveShadow = startWithActiveSlide.querySelector('.box-shadow');
     
     startWithActiveTable.classList.add('active');

@@ -17,6 +17,7 @@ from database import Database
 from werkzeug.security import check_password_hash
 import csv
 from math import exp
+import json
 
 
 def login_required(f):
@@ -116,7 +117,7 @@ def generate_reward_experience(results):
     for i, question in enumerate(results):
 
         if i == 0:
-            game_mode_multiplier = GAME_MODE_MULTIPLIER_MAP[question['gameMode']]
+            game_mode_multiplier = GAME_MODE_MULTIPLIER_MAP[question['game_mode']]
             continue
 
         # If the question is wrong move onto the next one; 0 xp gained
@@ -126,7 +127,7 @@ def generate_reward_experience(results):
         # Parts of the question object
         level = question['level']
         difficulty = question['difficulty']
-        time_elapsed = question['timeElapsed']
+        time_elapsed = question['time_elapsed']
 
         # Different Multipliers to modify the experience scaling per level
         level_multiplier = round(level * 0.50, 3) + 1
@@ -222,31 +223,42 @@ def generate_user_level_info(experience_list):
 
 # TODO - DONT FORGET TO ADD TOP MESSAGE
 def record_game_results(results, reward_experience, user_id):
-    question_types = {'+': 0, '-': 0, 'x': 0, '÷': 0, '^': 0}
+    # question_types = {'+': 0, '-': 0, 'x': 0, '÷': 0, '^': 0}
     correct_count = 0
     questions = len(results) - 1
+    questions_dict = {}
 
     for i, question in enumerate(results):
 
+        # Will only run the first loop
         if i == 0:
-            game_mode = question['gameMode']
-            game_timer = question['gameTimer']
-            game_date = question['gameDate']
+            game_mode = question['game_mode']
+            game_timer = question['game_timer']
+            game_date = question['game_date']
             continue
         
-        question_types[question['operator']] += 1
+        # question_types[question['operator']] += 1
         
         if question['correct']:
             correct_count += 1
+
+        question_data = {'operand_1': question['operand_1'], 'operator': question['operator'], 
+                         'operand_2': question['operand_2'], 'user_result': question['user_result'],
+                         'question_result': question['question_result'], 'difficulty': question['difficulty'],
+                         'level': question['level'], 'question_timer': question['question_timer']}
         
+        questions_dict[i] = question_data
+    
+    
+
     with Database() as db:
         query = ("INSERT INTO games(user_id, game_mode, questions, correct, "
-                "addition_exp, subtraction_exp, multiplication_exp, division_exp, exponential_exp, game_timer, game_date) " 
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
+                "addition_exp, subtraction_exp, multiplication_exp, division_exp, exponential_exp, game_timer, game_date, question_data) " 
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
         
         parameters = (user_id, game_mode, questions, correct_count, reward_experience[0], 
                       reward_experience[1], reward_experience[2], reward_experience[3], reward_experience[4],
-                      game_timer, game_date)
+                      game_timer, game_date, json.dumps(questions_dict))
         
         db.execute(query, parameters)
     
