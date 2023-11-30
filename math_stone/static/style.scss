@@ -2448,9 +2448,10 @@ table {
         overflow: hidden;
 
         span {
-            margin: 0 3rem;
+            color: white;
+            margin: 0 2rem;
             transform: scaleY(1.4) scale(2.8);
-            opacity: 0.08;
+            opacity: 0.1;
         }
     }
     tr {

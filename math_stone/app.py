@@ -137,6 +137,14 @@ def leaderboard():
     return render_template('leaderboard.html', leaderboards=leaderboards)
 
 
+@app.route('/game_history', methods=['POST'])
+@login_required
+def game_history():
+    user_id = session['user_id']
+
+    return render_template('game_history.html')
+
+
 @app.route('/error_redirect', methods=['GET', 'POST'])
 def error_redirect():
     if request.method == 'GET':
@@ -192,6 +200,12 @@ def record_results():
         db.execute(query, parameters)
 
     return jsonify({'successful': True})
+
+
+
+
+
+
 
 
 @app.route('/get_last_games_played', methods=['POST'])

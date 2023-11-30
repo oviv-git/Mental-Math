@@ -947,10 +947,8 @@ function modeSelectMultipleChoice() {
 
 // Gets called when a switch-button is pressed and when a swiper container changes
 function submitButtonActivation() {
-    let activeSlide = document.querySelector('.swiper-slide.swiper-slide-active');
     const submitContainer = document.querySelector('.submit-container');
-    let shouldActivate = submitButtonActivationCheck(activeSlide);
-
+    let shouldActivate = submitButtonActivationCheck();
 
     if (shouldActivate == true) {
         submitContainer.classList.add('active');
@@ -961,7 +959,7 @@ function submitButtonActivation() {
 }
 
 // Only gets called by submitButtonActivation(activeSlide);
-function submitButtonActivationCheck(activeSlide) {
+function submitButtonActivationCheck() {
     const switchboardButtons = document.querySelectorAll('.switch');
   
     // will not activate if all the switches are off
@@ -980,10 +978,12 @@ function submitButtonActivationCheck(activeSlide) {
     return true
 }
 
-
-// Function to change the colors of everything when the game mode is switched
-// Gets called by initModeSelectSwiper()
-// TODO change name
+/**
+* 
+* Function to change the colors of everything when the game mode is switched
+* Gets called by initModeSelectSwiper()
+* TODO change name
+*/
 function changeButtonColors() {
     const switchboard = document.getElementById('switchboard');
     const submitButton = document.getElementById('submit-button');
@@ -1147,8 +1147,10 @@ async function gameLogic(activeSlide) {
     successfullyFinishGame(resultsRecorded)
 }
 
+
+// Handles calling functions that need to be called when switching back to home-tab after a successful game.
 function successfullyFinishGame(resultsRecorded) {
-    if (resultsRecorded == true) {
+    if (resultsRecorded) {
         updateSessionMessage('Game successfully recorded', 'success');
     } else {
         updateSessionMessage('Game results not recorded', 'error');
@@ -1156,7 +1158,6 @@ function successfullyFinishGame(resultsRecorded) {
 
     displayLastGamesPlayed();
     updateUserLevels();
-    
 }
 
 
@@ -1258,7 +1259,7 @@ function activateQuestionProgress(progressContainer, answer) {
 *
 * @param {element} progressContainer - The container that holds the progress bar
 * @param {number} timer - How long the timer animtion lasts until the bar fills/empties 
-  @param {bool} reverse - If true then the timer will decrease instead of increasing
+* @param {bool} reverse - If true then the timer will decrease instead of increasing
 * @param {string} transition - linear by default; can be set to any of the valid transition styles
 */  
 function activateTimerProgress(progressContainer, timer, reverse=false, transition='linear') {
@@ -1283,10 +1284,11 @@ function activateTimerProgress(progressContainer, timer, reverse=false, transiti
         }
     }, 10);
 }
-
-// Initializes swiper.js on leaderboard.html and also has a bonus functionality of
-// transfering the active class the current slides caption element for styling purposes
-// Also in charge of adding the active class to the fake box shadow.
+/**
+* Initializes swiper.js on leaderboard.html and also has a bonus functionality of
+* transfering the active class the current slides caption element for styling purposes
+* Also in charge of adding the active class to the fake box shadow.
+*/
 function initLeaderboardSwiper() {
     const windowWidth = window.innerWidth
     let startWithActiveSlide = null;
@@ -1351,6 +1353,9 @@ function initLeaderboardSwiper() {
 }
 
 
+function gameHistory() {
+    
+}
 
 
 /** 
