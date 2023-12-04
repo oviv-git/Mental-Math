@@ -16,15 +16,18 @@ function main() {
         case '/home':
             // beginning of modularization 
             initHomePage();
-            logout();
-            
             break;
         case '/leaderboard':
             initDropdownMenu();
             initLeaderboardSwiper();
-            displayUsername();
-            logout();
+            initLeaderboardShadows();
+
+
             break;
+        case '/game_history':
+            initDropdownMenu();
+            break;
+            
     }
 }
 
@@ -36,7 +39,6 @@ function initHomePage() {
     loadSwitchboard();
     saveSwitchboard();
 
-    displayUsername();
     updateUserLevels();
     displayLastGamesPlayed();
     switchHomeTabs();
@@ -227,7 +229,7 @@ function loginFormSubmit() {
     });
 }
 
-function logout() {
+function initLogoutButton() {
     const logoutForm = document.getElementById('logout-form');
     
     logoutForm.addEventListener('submit', function() {
@@ -551,7 +553,6 @@ async function getUserLevels() {
  * Runs an sql query to SELECT the last 5 games of the user to populate results-container
 */
 async function displayLastGamesPlayed() {
-
     /**
     * AJAX request to run the sql query
     * @returns {promise} - Either returns up to 5 of the users previous games or an error
@@ -596,45 +597,78 @@ async function displayLastGamesPlayed() {
     const lastGamesPlayed = await getLastGamesPlayed();
     
     // lastGamesPlayed is limited to 5 rows.
-    for (let i = 0; i < lastGamesPlayed.length; i++) {
+    for (let i = 0; i < lastGamesPlayed.length; i++) {        
         let lastGamePlayed = lastGamesPlayed[i]
         let resultsRow = resultsRows[i + 1]
+
+        resultsRow.className = 'results-row ' + lastGamePlayed[0];
         
         let iconContainer = resultsRow.querySelector('span');
         iconContainer.innerHTML = iconMap[lastGamePlayed[0]];
 
         let question = resultsRow.querySelector('.question-amount');
-        question.innerHTML = lastGamePlayed[1];
+        question.innerHTML = lastGamePlayed[1] + '/' + lastGamePlayed[2];
 
-        let modeContainer = resultsRow.querySelector('.mode-container');
-        modeContainer.innerHTML = '';
-        
-        // Loops through the experience gained per mode
-        for (let j = 3; j < 8; j++) {
-            if (lastGamePlayed[j] !== 0) {
-                let modeExperienceContainer = document.createElement('div');
-                modeExperienceContainer.classList.add('mode-experience-container');
-                
-                let modeSymbol = document.createElement('p');
-                modeSymbol.classList.add('mode-symbol');
-                modeSymbol.innerHTML = modeMap[j];
-                modeExperienceContainer.appendChild(modeSymbol);
-                
-                let modeExperience = document.createElement('p');
-                modeExperience.classList.add('mode-experience');
-                modeExperience.innerHTML = lastGamePlayed[j];
-                modeExperienceContainer.appendChild(modeExperience);
-                
-                modeContainer.appendChild(modeExperienceContainer);
-            } 
-        }
         let percentage = resultsRow.querySelector('.percentage');
         percentage.innerHTML = (lastGamePlayed[2] / lastGamePlayed[1] * 100).toFixed(0) + '%';
 
         let timer = resultsRow.querySelector('.timer');
         timer.innerHTML = [lastGamePlayed[8].toFixed(2)] + 's';
 
-        resultsRow.className = 'results-row ' + lastGamePlayed[0];
+        let modeContainer = resultsRow.querySelector('.mode-container');
+        modeContainer.innerHTML = '';
+
+        for (let j = 3; j < 8; j++) {
+            let modeExperience = document.createElement('p');
+            modeExperience.classList.add('mode-experience');
+            modeExperience.innerHTML = lastGamePlayed[j];
+
+            if (lastGamePlayed[j] == undefined) {
+                modeExperience.innerHTML = '0'
+            } else {
+                modeExperience.innerHTML = lastGamePlayed[j]
+            }
+            modeContainer.appendChild(modeExperience);
+
+        }
+        // Deprecated Code - Displays all the differnt types of xp gained on the table at once
+        // Deprecated because I don't like how cluttered the table looks especially since
+        // I already have a visual representation of xp gained.
+
+        // Loops through the experience gained per mode
+        // for (let j = 3; j < 8; j++) {
+        //     if (lastGamePlayed[j] !== 0) {
+        //         let modeExperienceContainer = document.createElement('div');
+        //         modeExperienceContainer.classList.add('mode-experience-container');
+                
+        //         let modeSymbol = document.createElement('p');
+        //         modeSymbol.classList.add('mode-symbol');
+        //         modeSymbol.innerHTML = modeMap[j];
+        //         modeExperienceContainer.appendChild(modeSymbol);
+        //         
+        //         modeExperience.classList.add('mode-experience');
+        //         modeExperience.innerHTML = lastGamePlayed[j];
+        //         modeExperienceContainer.appendChild(modeExperience);
+                
+        //         modeContainer.appendChild(modeExperienceContainer);
+        //     } 
+        // }
+
+        // let experienceGained = 0;
+        // for (let j = 3; j < 8; j++) {
+        //     experienceGained += lastGamePlayed[j]
+        // }
+
+        // let modeExperience = document.createElement('p');
+        // modeExperience.classList.add('mode-experience');
+        // modeExperience.innerHTML = experienceGained;
+        // modeContainer.appendChild(modeExperience);
+
+        
+
+  
+
+
     }
 }
 
@@ -795,6 +829,10 @@ function initButtonsAnimation() {
 
 // TODO
 function initDropdownMenu() {
+    initLogoutButton();
+    displayUsername();
+
+
     const dropdownButton = document.getElementById('dropdown-button');
     const dropdownMenu = document.getElementById('dropdown-menu');
 
@@ -803,7 +841,6 @@ function initDropdownMenu() {
 
     // flag that says whether or not the dropdown menu is open or not
     var dropdownMenuOpen = false
-
 
     // Closes the dropdown menu
     function closeDropdownMenu() {
@@ -816,7 +853,6 @@ function initDropdownMenu() {
         if (!event.target.classList.contains('dropdown-menu-content') && !event.target.classList.contains('dropdown-toggle')) {
             closeDropdownMenu();
         }
-        
     }
 
     // Opens the menu, if the menu is open, closes the menu.
@@ -1155,7 +1191,6 @@ function successfullyFinishGame(resultsRecorded) {
     } else {
         updateSessionMessage('Game results not recorded', 'error');
     }
-
     displayLastGamesPlayed();
     updateUserLevels();
 }
@@ -1352,11 +1387,21 @@ function initLeaderboardSwiper() {
     });
 }
 
+// The leaderboard box-shadow is a pseudo-element under the table, it has to be a pseudo-element because
+// the header of the table is a caption and if I use a box-shadow under the table its clear that the caption
+// on top doesn't have the same shadow.
+function initLeaderboardShadows() {
+    const tableElementSize = document.querySelector('table').getBoundingClientRect();
+    const dropShadows = document.querySelectorAll('.box-shadow');
 
-function gameHistory() {
-    
+    console.log(tableElementSize)
+
+    dropShadows.forEach((element) => {
+        element.style.width = tableElementSize.width + 'px';
+        element.style.height = tableElementSize.height + 'px';
+        element.style.top = tableElementSize.top + 'px';
+    });
 }
-
 
 /** 
     Triggers animations when the user submits their answer

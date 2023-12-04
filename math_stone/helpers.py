@@ -12,7 +12,7 @@
 """
 
 from functools import wraps
-from flask import session, render_template, redirect
+from flask import session, render_template, redirect, jsonify
 from database import Database
 from werkzeug.security import check_password_hash
 import csv
@@ -328,4 +328,16 @@ def error(message, code=400):
     return render_template("error.html", code=code, message=message)
 
 
-#
+def generate_game_history(user_id, quantity):
+    leaderboards = [[1, 1, 1], [2, 2, 2], [3, 3, 3]]
+
+    with Database() as db:
+        query = ("SELECT questions, correct, addition_exp, subtraction_exp, multiplication_exp, "
+                "division_exp, exponential_exp, game_timer, game_date, question_data " 
+                "FROM games WHERE user_id = (?) ORDER BY game_id DESC LIMIT (?);")
+        parameters = (user_id, quantity)
+
+        db.execute(query, parameters, )
+        game_history = db.fetchall()
+
+    return game_history

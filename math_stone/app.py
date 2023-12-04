@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results
+from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results, generate_game_history
 from werkzeug.security import check_password_hash, generate_password_hash
 from database import Database
 from game import Game
@@ -25,6 +25,25 @@ def index():
 def home():
     """Sign in to be able to play"""
     return render_template('home.html')
+
+
+    # todo
+@app.route('/get_last_games_played', methods=['POST'])
+@login_required
+def get_last_games_played():
+    user_id = session['user_id']
+
+    with Database() as db:
+        query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, division_exp, "
+                "exponential_exp, game_timer FROM games WHERE user_id = (?) ORDER BY game_id DESC LIMIT 5;")
+        
+        parameters = (user_id, )
+        
+        db.execute(query, parameters)
+        last_games = db.fetchall()
+
+    return jsonify(last_games)
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -137,14 +156,21 @@ def leaderboard():
     return render_template('leaderboard.html', leaderboards=leaderboards)
 
 
+# todo
 @app.route('/game_history', methods=['POST'])
 @login_required
 def game_history():
     user_id = session['user_id']
+    quantity = request.form.get('quantity')
 
-    return render_template('game_history.html')
+    user_game_history = generate_game_history(user_id, quantity)
+    for row in user_game_history:
+        print(row)
+    
+    return render_template('game_history.html', user_game_history=user_game_history)
 
 
+# todo
 @app.route('/error_redirect', methods=['GET', 'POST'])
 def error_redirect():
     if request.method == 'GET':
@@ -156,6 +182,7 @@ def error_redirect():
         return error(error_message, error_code)
     
 
+# todo
 @app.route('/get_user_levels', methods=['POST'])
 def get_user_levels():
     user_id = session['user_id']
@@ -166,6 +193,7 @@ def get_user_levels():
     return jsonify(level_info_list)
 
 
+# todo
 @app.route('/generate_questions', methods=['POST'])
 @login_required
 def generate_questions():
@@ -203,23 +231,3 @@ def record_results():
 
 
 
-
-
-
-
-
-@app.route('/get_last_games_played', methods=['POST'])
-@login_required
-def get_last_games_played():
-    user_id = session['user_id']
-
-    with Database() as db:
-        query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, division_exp, "
-                "exponential_exp, game_timer FROM games WHERE user_id = (?) ORDER BY game_id desc LIMIT 5;")
-        
-        parameters = (user_id, )
-        
-        db.execute(query, parameters)
-        last_games = db.fetchall()
-
-    return jsonify(last_games)
