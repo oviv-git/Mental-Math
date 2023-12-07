@@ -73,7 +73,10 @@
                 </div>
             </div>
             <div class="detailed-history-row" data-row-id="{{ loop.index }}">
-                {{ format_date(game[9]) }}
+                {% for detailed_game in parse_detailed_game_history(game[10]).values() %}
+                    
+                    <p> {{ detailed_game['operand_1'] }} </p>
+                {% endfor %}
             </div>
         {% endfor %}
     </div>

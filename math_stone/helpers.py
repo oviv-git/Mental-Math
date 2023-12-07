@@ -329,8 +329,6 @@ def error(message, code=400):
 
 
 def generate_game_history(user_id, quantity):
-    leaderboards = [[1, 1, 1], [2, 2, 2], [3, 3, 3]]
-
     with Database() as db:
         query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, "
                 "division_exp, exponential_exp, game_timer, game_date, question_data " 

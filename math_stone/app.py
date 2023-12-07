@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
 from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results, generate_game_history
-from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.security import generate_password_hash
 from database import Database
 from game import Game
 import json
@@ -163,13 +163,14 @@ def game_history():
     user_id = session['user_id']
     quantity = request.form.get('quantity')
 
+    #TODO
     def calculate_percentage(operand_1, operand_2):
         if operand_2 == 0:
             return 0
         result = (operand_2 / operand_1) * 100
         return round(result)
 
-    
+    #TODO
     def format_date(date):
         timestamp, clock = date.split(' ')
         year, month, day = timestamp.split('-')
@@ -182,23 +183,32 @@ def game_history():
 
         return f"{hour}:{minute}{meridiem} {day}/{month}/{year[2:]}"
 
-
+    #TODO
     def cycle(game_number):
         if (game_number % 2 == 0):
             return 'even'
         return 'odd'
 
 
+    # Since the sql query returns a tuple with the last value being a long string, 
+    # instead of creating a new tuple I can just use this function to parse the string.
+    def parse_detailed_game_history(history_str):
+        history_dict = json.loads(history_str)
+
+        return history_dict
+
+
     user_game_history = generate_game_history(user_id, quantity)
-    for row in user_game_history:
-        print(row)
+    parse_detailed_game_history(user_game_history[1][10])
     
+    #TODO
     ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
     return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
-                           calculate_percentage=calculate_percentage, format_date=format_date, cycle=cycle)
+                           calculate_percentage=calculate_percentage, format_date=format_date, cycle=cycle,
+                           parse_detailed_game_history=parse_detailed_game_history)
 
 
-# todo
+#TODO
 @app.route('/error_redirect', methods=['GET', 'POST'])
 def error_redirect():
     if request.method == 'GET':
@@ -210,7 +220,7 @@ def error_redirect():
         return error(error_message, error_code)
     
 
-# todo
+#TODO
 @app.route('/get_user_levels', methods=['POST'])
 def get_user_levels():
     user_id = session['user_id']
@@ -221,7 +231,7 @@ def get_user_levels():
     return jsonify(level_info_list)
 
 
-# todo
+#TODO
 @app.route('/generate_questions', methods=['POST'])
 @login_required
 def generate_questions():
@@ -235,7 +245,7 @@ def generate_questions():
 
     return jsonify(questions)
 
-
+#TODO
 # Gets called when a game completes successfully. Records results - Updates experience
 @app.route('/record_results', methods=['POST'])
 @login_required

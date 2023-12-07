@@ -1447,6 +1447,11 @@ function initLeaderboardShadows() {
     });
 }
 
+function initGameHistoryTable() {
+    const visibleRows = querySelectorAll('game-history-row');
+    console.log(visibleRows)
+}
+
 /** 
     Triggers animations when the user submits their answer
 
