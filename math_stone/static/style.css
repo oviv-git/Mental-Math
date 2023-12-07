@@ -336,7 +336,7 @@ html.light .results-container.timed .levels-container .level-info-container .lev
   background: #9ba0cc;
 }
 html.light .results-container.timed .levels-container .level-info-container .level-info-top p {
-  color: #414774;
+  color: #dbddf2;
 }
 html.light .results-container.sudden {
   border-color: #bf6262;
@@ -358,7 +358,7 @@ html.light .results-container.sudden .levels-container .level-info-container .le
   background: #ce8686;
 }
 html.light .results-container.sudden .levels-container .level-info-container .level-info-top p {
-  color: #6f3333;
+  color: #f6dede;
 }
 html.light .submit-container .submit-button {
   background: #d4d4d4;
@@ -1445,10 +1445,14 @@ form {
 .results-container .last-game-results .results-row .mode-container {
   display: flex;
   flex: 3;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
-  padding: 0 0.4rem;
+}
+.results-container .last-game-results .results-row .mode-container .mode-experience-container {
+  flex: 1;
+  text-align: center;
+  align-items: center;
 }
 .results-container .last-game-results .results-row .percentage-container {
   flex: 0.5;
@@ -1940,6 +1944,54 @@ table tr td {
 table tr td p {
   font-family: "Heebo", sans-serif;
   transform: scale(2);
+}
+
+.scroll-container {
+  margin-top: 4rem;
+  width: 40%;
+  height: 40rem;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  overflow-y: scroll;
+}
+.scroll-container .game-history-row {
+  font-size: 1.4rem;
+  display: flex;
+  flex: 1;
+  max-height: 4rem;
+  min-height: 4rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.scroll-container .game-history-row.even {
+  background: #118d81;
+}
+.scroll-container .game-history-row.odd {
+  background: #69eadd;
+}
+.scroll-container .game-history-row .material-symbols-outlined {
+  font-variation-settings: "FILL" 1, "wght" 900, "GRAD" 200, "opsz" 600;
+  font-size: 2rem;
+}
+.scroll-container .game-history-row .mode-container {
+  display: flex;
+  flex: 4;
+}
+.scroll-container .game-history-row .date-container {
+  font-size: 1rem;
+}
+.scroll-container .game-history-row div {
+  flex: 1;
+  align-items: center;
+  text-align: center;
+}
+.scroll-container .game-history-row div p {
+  text-align: center;
+  align-items: center;
+}
+.scroll-container .detailed-history-row {
+  display: none;
 }
 
 @keyframes fadeIn {

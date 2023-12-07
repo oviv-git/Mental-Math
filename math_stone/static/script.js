@@ -557,28 +557,7 @@ async function displayLastGamesPlayed() {
     * AJAX request to run the sql query
     * @returns {promise} - Either returns up to 5 of the users previous games or an error
     */
-    async function getLastGamesPlayed() {
-        return new Promise(function(resolve, reject) {
-            $.ajax({
-                url: '/get_last_games_played',
-                method: 'POST',
-                dataType: 'JSON',
-                success: function(response) {
-                    resolve(response)
-                },
-                error: function(xhr, status, error) {
-                    console.log('GET_LAST_GAMES_PLAYED - ERROR - ', xhr, status, error)
-                    reject(error)
-                }
-            })
-        })
-        .then(function(response) {
-            return response
-        })
-        .catch(function(error) {
-            throw error
-        })
-    }
+    
 
     // Its better if a skeleton of the rows already exists in home.html so it can easily be modified
     // when a new game finishes and switchHomeTabs() gets called therefore this function gets called again
@@ -589,12 +568,9 @@ async function displayLastGamesPlayed() {
     const resultsRows = resultsContainer.querySelectorAll('.results-row');
     
     // Map to associate the modes with their cooresponding google-icon name
-    const iconMap = {'vanilla': 'icecream', 'timed': 'timer', 'choice': 'grid_view', 'sudden': 'skull'}
+    const ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'choice': 'grid_view', 'sudden': 'skull'}
 
-    // Map to associate the results index number to the mode
-    const modeMap = {3: '+', 4: '−', 5: '×', 6: '÷', 7: 'x²'};
-
-    const lastGamesPlayed = await getLastGamesPlayed();
+    const lastGamesPlayed = await getLastGamesPlayed(5);
     
     // lastGamesPlayed is limited to 5 rows.
     for (let i = 0; i < lastGamesPlayed.length; i++) {        
@@ -604,7 +580,7 @@ async function displayLastGamesPlayed() {
         resultsRow.className = 'results-row ' + lastGamePlayed[0];
         
         let iconContainer = resultsRow.querySelector('span');
-        iconContainer.innerHTML = iconMap[lastGamePlayed[0]];
+        iconContainer.innerHTML = ICON_MAP[lastGamePlayed[0]];
 
         let question = resultsRow.querySelector('.question-amount');
         question.innerHTML = lastGamePlayed[1] + '/' + lastGamePlayed[2];
@@ -616,60 +592,47 @@ async function displayLastGamesPlayed() {
         timer.innerHTML = [lastGamePlayed[8].toFixed(2)] + 's';
 
         let modeContainer = resultsRow.querySelector('.mode-container');
-        modeContainer.innerHTML = '';
+        let modeExperienceContainers = modeContainer.querySelectorAll('.mode-experience-container');
 
         for (let j = 3; j < 8; j++) {
+            let modeExperienceContainer = modeExperienceContainers[j-3];
+
             let modeExperience = document.createElement('p');
             modeExperience.classList.add('mode-experience');
+            
             modeExperience.innerHTML = lastGamePlayed[j];
-
-            if (lastGamePlayed[j] == undefined) {
-                modeExperience.innerHTML = '0'
-            } else {
+            if (lastGamePlayed[j] != undefined) {
                 modeExperience.innerHTML = lastGamePlayed[j]
+            } else {
+                modeExperience.innerHTML = 0;
             }
-            modeContainer.appendChild(modeExperience);
-
+            modeExperienceContainer.appendChild(modeExperience);
         }
-        // Deprecated Code - Displays all the differnt types of xp gained on the table at once
-        // Deprecated because I don't like how cluttered the table looks especially since
-        // I already have a visual representation of xp gained.
-
-        // Loops through the experience gained per mode
-        // for (let j = 3; j < 8; j++) {
-        //     if (lastGamePlayed[j] !== 0) {
-        //         let modeExperienceContainer = document.createElement('div');
-        //         modeExperienceContainer.classList.add('mode-experience-container');
-                
-        //         let modeSymbol = document.createElement('p');
-        //         modeSymbol.classList.add('mode-symbol');
-        //         modeSymbol.innerHTML = modeMap[j];
-        //         modeExperienceContainer.appendChild(modeSymbol);
-        //         
-        //         modeExperience.classList.add('mode-experience');
-        //         modeExperience.innerHTML = lastGamePlayed[j];
-        //         modeExperienceContainer.appendChild(modeExperience);
-                
-        //         modeContainer.appendChild(modeExperienceContainer);
-        //     } 
-        // }
-
-        // let experienceGained = 0;
-        // for (let j = 3; j < 8; j++) {
-        //     experienceGained += lastGamePlayed[j]
-        // }
-
-        // let modeExperience = document.createElement('p');
-        // modeExperience.classList.add('mode-experience');
-        // modeExperience.innerHTML = experienceGained;
-        // modeContainer.appendChild(modeExperience);
-
-        
-
-  
-
-
     }
+}
+
+async function getLastGamesPlayed(quantity) {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            url: '/get_last_games_played',
+            method: 'POST',
+            dataType: 'JSON',
+            data: {'quantity': quantity},
+            success: function(response) {
+                resolve(response)
+            },
+            error: function(xhr, status, error) {
+                console.log('GET_LAST_GAMES_PLAYED - ERROR - ', xhr, status, error)
+                reject(error)
+            }
+        })
+    })
+    .then(function(response) {
+        return response
+    })
+    .catch(function(error) {
+        throw error
+    })
 }
 
 
@@ -1015,8 +978,8 @@ function submitButtonActivationCheck() {
 }
 
 /**
-* 
 * Function to change the colors of everything when the game mode is switched
+* 
 * Gets called by initModeSelectSwiper()
 * TODO change name
 */
@@ -1033,6 +996,8 @@ function changeButtonColors() {
     resultsContainer.className = 'results-container ' + currentMode;
 }
 
+
+// TODO
 function startGame() {
     const submitButton = document.getElementById('submit-button');
     const submitContainer = document.querySelector('.submit-container')
@@ -1162,8 +1127,7 @@ async function gameLogic(activeSlide) {
         }
     }
     switchHomeTabs('home-tab');
-    // AJAX request to send results and return stats while also saving results from a completed game
-
+    
     // https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
     // Used this to convert new Date() into something that can fit into the sql DATE type
     let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -1171,28 +1135,108 @@ async function gameLogic(activeSlide) {
     let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
     
     // Makes it so the timer function from a previous game can never affect a future game
-    clearTimeout(timerTimeout)
+    clearTimeout(timerTimeout);
     
-    gameResults[0].game_timer = gameTimeElapsed
-    gameResults[0].game_date = gameTimeStamp
-
-    console.log(gameResults)
+    gameResults[0].game_timer = gameTimeElapsed;
+    gameResults[0].game_date = gameTimeStamp;
+    
+    // AJAX request to send results and return stats while also saving results from a completed game
     resultsRecorded = await recordResults(JSON.stringify(gameResults));
 
-    progressContainerGameQuestions.innerHTML = ''
-    successfullyFinishGame(resultsRecorded)
-}
+    updateLastGamePlayed();
 
-
-// Handles calling functions that need to be called when switching back to home-tab after a successful game.
-function successfullyFinishGame(resultsRecorded) {
+    progressContainerGameQuestions.innerHTML = '';
+    
     if (resultsRecorded) {
         updateSessionMessage('Game successfully recorded', 'success');
     } else {
         updateSessionMessage('Game results not recorded', 'error');
     }
-    displayLastGamesPlayed();
     updateUserLevels();
+}
+
+
+// I dont like that I had to make a whole ugly function just for inserting a new row 
+// but the alternative is reworking the way lastGameResults works and I dont have time for that 
+async function updateLastGamePlayed() {
+    let lastGamePlayed = await getLastGamesPlayed(1);
+
+    const ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'choice': 'grid_view', 'sudden': 'skull'}
+    
+    var resultsRows = document.querySelectorAll('.results-row');
+    resultsRows[resultsRows.length - 1].remove();
+
+    let resultsRow = document.createElement('div');
+    resultsRow.className = 'results-row ' + lastGamePlayed[0][0];
+
+    let iconContainer = document.createElement('div');
+    iconContainer.classList.add('icon-container');
+
+    let icon = document.createElement('span');
+    icon.classList.add('material-symbols-outlined');
+    icon.innerHTML = ICON_MAP[lastGamePlayed[0][0]];
+    
+    iconContainer.appendChild(icon);
+    resultsRow.appendChild(iconContainer);
+    
+    
+    let questionContainer = document.createElement('div');
+    questionContainer.classList.add('question-amount-container');
+
+    let question = document.createElement('p');
+    question.classList.add('question');
+    question.innerHTML = lastGamePlayed[0][1] + '/' + lastGamePlayed[0][2];
+
+    questionContainer.appendChild(question);
+    resultsRow.appendChild(questionContainer);
+
+
+    let percentageContainer = document.createElement('div');
+    percentageContainer.classList.add('percentage-container');
+
+    let percentage = document.createElement('p');
+    percentage.classList.add('percentage');
+    percentage.innerHTML = (lastGamePlayed[0][2] / lastGamePlayed[0][1] * 100).toFixed(0) + '%';
+    
+    percentageContainer.appendChild(percentage)
+    resultsRow.appendChild(percentageContainer)
+
+
+    let timerContainer = document.createElement('div');
+    timerContainer.classList.add('timer-container');
+
+    let timer = document.createElement('p');
+    timer.classList.add('timer');
+    timer.innerHTML = [lastGamePlayed[0][8].toFixed(2)] + 's';
+
+    timerContainer.appendChild(timer);
+    resultsRow.appendChild(timerContainer)
+
+    
+    let modeContainer = document.createElement('div');
+    modeContainer.classList.add('mode-container');
+    
+    for (let i = 3; i < 8; i++) {
+        var modeExperienceContainer = document.createElement('div')
+        modeExperienceContainer.classList.add('mode-experience-container')
+
+        let modeExperience = document.createElement('p');
+        modeExperience.classList.add('mode-experience');
+
+        if (lastGamePlayed[0][i] != undefined) {
+            modeExperience.innerHTML = lastGamePlayed[0][i]
+        } else {
+            modeExperience.innerHTML = 0;
+        }
+        modeExperienceContainer.appendChild(modeExperience);
+        modeContainer.appendChild(modeExperienceContainer);
+    }
+
+    resultsRow.appendChild(modeContainer);
+    
+    let firstRow = resultsRows[1];
+    let parentNode = document.querySelector('.last-game-results')
+    parentNode.insertBefore(resultsRow, firstRow)
 }
 
 

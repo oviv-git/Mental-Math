@@ -407,17 +407,6 @@ html.light {
     }
     // cp2 - light
     .results-container {
-        .last-game-results {
-            .results-row {
-                .mode-container {
-                    .mode-experience-container {
-                        &:nth-child(even) {
-                            // background: darken($default-light, 18%);
-                        }
-                    }
-                }
-            }
-        }
         
         .results-row {
             &:nth-child(even) {
@@ -487,7 +476,7 @@ html.light {
                         background: lighten(saturate($timed-mode, 5%), 20%);
 
                         p {
-                            color: darken($timed-mode, 15%);
+                            color: lighten(saturate($timed-mode, 20%), 40%);
                         }
                     }
                 }
@@ -514,7 +503,7 @@ html.light {
                         background: lighten(saturate($sudden-mode, 5%), 20%);
 
                         p {
-                            color: darken($sudden-mode, 15%);
+                    color: lighten(saturate($sudden-mode, 20%), 45%);
                         }
                     }
                 }
@@ -685,6 +674,7 @@ html.light {
         }
     }
 }
+// cp3
 
 // cp1
 html.dark {
@@ -1312,9 +1302,9 @@ html.dark {
             background: $main-cyan;
             border-color: lighten($main-cyan, 10%);
         }
-        
     }
 }
+// cp3
 
 .waves-effect {
     &.waves-light {
@@ -1875,33 +1865,22 @@ form {
             .mode-container {
                 display: flex;
                 flex: 3;
-                justify-content: space-around;
+                justify-content: space-evenly;
                 align-items: center;
                 overflow: hidden;
-                padding: 0 .4rem;
 
+                .mode-experience-container {
+                    flex: 1;
+                    text-align: center;
+                    align-items: center;
+                }
             }
             .percentage-container {
                 flex: .5;
-                
-                .percentage {
-            
-                }
-
             }
             .timer-container {
                 flex: 1;
-
-                .timer {
-                    
-                }
             }
-
-            .material-symbols-outlined {
-                // TODO - colors 
-                
-            }
-
             &.header {
                 justify-content: space-around;
                 padding: 0rem;
@@ -1946,7 +1925,6 @@ form {
                 display: flex;
                 flex: 1;
                 align-items: center;
-                // overflow: hidden;
                 margin: 0rem .5rem .5rem .5rem;
                 border-radius: 2rem; 
 
@@ -2462,7 +2440,66 @@ table {
 }
 
 .scroll-container {
+    margin-top: 4rem;
+    width: 40%;
+    height: 40rem;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: scroll;
 
+    // todo 
+    .game-history-row {
+        font-size: 1.4rem;
+        display: flex;
+        flex: 1;
+        max-height: 4rem;
+        min-height: 4rem;
+        align-items: center;
+        justify-content: space-between;
+
+        &.even {
+            background: #118d81;
+        }
+
+        &.odd {
+            background: #69eadd;
+        }
+
+        // todo 
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 1,
+                'wght' 900,
+                'GRAD' 200,
+                'opsz' 600;
+            font-size: 2rem;
+        }
+
+        .mode-container {
+            display: flex;
+            flex: 4;
+        }
+
+        .date-container {
+            font-size: 1rem;
+        }
+
+        div {
+            flex: 1;
+            align-items: center;
+            text-align: center;
+            
+            p {
+                text-align: center;
+                align-items: center;
+            }
+        }
+    }
+    .detailed-history-row {
+        display: none;
+    }
+    
 }
 
 @keyframes fadeIn

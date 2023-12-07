@@ -48,10 +48,35 @@
     </div>
     <div class="scroll-container">
         {% for game in user_game_history %}
-            {{ game }}
+            <div class="game-history-row {{ cycle(loop.index) }}" data-row-id="{{ loop.index }}">
+                <div class="icon-container">
+                    <span class="material-symbols-outlined">{{ ICON_MAP[game[0]] }}</span>
+                </div>
+                <div class="questions-amount-container">
+                    <p class="question-amount">{{ game[1] }} / {{ game[2] }}</p>
+                </div>
+                <div class="percentage-container">  
+                    <p class="percentage">{{ calculate_percentage(game[1], game[2]) }}%</p>
+                </div>
+                <div class="timer-container">
+                    <p class="timer">{{ game[8] }}s</p>
+                </div>
+                <div class="mode-container">
+                    {% for i in range (5) %}
+                        <div class="mode-experience-container">
+                            <p> {{ game[3 + i] }} </p>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class=date-container>
+                    <p class=date> {{ format_date(game[9]) }} </p>
+                </div>
+            </div>
+            <div class="detailed-history-row" data-row-id="{{ loop.index }}">
+                {{ format_date(game[9]) }}
+            </div>
         {% endfor %}
     </div>
-    
 </div>
 
 {% endblock %}

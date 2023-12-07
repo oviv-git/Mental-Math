@@ -27,17 +27,18 @@ def home():
     return render_template('home.html')
 
 
-    # todo
+# todo
 @app.route('/get_last_games_played', methods=['POST'])
 @login_required
 def get_last_games_played():
     user_id = session['user_id']
+    quantity = request.form.get('quantity')
 
     with Database() as db:
         query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, division_exp, "
-                "exponential_exp, game_timer FROM games WHERE user_id = (?) ORDER BY game_id DESC LIMIT 5;")
+                "exponential_exp, game_timer FROM games WHERE user_id = (?) ORDER BY game_id DESC LIMIT (?);")
         
-        parameters = (user_id, )
+        parameters = (user_id, quantity, )
         
         db.execute(query, parameters)
         last_games = db.fetchall()
@@ -75,7 +76,6 @@ def register():
     username = request.form.get('reg-username')
     password = request.form.get('reg-password')
     confirm = request.form.get('reg-confirm')
-
 
     if not username:
         return error('Must enter username', 422)
@@ -163,11 +163,39 @@ def game_history():
     user_id = session['user_id']
     quantity = request.form.get('quantity')
 
+    def calculate_percentage(operand_1, operand_2):
+        if operand_2 == 0:
+            return 0
+        result = (operand_2 / operand_1) * 100
+        return round(result)
+
+    
+    def format_date(date):
+        timestamp, clock = date.split(' ')
+        year, month, day = timestamp.split('-')
+        hour, minute, second = clock.split(':')
+        
+        meridiem = 'AM' 
+        if int(hour) > 12:
+            meridiem = 'PM'
+            hour = int(hour) - 12
+
+        return f"{hour}:{minute}{meridiem} {day}/{month}/{year[2:]}"
+
+
+    def cycle(game_number):
+        if (game_number % 2 == 0):
+            return 'even'
+        return 'odd'
+
+
     user_game_history = generate_game_history(user_id, quantity)
     for row in user_game_history:
         print(row)
     
-    return render_template('game_history.html', user_game_history=user_game_history)
+    ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
+    return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
+                           calculate_percentage=calculate_percentage, format_date=format_date, cycle=cycle)
 
 
 # todo
