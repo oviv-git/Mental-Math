@@ -195,6 +195,8 @@ def game_history():
     def parse_detailed_game_history(history_str):
         history_dict = json.loads(history_str)
 
+        print(history_dict)
+
         return history_dict
 
 
@@ -203,9 +205,11 @@ def game_history():
     
     #TODO
     ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
+    MODE_MAP = {'+': 'addition', '-': 'subtraction', 'x': 'multiplication', '÷': 'division', '^': 'exponential'}
+    
     return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
-                           calculate_percentage=calculate_percentage, format_date=format_date, cycle=cycle,
-                           parse_detailed_game_history=parse_detailed_game_history)
+                           MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
+                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history)
 
 
 #TODO

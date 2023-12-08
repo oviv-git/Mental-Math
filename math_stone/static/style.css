@@ -1990,6 +1990,9 @@ table tr td p {
   text-align: center;
   align-items: center;
 }
+.scroll-container .detailed-history-row {
+  display: flex;
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;
