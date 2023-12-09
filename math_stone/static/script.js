@@ -1137,7 +1137,9 @@ async function gameLogic(activeSlide) {
 
     // Corrects the tiny math error in the floating point values creating a cleaning looking value
     if (currentMode == 'timed' || currentMode == 'sudden') {
-        parseInt(gameTimeElapsed).toFixed(0)
+        last_two =  gameTimeElapsed.slice(-2);
+        gameTimeElapsed = gameTimeElapsed.replace(last_two, '00')
+        console.log(gameTimeElapsed)
     }
     
     
