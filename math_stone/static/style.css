@@ -475,6 +475,42 @@ html.light table.active caption {
   background: #84bccf;
   border-color: #458fa8;
 }
+html.light .scroll-container::-webkit-scrollbar-thumb {
+  background: #bfbfbf;
+}
+html.light .scroll-container::-webkit-scrollbar-track {
+  background: #d1d1d1;
+}
+html.light .scroll-container .row-container .game-history-row.even {
+  background: #d9d9d9;
+}
+html.light .scroll-container .row-container .game-history-row.odd {
+  background: #d1d1d1;
+}
+html.light .scroll-container .row-container .game-history-row:hover {
+  background: #bfbfbf;
+}
+html.light .scroll-container .row-container .game-history-row .icon-container.vanilla {
+  color: #3d91ad;
+}
+html.light .scroll-container .row-container .game-history-row .icon-container.timed {
+  color: #6870b3;
+}
+html.light .scroll-container .row-container .game-history-row .icon-container.sudden {
+  color: #d06a6a;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row:nth-child(odd) {
+  background: #e6e6e6;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row:nth-child(even) {
+  background: #ededed;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row:first-child {
+  border-top: 0.2rem solid #bfbfbf;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row:last-child {
+  border-bottom: 0.2rem solid #bfbfbf;
+}
 
 html.dark {
   background: #222;
@@ -934,6 +970,42 @@ html.dark table caption {
 html.dark table.active caption {
   background: #4f9db7;
   border-color: #73b1c6;
+}
+html.dark .scroll-container::-webkit-scrollbar-thumb {
+  background: #626262;
+}
+html.dark .scroll-container::-webkit-scrollbar-track {
+  background: #505050;
+}
+html.dark .scroll-container .row-container .game-history-row.even {
+  background: #484848;
+}
+html.dark .scroll-container .row-container .game-history-row.odd {
+  background: #505050;
+}
+html.dark .scroll-container .row-container .game-history-row:hover {
+  background: #626262;
+}
+html.dark .scroll-container .row-container .game-history-row .icon-container.vanilla {
+  color: #3d91ad;
+}
+html.dark .scroll-container .row-container .game-history-row .icon-container.timed {
+  color: #6870b3;
+}
+html.dark .scroll-container .row-container .game-history-row .icon-container.sudden {
+  color: #d06a6a;
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row:nth-child(odd) {
+  background: #3c3c3c;
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row:nth-child(even) {
+  background: #343434;
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row:first-child {
+  border-top: 0.2rem solid #626262;
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row:last-child {
+  border-bottom: 0.2rem solid #626262;
 }
 
 .waves-effect.waves-light .waves-ripple {
@@ -1955,8 +2027,24 @@ table tr td p {
   flex-direction: column;
   overflow-x: auto;
   overflow-y: scroll;
+  border-radius: 1rem;
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.4);
+  /* Track */
+  /* Handle */
 }
-.scroll-container .game-history-row {
+.scroll-container::-webkit-scrollbar {
+  width: 16px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  border-radius: 0 1rem 1rem 0;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  border-radius: 0 1rem 1rem 0;
+  width: 16px;
+  overflow: hidden;
+}
+.scroll-container .row-container .game-history-row {
+  cursor: pointer;
   font-size: 1.4rem;
   font-weight: 500;
   display: flex;
@@ -1966,59 +2054,53 @@ table tr td p {
   align-items: center;
   justify-content: space-between;
 }
-.scroll-container .game-history-row.even {
-  background: #3e8c84;
-}
-.scroll-container .game-history-row.odd {
-  background: #7fe7dd;
-}
-.scroll-container .game-history-row .icon-container {
+.scroll-container .row-container .game-history-row .icon-container {
   flex: 2;
 }
-.scroll-container .game-history-row .icon-container .material-symbols-outlined {
+.scroll-container .row-container .game-history-row .icon-container .material-symbols-outlined {
   font-variation-settings: "FILL" 1, "wght" 900, "GRAD" 200, "opsz" 600;
   font-size: 2rem;
 }
-.scroll-container .game-history-row .timer-container {
+.scroll-container .row-container .game-history-row .timer-container {
   flex: 3;
 }
-.scroll-container .game-history-row .questions-amount-container {
+.scroll-container .row-container .game-history-row .questions-amount-container {
   flex: 5;
 }
-.scroll-container .game-history-row .percentage-container {
+.scroll-container .row-container .game-history-row .percentage-container {
   flex: 5;
 }
-.scroll-container .game-history-row .date-container {
+.scroll-container .row-container .game-history-row .date-container {
   font-size: 1rem;
 }
-.scroll-container .game-history-row .experience-container {
+.scroll-container .row-container .game-history-row .experience-container {
   justify-content: space-around;
   display: flex;
   flex: 3;
 }
-.scroll-container .game-history-row div {
+.scroll-container .row-container .game-history-row div {
   align-items: center;
   text-align: center;
   pointer-events: none;
 }
-.scroll-container .game-history-row div p {
+.scroll-container .row-container .game-history-row div p {
   text-align: center;
   align-items: center;
   pointer-events: none;
 }
-.scroll-container .detailed-history-row {
+.scroll-container .row-container .detailed-history-row {
   flex-direction: column;
   display: none;
   transition: height 1s;
   overflow: hidden;
   height: 0px;
 }
-.scroll-container .detailed-history-row.active {
+.scroll-container .row-container .detailed-history-row.active {
   display: flex;
   transition: height 1s;
   height: auto;
 }
-.scroll-container .detailed-history-row .question-row {
+.scroll-container .row-container .detailed-history-row .question-row {
   font-size: 1.2rem;
   font-weight: 400;
   align-items: center;
@@ -2027,39 +2109,38 @@ table tr td p {
   height: 0;
   display: flex;
 }
-.scroll-container .detailed-history-row .question-row .mode-container {
+.scroll-container .row-container .detailed-history-row .question-row .mode-container {
   justify-content: center;
   display: flex;
   flex: 2;
-  background: #7796c5;
 }
-.scroll-container .detailed-history-row .question-row .mode-container p {
+.scroll-container .row-container .detailed-history-row .question-row .mode-container p {
   transform: scale(1.6);
 }
-.scroll-container .detailed-history-row .question-row .mode-container p.exponential {
-  transform: scale(1.2);
+.scroll-container .row-container .detailed-history-row .question-row .mode-container p.subtraction {
+  transform: scale(2.4);
 }
-.scroll-container .detailed-history-row .question-row .timer-container {
+.scroll-container .row-container .detailed-history-row .question-row .mode-container p.exponential {
+  transform: scale(1.3);
+}
+.scroll-container .row-container .detailed-history-row .question-row .timer-container {
   display: flex;
   flex: 3;
   align-items: center;
   justify-content: center;
-  background: #99edab;
 }
-.scroll-container .detailed-history-row .question-row .experience-container {
+.scroll-container .row-container .detailed-history-row .question-row .experience-container {
   display: flex;
   flex: 3;
   justify-content: center;
-  background: #C8EDB2;
 }
-.scroll-container .detailed-history-row .question-row .question-container {
+.scroll-container .row-container .detailed-history-row .question-row .question-container {
   justify-content: center;
   align-items: center;
   display: flex;
   flex: 10;
-  background: #88B8AB;
 }
-.scroll-container .detailed-history-row .question-row .question-container sup {
+.scroll-container .row-container .detailed-history-row .question-row .question-container sup {
   position: relative;
   right: 5%;
 }

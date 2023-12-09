@@ -17,12 +17,11 @@ function main() {
             // beginning of modularization 
             initHomePage();
             break;
+
         case '/leaderboard':
             initDropdownMenu();
             initLeaderboardSwiper();
             initLeaderboardShadows();
-
-
             break;
         case '/game_history':
             initDropdownMenu();
@@ -1137,11 +1136,12 @@ async function gameLogic(activeSlide) {
 
     // Corrects the tiny math error in the floating point values creating a cleaning looking value
     if (currentMode == 'timed' || currentMode == 'sudden') {
-        last_two =  gameTimeElapsed.slice(-2);
+        
+        let last_two = gameTimeElapsed.slice(-2);
         gameTimeElapsed = gameTimeElapsed.replace(last_two, '00')
-        console.log(gameTimeElapsed)
     }
     
+    console.log(gameTimeElapsed)
     
     // Makes it so the timer function from a previous game can never affect a future game
     clearTimeout(timerTimeout);
@@ -1447,8 +1447,6 @@ function initLeaderboardShadows() {
     const tableElementSize = document.querySelector('table').getBoundingClientRect();
     const dropShadows = document.querySelectorAll('.box-shadow');
 
-    console.log(tableElementSize)
-
     dropShadows.forEach((element) => {
         element.style.width = tableElementSize.width + 'px';
         element.style.height = tableElementSize.height + 'px';
@@ -1463,10 +1461,7 @@ function initGameHistoryTable() {
         let gameHistoryRow = element.querySelector('.game-history-row');
         let detailedHistoryRow = element.querySelector('.detailed-history-row');
 
-        console.log(gameHistoryRow, detailedHistoryRow)
-
         gameHistoryRow.addEventListener('click', function() {
-            console.log('yo')
             if (detailedHistoryRow.classList.contains('active')) {
                 detailedHistoryRow.classList.remove('active');
             } else {

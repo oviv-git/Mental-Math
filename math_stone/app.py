@@ -176,23 +176,18 @@ def game_history():
         year, month, day = timestamp.split('-')
         hour, minute, second = clock.split(':')
         
-        meridiem = 'AM' 
+        meridiem = 'AM'
         if int(hour) > 12:
             meridiem = 'PM'
             hour = int(hour) - 12
 
         return f"{hour}:{minute}{meridiem} {day}/{month}/{year[2:]}"
 
-    def is_correct(user_result, question_result):
-        print(user_result, question_result, type(user_result), type(question_result))
-        return True
-
     #TODO
     def cycle(game_number):
         if (game_number % 2 == 0):
             return 'even'
         return 'odd'
-
 
     # Since the sql query returns a tuple with the last value being a long string, 
     # instead of creating a new tuple I can just use this function to parse the string.
@@ -201,9 +196,7 @@ def game_history():
         
         return history_dict
 
-
     user_game_history = generate_game_history(user_id, quantity)
-    print(user_game_history)
     
     #TODO
     ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
@@ -211,7 +204,7 @@ def game_history():
     
     return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
                            MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
-                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, is_correct=is_correct)
+                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history)
 
 
 #TODO

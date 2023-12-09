@@ -50,7 +50,7 @@
         {% for game in user_game_history %}
         <div class="row-container">
             <div class="game-history-row {{ cycle(loop.index) }}" data-row-id="{{ loop.index }}">
-                <div class="icon-container">
+                <div class="icon-container {{ game[0] }}">
                     <span class="material-symbols-outlined">{{ ICON_MAP[game[0]] }}</span>
                 </div>
                 <div class="timer-container">
@@ -74,8 +74,10 @@
                     <div class="mode-container">
                         {% if detailed_game['operator'] == '^' %}
                         <p class="exponential">x²</p>
+                        {% elif detailed_game['operator'] == 'x' %}
+                        <p class="multiplication">×</p>
                         {% else %}
-                            <p> {{ detailed_game['operator'] }} </p>
+                            <p class="{{ MODE_MAP[detailed_game['operator']] }}"> {{ detailed_game['operator'] }} </p>
                         {% endif %}
                     </div>
                     <div class="timer-container">
