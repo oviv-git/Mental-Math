@@ -183,6 +183,10 @@ def game_history():
 
         return f"{hour}:{minute}{meridiem} {day}/{month}/{year[2:]}"
 
+    def is_correct(user_result, question_result):
+        print(user_result, question_result, type(user_result), type(question_result))
+        return True
+
     #TODO
     def cycle(game_number):
         if (game_number % 2 == 0):
@@ -194,14 +198,12 @@ def game_history():
     # instead of creating a new tuple I can just use this function to parse the string.
     def parse_detailed_game_history(history_str):
         history_dict = json.loads(history_str)
-
-        print(history_dict)
-
+        
         return history_dict
 
 
     user_game_history = generate_game_history(user_id, quantity)
-    parse_detailed_game_history(user_game_history[1][10])
+    print(user_game_history)
     
     #TODO
     ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
@@ -209,7 +211,7 @@ def game_history():
     
     return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
                            MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
-                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history)
+                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, is_correct=is_correct)
 
 
 #TODO
@@ -258,8 +260,9 @@ def record_results():
     results = json.loads(request.form.get('results'))
 
     user_experience = get_user_experience(user_id)
-    reward_experience = generate_reward_experience(results)
-    record_game_results(results, reward_experience, user_id)
+    reward_experience, question_experience_list = generate_reward_experience(results)
+    
+    record_game_results(results, reward_experience, question_experience_list, user_id)
 
     updated_experience = [sum(i) for i in zip(user_experience, reward_experience)]
 

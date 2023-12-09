@@ -110,7 +110,9 @@ def generate_reward_experience(results):
         reward_experience (list): A list containing 5 numbers
     """
     
+    # Pre-Initiailzed list that contains the xp for each math-type as well as total xp for the game.
     reward_experience = [0, 0, 0, 0, 0, 0]
+    question_experience_list = []
     GAME_MODE_MULTIPLIER_MAP = {'vanilla': 1, 'timed': 1.2, 'choice': 0.8, 'sudden': 1.5}
     total = 0;
 
@@ -122,6 +124,7 @@ def generate_reward_experience(results):
 
         # If the question is wrong move onto the next one; 0 xp gained
         if question['correct'] != True:
+            question_experience_list.append(0)
             continue
         
         # Parts of the question object
@@ -143,9 +146,11 @@ def generate_reward_experience(results):
 
         reward_experience[OPERATOR_MAP[operator]] += experience_gained
         total += experience_gained
+        print(experience_gained)
+        question_experience_list.append(experience_gained)
 
     reward_experience[-1] = total
-    return reward_experience
+    return reward_experience, question_experience_list
 
 
 def generate_speed_multiplier(time, difficulty):
@@ -222,8 +227,7 @@ def generate_user_level_info(experience_list):
     return user_level_info
 
 # TODO - DONT FORGET TO ADD TOP MESSAGE
-def record_game_results(results, reward_experience, user_id):
-    # question_types = {'+': 0, '-': 0, 'x': 0, '÷': 0, '^': 0}
+def record_game_results(results, reward_experience, question_experience_list, user_id):
     correct_count = 0
     questions = len(results) - 1
     questions_dict = {}
@@ -236,28 +240,26 @@ def record_game_results(results, reward_experience, user_id):
             game_timer = question['game_timer']
             game_date = question['game_date']
             continue
-        
-        # question_types[question['operator']] += 1
-        
+                
         if question['correct']:
             correct_count += 1
 
         question_data = {'operand_1': question['operand_1'], 'operator': question['operator'], 
                          'operand_2': question['operand_2'], 'user_result': question['user_result'],
                          'question_result': question['question_result'], 'difficulty': question['difficulty'],
-                         'level': question['level'], 'question_timer': question['question_timer']}
+                         'level': question['level'], 'question_timer': question['question_timer'],
+                         'question_exp': question_experience_list[i - 1]}
         
         questions_dict[i] = question_data
-    
     
 
     with Database() as db:
         query = ("INSERT INTO games(user_id, game_mode, questions, correct, "
-                "addition_exp, subtraction_exp, multiplication_exp, division_exp, exponential_exp, game_timer, game_date, question_data) " 
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
+                "addition_exp, subtraction_exp, multiplication_exp, division_exp, exponential_exp, total_exp, " 
+                "game_timer, game_date, question_data) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")
         
         parameters = (user_id, game_mode, questions, correct_count, reward_experience[0], 
-                      reward_experience[1], reward_experience[2], reward_experience[3], reward_experience[4],
+                      reward_experience[1], reward_experience[2], reward_experience[3], reward_experience[4], reward_experience[5],
                       game_timer, game_date, json.dumps(questions_dict))
         
         db.execute(query, parameters)
@@ -301,15 +303,7 @@ def generate_leaderboards(quantity, query_type):
                         break
             user_experience.append(temp_user)
         
-        leaderboards.append({'math_type':math_type, 'leaderboard': user_experience})
-    
-    # query2 = (f"SELECT U.username, L.total FROM users U LEFT JOIN levels L ON U.id = L.user_id ORDER BY L.total DESC LIMIT (?);")
-    # parameters2 = (quantity, )
-
-    # db.execute(query2, parameters2)
-    # temp_user_experience = db.fetchall()
-    # user_experience = []
-
+        leaderboards.append({'math_type':math_type, 'leaderboard': user_experience})    
     return leaderboards
 
 
@@ -331,7 +325,7 @@ def error(message, code=400):
 def generate_game_history(user_id, quantity):
     with Database() as db:
         query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, "
-                "division_exp, exponential_exp, game_timer, game_date, question_data " 
+                "division_exp, exponential_exp, total_exp, game_timer, game_date, question_data " 
                 "FROM games WHERE user_id = (?) ORDER BY game_id DESC LIMIT (?);")
         parameters = (user_id, quantity)
 

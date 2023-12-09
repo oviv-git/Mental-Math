@@ -48,9 +48,13 @@
     </div>
     <div class="scroll-container">
         {% for game in user_game_history %}
+        <div class="row-container">
             <div class="game-history-row {{ cycle(loop.index) }}" data-row-id="{{ loop.index }}">
                 <div class="icon-container">
                     <span class="material-symbols-outlined">{{ ICON_MAP[game[0]] }}</span>
+                </div>
+                <div class="timer-container">
+                    <p class="timer">{{ game[9] }}s</p>
                 </div>
                 <div class="questions-amount-container">
                     <p class="question-amount">{{ game[1] }} / {{ game[2] }}</p>
@@ -58,30 +62,46 @@
                 <div class="percentage-container">  
                     <p class="percentage">{{ calculate_percentage(game[1], game[2]) }}%</p>
                 </div>
-                <div class="timer-container">
-                    <p class="timer">{{ game[8] }}s</p>
-                </div>
-                <div class="mode-container">
-                    {% for i in range (5) %}
-                        <div class="mode-experience-container">
-                            <p> {{ game[3 + i] }} </p>
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class=date-container>
-                    <p class=date> {{ format_date(game[9]) }} </p>
+                <div class="experience-container">
+                    <p>
+                        {{ game[8] }}
+                    </p>
                 </div>
             </div>
             <div class="detailed-history-row" data-row-id="{{ loop.index }}">
-                {% for detailed_game in parse_detailed_game_history(game[10]).values() %}
-                    <div class="operand-1-container">
-                        <p class="operand-1"> {{ detailed_game['operand_1'] }} </p>
+                {% for detailed_game in parse_detailed_game_history(game[11]).values() %}
+                <div class="question-row">
+                    <div class="mode-container">
+                        {% if detailed_game['operator'] == '^' %}
+                        <p class="exponential">x²</p>
+                        {% else %}
+                            <p> {{ detailed_game['operator'] }} </p>
+                        {% endif %}
                     </div>
-                    <div class="operand-2-container">
-                        <p class="operand-2"> {{ detailed_game['operand_2'] }} </p>
+                    <div class="timer-container">
+                        <p> {{ detailed_game['question_timer']}}s </p>
                     </div>
+                    <div class="question-container">
+                        {% if detailed_game['operator'] == '^' %}
+                            <p>{{ detailed_game['operand_1'] }} <sup>{{ detailed_game['operand_2'] }}</sup>
+                        {% else %}
+                            <p>{{ detailed_game['operand_1'] }}  {{ detailed_game['operator'] }}  {{ detailed_game['operand_2'] }}
+                        {% endif %}
+                            = {{ detailed_game['user_result'] }} </p>
+                        {% if detailed_game['question_result'] == detailed_game['user_result'] | int %}
+                            <span class="material-symbols-outlined">check</span>
+                        {% else %}
+                        <span class="material-symbols-outlined">close</span>
+                        <p> = {{ detailed_game['question_result'] }} </p> 
+                        {% endif %}
+                    </div>
+                    <div class="experience-container">
+                        <p> {{ detailed_game['question_exp']}}</p>
+                    </div>
+                </div>
                 {% endfor %}
             </div>
+        </div>
         {% endfor %}
     </div>
 </div>

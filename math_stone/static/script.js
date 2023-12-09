@@ -26,6 +26,7 @@ function main() {
             break;
         case '/game_history':
             initDropdownMenu();
+            initGameHistoryTable();
             break;
             
     }
@@ -1133,6 +1134,12 @@ async function gameLogic(activeSlide) {
     let gameTimeStamp = new Date().toISOString().slice(0, 19).replace('T', ' ');
     let gameEndTime = new Date();
     let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
+
+    // Corrects the tiny math error in the floating point values creating a cleaning looking value
+    if (currentMode == 'timed' || currentMode == 'sudden') {
+        parseInt(gameTimeElapsed).toFixed(0)
+    }
+    
     
     // Makes it so the timer function from a previous game can never affect a future game
     clearTimeout(timerTimeout);
@@ -1448,8 +1455,23 @@ function initLeaderboardShadows() {
 }
 
 function initGameHistoryTable() {
-    const visibleRows = querySelectorAll('game-history-row');
-    console.log(visibleRows)
+    const visibleRows = document.querySelectorAll('.row-container');
+
+    visibleRows.forEach((element) => {
+        let gameHistoryRow = element.querySelector('.game-history-row');
+        let detailedHistoryRow = element.querySelector('.detailed-history-row');
+
+        console.log(gameHistoryRow, detailedHistoryRow)
+
+        gameHistoryRow.addEventListener('click', function() {
+            console.log('yo')
+            if (detailedHistoryRow.classList.contains('active')) {
+                detailedHistoryRow.classList.remove('active');
+            } else {
+                detailedHistoryRow.classList.add('active');
+            }
+        });
+    });
 }
 
 /** 
