@@ -46,6 +46,19 @@
             </button>
         </form>
     </div>
+    <div class="history-filter-container">
+        <div class="mode-switch-container">
+            <div class="mode-switch">
+                <span class="material-symbols-outlined">icecream</span>
+            </div>
+            <div class="mode-switch">
+                <span class="material-symbols-outlined">timer</span>
+            </div>
+            <div class="mode-switch">
+                <span class="material-symbols-outlined">skull</span>
+            </div>
+        </div>
+    </div>
     <div class="scroll-container">
         {% for game in user_game_history %}
         <div class="row-container">
@@ -69,6 +82,11 @@
                 </div>
             </div>
             <div class="detailed-history-row" data-row-id="{{ loop.index }}">
+                <div class="experience-row">
+                    {% for i in range(5) %}
+                        <p> {{ game[3 + i] }} </p>
+                    {% endfor %}
+                </div>
                 {% for detailed_game in parse_detailed_game_history(game[11]).values() %}
                 <div class="question-row">
                     <div class="mode-container">
@@ -91,10 +109,12 @@
                         {% endif %}
                             = {{ detailed_game['user_result'] }} </p>
                         {% if detailed_game['question_result'] == detailed_game['user_result'] | int %}
-                            <span class="material-symbols-outlined">check</span>
+                            <span class="material-symbols-outlined correct">check</span>
                         {% else %}
-                        <span class="material-symbols-outlined">close</span>
-                        <p> = {{ detailed_game['question_result'] }} </p> 
+                        <span class="material-symbols-outlined incorrect">close</span>
+                        <p class="corrected-answer"> = {{ detailed_game['question_result'] }} </p> 
+                        <span class="material-symbols-outlined info">check</span>
+
                         {% endif %}
                     </div>
                     <div class="experience-container">

@@ -499,17 +499,26 @@ html.light .scroll-container .row-container .game-history-row .icon-container.ti
 html.light .scroll-container .row-container .game-history-row .icon-container.sudden {
   color: #d06a6a;
 }
+html.light .scroll-container .row-container .detailed-history-row .experience-row {
+  border-top: 0.2rem solid #bfbfbf;
+}
 html.light .scroll-container .row-container .detailed-history-row .question-row:nth-child(odd) {
   background: #e6e6e6;
 }
 html.light .scroll-container .row-container .detailed-history-row .question-row:nth-child(even) {
   background: #ededed;
 }
-html.light .scroll-container .row-container .detailed-history-row .question-row:first-child {
-  border-top: 0.2rem solid #bfbfbf;
-}
 html.light .scroll-container .row-container .detailed-history-row .question-row:last-child {
   border-bottom: 0.2rem solid #bfbfbf;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row span.correct {
+  color: green;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row span.incorrect {
+  color: red;
+}
+html.light .scroll-container .row-container .detailed-history-row .question-row span.info {
+  color: #3c7f95;
 }
 
 html.dark {
@@ -995,17 +1004,26 @@ html.dark .scroll-container .row-container .game-history-row .icon-container.tim
 html.dark .scroll-container .row-container .game-history-row .icon-container.sudden {
   color: #d06a6a;
 }
+html.dark .scroll-container .row-container .detailed-history-row .experience-row {
+  border-top: 0.2rem solid #626262;
+}
 html.dark .scroll-container .row-container .detailed-history-row .question-row:nth-child(odd) {
   background: #3c3c3c;
 }
 html.dark .scroll-container .row-container .detailed-history-row .question-row:nth-child(even) {
   background: #343434;
 }
-html.dark .scroll-container .row-container .detailed-history-row .question-row:first-child {
-  border-top: 0.2rem solid #626262;
-}
 html.dark .scroll-container .row-container .detailed-history-row .question-row:last-child {
   border-bottom: 0.2rem solid #626262;
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row span.correct {
+  color: green;
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row span.incorrect {
+  color: rgb(196, 2, 2);
+}
+html.dark .scroll-container .row-container .detailed-history-row .question-row span.info {
+  color: #3d91ad;
 }
 
 .waves-effect.waves-light .waves-ripple {
@@ -2019,6 +2037,30 @@ table tr td p {
   transform: scale(2);
 }
 
+.history-filter-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 12rem;
+  width: 20%;
+  background: red;
+  top: 8rem;
+  left: 74%;
+}
+.history-filter-container .mode-switch-container {
+  max-height: 4rem;
+  min-height: 4rem;
+  display: flex;
+}
+.history-filter-container .mode-switch-container .mode-switch {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.history-filter-container .mode-switch-container .mode-switch span {
+  color: blue;
+}
+
 .scroll-container {
   margin-top: 4rem;
   width: 35%;
@@ -2100,13 +2142,21 @@ table tr td p {
   transition: height 1s;
   height: auto;
 }
+.scroll-container .row-container .detailed-history-row .experience-row {
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.2rem;
+  font-weight: 400;
+  align-items: center;
+  max-height: 3rem;
+  min-height: 3rem;
+}
 .scroll-container .row-container .detailed-history-row .question-row {
   font-size: 1.2rem;
   font-weight: 400;
   align-items: center;
   max-height: 3rem;
   min-height: 3rem;
-  height: 0;
   display: flex;
 }
 .scroll-container .row-container .detailed-history-row .question-row .mode-container {
@@ -2139,6 +2189,11 @@ table tr td p {
   align-items: center;
   display: flex;
   flex: 10;
+}
+.scroll-container .row-container .detailed-history-row .question-row .question-container .material-symbols-outlined {
+  margin: 0 0.2rem;
+  font-variation-settings: "wght" 900, "GRAD" 200, "opsz" 600;
+  font-size: 2rem;
 }
 .scroll-container .row-container .detailed-history-row .question-row .question-container sup {
   position: relative;
@@ -2218,7 +2273,7 @@ table tr td p {
     border-radius: 0rem;
   }
   .navbar {
-    position: inherit;
+    position: absolute;
     margin-bottom: 0;
     height: 5rem;
   }
@@ -2843,6 +2898,16 @@ table tr td p {
   }
   .game-tab-container .progress-container {
     height: 4%;
+  }
+  .scroll-container {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+    overflow-y: scroll;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 #loadOverlay {
