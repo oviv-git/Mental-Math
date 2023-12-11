@@ -26,6 +26,7 @@ function main() {
         case '/game_history':
             initDropdownMenu();
             initGameHistoryTable();
+            initGameHistoryFilter();
             break;
             
     }
@@ -874,6 +875,8 @@ function updateSliderValues() {
     settingsContainers.forEach((element) => {
         element.addEventListener('input', (event) => {
             let displayedValue = element.querySelector('.range-results');
+
+            console.log(element, displayedValue)
             
             if (event.target.value != undefined) {
                 displayedValue.innerHTML = event.target.value;
@@ -1454,6 +1457,8 @@ function initLeaderboardShadows() {
     });
 }
 
+
+// TODO
 function initGameHistoryTable() {
     const visibleRows = document.querySelectorAll('.row-container');
 
@@ -1471,6 +1476,71 @@ function initGameHistoryTable() {
     });
 }
 
+
+// TODO
+function initGameHistoryFilter() {
+
+    // TODO
+    var activeModes = []
+    function checkForActiveSwitch() {
+        
+        // Flag to track if a single switch is active
+        oneActiveSwitch = false;
+        for (let i = 0; i < switchButtons.length; i++) {
+            let switchButton = switchButtons[i];
+            if (switchButton.classList.contains('active')) {
+                oneActiveSwitch = true
+                activeModes[i] = true;
+            } else {
+                activeModes[i] = false;
+            }
+        }
+        if (oneActiveSwitch) {
+            return true
+        }
+        return false
+    }
+
+    const slider = document.querySelector('.input-range');
+    const sliderResults = document.querySelector('.input-information p')
+
+    if (slider.value == 100) {
+        sliderResults.innerHTML = 'Number of Games: All';
+    }
+
+    slider.addEventListener('input', function() {
+        if (slider.value == 100) {
+            sliderResults.innerHTML = 'Number of Games: All';
+        } else {
+            sliderResults.innerHTML = 'Number of Games: ' + slider.value;
+        }
+    })
+
+    const switchButtons = document.querySelectorAll('.mode-switch');
+
+    switchButtons.forEach((element) => {
+        element.addEventListener('click', function() {
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+            } else {
+                element.classList.add('active');
+            }
+        });
+    });
+
+    const submitFilterContainer = document.querySelector('.submit-filter-container');
+    let quantityInput = document.getElementById('quantity-input');
+    let activeModesInput = document.getElementById('active-modes-input');
+
+    submitFilterContainer.addEventListener('click', function() {
+        if (checkForActiveSwitch()) {
+            quantityInput.value = slider.value;
+            activeModesInput.value = activeModes;
+        }
+    });
+}
+
+
 /** 
     Triggers animations when the user submits their answer
 
@@ -1483,8 +1553,8 @@ function triggerAnimation(element, animation, timeDelay) {
         element.classList.remove(animation);
     };
     
-    element.classList.add(animation)
-    setTimeout(removeAnimation, timeDelay)
+    element.classList.add(animation);
+    setTimeout(removeAnimation, timeDelay);
 }
 
 

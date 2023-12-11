@@ -322,11 +322,39 @@ def error(message, code=400):
     return render_template("error.html", code=code, message=message)
 
 
-def generate_game_history(user_id, quantity):
+def generate_game_history(user_id, quantity, modes):
+    print(modes)
     with Database() as db:
         query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, "
                 "division_exp, exponential_exp, total_exp, game_timer, game_date, question_data " 
-                "FROM games WHERE user_id = (?) ORDER BY game_id DESC LIMIT (?);")
+                "FROM games WHERE user_id = (?)")
+
+        if 'true' in modes:
+            query += " AND ("
+
+            if modes[0] == 'true':
+                query += "game_mode = 'vanilla'"
+
+            if modes[1] == 'true':
+                if modes[0] == 'true':
+                    query += " OR"
+                query += " game_mode = 'timed'"
+
+            if modes[2] == 'true':
+                if modes[0] == 'true' or modes[1] == 'true':
+                    query += " OR"
+                query += " game_mode = 'sudden'"
+
+            query += " )"
+
+            
+        query += " ORDER BY game_id "
+
+        if quantity != 100:
+            query += "DESC LIMIT (?);"
+
+        print(query)
+
         parameters = (user_id, quantity)
 
         db.execute(query, parameters, )

@@ -32,11 +32,9 @@
             <div class="dropdown-menu-content">
                 <p>Profile</p><span class="material-symbols-outlined" style="left: 5%;">account_circle</span>
             </div>
-            <div class="dropdown-menu-content">
-                <p>Settings</p><span class="material-symbols-outlined">settings</span>
-            </div>
             <form class="dropdown-menu-content" action="/game_history" method="post" id="game-history-form">
                 <input type="hidden" name="quantity" value="20">
+                <input type="hidden" name="active_modes" value="true,true,true">
                 <button class="dropdown-button" id="game-history-button">
                     <p>History</p><span class="material-symbols-outlined">history</span>
                 </button>

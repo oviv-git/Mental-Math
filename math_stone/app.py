@@ -162,6 +162,7 @@ def leaderboard():
 def game_history():
     user_id = session['user_id']
     quantity = request.form.get('quantity')
+    modes = request.form.get('active_modes')
 
     #TODO
     def calculate_percentage(operand_1, operand_2):
@@ -196,7 +197,9 @@ def game_history():
         
         return history_dict
 
-    user_game_history = generate_game_history(user_id, quantity)
+    modes_list = modes.split(',')
+
+    user_game_history = generate_game_history(user_id, quantity, modes_list)
     
     #TODO
     ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
@@ -204,7 +207,7 @@ def game_history():
     
     return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
                            MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
-                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history)
+                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, quantity=quantity)
 
 
 #TODO

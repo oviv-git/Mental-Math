@@ -32,32 +32,40 @@
         <div class="dropdown-menu-content">
             <p>Profile</p><span class="material-symbols-outlined" style="left: 5%;">account_circle</span>
         </div>
-        <div class="dropdown-menu-content">
-            <p>Settings</p><span class="material-symbols-outlined">settings</span>
-        </div>
         <form class="dropdown-menu-content" action="/home" method="post" id="home-form">
             <button class="dropdown-button">
                 <p>Home</p><span class="material-symbols-outlined" style="left: 4%">home</span>
             </button>
         </form>
         <form class="dropdown-menu-content" action="/logout" method="post" id="logout-form">
-            <button class="dropdown-button" id="logout-button">
+            <button class="dropdown-button waves-effect" id="logout-button">
                 <p>Logout</p><span class="material-symbols-outlined">logout</span>
             </button>
         </form>
     </div>
     <div class="history-filter-container">
         <div class="mode-switch-container">
-            <div class="mode-switch">
-                <span class="material-symbols-outlined">icecream</span>
+            <div class="mode-switch active">
+                <span class="material-symbols-outlined vanilla">icecream</span>
             </div>
-            <div class="mode-switch">
-                <span class="material-symbols-outlined">timer</span>
+            <div class="mode-switch active">
+                <span class="material-symbols-outlined timed">timer</span>
             </div>
-            <div class="mode-switch">
-                <span class="material-symbols-outlined">skull</span>
+            <div class="mode-switch active">
+                <span class="material-symbols-outlined sudden">skull</span>
             </div>
         </div>
+        <div class="settings-container">
+            <div class="input-information"><p>Number of Games: <span class="range-results"> {{ quantity }} </span></p></div>
+            <input class="input-range" type="range" min="10" max="100" step="10" value="{{ quantity }}">
+        </div>
+        <form class="submit-filter-container" action="/game_history" method="post">
+            <input type="hidden" name="quantity" value="20" id="quantity-input">
+            <input type="hidden" name="active_modes" value="[true, true, true]" id="active-modes-input">
+            <button class="submit-filter">
+                <p>FILTER</p>
+            </button>
+        </form>
     </div>
     <div class="scroll-container">
         {% for game in user_game_history %}
@@ -114,7 +122,6 @@
                         <span class="material-symbols-outlined incorrect">close</span>
                         <p class="corrected-answer"> = {{ detailed_game['question_result'] }} </p> 
                         <span class="material-symbols-outlined info">check</span>
-
                         {% endif %}
                     </div>
                     <div class="experience-container">
