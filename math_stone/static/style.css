@@ -2281,6 +2281,136 @@ table tr td p {
   transform: scale(2.4);
 }
 
+.user-profile-container {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background: lightcoral;
+  border-radius: 2rem;
+}
+.user-profile-container .profile-container {
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.4rem;
+}
+.user-profile-container .profile-container div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.user-profile-container .profile-container div p {
+  font-family: "Source Sans Pro", sans-serif;
+}
+.user-profile-container .profile-container .username-container {
+  margin: 0rem 1rem;
+  height: 100%;
+  border-radius: 6rem;
+}
+.user-profile-container .profile-container .total-level-container {
+  height: 4rem;
+  width: 4rem;
+  margin: 0rem 1rem;
+  border-radius: 6rem;
+  background: #3f8da9;
+  border: 0.3rem solid;
+  border-color: black;
+}
+.user-profile-container .user-stats {
+  height: 8rem;
+}
+.user-profile-container .user-stats .user-stats-row {
+  display: flex;
+}
+.user-profile-container .user-stats .user-stats-row .icon-container {
+  flex: 1;
+}
+.user-profile-container .user-stats .user-stats-row .total-games-container {
+  flex: 3;
+}
+.user-profile-container .user-stats .user-stats-row .total-correct-container {
+  flex: 3;
+}
+.user-profile-container .user-stats .user-stats-row .percentage-container {
+  flex: 2;
+}
+
+.profile-levels-container {
+  width: 40%;
+  height: auto;
+}
+.profile-levels-container .experience-bar-container {
+  margin: 1.5rem 0rem;
+  display: flex;
+  height: 3.5rem;
+  width: 100%;
+  border-radius: 4rem;
+  box-sizing: content-box;
+}
+.profile-levels-container .experience-bar-container div p {
+  font-family: "Source Sans Pro", sans-serif;
+  position: relative;
+  align-items: center;
+  font-size: 1rem;
+  transform: scale(4);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.profile-levels-container .experience-bar-container div p.subtraction {
+  transform: scale(6);
+  padding-bottom: 0.1rem;
+}
+.profile-levels-container .experience-bar-container div p.exponential {
+  transform: scale(3.2);
+}
+.profile-levels-container .experience-bar-container .math-type {
+  position: absolute;
+  left: 29.4%;
+  border-radius: 3.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
+  background: #3a6595;
+  border: 0.3rem solid;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.profile-levels-container .experience-bar-container .experience-bar {
+  border-radius: 3.5rem;
+  border: 0.3rem solid;
+  border-color: black;
+  height: 3.5rem;
+  width: 100%;
+  background: #615e88;
+  overflow: hidden;
+}
+.profile-levels-container .experience-bar-container .experience-bar .filled-xp {
+  height: 100%;
+  background: limegreen;
+}
+.profile-levels-container .experience-bar-container .level-container {
+  position: absolute;
+  right: 29.4%;
+  background: #8A4FFF;
+  height: 3.5rem;
+  width: 3.5rem;
+  border-radius: 4rem;
+  border: 0.3rem solid;
+  border-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-levels-container .experience-bar-container .level-container p {
+  transform: scale(3);
+}
+
 .scroll-container {
   margin-top: 4rem;
   width: 35%;
@@ -2556,7 +2686,7 @@ table tr td p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 50%;
+    height: 45%;
     width: 100%;
     margin: 0;
     order: 1;
@@ -2600,7 +2730,7 @@ table tr td p {
   .play-container-right .results-container {
     width: 100%;
     margin: 0;
-    line-height: 1;
+    line-height: 0.5;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -2759,7 +2889,7 @@ table tr td p {
   }
   .results-container .levels-container .level-info-container .level-info-bottom {
     display: flex;
-    flex: 1.2;
+    flex: 1.4;
     align-items: center;
     overflow: hidden;
     margin: 0rem 0.2rem 0.5rem 0.2rem;
@@ -2775,8 +2905,8 @@ table tr td p {
     font-weight: 500;
   }
   .results-container .levels-container .level-info-container .level-info-bottom .level-bar {
-    height: 1.8rem;
-    border-width: 0.2rem;
+    height: 2.4rem;
+    border-width: 0.4rem;
   }
   .results-container .levels-container .level-info-container .level-info-bottom .level-bar .filled-xp {
     border-radius: 0rem 1rem 1rem 0rem;

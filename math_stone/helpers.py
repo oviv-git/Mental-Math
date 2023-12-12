@@ -139,14 +139,11 @@ def generate_reward_experience(results):
 
         experience_gained = round(difficulty_multiplier * speed_multiplier * game_mode_multiplier)
 
-        # print(f'{question}\n    Experience: {experience_gained}     Speed: {speed_multiplier}       Level: {level_multiplier}       Difficulty: {difficulty_multiplier} ')
-
         OPERATOR_MAP = {'+': 0, '-': 1, 'x': 2, '÷': 3, '^': 4}
         operator = question['operator']
 
         reward_experience[OPERATOR_MAP[operator]] += experience_gained
         total += experience_gained
-        print(experience_gained)
         question_experience_list.append(experience_gained)
 
     reward_experience[-1] = total
@@ -175,7 +172,6 @@ def generate_speed_multiplier(time, difficulty):
     MULTIPLIER_DECAY_RATE = round(0.5 / difficulty, 2)
 
     multiplier = max(MAX_MULTIPLIER * exp(-MULTIPLIER_DECAY_RATE * abs(time)), 1)
-    # print(multiplier)
 
     return multiplier
 
@@ -216,17 +212,14 @@ def generate_user_level_info(experience_list):
             # The xp bar on homepage should be empty(0%) even though the user technically has 1/1 (100%) xp
             if type_level == 1 and percentage == 100:
                 percentage = 0
-
-            # Convert percentage into string to easily insert into an elements width in script.js
-            percentage = f'{percentage}%'
-            
+                
             user_level_info.append({'level': type_level, 'percentage': percentage})
 
             csvfile.seek(0)
 
     return user_level_info
 
-# TODO - DONT FORGET TO ADD TOP MESSAGE
+# TODO - DONT FORGET TO ADD COMMENT
 def record_game_results(results, reward_experience, question_experience_list, user_id):
     correct_count = 0
     questions = len(results) - 1
@@ -265,7 +258,7 @@ def record_game_results(results, reward_experience, question_experience_list, us
         db.execute(query, parameters)
     
 
-# TODO - DONT FORGET TO ADD TOP MSG
+# TODO - DONT FORGET TO ADD COMMENT
 def generate_leaderboards(quantity, query_type):
     levels_list = []
 
@@ -307,7 +300,7 @@ def generate_leaderboards(quantity, query_type):
     return leaderboards
 
 
-# TODO - DONT FORGET TO ADD TOP MSG
+# TODO - DONT FORGET TO ADD COMMENT
 def error(message, code=400):
     """
     Redirects to error.html with an error code and a message detaling the nature of the error to the user
@@ -322,13 +315,15 @@ def error(message, code=400):
     return render_template("error.html", code=code, message=message)
 
 
+# TODO - Comment
 def generate_game_history(user_id, quantity, modes):
-    print(modes)
     with Database() as db:
         query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, "
                 "division_exp, exponential_exp, total_exp, game_timer, game_date, question_data " 
                 "FROM games WHERE user_id = (?)")
 
+        # A hideous (but functinal) way to handle the search filter because its crunch time 
+        # I cant rework the way the entire function works just to implement a search filter.
         if 'true' in modes:
             query += " AND ("
 
@@ -353,11 +348,30 @@ def generate_game_history(user_id, quantity, modes):
         if quantity != 100:
             query += "DESC LIMIT (?);"
 
-        print(query)
-
         parameters = (user_id, quantity)
 
         db.execute(query, parameters, )
         game_history = db.fetchall()
 
     return game_history
+
+
+# TODO - Comment
+def generate_user_stats(user_id):
+    stats_list = []
+    with Database() as db:
+        query = ("SELECT COUNT(game_id), SUM(questions), SUM(correct) FROM games WHERE user_id = ( ? );")
+        parameters = (user_id, )
+        db.execute(query, parameters)
+        stats_list.append(db.fetchall()[0])
+
+
+    MODES_MAP = ['vanilla', 'timed', 'sudden']
+    for mode in MODES_MAP:
+        with Database() as db:
+            query = ("SELECT COUNT(game_id), SUM(questions), SUM(correct) FROM games WHERE user_id = ( ? ) AND game_mode = ( ? )")
+            parameters = (user_id, mode)
+            db.execute(query, parameters)
+            stats_list.append(db.fetchall()[0])
+
+    return stats_list

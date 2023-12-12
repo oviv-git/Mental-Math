@@ -3,7 +3,6 @@ function main() {
     
     storedColorScheme();
     wavesEffectToggle();
-    displaySessionInformation();
     toggleColorScheme();
 
     switch (window.location.pathname) {
@@ -14,8 +13,18 @@ function main() {
             loginFormSubmit();
             break;
         case '/home':
-            // beginning of modularization 
             initHomePage();
+            break;
+
+        case '/profile':
+            initDropdownMenu();
+            initProfileContainer();
+            break;
+        
+        case '/game_history':
+            initDropdownMenu();
+            initGameHistoryTable();
+            initGameHistoryFilter();
             break;
 
         case '/leaderboard':
@@ -23,12 +32,6 @@ function main() {
             initLeaderboardSwiper();
             initLeaderboardShadows();
             break;
-        case '/game_history':
-            initDropdownMenu();
-            initGameHistoryTable();
-            initGameHistoryFilter();
-            break;
-            
     }
 }
 
@@ -181,14 +184,6 @@ function clearForm() {
 
 // Finds the session-information class and set the innerHTML to session.storage
 // TODO: 
-function displaySessionInformation() {
-    let message = sessionStorage.getItem('message');
-    let messageType = sessionStorage.getItem('messageType')
-    
-    if (message != null || messageType != null) {
-        M.toast({html: message, classes: messageType})
-    }
-}
 
 
 /**
@@ -200,19 +195,29 @@ function displaySessionInformation() {
 function updateSessionMessage(message, messageType, displayNow=false) {
     sessionStorage.setItem('message', message);
     sessionStorage.setItem('messageType', messageType);
-
-    if (displayNow) {
-        sessionStorage.setItem('displayMessage', true);
-    }
-            
-    if (sessionStorage.getItem('displayMessage' != true)) {
-        sessionStorage.setItem('displayMessage', true);
+   
+    // if (sessionStorage.getItem('displayMessage' != true)) {
+    //     sessionStorage.setItem('displayMessage', true);
         
-    } else {
-        sessionStorage.setItem('displayMessage', false);
-        displaySessionInformation();
+    // } else {
+    //     sessionStorage.setItem('displayMessage', false);
+    //     displaySessionInformation();
+    // }
+    if (displayNow == true) {
+        displaySessionInformation()
     }
+}
+
+function displaySessionInformation() {
+    let message = sessionStorage.getItem('message');
+    let messageType = sessionStorage.getItem('messageType');
+    let shouldDisplayMessage = sessionStorage.getItem('displayMessage');
+
+    console.log(shouldDisplayMessage)
     
+    if (message != null || messageType != null) {
+        M.toast({html: message, classes: messageType})
+    }
 }
 
 // When the submit button is pressed check if the form is valid with loginFormCheck()
@@ -234,7 +239,7 @@ function initLogoutButton() {
     const logoutForm = document.getElementById('logout-form');
     
     logoutForm.addEventListener('submit', function() {
-        updateSessionMessage('Logout Successful', 'success');
+        updateSessionMessage('Logout Successful', 'success', true);
         sessionStorage.clear();
     });
 }
@@ -506,7 +511,7 @@ async function updateUserLevels() {
         levelNumber.innerHTML = userLevel.level;
         levelNumber.classList.add('fade-in');
 
-        xpBar.style.width = userLevel.percentage
+        xpBar.style.width = userLevel.percentage + '%';
     }
 }
 
@@ -1138,7 +1143,7 @@ async function gameLogic(activeSlide) {
     let gameTimeElapsed = ((gameEndTime - gameStartTime) / 1000).toFixed(2);
 
     // Corrects the tiny math error in the floating point values creating a cleaning looking value
-    if (currentMode == 'timed' || currentMode == 'sudden') {
+    if (currentMode == 'timed') {
         
         let last_two = gameTimeElapsed.slice(-2);
         gameTimeElapsed = gameTimeElapsed.replace(last_two, '00')
@@ -1160,9 +1165,9 @@ async function gameLogic(activeSlide) {
     progressContainerGameQuestions.innerHTML = '';
     
     if (resultsRecorded) {
-        updateSessionMessage('Game successfully recorded', 'success');
+        updateSessionMessage('Game successfully recorded', 'success', true);
     } else {
-        updateSessionMessage('Game results not recorded', 'error');
+        updateSessionMessage('Game results not recorded', 'error', true);
     }
     updateUserLevels();
 }
@@ -1538,6 +1543,11 @@ function initGameHistoryFilter() {
             activeModesInput.value = activeModes;
         }
     });
+}
+
+function initProfileContainer() {
+    const usernameContainer = document.querySelector('.username-container > .username');
+    usernameContainer.innerHTML = sessionStorage.getItem('username');
 }
 
 

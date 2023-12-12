@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    MathStone Profile
+{% endblock %}
+
+{% block main %}
+<div class="full-page active">
+    <div class="navbar">
+        <div class="navbar-container username"> 
+            <span class="material-symbols-outlined">person</span>
+            <p></p>
+        </div>
+        <div class="navbar-container"><p>Profile</p></div>
+        <div class="navbar-container dropdown">
+            <button id="dropdown-button" class="navbar-container dropdown-toggle waves-effect">
+                <p>Menu</p><span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu">
+        <div class="dropdown-menu-content dark-mode-toggle">
+            <p>Darkmode</p><span class="material-symbols-outlined">dark_mode</span>
+        </div>
+        <form class="dropdown-menu-content" action="/home" method="post" id="home-form">
+            <button class="dropdown-button">
+                <p>Home</p><span class="material-symbols-outlined" style="left: 4%">home</span>
+            </button>
+        </form>
+        <form class="dropdown-menu-content" action="/game_history" method="post" id="game-history-form">
+            <input type="hidden" name="quantity" value="20">
+            <input type="hidden" name="active_modes" value="true,true,true">
+            <button class="dropdown-button" id="game-history-button">
+                <p>History</p><span class="material-symbols-outlined">history</span>
+            </button>
+        </form>
+        <form class="dropdown-menu-content" action="/leaderboard" method="post" id="leaderboard-form">
+            <input type="hidden" name="query_type" value="default">
+            <input type="hidden" name="quantity" value="10">
+            <button class="dropdown-button" >
+                <p>Leaderboard</p><span class="material-symbols-outlined" style="left: 8%;">leaderboard</span>
+            </button>
+        </form>
+        <form class="dropdown-menu-content" action="/logout" method="post" id="logout-form">
+            <button class="dropdown-button" id="logout-button">
+                <p>Logout</p><span class="material-symbols-outlined">logout</span>
+            </button>
+        </form>
+    </div>
+    <div class="user-profile-container">
+        <div class="profile-container">
+            <div class="username-container">
+                <p class="username"></p>
+            </div>
+            <div class="total-level-container"> 
+                <p class="total-level"> {{ total_level['level'] }} </p> 
+            </div>
+        </div>
+        <div class="user-stats">
+            {% for stat in user_stats %}
+            <div class="user-stats-row">
+                <div class="icon-container">
+                    <span class="material-symbols-outlined {{ MATH_MODES_MAP[loop.index - 1 | int][0] }}">{{ MATH_MODES_MAP[loop.index - 1 | int][1] }}</span>
+                </div>
+                <div class="total-games-container">
+                    {{ stat[0] }}
+                </div>
+                <div class="total-questions-container">
+                    {{ stat[1] }}
+                </div>
+                <div class="total-correct-container">
+                    {{ stat[2] }}
+                </div>
+                <div class="percentage-container">
+                    {{ stat[2] }}
+                </div>
+            </div>
+            {%endfor %}
+        </div>
+    </div>
+    
+    
+    <div class="profile-levels-container">
+        {% for user_level in user_levels %}
+            <div class="experience-bar-container">
+                <div class="math-type">
+                    <p class="{{ MATH_TYPE_MAP[loop.index - 1| int][1] }}">
+                        {{ MATH_TYPE_MAP[loop.index - 1| int][0] }}
+                    </p>
+                </div>
+                <div class="experience-bar">
+                    <div class="filled-xp" style="width: {{ user_level.percentage }}%" experience=" {{ user_experiences[loop.index - 1 | int] }} "></div>
+                </div>
+                <div class="level-container">
+                    <p>
+                        {{ user_level.level }}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

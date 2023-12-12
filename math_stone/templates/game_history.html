@@ -22,19 +22,21 @@
         <div class="dropdown-menu-content dark-mode-toggle">
             <p>Darkmode</p><span class="material-symbols-outlined">dark_mode</span>
         </div>
+        <form class="dropdown-menu-content" action="/home" method="post" id="home-form">
+            <button class="dropdown-button">
+                <p>Home</p><span class="material-symbols-outlined" style="left: 4%">home</span>
+            </button>
+        </form>
+        <form class="dropdown-menu-content" action="/profile" method="post" id="profile-form">
+            <button class="dropdown-button">
+                <p>Profile</p><span class="material-symbols-outlined" style="left: 5%;">account_circle</span>
+            </button>
+        </form>
         <form class="dropdown-menu-content" action="/leaderboard" method="post" id="leaderboard-form">
             <input type="hidden" name="query_type" value="default">
             <input type="hidden" name="quantity" value="10">
             <button class="dropdown-button" >
                 <p>Leaderboard</p><span class="material-symbols-outlined" style="left: 8%;">leaderboard</span>
-            </button>
-        </form>
-        <div class="dropdown-menu-content">
-            <p>Profile</p><span class="material-symbols-outlined" style="left: 5%;">account_circle</span>
-        </div>
-        <form class="dropdown-menu-content" action="/home" method="post" id="home-form">
-            <button class="dropdown-button">
-                <p>Home</p><span class="material-symbols-outlined" style="left: 4%">home</span>
             </button>
         </form>
         <form class="dropdown-menu-content" action="/logout" method="post" id="logout-form">

@@ -1635,7 +1635,6 @@ form {
     font-size: 1.2rem;
 }
 .toast {
-    
     color: $default-light;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.2rem;
@@ -2844,6 +2843,153 @@ table {
         }
     }
 }
+.user-profile-container {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    background: lightcoral;
+    border-radius: 2rem;
+
+    .profile-container {
+        width: 100%;
+        height: 5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.4rem;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+                font-family: 'Source Sans Pro', sans-serif;
+            }
+        }
+
+        .username-container {
+            margin: 0rem 1rem;
+            height: 100%;
+            border-radius: 6rem;
+            // background: #44c6e7;
+            // border: .3rem solid;
+            // border-color: black;
+        }
+
+        .total-level-container {
+            height: 4rem;
+            width: 4rem;
+            margin: 0rem 1rem;
+            border-radius: 6rem;
+            background: #3f8da9;
+            border: .3rem solid;
+            border-color: black;
+        }
+    }
+    .user-stats {
+        height: 8rem;
+        
+        .user-stats-row {
+            display: flex;
+
+            .icon-container {
+                flex: 1;
+            }
+            .total-games-container {
+                flex: 3;
+            }
+            .total-correct-container {
+                flex: 3;
+            }
+            .percentage-container {
+                flex: 2;
+            }
+        }
+    }
+}
+
+.profile-levels-container {
+    width: 40%;
+    height: auto;
+
+    .experience-bar-container {
+        margin: 1.5rem 0rem;
+        display: flex;
+        height: 3.5rem;
+        width: 100%;
+        border-radius: 4rem;
+        box-sizing: content-box;
+
+        div {
+            p {
+                font-family: 'Source Sans Pro', sans-serif;
+                position: relative;
+                align-items: center;
+                font-size: 1rem;
+                transform: scale(4);
+                user-select: none;
+
+                &.subtraction {
+                    transform: scale(6);
+                    padding-bottom: 0.1rem;
+                }
+
+                &.exponential {
+                    transform: scale(3.2);
+                }
+            }
+        }
+
+        .math-type {
+            position: absolute;
+            left: 29.4%;
+            border-radius: 3.5rem;
+            height: 3.5rem;
+            width: 3.5rem;
+            background: #3a6595;
+            border: .3rem solid;
+            border-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .experience-bar {
+            border-radius: 3.5rem;
+            border: .3rem solid;
+            border-color: black;
+            height: 3.5rem;
+            width: 100%;
+            background: #615e88;
+            overflow: hidden;
+
+            .filled-xp {
+                // border-radius: 0 4rem 4rem 0;
+                height: 100%;
+                background: limegreen;
+            }
+        }
+        .level-container {
+            position: absolute;
+            right: 29.4%;
+            background: #8A4FFF;
+            height: 3.5rem;
+            width: 3.5rem;
+            border-radius: 4rem;
+            border: .3rem solid;
+            border-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+                transform: scale(3);
+            }
+        }
+    }
+}
 
 .scroll-container {
     margin-top: 4rem;
@@ -3147,7 +3293,6 @@ table {
             p {
                 font-size: 1rem;
                 transform: scale(1.2);
-
             }
         }
     }
@@ -3164,7 +3309,7 @@ table {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 50%;
+        height: 45%;
         width: 100%;
         margin: 0;
         order: 1;
@@ -3209,7 +3354,7 @@ table {
         .results-container {
             width: 100%;
             margin: 0;
-            line-height: 1;
+            line-height: .5;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -3422,7 +3567,7 @@ table {
                 }
                 .level-info-bottom {
                     display: flex;
-                    flex: 1.2;
+                    flex: 1.4;
                     align-items: center;
                     overflow: hidden;
                     margin: 0rem .2rem .5rem .2rem;
@@ -3440,8 +3585,8 @@ table {
                         }
                     }
                     .level-bar {
-                        height: 1.8rem;
-                        border-width: .2rem;
+                        height: 2.4rem;
+                        border-width: .4rem;
                         
                         .filled-xp {
                             border-radius: 0rem 1rem 1rem 0rem;

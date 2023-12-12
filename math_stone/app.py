@@ -1,11 +1,10 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results, generate_game_history
+from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results, generate_game_history, generate_user_stats
 from werkzeug.security import generate_password_hash
 from database import Database
 from game import Game
 import json
-
 
 app = Flask(__name__)
 
@@ -14,20 +13,14 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 Session(app)
 
+
+# TODO
 # remember res.fetchone() https://docs.python.org/3/library/sqlite3.html
 @app.route("/", )
 def index():
     return render_template("/index.html")
 
-
-@app.route('/home', methods=['POST', 'GET'])
-@login_required
-def home():
-    """Sign in to be able to play"""
-    return render_template('home.html')
-
-
-# todo
+# TODO
 @app.route('/get_last_games_played', methods=['POST'])
 @login_required
 def get_last_games_played():
@@ -46,31 +39,7 @@ def get_last_games_played():
     return jsonify(last_games)
 
 
-@app.route('/login', methods=['POST'])
-def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
-
-    if not username:
-        return error('Must enter username', 422)
-
-    if not password:
-        return error('Must enter password', 422)
-
-    if validate_login(username, password) == True:
-        session['user_id'] = get_user_id(username)
-        return redirect(url_for('home'))
-
-    return error("Invalid session id", 400)
-
-
-@app.route('/logout', methods=['POST'])
-@login_required
-def logout():
-    session.clear()
-    return redirect(url_for('index'))
-
-
+# TODO
 @app.route('/register', methods=['POST'])
 def register():
     username = request.form.get('reg-username')
@@ -95,7 +64,7 @@ def register():
         paramaters = (username, password_hash,)
         db.execute(query, paramaters)
 
-        user_id = db.last_insert_rowid()[0][0];
+        user_id = db.last_insert_rowid()[0][0]
 
         query2 = "INSERT INTO levels (user_id) VALUES (?)"
         paramaters2 = ((user_id),)
@@ -105,6 +74,34 @@ def register():
     return redirect(url_for('home'))
 
 
+# TODO
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    password = request.form.get('password')
+
+    if not username:
+        return error('Must enter username', 422)
+
+    if not password:
+        return error('Must enter password', 422)
+
+    if validate_login(username, password) == True:
+        session['user_id'] = get_user_id(username)
+        return redirect(url_for('home'))
+
+    return error("Invalid session id", 400)
+
+
+# TODO
+@app.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
+# TODO
 @app.route('/check_username_availability', methods=['POST'])
 def check_username_availability():
     username = request.form.get('username')
@@ -119,6 +116,7 @@ def check_username_availability():
     return jsonify(False)
     
 
+# TODO
 @app.route('/check_valid_login', methods=['POST'])
 def check_valid_login():
     username = request.form.get('username')
@@ -131,98 +129,14 @@ def check_valid_login():
     return jsonify({'valid': False})
 
 
-@app.route('/profile', methods=['GET', 'POST'])
+# TODO
+@app.route('/home', methods=['POST', 'GET'])
 @login_required
-def profile():
-    pass
-    # TODO
+def home():
+    return render_template('home.html')
 
 
-@app.route('/stats', methods=['GET', 'POST'])
-@login_required
-def stats():
-    pass
-    # TODO
-
-
-@app.route('/leaderboard', methods=['POST'])
-@login_required
-def leaderboard():
-    quantity = request.form.get('quantity')
-    query_type = request.form.get('query_type')
-
-    leaderboards = generate_leaderboards(quantity, query_type)
-
-    return render_template('leaderboard.html', leaderboards=leaderboards)
-
-
-# todo
-@app.route('/game_history', methods=['POST'])
-@login_required
-def game_history():
-    user_id = session['user_id']
-    quantity = request.form.get('quantity')
-    modes = request.form.get('active_modes')
-
-    #TODO
-    def calculate_percentage(operand_1, operand_2):
-        if operand_2 == 0:
-            return 0
-        result = (operand_2 / operand_1) * 100
-        return round(result)
-
-    #TODO
-    def format_date(date):
-        timestamp, clock = date.split(' ')
-        year, month, day = timestamp.split('-')
-        hour, minute, second = clock.split(':')
-        
-        meridiem = 'AM'
-        if int(hour) > 12:
-            meridiem = 'PM'
-            hour = int(hour) - 12
-
-        return f"{hour}:{minute}{meridiem} {day}/{month}/{year[2:]}"
-
-    #TODO
-    def cycle(game_number):
-        if (game_number % 2 == 0):
-            return 'even'
-        return 'odd'
-
-    # Since the sql query returns a tuple with the last value being a long string, 
-    # instead of creating a new tuple I can just use this function to parse the string.
-    def parse_detailed_game_history(history_str):
-        history_dict = json.loads(history_str)
-        
-        return history_dict
-
-    modes_list = modes.split(',')
-
-    user_game_history = generate_game_history(user_id, quantity, modes_list)
-    
-    #TODO
-    ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
-    MODE_MAP = {'+': 'addition', '-': 'subtraction', 'x': 'multiplication', '÷': 'division', '^': 'exponential'}
-    
-    return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
-                           MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
-                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, quantity=quantity)
-
-
-#TODO
-@app.route('/error_redirect', methods=['GET', 'POST'])
-def error_redirect():
-    if request.method == 'GET':
-        return error('error_redirect', 'you shouldnt be seeing this')
-    if request.method == 'POST':
-        error_message = request.form.get('errorMessage')
-        error_code = request.form.get('errorCode')
-
-        return error(error_message, error_code)
-    
-
-#TODO
+# TODO
 @app.route('/get_user_levels', methods=['POST'])
 def get_user_levels():
     user_id = session['user_id']
@@ -232,22 +146,7 @@ def get_user_levels():
 
     return jsonify(level_info_list)
 
-
-#TODO
-@app.route('/generate_questions', methods=['POST'])
-@login_required
-def generate_questions():
-    user_id = session['user_id']
-    types = request.form.get('types')
-    amount = request.form.get('amount')
-    experience = get_user_experience(user_id)
-
-    game = Game(types, amount, experience)
-    questions = game.generate_questions()
-
-    return jsonify(questions)
-
-#TODO
+# TODO
 # Gets called when a game completes successfully. Records results - Updates experience
 @app.route('/record_results', methods=['POST'])
 @login_required
@@ -271,4 +170,122 @@ def record_results():
     return jsonify({'successful': True})
 
 
+# TODO
+@app.route('/generate_questions', methods=['POST'])
+@login_required
+def generate_questions():
+    user_id = session['user_id']
+    types = request.form.get('types')
+    amount = request.form.get('amount')
+    experience = get_user_experience(user_id)
 
+    game = Game(types, amount, experience)
+    questions = game.generate_questions()
+
+    return jsonify(questions)
+
+
+# TODO
+@app.route('/profile', methods=['POST'])
+@login_required
+def profile():
+    user_id = session['user_id']
+
+    with Database() as db:
+        query = ("SELECT addition, subtraction, multiplication, division, exponential, total FROM levels WHERE user_id = (?);")
+        parameters = (user_id, )
+        user_experiences = db.fetchone(query, parameters)
+
+
+    user_levels = generate_user_level_info(user_experiences)
+
+    # Instead of reworking the entire function just modify the list
+    total_level = user_levels[-1]
+    user_levels.pop()
+
+    user_stats = generate_user_stats(user_id)
+
+    MATH_TYPE_MAP = [['+', 'addition'], ['-', 'subtraction'], ['×', 'multiplication'], ['÷', 'division'], ['x²', 'exponential']]
+    MATH_MODES_MAP = [['total', 'group_work'], ['vanilla', 'icecream'], ['timed', 'timer'], ['sudden', 'skull']]
+
+    return render_template('profile.html', user_experiences=user_experiences, user_levels=user_levels, user_stats=user_stats,
+                            MATH_MODES_MAP=MATH_MODES_MAP, MATH_TYPE_MAP=MATH_TYPE_MAP, total_level=total_level)
+
+
+# TODO
+@app.route('/leaderboard', methods=['POST'])
+@login_required
+def leaderboard():
+    quantity = request.form.get('quantity')
+    query_type = request.form.get('query_type')
+
+    leaderboards = generate_leaderboards(quantity, query_type)
+
+    return render_template('leaderboard.html', leaderboards=leaderboards)
+
+
+# TODO
+@app.route('/game_history', methods=['POST'])
+@login_required
+def game_history():
+    user_id = session['user_id']
+    quantity = request.form.get('quantity')
+    modes = request.form.get('active_modes')
+
+    # TODO
+    def calculate_percentage(operand_1, operand_2):
+        if operand_2 == 0:
+            return 0
+        result = (operand_2 / operand_1) * 100
+        return round(result)
+
+    # TODO
+    def format_date(date):
+        timestamp, clock = date.split(' ')
+        year, month, day = timestamp.split('-')
+        hour, minute, second = clock.split(':')
+        
+        meridiem = 'AM'
+        if int(hour) > 12:
+            meridiem = 'PM'
+            hour = int(hour) - 12
+
+        return f"{hour}:{minute}{meridiem} {day}/{month}/{year[2:]}"
+
+    # TODO
+    def cycle(game_number):
+        if (game_number % 2 == 0):
+            return 'even'
+        return 'odd'
+
+    # Since the sql query returns a tuple with the last value being a long string, 
+    # instead of creating a new tuple I can just use this function to parse the string.
+    def parse_detailed_game_history(history_str):
+        history_dict = json.loads(history_str)
+        
+        return history_dict
+
+    modes_list = modes.split(',')
+
+    user_game_history = generate_game_history(user_id, quantity, modes_list)
+    
+    # TODO
+    ICON_MAP = {'vanilla': 'icecream', 'timed': 'timer', 'sudden': 'skull'}
+    MODE_MAP = {'+': 'addition', '-': 'subtraction', 'x': 'multiplication', '÷': 'division', '^': 'exponential'}
+    
+    return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
+                           MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
+                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, quantity=quantity)
+
+
+# TODO
+@app.route('/error_redirect', methods=['GET', 'POST'])
+def error_redirect():
+    if request.method == 'GET':
+        return error('error_redirect', 'you shouldnt be seeing this')
+    if request.method == 'POST':
+        error_message = request.form.get('errorMessage')
+        error_code = request.form.get('errorCode')
+
+        return error(error_message, error_code)
+    
