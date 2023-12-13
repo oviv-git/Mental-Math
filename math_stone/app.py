@@ -1,6 +1,6 @@
 from flask import Flask, redirect, render_template, request, session, jsonify, url_for
 from flask_session import Session
-from helpers import login_required, error, validate_login, get_user_id, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results, generate_game_history, generate_user_stats
+from helpers import login_required, error, validate_login, get_user_id, get_user_username, get_user_experience, generate_reward_experience, generate_user_level_info, generate_leaderboards, record_game_results, generate_game_history, generate_user_stats
 from werkzeug.security import generate_password_hash
 from database import Database
 from game import Game
@@ -189,13 +189,24 @@ def generate_questions():
 @app.route('/profile', methods=['POST'])
 @login_required
 def profile():
-    user_id = session['user_id']
+    # TODO
+    def calculate_percentage(operand_1, operand_2):
+        if operand_2 == 0:
+            return 0
+        result = (operand_2 / operand_1) * 100
+        return round(result)
+
+    username = request.form.get('user_search')
+    if username == None:
+        user_id = session['user_id']
+        username = get_user_username(user_id)
+    else:
+        user_id = get_user_id(username)
 
     with Database() as db:
         query = ("SELECT addition, subtraction, multiplication, division, exponential, total FROM levels WHERE user_id = (?);")
         parameters = (user_id, )
         user_experiences = db.fetchone(query, parameters)
-
 
     user_levels = generate_user_level_info(user_experiences)
 
@@ -206,10 +217,11 @@ def profile():
     user_stats = generate_user_stats(user_id)
 
     MATH_TYPE_MAP = [['+', 'addition'], ['-', 'subtraction'], ['×', 'multiplication'], ['÷', 'division'], ['x²', 'exponential']]
-    MATH_MODES_MAP = [['total', 'group_work'], ['vanilla', 'icecream'], ['timed', 'timer'], ['sudden', 'skull']]
+    MATH_MODES_MAP = [['total', 'all_inclusive'], ['vanilla', 'icecream'], ['timed', 'timer'], ['sudden', 'skull']]
 
     return render_template('profile.html', user_experiences=user_experiences, user_levels=user_levels, user_stats=user_stats,
-                            MATH_MODES_MAP=MATH_MODES_MAP, MATH_TYPE_MAP=MATH_TYPE_MAP, total_level=total_level)
+                            MATH_MODES_MAP=MATH_MODES_MAP, MATH_TYPE_MAP=MATH_TYPE_MAP, total_level=total_level, 
+                            calculate_percentage=calculate_percentage, username=username)
 
 
 # TODO

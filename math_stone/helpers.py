@@ -55,9 +55,18 @@ def get_user_id(username):
     with Database() as db:
         query = "SELECT DISTINCT id FROM users WHERE LOWER(username) = LOWER(?)"
         parameters = (username, )
-        user_id = db.fetchone(query, parameters)
+        user_id = db.fetchone(query, parameters)[0]
 
-        return user_id[0]
+        return user_id
+
+# TODO
+def get_user_username(user_id):
+    with Database() as db:
+        query = "SELECT username FROM users WHERE id = (?)"
+        parameters = (user_id, )
+        username = db.fetchone(query, parameters)[0]
+
+        return username
 
 
 def validate_login(username, password):

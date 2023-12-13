@@ -47,57 +47,76 @@
             </button>
         </form>
     </div>
+    <form class="profile-search-container" action="/profile" method="post">
+        <input type="textarea" id="user-search" name="user-search" placeholder="Find Profile" autocomplete="off">
+        <button class="profile-search-button">Search</button>
+    </form>
     <div class="user-profile-container">
         <div class="profile-container">
             <div class="username-container">
-                <p class="username"></p>
+                <p class="username"> {{ username }} </p>
             </div>
             <div class="total-level-container"> 
                 <p class="total-level"> {{ total_level['level'] }} </p> 
             </div>
         </div>
         <div class="user-stats">
+            <div class="user-stats-row title">
+                <div class="icon-container">
+                    <span class="material-symbols-outlined">sports_esports</span>
+                </div>
+                <div class="total-games-container">
+                    <p> Games </p>
+                </div>
+                <div class="total-questions-container">
+                    <p> Questions </p>
+                </div>
+                <div class="percentage-container">
+                    <p> Percentage </p>
+                </div>
+            </div>
             {% for stat in user_stats %}
             <div class="user-stats-row">
                 <div class="icon-container">
                     <span class="material-symbols-outlined {{ MATH_MODES_MAP[loop.index - 1 | int][0] }}">{{ MATH_MODES_MAP[loop.index - 1 | int][1] }}</span>
                 </div>
                 <div class="total-games-container">
-                    {{ stat[0] }}
+                    <p> {{ stat[0] }} </p>
                 </div>
                 <div class="total-questions-container">
-                    {{ stat[1] }}
-                </div>
-                <div class="total-correct-container">
-                    {{ stat[2] }}
+                    <p> {{ stat[1] }} / {{ stat[2] }}</p>
                 </div>
                 <div class="percentage-container">
-                    {{ stat[2] }}
+                    <p> {{ calculate_percentage(stat[1], stat[2]) }}% </p>
                 </div>
             </div>
             {%endfor %}
         </div>
-    </div>
-    
-    
-    <div class="profile-levels-container">
-        {% for user_level in user_levels %}
-            <div class="experience-bar-container">
-                <div class="math-type">
-                    <p class="{{ MATH_TYPE_MAP[loop.index - 1| int][1] }}">
-                        {{ MATH_TYPE_MAP[loop.index - 1| int][0] }}
-                    </p>
+        <div class="profile-levels-container">
+            {% for user_level in user_levels %}
+                <div class="experience-bar-container">
+                    <div class="math-type">
+                        <p class="{{ MATH_TYPE_MAP[loop.index - 1| int][1] }}">
+                            {{ MATH_TYPE_MAP[loop.index - 1| int][0] }}
+                        </p>
+                    </div>
+                    <div class="experience-bar">
+                        
+                        <div class="filled-xp" style="width: {{ user_level.percentage }}%" experience=" {{ user_experiences[loop.index - 1 | int] }} ">
+                            <p>
+                                {{ user_experiences[loop.index - 1 | int] }}
+                            </p>
+                            
+                        </div>
+                    </div>
+                    <div class="level-container">
+                        <p>
+                            {{ user_level.level }}
+                        </p>
+                    </div>
                 </div>
-                <div class="experience-bar">
-                    <div class="filled-xp" style="width: {{ user_level.percentage }}%" experience=" {{ user_experiences[loop.index - 1 | int] }} "></div>
-                </div>
-                <div class="level-container">
-                    <p>
-                        {{ user_level.level }}
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -18,7 +18,7 @@ function main() {
 
         case '/profile':
             initDropdownMenu();
-            initProfileContainer();
+            initProfileSearch();
             break;
         
         case '/game_history':
@@ -1545,11 +1545,15 @@ function initGameHistoryFilter() {
     });
 }
 
-function initProfileContainer() {
-    const usernameContainer = document.querySelector('.username-container > .username');
-    usernameContainer.innerHTML = sessionStorage.getItem('username');
-}
+function initProfileSearch() {
+    const profileSearchContainer = document.querySelector('.profile-search-container');
+    console.log(profileSearchContainer)
 
+    profileSearchContainer.preventDefault('submit', async function(e) {
+        e.preventDefault()
+        console.log('yeller')
+    })
+}
 
 /** 
     Triggers animations when the user submits their answer
