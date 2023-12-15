@@ -189,6 +189,8 @@ def generate_questions():
 @app.route('/profile', methods=['POST'])
 @login_required
 def profile():
+    username = request.form.get('user-search')
+
     # TODO
     def calculate_percentage(operand_1, operand_2):
         if operand_2 == 0:
@@ -196,12 +198,15 @@ def profile():
         result = (operand_2 / operand_1) * 100
         return round(result)
 
-    username = request.form.get('user_search')
+    print(username)
+
     if username == None:
         user_id = session['user_id']
         username = get_user_username(user_id)
     else:
         user_id = get_user_id(username)
+
+    print(username, user_id)
 
     with Database() as db:
         query = ("SELECT addition, subtraction, multiplication, division, exponential, total FROM levels WHERE user_id = (?);")
@@ -215,6 +220,7 @@ def profile():
     user_levels.pop()
 
     user_stats = generate_user_stats(user_id)
+    print('stats', type(user_stats[0][0]))
 
     MATH_TYPE_MAP = [['+', 'addition'], ['-', 'subtraction'], ['×', 'multiplication'], ['÷', 'division'], ['x²', 'exponential']]
     MATH_MODES_MAP = [['total', 'all_inclusive'], ['vanilla', 'icecream'], ['timed', 'timer'], ['sudden', 'skull']]
@@ -270,6 +276,13 @@ def game_history():
             return 'even'
         return 'odd'
 
+
+    # The mode will either be true or false (string), if true add the active class to the mode
+    def add_active_mode(mode):
+        print(modes)
+        if (mode == 'true'):
+            return 'active'
+        
     # Since the sql query returns a tuple with the last value being a long string, 
     # instead of creating a new tuple I can just use this function to parse the string.
     def parse_detailed_game_history(history_str):
@@ -287,7 +300,8 @@ def game_history():
     
     return render_template('game_history.html', user_game_history=user_game_history, ICON_MAP=ICON_MAP,
                            MODE_MAP=MODE_MAP, calculate_percentage=calculate_percentage, format_date=format_date, 
-                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, quantity=quantity)
+                           cycle=cycle, parse_detailed_game_history=parse_detailed_game_history, quantity=quantity,
+                           modes_list=modes_list, add_active_mode=add_active_mode)
 
 
 # TODO

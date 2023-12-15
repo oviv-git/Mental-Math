@@ -11,7 +11,7 @@
             <span class="material-symbols-outlined">person</span>
             <p></p>
         </div>
-        <div class="navbar-container"><p>Game History</p></div>
+        <div class="navbar-container"><p>History</p></div>
         <div class="navbar-container dropdown">
             <button id="dropdown-button" class="navbar-container dropdown-toggle waves-effect">
                 <p>Menu</p><span class="material-symbols-outlined">menu</span>
@@ -47,13 +47,13 @@
     </div>
     <div class="history-filter-container">
         <div class="mode-switch-container">
-            <div class="mode-switch active">
+            <div class="mode-switch  {{ add_active_mode(modes_list[0]) }}">
                 <span class="material-symbols-outlined vanilla">icecream</span>
             </div>
-            <div class="mode-switch active">
+            <div class="mode-switch {{ add_active_mode(modes_list[1]) }}">
                 <span class="material-symbols-outlined timed">timer</span>
             </div>
-            <div class="mode-switch active">
+            <div class="mode-switch  {{ add_active_mode(modes_list[2]) }}">
                 <span class="material-symbols-outlined sudden">skull</span>
             </div>
         </div>

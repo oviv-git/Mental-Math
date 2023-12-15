@@ -47,10 +47,18 @@
             </button>
         </form>
     </div>
-    <form class="profile-search-container" action="/profile" method="post">
-        <input type="textarea" id="user-search" name="user-search" placeholder="Find Profile" autocomplete="off">
-        <button class="profile-search-button">Search</button>
-    </form>
+    <div class="profile-search-container">
+        <input type="textarea" id="user-search-input" placeholder="Find Profile" autocomplete="off">
+        <form action="/profile" method="post" id="profile-search-form">
+            <input type="hidden" id="user-search" name="user-search" value=""> 
+            <button class="profile-search-button">
+                <div>
+                    SEARCH
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+            </button>
+        </form>
+    </div>
     <div class="user-profile-container">
         <div class="profile-container">
             <div class="username-container">
@@ -77,6 +85,8 @@
             </div>
             {% for stat in user_stats %}
             <div class="user-stats-row">
+                {% if stat[0] | string == '0'  %}
+                {% else %}
                 <div class="icon-container">
                     <span class="material-symbols-outlined {{ MATH_MODES_MAP[loop.index - 1 | int][0] }}">{{ MATH_MODES_MAP[loop.index - 1 | int][1] }}</span>
                 </div>
@@ -89,6 +99,7 @@
                 <div class="percentage-container">
                     <p> {{ calculate_percentage(stat[1], stat[2]) }}% </p>
                 </div>
+                {% endif %}
             </div>
             {%endfor %}
         </div>

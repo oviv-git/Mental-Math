@@ -196,13 +196,6 @@ function updateSessionMessage(message, messageType, displayNow=false) {
     sessionStorage.setItem('message', message);
     sessionStorage.setItem('messageType', messageType);
    
-    // if (sessionStorage.getItem('displayMessage' != true)) {
-    //     sessionStorage.setItem('displayMessage', true);
-        
-    // } else {
-    //     sessionStorage.setItem('displayMessage', false);
-    //     displaySessionInformation();
-    // }
     if (displayNow == true) {
         displaySessionInformation()
     }
@@ -212,8 +205,6 @@ function displaySessionInformation() {
     let message = sessionStorage.getItem('message');
     let messageType = sessionStorage.getItem('messageType');
     let shouldDisplayMessage = sessionStorage.getItem('displayMessage');
-
-    console.log(shouldDisplayMessage)
     
     if (message != null || messageType != null) {
         M.toast({html: message, classes: messageType})
@@ -1545,15 +1536,49 @@ function initGameHistoryFilter() {
     });
 }
 
-function initProfileSearch() {
-    const profileSearchContainer = document.querySelector('.profile-search-container');
-    console.log(profileSearchContainer)
 
-    profileSearchContainer.preventDefault('submit', async function(e) {
-        e.preventDefault()
-        console.log('yeller')
+// TODO: COMMENT 
+function initProfileSearch() {
+    const profileSearchForm = document.getElementById('profile-search-form');
+    const submitButton = document.querySelector('.profile-search-button');
+    const hiddenInput = document.getElementById('user-search');
+
+    // If the user presses enter on /profile.html submits the form
+    document.addEventListener('keypress', function(event) {
+        if (event.key == 'Enter') {
+            submitButton.click();
+        } 
+    })
+    
+
+    profileSearchForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        let usernameInput = document.getElementById('user-search-input').value;
+        
+
+        if (usernameInput.length == 0) {
+            updateSessionMessage('Enter a username to search', 'error', true);
+
+        } else {
+            let isAvailable = await checkUsernameAvailability(usernameInput);
+            
+            if (isAvailable) {
+                hiddenInput.value = usernameInput;
+                profileSearchForm.submit();
+                
+            } else {
+                updateSessionMessage("User does not exist", 'error', true);
+            }
+        }
     })
 }
+// if username is none trigger animation on button and toast
+
+// if username isn't valid trigger animation and different toast
+
+// if username is valid then input it into the type input type hidden and submit
+
+// might have to rework the structure of the form
 
 /** 
     Triggers animations when the user submits their answer
