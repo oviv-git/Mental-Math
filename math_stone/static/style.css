@@ -1297,14 +1297,21 @@ html.dark .scroll-container .row-container .detailed-history-row .question-row s
   justify-content: center;
 }
 
+.section-group.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .logo-container {
   width: 100%;
   height: auto;
+  display: flex;
   justify-content: center;
   overflow: hidden;
 }
 .logo-container img {
-  width: 100%;
+  width: 70%;
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -1361,6 +1368,10 @@ form {
 }
 .btn:focus {
   background: #6bacc2;
+}
+
+.slides.light-image.mobile {
+  display: none;
 }
 
 .dark-mode-toggle.index {
@@ -1631,7 +1642,7 @@ form {
   background: transparent;
   position: relative;
   width: 100%;
-  flex: 4;
+  flex: 2.5;
   top: 4%;
   display: flex;
   justify-content: center;
@@ -1640,13 +1651,13 @@ form {
 }
 .play-container-left .mode-select-container {
   height: 50%;
-  flex: 4;
+  flex: 6;
 }
 .play-container-left .submit-container {
-  flex: 3;
+  flex: 1;
   display: flex;
   width: 100%;
-  margin: 0 0 2rem 0;
+  margin: 0;
   flex-direction: column;
   align-items: center;
 }
@@ -1867,6 +1878,8 @@ form {
 }
 
 .submit-container .submit-button {
+  position: relative;
+  bottom: 50%;
   transition: all 0.5s !important;
   cursor: pointer;
   border-radius: 1.5rem;
@@ -1877,7 +1890,7 @@ form {
   height: 100%;
   overflow: hidden;
   z-index: 8;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .submit-container .submit-button.active {
   transition: all 0.3s !important;
@@ -1924,11 +1937,11 @@ form {
   border-radius: 0 0 1.5rem 1.5rem;
 }
 .swiper-slide .game-mode .settings {
-  height: 100%;
+  height: 40%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0rem 0rem 4rem 0rem;
+  padding: 2rem 0rem 2rem 0rem;
 }
 .swiper-slide .game-mode .settings .settings-container {
   display: flex;
@@ -1936,6 +1949,7 @@ form {
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  padding: 0 0 1rem;
 }
 .swiper-slide .game-mode .settings .settings-container .input-information {
   display: flex;
@@ -1953,14 +1967,45 @@ form {
   overflow: hidden;
   border: none;
   border-radius: 32px;
-  height: 2.9rem;
+  height: 2.8rem;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]:focus {
+  outline: none;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-webkit-slider-runnable-track {
+  height: 2.8rem;
+  border-radius: 16px;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-moz-range-track {
+  height: 2.8rem;
+  border-radius: 16px;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3.1rem;
+  width: 3.1rem;
+  margin-top: -0.12rem;
+  border-radius: 50%;
+  border: 0.5rem solid transparent;
+  box-shadow: -415px 0 0 400px transparent;
+}
+.swiper-slide .game-mode .settings .settings-container input[type=range]::-moz-range-thumb {
+  outline: none;
+  height: 3.1rem;
+  background: transparent;
+  width: 3.1rem;
+  border-radius: 50%;
+  border: 0.5rem solid transparent;
+  box-shadow: -407px 0 0 400px transparent;
+  margin-bottom: 1rem;
 }
 .swiper-slide .game-mode .settings .settings-container label {
   font-size: 1rem;
   font-family: "Source Sans Pro", sans-serif;
 }
 .swiper-slide .game-mode .settings-header {
-  height: 60%;
+  height: 25%;
   z-index: 3;
   cursor: grab;
   pointer-events: auto;
@@ -2763,8 +2808,20 @@ table tr td p {
   html.light .play-container {
     border: 0;
   }
+  html.light .slides.light-image.mobile {
+    display: flex;
+  }
+  html.light .slides.dark-image.mobile {
+    display: none;
+  }
   html.dark .play-container {
     border: 0;
+  }
+  html.dark .slides.dark-image.mobile {
+    display: flex;
+  }
+  html.dark .slides.light-image.mobile {
+    display: none;
   }
   .section-container {
     flex-direction: column;
@@ -2776,10 +2833,17 @@ table tr td p {
     width: 100%;
     order: 2;
   }
+  .flow-text {
+    font-size: 1.6rem;
+    padding: 0rem 1rem 0rem 1rem;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+  }
   .dark-mode-toggle.index {
     position: absolute;
-    top: 4%;
-    left: 70%;
+    top: 3%;
+    right: 3%;
+    left: auto;
   }
   .section-large {
     width: 100%;
@@ -2790,16 +2854,20 @@ table tr td p {
     justify-content: flex-start;
   }
   .slider {
-    margin-top: 4rem;
+    margin-top: 2rem;
   }
-  .slides {
-    border: none;
+  .slider .slides {
     border-radius: 0rem;
+    border: none;
+    background: transparent;
+  }
+  .slider .slides li .caption {
+    top: 0%;
   }
   .navbar {
     position: absolute;
     margin-bottom: 0;
-    height: 5rem;
+    height: 4rem;
   }
   .navbar .navbar-container {
     padding: 0;
@@ -2865,13 +2933,13 @@ table tr td p {
     width: 100%;
     margin: 0;
     order: 1;
-    flex: 2;
+    flex: 1;
   }
   .play-container-left .switchboard-container {
     position: relative;
-    top: 24%;
+    top: 22%;
     width: 100%;
-    flex: 2;
+    flex: 2.4;
     background: transparent;
     display: flex;
     justify-content: center;
@@ -2880,7 +2948,7 @@ table tr td p {
     padding: 0rem;
   }
   .play-container-left .mode-select-container {
-    flex: 1;
+    flex: 3;
     height: 40%;
     position: relative;
     top: 6%;
@@ -2891,8 +2959,7 @@ table tr td p {
     display: flex;
     width: 100%;
     margin: 0;
-    position: relative;
-    top: 2%;
+    position: static;
     flex-direction: column;
     align-items: center;
   }
@@ -2903,7 +2970,7 @@ table tr td p {
     margin: 0;
     display: flex;
     flex-direction: column;
-    flex: 2;
+    flex: 1;
   }
   .play-container-right .results-container {
     width: 100%;
@@ -2919,6 +2986,12 @@ table tr td p {
     box-shadow: 0rem 0em 0.8rem #222;
     pointer-events: none;
   }
+  .slides.light-image {
+    display: none;
+  }
+  .slides.dark-image {
+    display: none;
+  }
   .swiper-slide {
     align-items: start;
     width: 100%;
@@ -2933,13 +3006,16 @@ table tr td p {
     height: 50%;
     padding: 0;
   }
+  .swiper-slide .game-mode .settings .settings-container {
+    padding: 0;
+  }
   .swiper-slide .game-mode .settings .settings-container .input-information {
     display: flex;
-    transform: scale(1.5) translateY(1.8rem);
+    transform: scale(1.3) translateY(1.8rem);
     font-family: "Source Sans Pro", sans-serif;
   }
   .swiper-slide .game-mode .settings .settings-container input[type=range] {
-    margin: 3rem 0rem 3rem;
+    margin: 2rem 0rem 3rem;
     -webkit-appearance: none;
     -moz-appearance: none;
          appearance: none;
@@ -2982,7 +3058,9 @@ table tr td p {
     box-shadow: -407px 0 0 400px transparent;
   }
   .swiper-slide .game-mode .settings-header {
-    height: 25%;
+    border-top-width: 0.25rem;
+    border-bottom-width: 0.25rem;
+    height: 35%;
     border-radius: 0rem;
   }
   .swiper-slide .game-mode .settings-header p {
@@ -3076,6 +3154,7 @@ table tr td p {
   .results-container .last-game-results .results-row.header {
     justify-content: space-around;
     padding: 0rem;
+    margin: 0.5rem 0 0 0;
   }
   .results-container .levels-container {
     border-width: 0.4rem;
@@ -3144,7 +3223,7 @@ table tr td p {
   }
   .submit-container .submit-button.active {
     transition: all 0.3s !important;
-    transform: translateY(0.5rem);
+    transform: translateY(0.7rem);
   }
   .submit-container .submit-button .submit-button-text {
     transition: color 1s;
@@ -3161,22 +3240,22 @@ table tr td p {
     box-shadow: 0rem 0.5rem 0rem #bfbfbf, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .submit-container.active .submit-button.vanilla {
-    box-shadow: 0rem 1rem 0rem #488498, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 1rem 0rem #5093aa, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .submit-container.active .submit-button.vanilla.active {
-    box-shadow: 0rem 0.5rem 0rem #488498, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 0.2rem 0rem #5093aa, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .submit-container.active .submit-button.timed {
-    box-shadow: 0rem 1rem 0rem #6d75ad, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 1rem 0rem #7e84b6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .submit-container.active .submit-button.timed.active {
-    box-shadow: 0rem 0.5rem 0rem #6d75ad, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 0.2rem 0rem #7e84b6, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .submit-container.active .submit-button.sudden {
-    box-shadow: 0rem 1rem 0rem #b15656, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 1rem 0rem #b96868, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .submit-container.active .submit-button.sudden.active {
-    box-shadow: 0rem 0.5rem 0rem #b15656, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 0.2rem 0rem #b96868, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.light .results-container.vanilla .last-game-results .results-row.header {
     background: #cedadf;
@@ -3236,26 +3315,26 @@ table tr td p {
     box-shadow: 0rem 1rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container .submit-button.active {
-    transform: translateY(1rem);
+    transform: translateY(0.7rem);
     box-shadow: 0rem 0rem 0rem #555555, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container.active .submit-button.vanilla {
     box-shadow: 0rem 1rem 0rem #357083, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container.active .submit-button.vanilla.active {
-    box-shadow: 0rem 0rem 0rem #2d6071, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 0.2rem 0rem #2d6071, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container.active .submit-button.timed {
     box-shadow: 0rem 1rem 0rem #535b94, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container.active .submit-button.timed.active {
-    box-shadow: 0rem 0rem 0rem #414774, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 0.2rem 0rem #414774, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container.active .submit-button.sudden {
     box-shadow: 0rem 1rem 0rem #924343, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .submit-container.active .submit-button.sudden.active {
-    box-shadow: 0rem 0rem 0rem #6f3333, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem 0.2rem 0rem #6f3333, 0rem -1rem 1.4rem rgba(0, 0, 0, 0.1);
   }
   html.dark .results-container.vanilla .last-game-results .results-row.header {
     background: #355c69;
@@ -3416,10 +3495,12 @@ table tr td p {
     transform: translateY(-1.2rem);
   }
   table {
+    line-height: 0.8 !important;
     border-radius: 0 0 1.5rem 1.5rem;
     width: 90%;
     height: auto;
     table-layout: fixed;
+    margin-top: 8rem;
   }
   table.active {
     transform: translateY(-1.2rem);
@@ -3697,66 +3778,6 @@ table tr td p {
     font-variation-settings: "FILL" 1, "wght" 900, "GRAD" 200, "opsz" 600;
     transform: scale(1.2);
   }
-  .history-filter-container .settings-container {
-    display: flex;
-    flex-direction: column;
-    z-index: 2;
-    height: 6rem;
-    width: 100%;
-    background: #3797b4;
-    align-items: center;
-    justify-content: center;
-  }
-  .history-filter-container .settings-container .input-information {
-    align-items: center;
-    font-size: 0.8rem;
-    transform: scale(1.4);
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-  }
-  .history-filter-container .settings-container input[type=range] {
-    margin-top: 0.2rem;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-         appearance: none;
-    width: 80%;
-    cursor: pointer;
-    outline: none;
-    overflow: hidden;
-    border: none;
-    border-radius: 32px;
-    height: 2rem;
-  }
-  .history-filter-container .settings-container input[type=range]:focus {
-    outline: none;
-  }
-  .history-filter-container .settings-container input[type=range]::-webkit-slider-runnable-track {
-    height: 3rem;
-    border-radius: 16px;
-  }
-  .history-filter-container .settings-container input[type=range]::-moz-range-track {
-    height: 3rem;
-    border-radius: 16px;
-  }
-  .history-filter-container .settings-container input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    height: 2rem;
-    width: 2rem;
-    border-radius: 50%;
-    border: 0.5rem solid transparent;
-    box-shadow: -415px 0 0 400px transparent;
-    margin-top: 0.5rem;
-  }
-  .history-filter-container .settings-container input[type=range]::-moz-range-thumb {
-    outline: none;
-    height: 2rem;
-    background: transparent;
-    width: 2rem;
-    border-radius: 50%;
-    border: 0.5rem solid transparent;
-    box-shadow: -407px 0 0 400px transparent;
-  }
   .history-filter-container .submit-filter-container {
     overflow: hidden;
     border-top: 0.3rem solid;
@@ -3803,6 +3824,19 @@ table tr td p {
     border-radius: 0rem;
     box-shadow: none;
     border-bottom: none;
+    /* Track */
+    /* Handle */
+  }
+  .scroll-container::-webkit-scrollbar {
+    width: 16px;
+  }
+  .scroll-container::-webkit-scrollbar-track {
+    border-radius: 0;
+  }
+  .scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 0;
+    width: 16px;
+    overflow: hidden;
   }
   .scroll-container .row-container .game-history-row {
     cursor: pointer;

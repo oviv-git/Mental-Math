@@ -1,5 +1,5 @@
 function main() {
-    // TODO MODULARIZE ALL THHESE FUNCTIONS like initHomePage, initLeaderboard, etc
+    // an MODULARIZE ALL THHESE FUNCTIONS like initHomePage, initLeaderboard, etc
     
     storedColorScheme();
     wavesEffectToggle();
@@ -122,7 +122,7 @@ function initSlider() {
         // Initialize slider
         var sliders = document.querySelectorAll('.slider');
         var instances = M.Slider.init(sliders, {
-            height: 700
+            height: 700,
         });
     });
 }
@@ -439,7 +439,7 @@ function checkValidLogin(username, password) {
                 resolve(response['valid']);
             },
             error: function(xhr, status, error) {
-                console.log(xhr, status, error)
+                console.log('checkValidLogin Error', xhr, status, error)
                 reject(error);
             }
         });
@@ -871,8 +871,6 @@ function updateSliderValues() {
     settingsContainers.forEach((element) => {
         element.addEventListener('input', (event) => {
             let displayedValue = element.querySelector('.range-results');
-
-            console.log(element, displayedValue)
             
             if (event.target.value != undefined) {
                 displayedValue.innerHTML = event.target.value;
@@ -1074,10 +1072,17 @@ async function gameLogic(activeSlide) {
 
         let question = generatedQuestions[i];
         let questionStartTime = new Date();
-        
-        operand1.innerHTML = question['operand_1'];
-        operand2.innerHTML = question['operand_2']; 
-        operator.innerHTML = question['operator'];
+
+        if (question['operator'] == '^') {
+            operand1.innerHTML = question['operand_1'] + "<sup>" + question['operand_2'] + "</sup>"
+            operand2.innerHTML = ''
+            operator.innerHTML = ''
+            
+        } else {            
+            operand1.innerHTML = question['operand_1'];
+            operand2.innerHTML = question['operand_2']; 
+            operator.innerHTML = question['operator'];
+        }
 
         // If the progressContainerGameQuestions' divs weren't generated earlier 
         // then generate a new one for each question
@@ -1139,9 +1144,7 @@ async function gameLogic(activeSlide) {
         let last_two = gameTimeElapsed.slice(-2);
         gameTimeElapsed = gameTimeElapsed.replace(last_two, '00')
     }
-    
-    console.log(gameTimeElapsed)
-    
+        
     // Makes it so the timer function from a previous game can never affect a future game
     clearTimeout(timerTimeout);
     

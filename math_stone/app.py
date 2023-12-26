@@ -282,6 +282,7 @@ def game_history():
         print(modes)
         if (mode == 'true'):
             return 'active'
+        return ''
         
     # Since the sql query returns a tuple with the last value being a long string, 
     # instead of creating a new tuple I can just use this function to parse the string.

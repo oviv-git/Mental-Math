@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block main %}
-    <div class="section-container">
+    <div class="full-page active">
         <div class="dark-mode-toggle index">
             <button class="waves-effect" aria-label="dark mode toggle">
                 <span class="material-symbols-outlined">light_mode</span>
             </button>
         </div>
-        <div class="section section-small" id="section1">
+        <div class="section section-med" id="section1">
             <div class="section-group">
                 <div class="logo-container">
                     <img class="logo" src="static/logo.png" alt="MathStone Logo">
@@ -19,7 +19,7 @@
                 <p class="flow-text">A fun and rewarding game that will sharpen your mental math skills and improve your concentration
                 </p>
             </div>
-            <div class="section-group">
+            <div class="section-group forms">
                 <button id="login-button" class="btn btn-large waves-effect">Play</button>
                 <div id="modal" class="modal">
                     <div class="modal-header">
@@ -82,52 +82,6 @@
                 </div>
                 <p class="caption">Don't have an account?</p>
                 <button id="register-button" class="btn btn-large waves-effect btn-secondary">Register</button>
-                <p><a class="caption" href="#explanation">Why do I need an account?</a></p>
-            </div>
-        </div>
-
-        <div class="section section-large" id="section2">
-            <div class="slider">
-                <ul class="slides">
-                    <li>
-                        <img class="slides light-image" src="static/demos/l1.png">
-                        <img class="slides dark-image" src="static/demos/d1.png">
-                        <div class="caption center-align">
-                            <h3 class="tagline">This is our big Tagline!</h3>
-                            <h5 class="slogan">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img class="slides light-image" src="static/demos/l2.png">
-                        <img class="slides dark-image" src="static/demos/d2.png">
-                        <div class="caption left-align">
-                            <h3 class="tagline">Left Aligned Caption</h3>
-                            <h5 class="slogan">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img class="slides light-image" src="static/demos/l3.png">
-                        <img class="slides dark-image" src="static/demos/d3.png">
-                        <div class="caption right-align">
-                            <h3 class="tagline">Right Aligned Caption</h3>
-                            <h5 class="slogan">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <li>
-                        <img class="slides light-image" src="static/demos/l4.png">
-                        <img class="slides dark-image" src="static/demos/d4.png">
-                        <div class="caption center-align">
-                            <h3 class="tagline">This is our big Tagline!</h3>
-                            <h5 class="slogan">Here's our small slogan.</h5>
-                        </div>
-                    </li>
-                    <ul class="indicators">
-                        <li class="indicator-item"></li>
-                        <li class="indicator-item"></li>
-                        <li class="indicator-item"></li>
-                        <li class="indicator-item"></li>
-                    </ul>
-                </ul>
             </div>
         </div>
     </div>
