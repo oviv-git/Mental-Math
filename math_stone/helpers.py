@@ -4,11 +4,17 @@
     Functions
         login_required: Function wrapper requring that the user is loggen in on certain pages
         get_user_id: Database query to get user_id based on a username
+        get_user_username: Database query to get the username based on a user_id
         validate_login: Database query to validate the users username and password
         get_user_experience: Database query to get the users experience
         generate_reward_experience: Algorithm to generate experience for each question
         generate_speed_multiplier: Generates a multiplier for the experience based on answer time
-        error: Render error.html with a specific code and message
+        generate_user_level_info: Generates a list containing user level and level % for each math type
+        record_game_results - Records the results of a game to the database
+        generate_leaderboards - Generates a variable amount of leaderboards
+        generate_game_history - Generates the game history for a selected user
+        generate_user_stats - Generates the detailed stats for a selected user
+        error - Redirects to the error page with a message and an error code detailing the error
 """
 
 from functools import wraps
@@ -47,9 +53,9 @@ def get_user_id(username):
     Using the users username and a database query find the user_id associated with that username
 
     Argument:
-        username (string): The users chosen username taken from either login or register
+        username {string}: The users chosen username taken from either login or register
     Return: 
-        user_id (int): The cooresponding user_id linked to username
+        user_id {int}: The cooresponding user_id linked to username
     """
 
     with Database() as db:
@@ -59,8 +65,18 @@ def get_user_id(username):
 
         return user_id
 
-# TODO
+
 def get_user_username(user_id):
+    """
+    Using the provided user_id returns the cooresponding username
+
+    Argument:
+        user_id {int}: The provided users id that cooresponds to their username in the database
+    
+    Return:
+        username {string}: The cooresponding username
+    """
+
     with Database() as db:
         query = "SELECT username FROM users WHERE id = (?)"
         parameters = (user_id, )
@@ -74,8 +90,8 @@ def validate_login(username, password):
     Checks to see if hashed password provided by the user matches the one in the database
 
     Arugments:
-        username (string): Username provided by the user in a login form
-        password (string): Password provided by the user in a login form
+        username {string}: Username provided by the user in a login form
+        password {string}: Password provided by the user in a login form
     Return: 
         (bool): Returns true if the login is valid
     """
@@ -97,9 +113,9 @@ def get_user_experience(user_id):
     Database query gets a list of the users experience for each question type
     
     Argument:
-        user_id (int): The user_id that can be linked to that users levels in the database
+        user_id {int}: The user_id that can be linked to that users levels in the database
     Return:
-        user_experience (list): A list containing 5 numbers, each number represents the users xp
+        user_experience {list}: A list containing 5 numbers, each number represents the users xp
     """
     
     with Database() as db:
@@ -113,10 +129,11 @@ def generate_reward_experience(results):
     The algorithm that generates experience for each question answered, returns all the reward xp in a list
     
     Argument:
-        results (JSON object): Sent as an AJAX request from home.html and contains information about each question
+        results {JSON object}: Sent as an AJAX request from home.html and contains information about each question
         Example: 'correct': true, 'operator': '+', 'timeElapsed': 1.22, 'difficulty': 2, 'level': 14
-    Return:
-        reward_experience (list): A list containing 5 numbers
+    Returns:
+        reward_experience {list}: A list containing 5 numbers
+        question_experience_list {list}: Contains the experience gained for each question in the game
     """
     
     # Pre-Initiailzed list that contains the xp for each math-type as well as total xp for the game.
@@ -164,11 +181,11 @@ def generate_speed_multiplier(time, difficulty):
     Based on how long it takes the user to answer, generate a multiplier for the generated xp
 
     Arguments:
-        time (float): Time is received from an AJAX request and is a fixed point decimal
-        difficulty (int): For more difficult questions, more time is given for the multiplier
+        time {float}: Time is received from an AJAX request and is a fixed point decimal
+        difficulty {int}: For more difficult questions, more time is given for the multiplier
 
     Return:
-        (float): The return value gets lower the longer you take per question, 5 seconds * difficulty
+        multiplier {float}: The return value gets lower the longer you take per question, 5 seconds * difficulty
         is how you find out how long the user must take to get a 1 as a return (no bonus)
     """
     try:
@@ -187,12 +204,13 @@ def generate_speed_multiplier(time, difficulty):
 def generate_user_level_info(experience_list):
     """
     Generates a list containing the users level and % to next level for each math type
-    so the experience bars in the results container can be updarted
+    so the experience bars in the results container can be updated
     
-    Arguements:
-        experience (list of ints): each index represents the users experience in a specific math type
+    Arguments:
+        experience {list of ints}: each index represents the users experience in a specific math type
     
     Return:
+        user_level_info {list of dicts}: Each dict contains {'level': type_level, 'percentage': percentage}
     """
 
     user_level_info = []    
@@ -228,8 +246,20 @@ def generate_user_level_info(experience_list):
 
     return user_level_info
 
-# TODO - DONT FORGET TO ADD COMMENT
 def record_game_results(results, reward_experience, question_experience_list, user_id):
+    """
+    When the user successfuly finishes a game their game results get recorded into the games table
+    
+    Arguments:
+        results {list}: Contains all the users results from the game they just played
+        reward_experience {list}: Contains the reward xp for each type to record in the levels table
+        question_experience_list {list}: Contains the experience gained for each question in the game
+        user_id {int}: The user_id of the user who just played the game
+    
+    No Return:
+        records the users results into the game and levels tables
+    """
+    
     correct_count = 0
     questions = len(results) - 1
     questions_dict = {}
@@ -267,8 +297,16 @@ def record_game_results(results, reward_experience, question_experience_list, us
         db.execute(query, parameters)
     
 
-# TODO - DONT FORGET TO ADD COMMENT
-def generate_leaderboards(quantity, query_type):
+def generate_leaderboards(quantity):
+    """
+    Based on the input generates leaderboards for each type of math_type
+    
+    Arguments:
+        quantity {int}: Tells the function the max number of leaderboards to generate
+    
+    Return:
+        leaderboards {list of dicts}: Contains all the leaderboard info, gets passed into jinja
+    """
     levels_list = []
 
     with open('levels.csv', 'r+', encoding='utf-8') as csvfile:
@@ -309,23 +347,17 @@ def generate_leaderboards(quantity, query_type):
     return leaderboards
 
 
-# TODO - DONT FORGET TO ADD COMMENT
-def error(message, code=400):
-    """
-    Redirects to error.html with an error code and a message detaling the nature of the error to the user
-    
-    Arguments:
-        message (string): Error message that displays on the page detailing the error
-        code (int): The cooresponding error code that gives more information about the error
-    Return:
-        render_template (webpage): Redirects to error.html with the included code and message
-    """
-
-    return render_template("error.html", code=code, message=message)
-
-
-# TODO - Comment
 def generate_game_history(user_id, quantity, modes):
+    """
+    Generates a set amount of the users game history
+
+    Argument:
+        user_id {int}: Will get the game history of this specific user_id
+        quantity {int}: Tells the function the max amount of games histories to get
+        modes {list}: A mode will either be True or False. True means to get that mode
+    Return: 
+        game_history {list} A the game histories found (or the max quantity)
+    """
     with Database() as db:
         query = ("SELECT game_mode, questions, correct, addition_exp, subtraction_exp, multiplication_exp, "
                 "division_exp, exponential_exp, total_exp, game_timer, game_date, question_data " 
@@ -365,8 +397,15 @@ def generate_game_history(user_id, quantity, modes):
     return game_history
 
 
-# TODO - Comment
 def generate_user_stats(user_id):
+    """
+    Generates the stats of the user cooresponding to the given user_id
+
+    Argument:
+        user_id {int}: The user id which will be used to generate the stats
+    Return: 
+        stats_list {list}: Contains all the advanced stats for that user
+    """
     stats_list = []
     with Database() as db:
         query = ("SELECT COUNT(game_id), SUM(questions), SUM(correct) FROM games WHERE user_id = ( ? );")
@@ -384,3 +423,18 @@ def generate_user_stats(user_id):
             stats_list.append(db.fetchall()[0])
 
     return stats_list
+
+
+def error(message, code=400):
+    """
+    Redirects to error.html with an error code and a message detaling the nature of the error to the user
+    
+    Arguments:
+        message {string}: Error message that displays on the page detailing the error
+        code {int}: The cooresponding error code that gives more information about the error
+    Return:
+        render_template {webpage}: Redirects to error.html with the included code and message
+    """
+
+    return render_template("error.html", code=code, message=message)
+

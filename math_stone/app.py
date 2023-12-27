@@ -198,15 +198,11 @@ def profile():
         result = (operand_2 / operand_1) * 100
         return round(result)
 
-    print(username)
-
     if username == None:
         user_id = session['user_id']
         username = get_user_username(user_id)
     else:
         user_id = get_user_id(username)
-
-    print(username, user_id)
 
     with Database() as db:
         query = ("SELECT addition, subtraction, multiplication, division, exponential, total FROM levels WHERE user_id = (?);")
@@ -220,7 +216,6 @@ def profile():
     user_levels.pop()
 
     user_stats = generate_user_stats(user_id)
-    print('stats', type(user_stats[0][0]))
 
     MATH_TYPE_MAP = [['+', 'addition'], ['-', 'subtraction'], ['×', 'multiplication'], ['÷', 'division'], ['x²', 'exponential']]
     MATH_MODES_MAP = [['total', 'all_inclusive'], ['vanilla', 'icecream'], ['timed', 'timer'], ['sudden', 'skull']]
@@ -235,9 +230,8 @@ def profile():
 @login_required
 def leaderboard():
     quantity = request.form.get('quantity')
-    query_type = request.form.get('query_type')
 
-    leaderboards = generate_leaderboards(quantity, query_type)
+    leaderboards = generate_leaderboards(quantity)
 
     return render_template('leaderboard.html', leaderboards=leaderboards)
 

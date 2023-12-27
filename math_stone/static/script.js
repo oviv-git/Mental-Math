@@ -182,12 +182,10 @@ function clearForm() {
     modalOverlay.click();
 }
 
-// Finds the session-information class and set the innerHTML to session.storage
-// TODO: 
-
 
 /**
  * Updates the messages displayed on the toast and its class
+ * 
  * @param {string} message - The message displayed on the toast
  * @param {string} messageType - The class that gets applied to the toast
  * @param {bool} displayNow - if True, display the sessionMessage regardless of the displayMessage flag
