@@ -22,20 +22,18 @@ function main() {
 
         case '/leaderboard':
             initLeaderboardPage();
-
             break;
     }
 }
 
+// Initialzies all the functions that run when index.html is loaded
 function initIndexPage() {
-    initSlider();
     initForm();
     registerFormSubmit();
     loginFormSubmit();
 }
 
-// Makes sure everything in home.html runs when the page loads
-// Seperating the tabs into seperate functions themselves just makes the code too messy
+// Initialzies all the functions that run when home.html is loaded
 function initHomePage() {
     // Everything in Home-Tab
     loadSwitchboard();
@@ -58,25 +56,29 @@ function initHomePage() {
     initToolTips(exitButtonNodeList)
 }
 
+// Initialzies all the functions that run when profile.html is loaded
 function initProfilePage() {
     initDropdownMenu();
     initProfileSearch();
 }
 
+// Initialzies all the functions that run when game_history.html is loaded
 function initGameHistoryPage() {
     initDropdownMenu();
     initGameHistoryTable();
     initGameHistoryFilter();
 }
 
+// Initializes all the functions that run when leaderboard.html is loaded
 function initLeaderboardPage() {
     initDropdownMenu();
     initLeaderboardSwiper();
     initLeaderboardShadows();
 }
 
+// If the user has the dark-mode setting switched on 
+// then html gets set to dark every time a page loads 
 function storedColorScheme() {
-    
     let html = document.querySelector('html')
     let storedMode = sessionStorage.getItem('prefferedMode')
 
@@ -86,7 +88,8 @@ function storedColorScheme() {
     }
 }
 
-// switches the class the html element between light/dark with with a button toggle
+// Gives toggle functionality to the dark-mode-toggle buttons 
+// found in every page
 function toggleColorScheme() {
     const toggle = document.querySelector('.dark-mode-toggle');
     const html = document.querySelector('html');
@@ -113,7 +116,7 @@ function toggleColorScheme() {
     });
 }
 
-// Called in toggleColorScheme() to also toggle the color of the waves-effect from the Materialize library
+// Called in toggleColorScheme() to also toggles the color of the waves-effect from the Materialize library
 function wavesEffectToggle() {
     let waveElements = document.querySelectorAll('.waves-effect')
     let html = document.querySelector('html')
@@ -131,16 +134,6 @@ function wavesEffectToggle() {
     }
 }
 
-// Image slider on index
-function initSlider() {
-    document.addEventListener('DOMContentLoaded', function() {
-        // Initialize slider
-        var sliders = document.querySelectorAll('.slider');
-        var instances = M.Slider.init(sliders, {
-            height: 700,
-        });
-    });
-}
 
 // Initializes modals and tabs and links the correct modal tab with its cooresponding button
 function initForm() {
@@ -197,7 +190,6 @@ function clearForm() {
     modalOverlay.click();
 }
 
-
 /**
  * Updates the messages displayed on the toast and its class
  * 
@@ -214,18 +206,21 @@ function updateSessionMessage(message, messageType, displayNow=false) {
     }
 }
 
+// Pops up the toast message with the message saved in session storage
 function displaySessionInformation() {
     let message = sessionStorage.getItem('message');
     let messageType = sessionStorage.getItem('messageType');
-    let shouldDisplayMessage = sessionStorage.getItem('displayMessage');
     
     if (message != null || messageType != null) {
         M.toast({html: message, classes: messageType})
     }
 }
 
-// When the submit button is pressed check if the form is valid with loginFormCheck()
-// if loginFormCheck() returns true then submit the form to app.py
+
+/**
+* When the submit button is pressed check if the form is valid with loginFormCheck()
+* if loginFormCheck() returns true then submit the form to app.py
+*/
 function loginFormSubmit() {
     const loginForm = document.getElementById('login-form')
 
@@ -239,6 +234,7 @@ function loginFormSubmit() {
     });
 }
 
+// Adds functionality to the logout button and clears the sessionStorage
 function initLogoutButton() {
     const logoutForm = document.getElementById('logout-form');
     
@@ -248,6 +244,13 @@ function initLogoutButton() {
     });
 }
 
+/**
+* Does a series of checks on each of the input fields in the form, if one of them fails 
+* then it doesn't move onto the next one at all, displays the relevant error information
+* under the form that failed. It gets called by loginFormSubmit()
+* If the check was succesful it returns true and form submits, otherwise it returns false
+* with a message specifying what part of the check failed
+*/
 async function loginFormCheck() {
     var username = document.getElementById('username');
     var usernameErrorBox = document.getElementById('username-error');
@@ -292,6 +295,14 @@ async function loginFormCheck() {
     return true;
 }
 
+/**
+* When the Register form is submitted it calls the asynchronous function registerFormCheck()
+* to test the input fields one by one, if one of the tests fails it displays the error message
+* associated with the failure and shows some visual queues to help the user. 
+* If it passes all the checks then the form gets submitted to app.py for additional backend checks
+* and hopefully a successful registration if those checks also pass which they should unless the user
+* has tampered with the html of the website
+*/
 function registerFormSubmit() {
     var registerForm = document.getElementById('reg-form')
 
@@ -305,6 +316,11 @@ function registerFormSubmit() {
     })
 }
 
+/**
+* Gets called by registerFormSubmit() and runs a series of checks on the input fields 
+* in the register form, if any of them fail Then return an error with an error message.
+* if it successfully passes all the tests then return true and the form can be submitted
+*/
 async function registerFormCheck() {
     const username = document.getElementById('reg-username');
     const usernameErrorBox = document.getElementById('reg-username-error');
@@ -340,9 +356,13 @@ async function registerFormCheck() {
     return true;
 }
 
+/** 
+* Basic regex validation tests for creating a valid username during registration,
+* If it fails return an error message detailing the failure, if passes all then return true
+*
+* @param {string} username - The username the user enters in the input field
+*/
 function usernameBasicCheck(username) {
-    // TODO: checks for a username and returns an error message if its false. 
-    // No error message will be returned for a success and therefore no need to return a bool, just count the return
     if (username.length == 0) {
         return 'Must enter a username'
     }
@@ -362,6 +382,14 @@ function usernameBasicCheck(username) {
     return true;
 }
 
+/**
+* Basic regex checks to make sure the password isn't too basic
+* If it fails return an error message detailing the failure, if passes all then return true
+*
+* @param {string} password - The password that the user entered in the input field
+* @returns {string|boolean} - A string return indciates failure and contains the message,  
+*                             returns true if it passes all the checks
+*/                            
 function passwordBasicCheck(password) {
     if (password.length == 0 ) {
         return 'Must enter a password'
@@ -378,10 +406,17 @@ function passwordBasicCheck(password) {
     if (/^[a-zA-Z]+$/.test(password)) {
         return 'Password must contain atleast one letter and number'
     }
-    
     return true
 }
 
+
+/**
+ * Simple function that checks if the password and password confirmation field match
+ * 
+ * @param {string} password - The password the user entered in the input field
+ * @param {string} confirm - The password confirmation the user entered in the input field
+ * @returns {string|bool}
+ */
 function confirmBasicCheck(password, confirm) {
     if (password != confirm) {
         return 'Confirmation and password must match'
@@ -389,7 +424,18 @@ function confirmBasicCheck(password, confirm) {
     return true
 }
 
-// Input the different input elements so the error handler 
+/**
+ * Whenever a test fails in the login or registration this function is responsible
+ * for displaying the erorr message and changing the css to indicate that it failed,
+ * also clears the error message and reverts the css to indciate success
+ * 
+ * @param {string|true} errorMessage - If its true then apply the succesful css, if its an error message
+ *                                     then display the message and change the css to indicate failure
+ * @param {*} input - The input field itself so the css can be applied onto it
+ * @param {*} inputErrorBox - The error box that holds the text
+ * @param {*} inputLabel - Extra element related to the materialze library that also needs to be changed
+ * @returns {bool} - returns either true or false to indicate if that its completed and what the result was
+ */
 function errorHandler(errorMessage, input, inputErrorBox, inputLabel) {
     if (errorMessage != true) {
         inputErrorBox.innerHTML = errorMessage;
@@ -414,7 +460,13 @@ function errorHandler(errorMessage, input, inputErrorBox, inputLabel) {
     }
 }
 
-// Sends AJAX request to check the availability of a username in app.py
+/**
+ * AJAX request sent to app.py which runs a database query to check if the username exists in the db
+ * Gets called in the login and registration check functions and in profile.html when searching for a profile
+ * 
+ * @param {string} username - The username provided by  
+ * @returns {bool} the response is either true or false or an error if the async function fails
+ */
 async function checkUsernameAvailability(username) {
     return new Promise(function(resolve, reject) {
         $.ajax({
@@ -439,8 +491,13 @@ async function checkUsernameAvailability(username) {
     });
 }
 
-// Sends AJAX request to check if the login is successful 
-// TODO - Probably remake this since its a very eary function
+/**
+ * Sends AJAX request to do a backend check to see if the login is successful
+ * 
+ * @param {*} username - The username entered in the login input field
+ * @param {*} password - The password entered int he password input field
+ * @returns 
+ */
 function checkValidLogin(username, password) {
     return new Promise(function(resolve, reject) {
         $.ajax({
@@ -459,8 +516,12 @@ function checkValidLogin(username, password) {
     });
 }
 
-// Sends AJAX request to redirect to error.html with errorMessage and errorCode
-// TODO - remake this - or find a use for it. idk 
+/**
+ * Sends AJAX request to redirect to error.html with errorMessage and errorCode
+ * 
+ * @param {*} errorMessage - The error message indicating what went wrong
+ * @param {*} errorCode - The error code associated with the type of error
+ */
 function errorRedirect(errorMessage, errorCode) {
     $.ajax({
         url: '/error_redirect',
@@ -476,15 +537,11 @@ function errorRedirect(errorMessage, errorCode) {
     })
 }
 
-
-// TODO - COMMENT
-function pathnameRedirect(pathname) {
-    window.location.pathname = pathname;
-}
-
-// Functions for Home.html
-
-// Meant to switch between the home-tab and the game-tab
+/**
+ * Function that switches tabs in home.html when a the user starts and ends a game
+ * 
+ * @param {string} tab - The only args that work here are home-tab and game-tab
+ */
 function switchHomeTabs(tab) {
     const tabs = document.querySelectorAll('.full-page');
     // Current tabs: 'home-tab', 'game-tab'
@@ -499,8 +556,11 @@ function switchHomeTabs(tab) {
     }
 }
 
-
-// TOOD - 
+/**
+ * updateUserLevels gets called and then all of the levels and the xp bars
+ * are updated with the percentage to the next level
+ * Gets called when the home.html is loaded at first
+ */
 async function updateUserLevels() {
     let userLevels = await getUserLevels();
     let levelInfoContainers = document.querySelectorAll('.level-info-container');
@@ -519,11 +579,10 @@ async function updateUserLevels() {
     }
 }
 
-
-function displayUsername() {
 /**
  * Gets the username from sessionStorage and displays it on the navbar
 */
+function displayUsername() {
     const usernameContainer = document.querySelector('.navbar-container.username > p');
     const username = sessionStorage.getItem('username');
 
@@ -561,14 +620,10 @@ async function getUserLevels() {
 /**
  * Gets called when home.html first loads and again on every call of switchHomeTabs();
  * Runs an sql query to SELECT the last 5 games of the user to populate results-container
+ * 
+ * @returns {promise} - Either returns up to 5 of the users previous games or an error
 */
 async function displayLastGamesPlayed() {
-    /**
-    * AJAX request to run the sql query
-    * @returns {promise} - Either returns up to 5 of the users previous games or an error
-    */
-    
-
     // Its better if a skeleton of the rows already exists in home.html so it can easily be modified
     // when a new game finishes and switchHomeTabs() gets called therefore this function gets called again
     // with the new information, if I used createElement() I would have to have another function
@@ -621,6 +676,13 @@ async function displayLastGamesPlayed() {
     }
 }
 
+
+/**
+ * AJAX request that gets the a specific amount of the users previous games played
+ * 
+ * @param {int} quantity - the amount of games that will be generated
+ * @returns {json} - Contains the basic information for the last games the user played
+ */
 async function getLastGamesPlayed(quantity) {
     return new Promise(function(resolve, reject) {
         $.ajax({
@@ -714,6 +776,7 @@ function gameInput() {
 
 
 // Main function for when the switchboard is toggled, all other switchboard functions will be called here
+// The switchboard is located on home.html and it sets the settings for which math types will be generated
 function toggleSwitchboard() {
     var switchboard = document.getElementById('switchboard');
 
@@ -733,10 +796,12 @@ function toggleSwitchboard() {
     })
 }
 
-// Updates sessionStorage every time a switch is toggled on the switchboard.
-// It makes more sense to use sessionStorage since the switches have to remain at the state they were
-// when the tab is refreshed, having this function return switchBoardState would require another function
-// for saving the state of switches
+/**
+ * Updates sessionStorage every time a switch is toggled on the switchboard.
+ * It makes more sense to use sessionStorage since the switches have to remain at the state they were
+ * when the tab is refreshed, having this function return switchBoardState would require another function
+ * for saving the state of switches
+ */
 function saveSwitchboard() {
     let additionSwitchActive = document.getElementById('addition').classList.contains('active');
     let subtractionSwitchActive = document.getElementById('subtraction').classList.contains('active');
@@ -756,7 +821,10 @@ function saveSwitchboard() {
     sessionStorage.setItem('switchState', isSwitchActive);
 }
 
-// Checks sessionStorage for the state of the switches when home.html loads
+/**
+ * Gets the state of the switches from sessionStorage and sets the switches to their saved states
+ * If sessionStorage doesn't have a switchState item then it creates it
+ */
 function loadSwitchboard() {
     if (!sessionStorage.getItem('switchState')) {
         const defaultSwitches = {
@@ -800,11 +868,14 @@ function initButtonsAnimation() {
     })
 }
 
-// TODO
+/**
+ * Initializes the dropdown menu that is in even page except index and error
+ * Dynamically generates it so its the exact same size as the dropdown button 
+ * in the navbar no matter what screen size is being use.
+ */
 function initDropdownMenu() {
     initLogoutButton();
     displayUsername();
-
 
     const dropdownButton = document.getElementById('dropdown-button');
     const dropdownMenu = document.getElementById('dropdown-menu');
@@ -893,7 +964,7 @@ function updateSliderValues() {
 }
 
 
-// TODO : toggles the tooltips on mobile with click and hover on pc
+// Toggles the tooltips on mobile with click and hover on pc
 function initToolTips(toolTipsNodeList) {
    
     // Assumes the user is on a mobile device unless pointer is detected then they have a mouse
@@ -902,7 +973,7 @@ function initToolTips(toolTipsNodeList) {
         isMobileDevice = false
     }
 
-    // TOOD
+    // Initializes the tool tip hover functionality that explains the game mode further
     function toggleToolTip(toolTipContainer) {
         let isToolTipActive = toolTipContainer.classList.contains('active');
 
@@ -913,7 +984,7 @@ function initToolTips(toolTipsNodeList) {
         }
     }
 
-    // TODO - comments
+    // Sets up the tooltips to work on click for mobile instead of hover
     toolTipsNodeList.forEach(toolTips => {
         let iconContainer = toolTips.querySelector('span')
         let toolTipContainer = toolTips.querySelector('.tooltip-container');
@@ -933,8 +1004,6 @@ function initToolTips(toolTipsNodeList) {
         }
     });
 }
-
-
 
 // Makes sure only one toggle button can be active at a time.
 function modeSelectMultipleChoice() {
@@ -988,10 +1057,9 @@ function submitButtonActivationCheck() {
 }
 
 /**
-* Function to change the colors of everything when the game mode is switched
-* 
+* Function to change the colors of a bunch of different elements on home.html
+* to the colour scheme of the current selected mode
 * Gets called by initModeSelectSwiper()
-* TODO change name
 */
 function changeButtonColors() {
     const switchboard = document.getElementById('switchboard');
@@ -1006,8 +1074,7 @@ function changeButtonColors() {
     resultsContainer.className = 'results-container ' + currentMode;
 }
 
-
-// TODO
+// Initiailzes the start button and only allows a game to start if atleast 1 math type is selected
 function startGame() {
     const submitButton = document.getElementById('submit-button');
     const submitContainer = document.querySelector('.submit-container')
@@ -1024,8 +1091,16 @@ function startGame() {
     });
 }
 
-
-// The activeSlide parameter denotes what game mode the user selected
+/**
+ * The main function of this application which handles the way the game actually runs
+ * Depending on the game mode that was selected with the swiper gameLogic has slightly differnt 
+ * rules like sudden ending the game at the first wrong answer and ending the game based on a timer
+ * After the game successfully completes it sends the user back to home-tab and it sends an AJAX request  
+ * with the questions and answers to be recorded in a database, after the reward xp is generated the users
+ * experience bars and levels also get updated
+ * 
+ * @param {*} activeSlide - The current game mode that was selected before starting a game
+ */
 async function gameLogic(activeSlide) {
     const currentMode = activeSlide.querySelector('.game-mode').getAttribute('class').split(' ')[1];
     const switchboardState = JSON.stringify(getSwitchboardState());    
@@ -1179,9 +1254,12 @@ async function gameLogic(activeSlide) {
     updateUserLevels();
 }
 
-
-// I dont like that I had to make a whole ugly function just for inserting a new row 
-// but the alternative is reworking the way lastGameResults works and I dont have time for that 
+/**
+ * Updates the last games played with the newest game without having to do a query for the
+ * last 5 games, it just removes the last one and inserts a new one infront of the previous first one
+ * I dont like that I had to make a whole ugly function just for inserting a new row 
+ * but the alternative is reworking the way lastGameResults works and I dont have time for that 
+ */
 async function updateLastGamePlayed() {
     let lastGamePlayed = await getLastGamesPlayed(1);
 
@@ -1266,8 +1344,10 @@ async function updateLastGamePlayed() {
 
 /**
  * AJAX request to get a jsonify string with all the questions and answers.
+ * 
  * @param {JSON} types - JSON object containing the selected math types
  * @param {number} amount - number of questioned selected by the user.
+ * @returns {JSON object} - Contains all of the questions and answers for gameLogic
  */
 async function generateQuestions(types, amount) {
     return new Promise(function(resolve, reject) {
@@ -1296,6 +1376,7 @@ async function generateQuestions(types, amount) {
 /**
  * AJAX request to record the results of a successfully completed game
  * @param {JSON} results - JSON object containing the results of the game
+ * @returns {Boolean} - Lets gameLogic know if the results were successfuly recorded or not
  */
 async function recordResults(results) {
     return new Promise(function(resolve, reject) {
@@ -1321,14 +1402,11 @@ async function recordResults(results) {
     })
 }
 
-
-
 /** 
 * Clears all of the containers inside of the progressContainer
 * 
 * @param {element} progressContainer - The container that holds the progress bar
-* @param TODO
-* return TODO
+* @param {int} questions - Tells the function how many new divs to prepare 
 */  
 function initQuestionProgress(progressContainer, questions) {    
     for (let i = 0; i < questions; i++) {
@@ -1387,6 +1465,7 @@ function activateTimerProgress(progressContainer, timer, reverse=false, transiti
         }
     }, 10);
 }
+
 /**
 * Initializes swiper.js on leaderboard.html and also has a bonus functionality of
 * transfering the active class the current slides caption element for styling purposes
@@ -1455,9 +1534,11 @@ function initLeaderboardSwiper() {
     });
 }
 
-// The leaderboard box-shadow is a pseudo-element under the table, it has to be a pseudo-element because
-// the header of the table is a caption and if I use a box-shadow under the table its clear that the caption
-// on top doesn't have the same shadow.
+/**
+ * The leaderboard box-shadow is a pseudo-element under the table, it has to be a pseudo-element 
+ * because the header of the table is a caption and if I use a box-shadow under the table its clear 
+ * that the caption on top doesn't have the same shadow.
+ */
 function initLeaderboardShadows() {
     const tableElementSize = document.querySelector('table').getBoundingClientRect();
     const dropShadows = document.querySelectorAll('.box-shadow');
@@ -1469,8 +1550,7 @@ function initLeaderboardShadows() {
     });
 }
 
-
-// TODO
+// Initializes the dropdown functionality for every row in the game-history table
 function initGameHistoryTable() {
     const visibleRows = document.querySelectorAll('.row-container');
 
@@ -1488,11 +1568,8 @@ function initGameHistoryTable() {
     });
 }
 
-
-// TODO
+// Initializes the toggle buttons for the search filter on the game_history.html
 function initGameHistoryFilter() {
-
-    // TODO
     var activeModes = []
     function checkForActiveSwitch() {
         
@@ -1553,7 +1630,12 @@ function initGameHistoryFilter() {
 }
 
 
-// TODO: COMMENT 
+/**
+ * Initialzes the profile search function in the profile.html page
+ * First it checks if the username actually exists and only then does it search
+ * for their profile, you can look up anyones profile and see their general stats
+ * as if it were your own.
+ */
 function initProfileSearch() {
     const profileSearchForm = document.getElementById('profile-search-form');
     const submitButton = document.querySelector('.profile-search-button');
@@ -1566,7 +1648,6 @@ function initProfileSearch() {
         } 
     })
     
-
     profileSearchForm.addEventListener('submit', async function (event) {
         event.preventDefault();
         let usernameInput = document.getElementById('user-search-input').value;
@@ -1588,21 +1669,14 @@ function initProfileSearch() {
         }
     })
 }
-// if username is none trigger animation on button and toast
 
-// if username isn't valid trigger animation and different toast
-
-// if username is valid then input it into the type input type hidden and submit
-
-// might have to rework the structure of the form
-
-/** 
-    Triggers animations when the user submits their answer
-
-    @param {object} element - The element that will receieve the class
-    @param {string} animation - The class that will be added to trigger the animation
-    @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset
-*/
+/**
+ * Triggers animations when the user submits their answer
+ * 
+ * @param {object} element - The element that will receieve the class
+ * @param {string} animation - The class that will be added to trigger the animation 
+ * @param {number} timeDelay - How many ms until the class gets removed again for the animation to reset 
+ */
 function triggerAnimation(element, animation, timeDelay) {
     const removeAnimation = function () {
         element.classList.remove(animation);

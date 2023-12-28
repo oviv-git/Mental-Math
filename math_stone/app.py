@@ -217,7 +217,7 @@ def get_last_games_played():
     Database query that retrieves the 5 most recent games played to be displayed in home.html
     gets called whenever home.html loads or when a game is completed
     
-    Return: JSONified object to send back to the javascript
+    Return: JSONified list to send back to the javascript
     """
     
     user_id = session['user_id']
