@@ -1,40 +1,38 @@
 function main() {
-    // an MODULARIZE ALL THHESE FUNCTIONS like initHomePage, initLeaderboard, etc
-    
     storedColorScheme();
     wavesEffectToggle();
     toggleColorScheme();
 
     switch (window.location.pathname) {
         case '/':
-            initSlider();
-            initForm();
-            registerFormSubmit();
-            loginFormSubmit();
+            initIndexPage()
             break;
+
         case '/home':
             initHomePage();
             break;
 
         case '/profile':
-            initDropdownMenu();
-            initProfileSearch();
+            initProfilePage()
             break;
         
         case '/game_history':
-            initDropdownMenu();
-            initGameHistoryTable();
-            initGameHistoryFilter();
+            initGameHistoryPage();
             break;
 
         case '/leaderboard':
-            initDropdownMenu();
-            initLeaderboardSwiper();
-            initLeaderboardShadows();
+            initLeaderboardPage();
+
             break;
     }
 }
 
+function initIndexPage() {
+    initSlider();
+    initForm();
+    registerFormSubmit();
+    loginFormSubmit();
+}
 
 // Makes sure everything in home.html runs when the page loads
 // Seperating the tabs into seperate functions themselves just makes the code too messy
@@ -60,8 +58,25 @@ function initHomePage() {
     initToolTips(exitButtonNodeList)
 }
 
-// Loads the page with the preffered color scheme stored in session.storage
+function initProfilePage() {
+    initDropdownMenu();
+    initProfileSearch();
+}
+
+function initGameHistoryPage() {
+    initDropdownMenu();
+    initGameHistoryTable();
+    initGameHistoryFilter();
+}
+
+function initLeaderboardPage() {
+    initDropdownMenu();
+    initLeaderboardSwiper();
+    initLeaderboardShadows();
+}
+
 function storedColorScheme() {
+    
     let html = document.querySelector('html')
     let storedMode = sessionStorage.getItem('prefferedMode')
 

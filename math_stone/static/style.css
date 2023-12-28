@@ -7,6 +7,9 @@ html.light {
   background: default-light;
   color: #222;
 }
+html.light .dark-mode-toggle.index button {
+  background: #d9d9d9;
+}
 html.light h3 {
   color: #222;
 }
@@ -1258,6 +1261,9 @@ html.dark .scroll-container .row-container .detailed-history-row .question-row s
 }
 html.dark .scroll-container .row-container .detailed-history-row .question-row span.info {
   color: #3d91ad;
+}
+html.dark .dark-mode-toggle.index button {
+  background: #484848;
 }
 
 .waves-effect.waves-light .waves-ripple {

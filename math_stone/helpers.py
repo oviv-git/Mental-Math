@@ -9,7 +9,7 @@
         get_user_experience: Database query to get the users experience
         generate_reward_experience: Algorithm to generate experience for each question
         generate_speed_multiplier: Generates a multiplier for the experience based on answer time
-        generate_user_level_info: Generates a list containing user level and level % for each math type
+        generate_user_level_info: returns a list containing user level and level % for each type
         record_game_results - Records the results of a game to the database
         generate_leaderboards - Generates a variable amount of leaderboards
         generate_game_history - Generates the game history for a selected user
@@ -18,7 +18,7 @@
 """
 
 from functools import wraps
-from flask import session, render_template, redirect, jsonify
+from flask import session, render_template, redirect
 from database import Database
 from werkzeug.security import check_password_hash
 import csv

@@ -33,8 +33,10 @@ html.light {
     background: default-light;
     color: $default-dark;
 
-    .dark-mode-toggle{
-        
+    .dark-mode-toggle.index {
+        button {
+            background: darken($default-light, 15%)
+        }
     }
 
     h3 {
@@ -1723,6 +1725,11 @@ html.dark {
             }
         }
     }
+    .dark-mode-toggle.index {
+        button {
+            background: lighten($default-dark, 15%)
+        }
+    }
 }
 // cp3
 
@@ -1743,8 +1750,6 @@ html.dark {
     display: flex;
     margin: auto;
     text-align: center;
-
-    
 }
 .section {
     position: relative;
@@ -1755,8 +1760,6 @@ html.dark {
     justify-content: space-around;
     align-items: center;
     height: 100vh;
-
-    
 }
 .section-small {
     width: 35%;
